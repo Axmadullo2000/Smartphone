@@ -1,17 +1,20 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useNavigate, Link } from 'react-router-dom'
 
 import user from '../../assets/user.svg'
 import basket from '../../assets/basket.svg'
 import headphone from '../../assets/headphone.svg'
 
-import './Header.scss'
 import Basket from '../Basket'
+
+import './Header.scss'
 
 const Header = () => {
 	const ref = useRef()
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [basketModalOpen, setBasketModalOpen] = useState(false)
+	const navigate = useNavigate()
 
 	const checkIfClickedOutside = e => {
 		if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
@@ -31,8 +34,10 @@ const Header = () => {
 			>
 				<div className=''>
 					<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
-						<span className='text-red-700 hover:text-red-900'>Smart</span>{' '}
-						<span className='text-blue-700 hover:text-blue-900'>Shop</span>
+						<Link to='/'>
+							<span className='text-red-700 hover:text-red-900'>Smart</span>{' '}
+							<span className='text-blue-700 hover:text-blue-900'>Shop</span>
+						</Link>
 					</p>
 				</div>
 				{isMenuOpen ? (
@@ -123,7 +128,10 @@ const Header = () => {
 					</button>
 				</label>
 
-				<button className='w-40 flex hover:bg-red-900	'>
+				<button
+					className='w-40 flex hover:bg-red-900	'
+					onClick={() => navigate('/sign-up')}
+				>
 					<img
 						src={user}
 						alt=''

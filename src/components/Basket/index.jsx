@@ -17,7 +17,7 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 			{basketModalOpen && (
 				<div
 					className='bg-slate-100 p-10 fixed right-0 h-full'
-					style={{ height: '100vh', width: '700px' }}
+					style={{ height: '100vh', width: '700px', zIndex: 999 }}
 					ref={ref}
 				>
 					<button onClick={() => setBasketModalOpen(old => !old)}>
