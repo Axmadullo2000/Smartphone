@@ -5,11 +5,13 @@ import basket from '../../assets/basket.svg'
 import headphone from '../../assets/headphone.svg'
 
 import './Header.scss'
+import Basket from '../Basket'
 
 const Header = () => {
 	const ref = useRef()
 
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
+	const [basketModalOpen, setBasketModalOpen] = useState(false)
 
 	const checkIfClickedOutside = e => {
 		if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
@@ -129,7 +131,10 @@ const Header = () => {
 					/>
 					<p className='text-white text-sm ml-2'>Вход / Регистрация</p>
 				</button>
-				<button className='w-40 flex ml-4 hover:bg-red-900'>
+				<button
+					className='w-40 flex ml-4 hover:bg-red-900'
+					onClick={() => setBasketModalOpen(old => !old)}
+				>
 					<img
 						src={basket}
 						alt=''
@@ -206,6 +211,11 @@ const Header = () => {
 					</div>
 				</div>
 			)}
+
+			<Basket
+				basketModalOpen={basketModalOpen}
+				setBasketModalOpen={setBasketModalOpen}
+			/>
 		</>
 	)
 }
