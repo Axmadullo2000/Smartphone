@@ -1,25 +1,32 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import user from '../../assets/user.svg'
 import basket from '../../assets/basket.svg'
 import headphone from '../../assets/headphone.svg'
 
 import Basket from '../Basket'
+import { SearchAsyncThunk } from '../../redux/asyncThunks'
 
 import './Header.scss'
 
 const Header = () => {
 	const ref = useRef()
-
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [basketModalOpen, setBasketModalOpen] = useState(false)
+	const [searchItem, setSearchItem] = useState('')
 	const navigate = useNavigate()
-
+	const { data } = useSelector(data => data.data)
 	const checkIfClickedOutside = e => {
 		if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
 			setIsMenuOpen(false)
 		}
+	}
+
+	const searchHandleSubmit = e => {
+		e.preventDefault()
+		navigate(`/search/${searchItem}`)
 	}
 	useEffect(() => {
 		document.addEventListener('mousedown', checkIfClickedOutside)
@@ -28,7 +35,7 @@ const Header = () => {
 	return (
 		<>
 			<div
-				className='bg-red-500 p-2 flex items-center'
+				className='bg-red-500 p-2 flex items-center shadow-lg'
 				ref={ref}
 				onClick={checkIfClickedOutside}
 			>
@@ -100,33 +107,39 @@ const Header = () => {
 					</div>
 				)}
 
-				<label htmlFor='' className='flex relative p-4'>
-					<input
-						placeholder={'Search your favourite smartphones'}
-						style={{ width: '450px' }}
-						type='text'
-						className='ml-5 mt-1 block px-3 p-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+				<form onSubmit={searchHandleSubmit}>
+					<label htmlFor='search' className='flex relative p-4'>
+						<input
+							id='search'
+							required
+							value={searchItem}
+							onChange={e => setSearchItem(e.target.value)}
+							placeholder={'Search your favourite smartphones'}
+							style={{ width: '450px' }}
+							type='text'
+							className='ml-5 mt-1 block px-3 p-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
       focus:invalid:border-pink-500 focus:invalid:ring-pink-500
     '
-					/>
-					<button className='p-3 bg-blue-900 text-slate-200 absolute rounded-lg top-6 right-5 hover:bg-red-900'>
-						<svg
-							xmlns='http://www.w3.org/2000/svg'
-							viewBox='0 0 50 50'
-							width='50px'
-							height='50px'
-							style={{ width: '24px', height: '24px' }}
-						>
-							<path
-								style={{ fill: 'white' }}
-								d='M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z'
-							/>
-						</svg>
-					</button>
-				</label>
+						/>
+						<button className='p-3 bg-blue-900 text-slate-200 absolute rounded-lg top-6 right-5 hover:bg-red-900'>
+							<svg
+								xmlns='http://www.w3.org/2000/svg'
+								viewBox='0 0 50 50'
+								width='50px'
+								height='50px'
+								style={{ width: '24px', height: '24px' }}
+							>
+								<path
+									style={{ fill: 'white' }}
+									d='M 21 3 C 11.621094 3 4 10.621094 4 20 C 4 29.378906 11.621094 37 21 37 C 24.710938 37 28.140625 35.804688 30.9375 33.78125 L 44.09375 46.90625 L 46.90625 44.09375 L 33.90625 31.0625 C 36.460938 28.085938 38 24.222656 38 20 C 38 10.621094 30.378906 3 21 3 Z M 21 5 C 29.296875 5 36 11.703125 36 20 C 36 28.296875 29.296875 35 21 35 C 12.703125 35 6 28.296875 6 20 C 6 11.703125 12.703125 5 21 5 Z'
+								/>
+							</svg>
+						</button>
+					</label>
+				</form>
 
 				<button
 					className='w-40 flex hover:bg-red-900	'

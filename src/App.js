@@ -6,6 +6,7 @@ import HomePage from './pages/HomePage'
 import './App.css'
 import Registration from './pages/Auth/Registration'
 import Login from './pages/Auth/Login'
+import { SearchResult } from './components/SearchResult'
 
 function App() {
 	return (
@@ -13,6 +14,8 @@ function App() {
 			<Route path='/' element={<HomePage />} />
 			<Route path='/sign-up' element={<Registration />} />
 			<Route path='/sign-in' element={<Login />} />
+
+			<Route path='/search/:slug' element={<SearchResult />} />
 		</Routes>
 	)
 }
