@@ -4,6 +4,6 @@ import ExampleReducer from '../slices'
 
 export const store = configureStore({
 	reducer: {
-		example: ExampleReducer,
+		data: ExampleReducer,
 	},
 })

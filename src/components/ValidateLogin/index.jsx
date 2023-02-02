@@ -51,7 +51,7 @@ export const ValidateLogin = () => {
 									placeholder='Your Username'
 								/>
 							</div>
-							<div className='my-5' style={{marginTop: '15px'}}>
+							<div className='my-5' style={{ marginTop: '15px' }}>
 								<label htmlFor='password' className='sr-only'>
 									Password
 								</label>
