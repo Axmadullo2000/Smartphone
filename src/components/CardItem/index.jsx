@@ -57,7 +57,7 @@ export const CardItem = () => {
 			<img className='stars' src={stars} alt='' />
 			<div className='flex items-center justify-between mb-5'>
 				<p
-					className='bg-slate-300 mx-2 text-red-700'
+					className='text-blue-500'
 					style={{ fontSize: '22px', fontWeight: 'bold' }}
 				>
 					2 200 000 сум
