@@ -1,4 +1,5 @@
 import React from 'react'
+import Footer from '../../../components/Footer'
 import Header from '../../../components/Header'
 import { ValidateRegistration } from '../../../components/ValidateRegistration'
 const Registration = () => {
@@ -6,6 +7,7 @@ const Registration = () => {
 		<div>
 			<Header />
 			<ValidateRegistration />
+			<Footer />
 		</div>
 	)
 }

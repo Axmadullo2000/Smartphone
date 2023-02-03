@@ -1,6 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
+
 import { Carousel } from '../../components/Carousel'
+import Footer from '../../components/Footer'
 
 import Header from '../../components/Header'
 
@@ -11,6 +13,7 @@ const HomePage = () => {
 		<div>
 			<Header />
 			<Carousel />
+			<Footer />
 		</div>
 	)
 }
