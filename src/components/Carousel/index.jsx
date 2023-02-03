@@ -15,7 +15,7 @@ export const Carousel = () => {
 	const swiperRef = useRef()
 	return (
 		<>
-			<div className='flex justify-center mt-5 relative'>
+			<div className='flex justify-center mt-8 relative'>
 				<button
 					onClick={() => swiperRef.current.slidePrev()}
 					className='z-50 absolute'

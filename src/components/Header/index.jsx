@@ -175,7 +175,7 @@ const Header = () => {
 						height={36}
 						alt=''
 					/>
-					<p className='text-white text-2xl ml-2'>(99) 794 42 62</p>
+					<p className='text-white text-2xl ml-2'>(91) 792 12 32</p>
 				</button>
 			</div>
 
