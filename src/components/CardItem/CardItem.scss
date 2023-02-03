@@ -1,0 +1,21 @@
+.card {
+	background-color: white;
+	border: 1px solid transparent;
+	cursor: pointer;
+	transition: 0.6s ease-in-out;
+}
+
+.card:hover {
+	border: 5px solid blue;
+	background: rebeccapurple;
+	color: white;
+
+	.stars {
+		background: linear-gradient(to right, #ffc107 80%, white 100%);
+		background-color: rebeccapurple;
+	}
+}
+
+.stars {
+	background: linear-gradient(to right, #ffc107 100%, white 100%);
+}
