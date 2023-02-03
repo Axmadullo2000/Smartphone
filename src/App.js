@@ -8,6 +8,8 @@ import Registration from './pages/Auth/Registration'
 import Login from './pages/Auth/Login'
 import { SearchResult } from './components/SearchResult'
 
+import 'swiper/css'
+
 function App() {
 	return (
 		<Routes>

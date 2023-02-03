@@ -153,15 +153,19 @@ const Header = () => {
 					<p className='text-white text-sm ml-2'>Вход / Регистрация</p>
 				</button>
 				<button
-					className='w-40 flex ml-4 hover:bg-red-900'
+					className='w-40 flex items-center ml-4 hover:bg-red-900'
 					onClick={() => setBasketModalOpen(old => !old)}
 				>
 					<img
 						src={basket}
+						width={34}
+						height={34}
 						alt=''
 						className='bg-slate-100 hover:bg-slate-700 p-1 ml-5 rounded-lg'
 					/>
-					<p className='text-white text-sm ml-2'>Корзина / Оформление заказа</p>
+					<span className='text-white text-sm ml-2'>
+						Корзина / Оформление заказа
+					</span>
 				</button>
 				<button className='w-70 p-3 flex ml-5 hover:bg-red-500'>
 					<img
