@@ -1,28 +1,27 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { useSelector, useDispatch } from 'react-redux'
 
-import { fetchCardsAsyncThunk } from '../../redux/asyncThunks'
-
-import { CardItem } from '../CardItem'
+import { fetchPopularCardsAsyncThunk } from '../../redux/asyncThunks'
 
 import prev from '../../assets/prev.svg'
 import next from '../../assets/next.svg'
+import { CardItem } from '../CardItem'
 
-import './Carousel.scss'
-
-export const Carousel = () => {
-	const { data } = useSelector(data => data.data)
-	const dispatch = useDispatch()
+const PopularProducts = () => {
 	const swiperRef = useRef()
-
-	console.log(data.results)
+	const { popularData } = useSelector(data => data.data)
+	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(fetchCardsAsyncThunk())
+		dispatch(fetchPopularCardsAsyncThunk())
 	}, [])
+
 	return (
-		<>
+		<div>
+			<h2 className='text-3xl text-center my-3 text-blue-900'>
+				Популярные товары{' '}
+			</h2>
 			<div className='flex justify-center mt-8 relative'>
 				<button
 					onClick={() => swiperRef.current.slidePrev()}
@@ -42,8 +41,8 @@ export const Carousel = () => {
 						swiperRef.current = swiper
 					}}
 				>
-					{!!data.results &&
-						data.results.map(slide => (
+					{popularData.results != undefined &&
+						popularData.results.map(slide => (
 							<SwiperSlide>
 								<CardItem {...slide} />
 							</SwiperSlide>
@@ -62,6 +61,8 @@ export const Carousel = () => {
 					<img src={next} alt='' />
 				</button>
 			</div>
-		</>
+		</div>
 	)
 }
+
+export default PopularProducts

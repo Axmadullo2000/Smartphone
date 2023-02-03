@@ -43,11 +43,22 @@ export const nextBtnAsyncThunk = createAsyncThunk(
 	}
 )
 
-export const fetchCardsAsyncThunk = createAsyncThunk(
-	'fetch/fetchCardsAsyncThunk',
+export const fetchNewProductCardsAsyncThunk = createAsyncThunk(
+	'fetch/fetchNewProductCardsAsyncThunk',
 	async () => {
 		const response = await axios.get(
 			`http://127.0.0.1:8000/api/phones/func/?limit=20&offset=40`
+		)
+
+		return response.data
+	}
+)
+
+export const fetchPopularCardsAsyncThunk = createAsyncThunk(
+	'fetch/fetchPopularCardsAsyncThunk',
+	async () => {
+		const response = await axios.get(
+			`http://127.0.0.1:8000/api/phones/func/?limit=18&offset=5`
 		)
 
 		return response.data

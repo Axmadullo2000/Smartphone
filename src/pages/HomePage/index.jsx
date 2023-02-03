@@ -1,18 +1,16 @@
 import React from 'react'
-import { useSelector } from 'react-redux'
-
-import { Carousel } from '../../components/Carousel'
-import Footer from '../../components/Footer'
 
 import Header from '../../components/Header'
+import NewProducts from '../../components/newProducts'
+import PopularProducts from '../../components/PopularProducts'
+import Footer from '../../components/Footer'
 
 const HomePage = () => {
-	const data = useSelector(data => data.example)
-
 	return (
 		<div>
 			<Header />
-			<Carousel />
+			<NewProducts />
+			<PopularProducts />
 			<Footer />
 		</div>
 	)
