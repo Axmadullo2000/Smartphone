@@ -1,18 +1,26 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { fetchCardsAsyncThunk } from '../../redux/asyncThunks'
+
+import { CardItem } from '../CardItem'
 
 import prev from '../../assets/prev.svg'
 import next from '../../assets/next.svg'
 
 import './Carousel.scss'
-import { CardItem } from '../CardItem'
 
 export const Carousel = () => {
-	const arr = [
-		1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21,
-		22, 23, 24, 25,
-	]
+	const { data } = useSelector(data => data.data)
+	const dispatch = useDispatch()
 	const swiperRef = useRef()
+
+	console.log(data.results)
+
+	useEffect(() => {
+		dispatch(fetchCardsAsyncThunk())
+	}, [])
 	return (
 		<>
 			<div className='flex justify-center mt-8 relative'>
@@ -34,11 +42,12 @@ export const Carousel = () => {
 						swiperRef.current = swiper
 					}}
 				>
-					{arr.map(slide => (
-						<SwiperSlide>
-							<CardItem />
-						</SwiperSlide>
-					))}
+					{!!data.results &&
+						data.results.map(slide => (
+							<SwiperSlide>
+								<CardItem {...slide} />
+							</SwiperSlide>
+						))}
 				</Swiper>
 				<button
 					onClick={() => swiperRef.current.slideNext()}

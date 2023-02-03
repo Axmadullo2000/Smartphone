@@ -16,7 +16,6 @@ export const SearchAsyncThunk = createAsyncThunk(
 		const response = await axios.get(
 			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
-		console.log(response.data.next)
 		return response.data
 		//здесь будут доступны data, id, dispatch, rejectWithValue
 	}
@@ -29,7 +28,6 @@ export const prevBtnAsyncThunk = createAsyncThunk(
 			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
 		const prevDataResponse = await axios.get(response.data.previous)
-		console.log(prevDataResponse)
 		return prevDataResponse.data
 	}
 )
@@ -41,7 +39,17 @@ export const nextBtnAsyncThunk = createAsyncThunk(
 			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
 		const nextDataResponse = await axios.get(response.data.next)
-		console.log(nextDataResponse)
 		return nextDataResponse.data
+	}
+)
+
+export const fetchCardsAsyncThunk = createAsyncThunk(
+	'fetch/fetchCardsAsyncThunk',
+	async () => {
+		const response = await axios.get(
+			`http://127.0.0.1:8000/api/phones/func/?limit=20&offset=40`
+		)
+
+		return response.data
 	}
 )

@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 
 import {
+	fetchCardsAsyncThunk,
 	nextBtnAsyncThunk,
 	prevBtnAsyncThunk,
 	SearchAsyncThunk,
@@ -29,6 +30,9 @@ const ExampleSlice = createSlice({
 			})
 
 			.addCase(nextBtnAsyncThunk.fulfilled, (state, action) => {
+				state.data = action.payload
+			})
+			.addCase(fetchCardsAsyncThunk.fulfilled, (state, action) => {
 				state.data = action.payload
 			}),
 })
