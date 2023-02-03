@@ -8,7 +8,7 @@ import basket from '../../assets/basket.svg'
 
 import './CardItem.scss'
 
-export const CardItem = () => {
+export const CardItem = ({ name, photo1, price }) => {
 	return (
 		<div
 			className='card border mx-5 px-2'
@@ -49,18 +49,15 @@ export const CardItem = () => {
 					alt=''
 				/>
 			</div>
-			<img
-				src='https://www.mediapark.uz/upload/file/mp/products/images/NYPd0nJhMmF9m96kurBD4AvSgcEHwdtg.jpg'
-				alt=''
-			/>
-			<p className='text-center'>Смартфон Huawei Nova Y61 4/64 GB Mint Green</p>
+			<img src={photo1} alt={name} />
+			<p className='text-center'>{name}</p>
 			<img className='stars' src={stars} alt='' />
 			<div className='flex items-center justify-between mb-5'>
 				<p
 					className='text-blue-500'
 					style={{ fontSize: '22px', fontWeight: 'bold' }}
 				>
-					2 200 000 сум
+					{price}
 				</p>
 				<button
 					style={{
