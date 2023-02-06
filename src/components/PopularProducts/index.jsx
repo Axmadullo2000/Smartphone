@@ -43,7 +43,7 @@ const PopularProducts = () => {
 				>
 					{popularData.results != undefined &&
 						popularData.results.map(slide => (
-							<SwiperSlide>
+							<SwiperSlide key={slide.id}>
 								<CardItem {...slide} />
 							</SwiperSlide>
 						))}

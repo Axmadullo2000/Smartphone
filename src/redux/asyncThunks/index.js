@@ -2,15 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 
 import axios from 'axios'
 
-interface SearchAsyncThunkPayload {
-	search: string;
-	offset: number;
-}
-
 export const SearchAsyncThunk = createAsyncThunk(
 	`search/addNewMessageThunk`,
 	async (
-		{ search, offset }: SearchAsyncThunkPayload,
+		{ search, offset },
 		{ dispatch, rejectWithValue }
 	) => {
 		const response = await axios.get(
@@ -23,7 +18,7 @@ export const SearchAsyncThunk = createAsyncThunk(
 
 export const prevBtnAsyncThunk = createAsyncThunk(
 	'prev/prevBtnAsyncThunk',
-	async ({ search, offset }: SearchAsyncThunkPayload) => {
+	async ({ search, offset }) => {
 		const response = await axios.get(
 			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
@@ -34,7 +29,7 @@ export const prevBtnAsyncThunk = createAsyncThunk(
 
 export const nextBtnAsyncThunk = createAsyncThunk(
 	'next/nextBtnAsyncThunk',
-	async ({ search, offset }: SearchAsyncThunkPayload) => {
+	async ({ search, offset }) => {
 		const response = await axios.get(
 			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
@@ -64,3 +59,10 @@ export const fetchPopularCardsAsyncThunk = createAsyncThunk(
 		return response.data
 	}
 )
+
+export const getAllData = createAsyncThunk('data/getAllData', async () => {
+	const response = await axios.get(
+		'http://127.0.0.1:8000/api/phones/func/?limit=68&offset=0'
+	)
+	return response.data
+})

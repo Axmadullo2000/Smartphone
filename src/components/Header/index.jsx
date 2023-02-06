@@ -1,24 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
-import { useDispatch, useSelector } from 'react-redux'
+
+import Basket from '../Basket'
+import { getAllData } from '../../redux/asyncThunks'
 
 import user from '../../assets/user.svg'
 import basket from '../../assets/basket.svg'
 import headphone from '../../assets/headphone.svg'
 
-import Basket from '../Basket'
-import { SearchAsyncThunk } from '../../redux/asyncThunks'
-
 import './Header.scss'
 
 const Header = () => {
+	const { data, allData } = useSelector(state => state.data)
 	const ref = useRef()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [basketModalOpen, setBasketModalOpen] = useState(false)
 	const [searchItem, setSearchItem] = useState('')
 	const navigate = useNavigate()
-	const { data } = useSelector(data => data.data)
-	const checkIfClickedOutside = e => {
+	const dispatch = useDispatch()
+
+	const brand = []
+
+	const checkOpening = e => {
 		if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
 			setIsMenuOpen(false)
 		}
@@ -28,17 +32,23 @@ const Header = () => {
 		e.preventDefault()
 		navigate(`/search/${searchItem}`)
 	}
+
+	!!allData.results && allData.results.map(item => brand.push(item.brand))
 	useEffect(() => {
-		document.addEventListener('mousedown', checkIfClickedOutside)
+		dispatch(getAllData())
+	}, [])
+
+	const brands = brand.filter(function (item, pos) {
+		return brand.indexOf(item) == pos
+	})
+
+	useEffect(() => {
+		document.addEventListener('click', checkOpening)
 	}, [isMenuOpen])
 
 	return (
 		<>
-			<div
-				className='bg-red-500 p-2 flex items-center shadow-lg'
-				ref={ref}
-				onClick={checkIfClickedOutside}
-			>
+			<div className='bg-red-500 p-2 flex items-center shadow-lg'>
 				<div className=''>
 					<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
 						<Link to='/'>
@@ -50,6 +60,7 @@ const Header = () => {
 				{isMenuOpen ? (
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
+						ref={ref}
 						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-red-500'
 						style={{ width: '130px' }}
 					>
@@ -62,8 +73,8 @@ const Header = () => {
 								xmlns='http://www.w3.org/2000/svg'
 							>
 								<path
-									fill-rule='evenodd'
-									clip-rule='evenodd'
+									fillRule='evenodd'
+									clipRule='evenodd'
 									d='M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z'
 									fill='rgb(88, 88, 88)'
 								/>
@@ -190,48 +201,13 @@ const Header = () => {
 							<li className='text-slate-250 opacity-70 hover:opacity-100'>
 								Все смартфоны
 							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Смартфоны SAMSUNG
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Смартфоны Apple iPhone
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Смартфоны Xiaomi
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Смартфоны ViVO
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Аксессуары Хiaomi
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Аксессуары Apple
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Мобильные телефоны
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Домашние телефоны
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Рации
-							</li>
-						</ul>
-					</div>
-
-					<div className='mx-8'>
-						<h2 className='text-black mb-2'>Планшеты</h2>
-						<ul>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Электронные книги
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Планшеты на Android
-							</li>
-							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Планшеты Apple
-							</li>
+							{brands.map(item => {
+								return (
+									<li className='capitalize hover:text-red-600'>
+										<Link to={`/products/category/${item}`}>{item}</Link>{' '}
+									</li>
+								)
+							})}
 						</ul>
 					</div>
 				</div>

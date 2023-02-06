@@ -41,7 +41,7 @@ const NewProducts = () => {
 				>
 					{data.results != undefined &&
 						data.results.map(slide => (
-							<SwiperSlide>
+							<SwiperSlide key={slide.id}>
 								<CardItem {...slide} />
 							</SwiperSlide>
 						))}

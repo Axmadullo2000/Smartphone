@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
 	fetchNewProductCardsAsyncThunk,
 	fetchPopularCardsAsyncThunk,
+	getAllData,
 	nextBtnAsyncThunk,
 	prevBtnAsyncThunk,
 	SearchAsyncThunk,
@@ -12,6 +13,8 @@ const initialState = {
 	status: '',
 	data: [],
 	popularData: [],
+	allData: [],
+	catalogData: [],
 }
 
 const ExampleSlice = createSlice({
@@ -39,7 +42,12 @@ const ExampleSlice = createSlice({
 			})
 			.addCase(fetchPopularCardsAsyncThunk.fulfilled, (state, action) => {
 				state.popularData = action.payload
+			})
+			.addCase(getAllData.fulfilled, (state, action) => {
+				state.allData = action.payload
 			}),
 })
+
+export const { getCatalogList } = ExampleSlice.actions
 
 export default ExampleSlice.reducer
