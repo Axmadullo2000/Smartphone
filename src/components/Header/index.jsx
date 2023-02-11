@@ -48,7 +48,7 @@ const Header = () => {
 
 	return (
 		<>
-			<div className='bg-red-500 p-2 flex items-center shadow-lg'>
+			<div className='bg-slate-200 p-2 flex items-center' style={{boxShadow: '2px 12px 12px black'}}>
 				<div className=''>
 					<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
 						<Link to='/'>
@@ -61,7 +61,7 @@ const Header = () => {
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
 						ref={ref}
-						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-red-500'
+						className='flex items-center bg-slate-400 p-3.5 rounded-lg cursor-pointer hover:bg-slate-500'
 						style={{ width: '130px' }}
 					>
 						<div className='flex flex-col'>
@@ -76,7 +76,7 @@ const Header = () => {
 									fillRule='evenodd'
 									clipRule='evenodd'
 									d='M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z'
-									fill='rgb(88, 88, 88)'
+									fill='#f6f6f6'
 								/>
 							</svg>
 						</div>
@@ -85,13 +85,13 @@ const Header = () => {
 				) : (
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
-						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-red-500'
+						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-slate-500'
 						style={{ width: '130px' }}
 					>
 						<div className='flex flex-col'>
 							<span
 								style={{
-									width: '22px',
+									width: '20px',
 									height: '4px',
 									margin: '3px 0',
 									background: '#585858',
@@ -99,7 +99,7 @@ const Header = () => {
 							></span>
 							<span
 								style={{
-									width: '22px',
+									width: '20px',
 									height: '4px',
 									margin: '3px 0',
 									background: '#585858',

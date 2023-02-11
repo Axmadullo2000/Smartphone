@@ -18,7 +18,7 @@ const PopularProducts = () => {
 	}, [])
 
 	return (
-		<div>
+		<div style={{marginTop: '100px', marginBottom: '60px'}}>
 			<h2 className='text-3xl text-center my-3 text-blue-900'>
 				Популярные товары{' '}
 			</h2>
