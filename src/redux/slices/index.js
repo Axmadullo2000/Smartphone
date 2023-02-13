@@ -3,9 +3,11 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
 	fetchNewProductCardsAsyncThunk,
 	fetchPopularCardsAsyncThunk,
+	filterByFewParams,
 	getAllData,
 	nextBtnAsyncThunk,
 	prevBtnAsyncThunk,
+	prevBtnInFiltering,
 	SearchAsyncThunk,
 } from '../asyncThunks'
 
@@ -15,9 +17,10 @@ const initialState = {
 	popularData: [],
 	allData: [],
 	catalogData: [],
+	filteredData: [],
 }
 
-const ExampleSlice = createSlice({
+const ProductSlice = createSlice({
 	name: 'slice/ExampleSlice',
 	initialState,
 	reducers: {},
@@ -45,9 +48,17 @@ const ExampleSlice = createSlice({
 			})
 			.addCase(getAllData.fulfilled, (state, action) => {
 				state.allData = action.payload
-			}),
+			})
+
+			.addCase(filterByFewParams.fulfilled, (state, action) => {
+				state.filteredData = action.payload
+			})
+
+			.addCase(prevBtnInFiltering.fulfilled, (state, action) => {
+				state.previousData = action.payload
+			})
 })
 
-export const { getCatalogList } = ExampleSlice.actions
+export const { getCatalogList } = ProductSlice.actions
 
-export default ExampleSlice.reducer
+export default ProductSlice.reducer

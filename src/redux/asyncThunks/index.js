@@ -66,3 +66,40 @@ export const getAllData = createAsyncThunk('data/getAllData', async () => {
 	)
 	return response.data
 })
+
+
+export const filterByFewParams = createAsyncThunk(
+	'filter/filterByFewParams',
+	async ({brand, corpus, yadra, front_kamera, giga_vstoeno, giga_operate, accumulator}) => {
+		console.log(brand, corpus, yadra, front_kamera, giga_operate, giga_vstoeno, accumulator);
+		const response = await axios.get(`
+		http://127.0.0.1:8000/api/phones/func/?
+		${brand != undefined ? `brand=${brand}` : null}
+		${corpus != undefined ? `&corpus=${corpus}` : null}
+		${yadra != undefined ? `&yadra=${yadra}` : null}
+		${front_kamera != undefined ? `&front_kamera=${front_kamera}` : ''}
+		${giga_vstoeno != undefined ? `&giga_vstoeno=${giga_vstoeno}` : ''}
+		${giga_operate != undefined ? `&giga_operate=${giga_operate}` : ''}
+		${accumulator != undefined ? `&accumulator=${accumulator}` : ''}&limit=134&offset=1
+		`)
+ 
+		console.log(response);
+		
+		return response.data
+	}
+	)
+	
+export const prevBtnInFiltering = createAsyncThunk(
+	'prev/prevBtnInFiltering',
+	async () => {
+		const response = await axios.get(
+			`http://127.0.0.1:8000/api/phones/func/?limit=10&offset=1&brand=samsung`
+		)
+		const prevDataResponse = await axios.get(response.data.previous)
+		console.log(prevDataResponse);
+		return prevDataResponse.data
+	}
+)
+
+
+

@@ -30,7 +30,7 @@ const PopularProducts = () => {
 						width: '55px',
 						top: '50%',
 						transform: 'translateY(-50%)',
-						left: '1.5%',
+						left: '1%',
 					}}
 				>
 					<img src={prev} alt='' />
@@ -55,7 +55,7 @@ const PopularProducts = () => {
 						width: '55px',
 						top: '50%',
 						transform: 'translateY(-50%)',
-						right: '2.5%',
+						right: '3%',
 					}}
 				>
 					<img src={next} alt='' />

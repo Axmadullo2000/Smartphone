@@ -6,12 +6,12 @@
 }
 
 .card:hover {
-	border: 5px solid blue;
-	background: rebeccapurple;
-	color: white;
+	border: 2px solid red;
+	background: white;
+	color: #D92E15;
 
 	.stars {
-		background: linear-gradient(to right, #ffc107 80%, white 100%);
+		background: linear-gradient(to right, #ffc107 20%, white 100%);
 		background-color: rebeccapurple;
 	}
 }

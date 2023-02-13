@@ -48,9 +48,9 @@ const Header = () => {
 
 	return (
 		<>
-			<div className='bg-slate-200 p-2 flex items-center' style={{boxShadow: '2px 12px 12px black'}}>
+			<div className='p-2 flex items-center' style={{ boxShadow: '2px 5px 2px red', background: '#D92E15' }}>
 				<div className=''>
-					<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
+					<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-slate-500/50 rounded-lg cursor-pointer'>
 						<Link to='/'>
 							<span className='text-red-700 hover:text-red-900'>Smart</span>{' '}
 							<span className='text-blue-700 hover:text-blue-900'>Shop</span>
@@ -61,7 +61,7 @@ const Header = () => {
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
 						ref={ref}
-						className='flex items-center bg-slate-400 p-3.5 rounded-lg cursor-pointer hover:bg-slate-500'
+						className='flex items-center bg-white	 p-3.5 rounded-lg cursor-pointer hover:bg-white'
 						style={{ width: '130px' }}
 					>
 						<div className='flex flex-col'>
@@ -69,14 +69,14 @@ const Header = () => {
 								width='40px'
 								height='38px'
 								viewBox='0 0 24 24'
-								fill='none'
+								fill='black'
 								xmlns='http://www.w3.org/2000/svg'
 							>
 								<path
 									fillRule='evenodd'
 									clipRule='evenodd'
 									d='M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z'
-									fill='#f6f6f6'
+									fill='black'
 								/>
 							</svg>
 						</div>
@@ -85,7 +85,7 @@ const Header = () => {
 				) : (
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
-						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-slate-500'
+						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-red-500'
 						style={{ width: '130px' }}
 					>
 						<div className='flex flex-col'>
@@ -159,7 +159,7 @@ const Header = () => {
 					<img
 						src={user}
 						alt=''
-						className='bg-slate-100 hover:bg-slate-900 p-3 rounded-lg'
+						className='bg-slate-100 hover:bg-red-900 p-3 rounded-lg'
 					/>
 					<p className='text-white text-sm ml-2'>Вход / Регистрация</p>
 				</button>
@@ -172,15 +172,15 @@ const Header = () => {
 						width={34}
 						height={34}
 						alt=''
-						className='bg-slate-100 hover:bg-slate-700 p-1 ml-5 rounded-lg'
+						className='bg-slate-100 hover:bg-red-700 p-1 ml-5 rounded-lg'
 					/>
 					<span className='text-white text-sm ml-2'>
 						Корзина / Оформление заказа
 					</span>
 				</button>
-				<button className='w-70 p-3 flex ml-5 hover:bg-red-500'>
+				<button className='w-70 p-3 flex ml-5'>
 					<img
-						className='bg-slate-10 hover:bg-red-400'
+						className='bg-slate-10'
 						src={headphone}
 						width={36}
 						height={36}
