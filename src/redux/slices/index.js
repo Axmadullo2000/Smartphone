@@ -4,11 +4,7 @@ import {
 	fetchNewProductCardsAsyncThunk,
 	fetchPopularCardsAsyncThunk,
 	filterByFewParams,
-	getAllData,
-	nextBtnAsyncThunk,
-	prevBtnAsyncThunk,
-	prevBtnInFiltering,
-	SearchAsyncThunk,
+	getAllData, SearchAsyncThunk
 } from '../asyncThunks'
 
 const initialState = {
@@ -33,13 +29,7 @@ const ProductSlice = createSlice({
 				state.status = 'Completed'
 				state.data = action.payload
 			})
-			.addCase(prevBtnAsyncThunk.fulfilled, (state, action) => {
-				state.data = action.payload
-			})
 
-			.addCase(nextBtnAsyncThunk.fulfilled, (state, action) => {
-				state.data = action.payload
-			})
 			.addCase(fetchNewProductCardsAsyncThunk.fulfilled, (state, action) => {
 				state.data = action.payload
 			})
@@ -49,13 +39,8 @@ const ProductSlice = createSlice({
 			.addCase(getAllData.fulfilled, (state, action) => {
 				state.allData = action.payload
 			})
-
-			.addCase(filterByFewParams.fulfilled, (state, action) => {
+			.addCase(filterByFewParams.fulfilled, (state, action)=> {
 				state.filteredData = action.payload
-			})
-
-			.addCase(prevBtnInFiltering.fulfilled, (state, action) => {
-				state.previousData = action.payload
 			})
 })
 

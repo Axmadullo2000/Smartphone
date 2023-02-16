@@ -1,13 +1,10 @@
 import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 import {
-	nextBtnAsyncThunk,
-	prevBtnAsyncThunk,
-	SearchAsyncThunk,
+	SearchAsyncThunk
 } from '../../redux/asyncThunks'
-
 import Header from '../Header'
 import Loader from '../Loader'
 
@@ -29,7 +26,6 @@ export const SearchResult = () => {
 	}
 	Count()
 
-	console.log(!!data.results && data.results[0].id)
 
 	const count = 0
 
@@ -50,7 +46,6 @@ export const SearchResult = () => {
 								<img src={item.photo1} alt='' width={300} />
 							)}
 							<ul className='ml-4 mt-4'>
-								<li>{item.id}</li>
 								<li>Тип {item.name.slice(0, 8)}</li>
 								<li>Версия ОС {item.Version_OS}</li>
 								<li>Корпус {item.corpus}</li>
@@ -72,34 +67,6 @@ export const SearchResult = () => {
 					</button>
 				))}
 				<br />
-				<div className='flex justify-around'>
-					<button
-						onClick={() =>
-							dispatch(
-								prevBtnAsyncThunk({
-									search: slug,
-									offset: data.results[0].id - 5,
-								})
-							)
-						}
-						className='p-2 w-50 border my-5 hover:text-red-500'
-					>
-						Prev
-					</button>
-					<button
-						onClick={() =>
-							dispatch(
-								nextBtnAsyncThunk({
-									search: slug,
-									offset: data.results[4].id + 5,
-								})
-							)
-						}
-						className='p-2 w-50 border my-5 hover:text-red-500'
-					>
-						Next
-					</button>
-				</div>
 			</div>
 		</div>
 	)

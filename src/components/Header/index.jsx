@@ -1,13 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate, Link } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
-import Basket from '../Basket'
 import { getAllData } from '../../redux/asyncThunks'
+import Basket from '../Basket'
 
-import user from '../../assets/user.svg'
 import basket from '../../assets/basket.svg'
 import headphone from '../../assets/headphone.svg'
+import user from '../../assets/user.svg'
 
 import './Header.scss'
 
@@ -61,7 +61,7 @@ const Header = () => {
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
 						ref={ref}
-						className='flex items-center bg-white	 p-3.5 rounded-lg cursor-pointer hover:bg-white'
+						className='flex items-center bg-slate-200	p-3.5 rounded-lg cursor-pointer hover:bg-slate-100'
 						style={{ width: '130px' }}
 					>
 						<div className='flex flex-col'>
@@ -85,7 +85,7 @@ const Header = () => {
 				) : (
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
-						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-red-500'
+						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-red-600'
 						style={{ width: '130px' }}
 					>
 						<div className='flex flex-col'>
@@ -135,7 +135,7 @@ const Header = () => {
       focus:invalid:border-pink-500 focus:invalid:ring-pink-500
     '
 						/>
-						<button className='p-3 bg-blue-900 text-slate-200 absolute rounded-lg top-6 right-5 hover:bg-red-900'>
+						<button className='p-3 bg-red-900 text-slate-200 absolute rounded-lg top-6 right-5 hover:bg-red-600'>
 							<svg
 								xmlns='http://www.w3.org/2000/svg'
 								viewBox='0 0 50 50'
@@ -153,7 +153,7 @@ const Header = () => {
 				</form>
 
 				<button
-					className='w-40 flex hover:bg-red-900	'
+					className='w-40 flex hover:bg-red-600'
 					onClick={() => navigate('/sign-up')}
 				>
 					<img
@@ -164,7 +164,7 @@ const Header = () => {
 					<p className='text-white text-sm ml-2'>Вход / Регистрация</p>
 				</button>
 				<button
-					className='w-40 flex items-center ml-4 hover:bg-red-900'
+					className='w-40 flex items-center ml-4 hover:bg-red-600'
 					onClick={() => setBasketModalOpen(old => !old)}
 				>
 					<img
@@ -172,7 +172,7 @@ const Header = () => {
 						width={34}
 						height={34}
 						alt=''
-						className='bg-slate-100 hover:bg-red-700 p-1 ml-5 rounded-lg'
+						className='bg-slate-100 hover:bg-red-100 p-1 ml-5 rounded-lg'
 					/>
 					<span className='text-white text-sm ml-2'>
 						Корзина / Оформление заказа
@@ -199,11 +199,11 @@ const Header = () => {
 						<h2 className='text-black mb-2'>Средства связи</h2>
 						<ul>
 							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								Все смартфоны
+								<Link to='/products/category/all'>Все Смартфоны</Link>
 							</li>
 							{brands.map(item => {
 								return (
-									<li className='capitalize hover:text-red-600'>
+									<li className='capitalize text-slate-500 hover:text-black'>
 										<Link to={`/products/category/${item}`}>{item}</Link>{' '}
 									</li>
 								)
