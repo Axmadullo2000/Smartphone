@@ -1,16 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-import telegram from '../../assets/telegram.svg'
-import instagram from '../../assets/instagram.svg'
 import facebook from '../../assets/facebook.svg'
 import headphone from '../../assets/headphone.svg'
+import instagram from '../../assets/instagram.svg'
+import telegram from '../../assets/telegram.svg'
 
 import './Footer.scss'
 
 const Footer = () => {
 	return (
-		<footer className='footer flex text-slate-100 justify-between'>
+		<footer className='footer flex text-slate-100 justify-between' style={{paddingBottom: '40px'}}>
 			<div className='flex items-start'>
 				<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
 					<Link to='/'>
@@ -22,30 +22,74 @@ const Footer = () => {
 
 			<div>
 				<h5>О нас</h5>
-				<ul>
-					<li>О нас</li>
-					<li>Новости</li>
-					<li>Гарантия</li>
-					<li>Акции</li>
-					<li>Адреса магазинов</li>
+				<ul style={{lineHeight: '30px'}}>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							О нас
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Новости
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Гарантия
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Акции
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Адреса магазинов
+						</Link>
+					</li>
 				</ul>
 			</div>
 
 			<div>
 				<h5>Покупателям</h5>
-				<ul>
-					<li>Доставка</li>
-					<li>Контакты</li>
-					<li>Сервис центр</li>
-					<li>Оставить отзыв</li>
-					<li>Вакансии</li>
-					<li>Корпоративным покупателям</li>
+				<ul style={{lineHeight: '30px'}}>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Доставка
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Контакты
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Сервис центр
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Оставить отзыв
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Вакансии
+						</Link>
+					</li>
+					<li>
+						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
+							Корпоративным покупателям
+						</Link>
+					</li>
 				</ul>
 			</div>
 
 			<div>
 				<h5>Услуги</h5>
-				<ul>
+				<ul style={{lineHeight: '30px'}}>
 					<li>Как сделать покупку?</li>
 					<li>Способы оплаты</li>
 					<li>Рассрочка UNIRED</li>
@@ -69,7 +113,7 @@ const Footer = () => {
 				</div>
 				<button className='flex ml-1 mt-5'>
 					<img
-						className='bg-slate-10 hover:bg-red-400'
+						className='bg-slate-10'
 						src={headphone}
 						width={36}
 						height={36}

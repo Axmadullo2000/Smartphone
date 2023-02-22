@@ -48,12 +48,15 @@ const Header = () => {
 
 	return (
 		<>
-			<div className='p-2 flex items-center' style={{ boxShadow: '2px 5px 2px red', background: '#D92E15' }}>
+			<div
+				className='p-2 flex items-center'
+				style={{ boxShadow: '2px 5px 2px red', background: '#D92E15' }}
+			>
 				<div className=''>
 					<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-slate-500/50 rounded-lg cursor-pointer'>
-						<Link to='/'>
-							<span className='text-red-700 hover:text-red-900'>Smart</span>{' '}
-							<span className='text-blue-700 hover:text-blue-900'>Shop</span>
+						<Link to='/' className='opacity-75 hover:opacity-100'>
+							<span className='text-red-700'>Smart</span>{' '}
+							<span className='text-blue-700'>Shop</span>
 						</Link>
 					</p>
 				</div>
@@ -61,60 +64,99 @@ const Header = () => {
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
 						ref={ref}
-						className='flex items-center bg-slate-200	p-3.5 rounded-lg cursor-pointer hover:bg-slate-100'
-						style={{ width: '130px' }}
+						className='flex items-center bg-slate-200	rounded-lg cursor-pointer hover:bg-slate-100'
+						style={{ width: '130px', padding: '10px' }}
 					>
-						<div className='flex flex-col'>
-							<svg
-								width='40px'
-								height='38px'
-								viewBox='0 0 24 24'
-								fill='black'
-								xmlns='http://www.w3.org/2000/svg'
-							>
-								<path
-									fillRule='evenodd'
-									clipRule='evenodd'
-									d='M5.29289 5.29289C5.68342 4.90237 6.31658 4.90237 6.70711 5.29289L12 10.5858L17.2929 5.29289C17.6834 4.90237 18.3166 4.90237 18.7071 5.29289C19.0976 5.68342 19.0976 6.31658 18.7071 6.70711L13.4142 12L18.7071 17.2929C19.0976 17.6834 19.0976 18.3166 18.7071 18.7071C18.3166 19.0976 17.6834 19.0976 17.2929 18.7071L12 13.4142L6.70711 18.7071C6.31658 19.0976 5.68342 19.0976 5.29289 18.7071C4.90237 18.3166 4.90237 17.6834 5.29289 17.2929L10.5858 12L5.29289 6.70711C4.90237 6.31658 4.90237 5.68342 5.29289 5.29289Z'
-									fill='black'
-								/>
-							</svg>
+						<div
+							className='flex flex-col'
+							style={{
+								width: '22px',
+								height: '14px',
+								position: 'relative',
+								margin: '0px 8px'
+							}}
+						>
+							<span
+								style={{
+									width: '20px',
+									height: '3px',
+									margin: '3px 0',
+									background: '#585858',
+									position: 'absolute',
+									top: '49%',
+									transform: 'rotate(45deg)'
+								}}
+							></span>
+							<span
+								style={{
+									width: '20px',
+									height: '3px',
+									margin: '3px 0',
+									background: '#585858',
+									position: 'absolute',
+									top: '49%',
+									transform: 'rotate(-45deg)'
+								}}
+							></span>
 						</div>
-						<div className='ml-0 text-xl opacity-60'>Каталог</div>
+						<div
+							className='ml-0 text-xl opacity-60'
+							style={{ marginTop: '8px' }}
+						>
+							Каталог
+						</div>
 					</div>
 				) : (
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
-						className='flex items-center bg-slate-100 p-3.5 rounded-lg cursor-pointer hover:bg-red-600'
+						className='flex items-center bg-slate-100 rounded-lg cursor-pointer hover:bg-red-600'
 						style={{ width: '130px' }}
 					>
-						<div className='flex flex-col'>
+						<div
+							className='flex flex-col absolute'
+							style={{ width: '22px', height: '14px', margin: '0px 8px' }}
+						>
 							<span
 								style={{
-									width: '20px',
-									height: '4px',
+									width: '100%',
+									height: '3px',
 									margin: '3px 0',
 									background: '#585858',
+									position: 'absolute',
+									top: 0
 								}}
 							></span>
 							<span
 								style={{
-									width: '20px',
-									height: '4px',
+									width: '100%',
+									height: '3px',
 									margin: '3px 0',
 									background: '#585858',
+									position: 'absolute',
+									top: '50%'
 								}}
 							></span>
 							<span
 								style={{
-									width: '22px',
-									height: '4px',
+									width: '100%',
+									height: '3px',
 									margin: '3px 0',
 									background: '#585858',
+									position: 'absolute',
+									top: '100%'
 								}}
 							></span>
 						</div>
-						<div className='ml-3 text-xl opacity-60'>Каталог</div>
+						<div
+							className='ml-3 text-xl opacity-60'
+							style={{
+								fontSize: '21px',
+								padding: '10px',
+								margin: '8px 28px 0'
+							}}
+						>
+							Каталог
+						</div>
 					</div>
 				)}
 
@@ -128,7 +170,7 @@ const Header = () => {
 							placeholder={'Search your favourite smartphones'}
 							style={{ width: '450px' }}
 							type='text'
-							className='ml-5 mt-1 block px-3 p-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
+							className='search_panel ml-5 mt-1 block px-3 p-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
       focus:outline-none focus:border-sky-500 focus:ring-1 focus:ring-sky-500
       disabled:bg-slate-50 disabled:text-slate-500 disabled:border-slate-200 disabled:shadow-none
       invalid:border-pink-500 invalid:text-pink-600
@@ -199,12 +241,14 @@ const Header = () => {
 						<h2 className='text-black mb-2'>Средства связи</h2>
 						<ul>
 							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								<Link to='/products/category/all'>Все Смартфоны</Link>
+								<Link to='/products/category/all' style={{padding: '20px', margin
+							: '-15px'}}>Все Смартфоны</Link>
 							</li>
 							{brands.map(item => {
 								return (
 									<li className='capitalize text-slate-500 hover:text-black'>
-										<Link to={`/products/category/${item}`}>{item}</Link>{' '}
+										<Link to={`/products/category/${item}`} style={{padding: '20px', margin
+									: '-15px'}}>{item}</Link>{' '}
 									</li>
 								)
 							})}

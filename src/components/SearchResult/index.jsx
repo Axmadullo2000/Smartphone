@@ -2,9 +2,8 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import {
-	SearchAsyncThunk
-} from '../../redux/asyncThunks'
+import { SearchAsyncThunk } from '../../redux/asyncThunks'
+import Footer from '../Footer'
 import Header from '../Header'
 import Loader from '../Loader'
 
@@ -16,21 +15,17 @@ export const SearchResult = () => {
 
 	slug = slug?.trim()
 
-	console.log(data)
-
 	const Count = () => {
 		for (let i = 1; i < data.count; i++) {
 			arr.push(i)
 		}
-		console.log(arr)
 	}
-	Count()
-
 
 	const count = 0
 
 	useEffect(() => {
 		dispatch(SearchAsyncThunk({ search: slug, offset: count }))
+		Count()
 	}, [slug])
 	return (
 		<div>
@@ -68,6 +63,7 @@ export const SearchResult = () => {
 				))}
 				<br />
 			</div>
+			<Footer />
 		</div>
 	)
 }

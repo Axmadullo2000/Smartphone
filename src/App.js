@@ -1,15 +1,15 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
+import 'rc-slider/assets/index.css'
+import 'rc-tooltip/assets/bootstrap.css'
 import 'swiper/css'
-import 'rc-tooltip/assets/bootstrap.css';
-import 'rc-slider/assets/index.css';
 
-import HomePage from './pages/HomePage'
-import Registration from './pages/Auth/Registration'
-import Login from './pages/Auth/Login'
 import { SearchResult } from './components/SearchResult'
+import Login from './pages/Auth/Login'
+import Registration from './pages/Auth/Registration'
 import FilterProducts from './pages/FilterProducts'
+import HomePage from './pages/HomePage'
 
 import './App.css'
 
@@ -19,7 +19,6 @@ function App() {
 			<Route path='/' element={<HomePage />} />
 			<Route path='/sign-up' element={<Registration />} />
 			<Route path='/sign-in' element={<Login />} />
-
 
 			<Route path='/search/:slug' element={<SearchResult />} />
 			<Route path='/products/category/:slug' element={<FilterProducts />} />
