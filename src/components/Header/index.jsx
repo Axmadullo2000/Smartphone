@@ -72,15 +72,13 @@ const Header = () => {
 							style={{
 								width: '22px',
 								height: '14px',
-								position: 'relative',
-								margin: '0px 8px'
+								position: 'relative'
 							}}
 						>
 							<span
 								style={{
 									width: '20px',
 									height: '3px',
-									margin: '3px 0',
 									background: '#585858',
 									position: 'absolute',
 									top: '49%',
@@ -91,7 +89,6 @@ const Header = () => {
 								style={{
 									width: '20px',
 									height: '3px',
-									margin: '3px 0',
 									background: '#585858',
 									position: 'absolute',
 									top: '49%',
@@ -99,60 +96,56 @@ const Header = () => {
 								}}
 							></span>
 						</div>
-						<div
-							className='ml-0 text-xl opacity-60'
-							style={{ marginTop: '8px' }}
-						>
-							Каталог
-						</div>
+						<div className='text-xl opacity-60'>Каталог</div>
 					</div>
 				) : (
 					<div
 						onClick={() => setIsMenuOpen(oldState => !oldState)}
 						className='flex items-center bg-slate-100 rounded-lg cursor-pointer hover:bg-red-600'
-						style={{ width: '130px' }}
+						style={{ padding: '15px ' }}
 					>
 						<div
-							className='flex flex-col absolute'
-							style={{ width: '22px', height: '14px', margin: '0px 8px' }}
+							className='relative'
+							style={{
+								width: '22px',
+								height: '14px',
+								margin: '0px 8px'
+							}}
 						>
 							<span
 								style={{
 									width: '100%',
 									height: '3px',
-									margin: '3px 0',
 									background: '#585858',
 									position: 'absolute',
-									top: 0
+									top: '0'
 								}}
 							></span>
 							<span
 								style={{
 									width: '100%',
 									height: '3px',
-									margin: '3px 0',
+
 									background: '#585858',
 									position: 'absolute',
-									top: '50%'
+									top: '50%',
+									transform: 'translateY(-50%)'
 								}}
 							></span>
 							<span
 								style={{
 									width: '100%',
 									height: '3px',
-									margin: '3px 0',
 									background: '#585858',
 									position: 'absolute',
-									top: '100%'
+									bottom: '0'
 								}}
 							></span>
 						</div>
 						<div
-							className='ml-3 text-xl opacity-60'
+							className='text-xl opacity-60'
 							style={{
-								fontSize: '21px',
-								padding: '10px',
-								margin: '8px 28px 0'
+								fontSize: '18px'
 							}}
 						>
 							Каталог
@@ -241,14 +234,22 @@ const Header = () => {
 						<h2 className='text-black mb-2'>Средства связи</h2>
 						<ul>
 							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								<Link to='/products/category/all' style={{padding: '20px', margin
-							: '-15px'}}>Все Смартфоны</Link>
+								<Link
+									to='/products/category/all'
+									style={{ padding: '20px', margin: '-15px' }}
+								>
+									Все Смартфоны
+								</Link>
 							</li>
 							{brands.map(item => {
 								return (
 									<li className='capitalize text-slate-500 hover:text-black'>
-										<Link to={`/products/category/${item}`} style={{padding: '20px', margin
-									: '-15px'}}>{item}</Link>{' '}
+										<Link
+											to={`/products/category/${item}`}
+											style={{ padding: '20px', margin: '-15px' }}
+										>
+											{item}
+										</Link>{' '}
 									</li>
 								)
 							})}

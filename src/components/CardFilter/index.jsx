@@ -14,6 +14,8 @@ import './CardFilter.scss'
 const CardFilter = ({ slug }) => {
 	const [sortType, setSorted] = useState('asc')
 
+	const [showProducts, setShowProducts] = useState(true)
+
 	const [isOpenMemoryFilter, setIsOpenMemoryFilter] = useState(false)
 	const [isOpenOperateGiga, setIsOpenOperateGiga] = useState(false)
 	const [isOpenFrontCamera, setIsOpenFrontCamera] = useState(false)
@@ -33,6 +35,13 @@ const CardFilter = ({ slug }) => {
 	const { pathname } = useLocation()
 
 	const { allData, filteredData } = useSelector(data => data.data)
+
+	const maxElementArr = []
+
+	!!allData.results &&
+		allData.results.map(item => maxElementArr.push(item.price))
+
+	const maxExpensiveProduct = maxElementArr.sort((a, b) => b - a)[0]
 
 	const dispatch = useDispatch()
 
@@ -80,10 +89,15 @@ const CardFilter = ({ slug }) => {
 				offset: 0
 			})
 		)
+
+		resetFilter()
 	}, [slug])
 
 	const handleFilter = e => {
 		e.preventDefault()
+
+		resetFilter()
+		setCount(0)
 
 		return dispatch(
 			filterByFewParams({
@@ -213,139 +227,102 @@ const CardFilter = ({ slug }) => {
 		return uniqueData
 	}
 
+	const resetFilter = () => {
+		setSelectedBaseMemory('')
+		setSelectedFastMemory('')
+		setSelectedFrontCamera('')
+		setSelectedAccumulator('')
+		setSelectedYadra('')
+		setSelectedCorpus('')
+	}
+
 	return (
 		<div style={{ display: 'flex', marginTop: '13px' }}>
-			<div
-				style={{
-					width: '400px',
-					background: '#f6f6f6',
-					padding: '20px 35px',
-					lineHeight: '30px'
-				}}
-			>
-				<h3 className='text-xl text-red-700'>
-					<span className='capitalize'>
-						{slug != 'all' ? slug : 'Все '} Смартфоны
-					</span>
-				</h3>
-				<div>
-					{pathname == '/products/category/all' ? (
-						<Link to='/products/category/all' className='text-red-700'>
-							Все Смартфоны
-						</Link>
-					) : (
-						<Link to='/products/category/all' className='text-red-450'>
-							Все Смартфоны
-						</Link>
-					)}
-
-					{filterItems.map(item => (
-						<p key={item} className='capitalize'>
-							{pathname == `/products/category/${item}` ? (
-								<Link
-									to={`/products/category/${item}`}
-									style={{ color: 'red' }}
-								>
-									{item}
-								</Link>
-							) : (
-								<Link to={`/products/category/${item}`}>{item}</Link>
-							)}
-						</p>
-					))}
-				</div>
-
-				<div style={{ width: '100%' }}>
-					<h3
-						className='text-xl py-2'
-						style={{
-							color: '#223869'
-						}}
-					>
-						Стоимость
-					</h3>
-					{
-						<>
-							{count == 0 ? (
-								<div className='flex justify-between text-red-500 text-xl'>
-									<span>{count}</span>
-									<span>{2300000}</span>
-								</div>
-							) : (
-								<div className='flex justify-between text-xl text-red-500'>
-									<span>{count[0]}</span>
-									<span>{count[1]}</span>
-								</div>
-							)}
-						</>
-					}
-
-					<div style={{ width: 320, margin: '20px 0px' }}>
-						<TooltipSlider
-							onChange={value => setCount(value)}
-							range
-							min={0}
-							max={23000000}
-							defaultValue={[0, 23000000]}
-							tipFormatter={value => `${value} сум`}
-						/>
-					</div>
-				</div>
-				<div>
-					Filter items
-					<div
-						onClick={() => setIsOpenMemoryFilter(!isOpenMemoryFilter)}
-						className='cursor-pointer flex items-center justify-between mt-6 p-4'
-						style={
-							isOpenMemoryFilter
-								? { border: '2px solid D92E15', background: '#D92E15' }
-								: {
-										border: '2px solid #D92E15',
-										background: 'white'
-								  }
-						}
-					>
-						<span
-							id='operative_memory'
-							style={
-								isOpenMemoryFilter ? { color: 'white' } : { color: '#D92E15' }
-							}
-						>
-							Встроенная память
+			{showProducts && (
+				<div
+					style={{
+						width: '400px',
+						background: '#f6f6f6',
+						padding: '20px 35px',
+						lineHeight: '30px'
+					}}
+				>
+					<h3 className='text-xl text-red-700'>
+						<span className='capitalize'>
+							{slug != 'all' ? slug : 'Все '} Смартфоны
 						</span>
-						{isOpenMemoryFilter ? (
-							<img src={openElement} alt='Open element' />
+					</h3>
+					<div>
+						{pathname == '/products/category/all' ? (
+							<Link to='/products/category/all' className='text-red-700'>
+								Все Смартфоны
+							</Link>
 						) : (
-							<img src={closeElement} alt='Close element' />
+							<Link to='/products/category/all' className='text-red-450'>
+								Все Смартфоны
+							</Link>
 						)}
+
+						{filterItems.map(item => (
+							<p key={item} className='capitalize'>
+								{pathname == `/products/category/${item}` ? (
+									<Link
+										to={`/products/category/${item}`}
+										style={{ color: 'red' }}
+									>
+										{item}
+									</Link>
+								) : (
+									<Link to={`/products/category/${item}`}>{item}</Link>
+								)}
+							</p>
+						))}
 					</div>
-					<form onSubmit={handleFilter}>
-						{isOpenMemoryFilter && (
-							<div className='m-0 p-2' style={{ border: '1px solid #D92E15' }}>
-								{FilterByMemory().map(item => (
-									<div className='radio' style={{ width: '100%' }}>
-										<label className='block w-full cursor-pointer'>
-											<input
-												style={{ margin: '0 12px 0 0' }}
-												type='radio'
-												value={item}
-												checked={selectedBaseMemory === item}
-												onChange={e => setSelectedBaseMemory(e.target.value)}
-												className='hover:text-red-300'
-											/>
-											{item} Гб
-										</label>
-									</div>
-								))}
-							</div>
-						)}
 
+					<div style={{ width: '100%' }}>
+						<h3
+							className='text-xl py-2'
+							style={{
+								color: '#223869'
+							}}
+						>
+							Стоимость
+						</h3>
+						{
+							<>
+								{count == 0 ? (
+									<div className='flex justify-between text-red-500 text-xl'>
+										<span>{count}</span>
+										<span>{maxExpensiveProduct}</span>
+									</div>
+								) : (
+									<div className='flex justify-between text-xl text-red-500'>
+										<span>{count[0]}</span>
+										<span>{count[1]}</span>
+									</div>
+								)}
+							</>
+						}
+
+						<div style={{ width: 320, margin: '20px 0px' }}>
+							<TooltipSlider
+								onChange={value => setCount(value)}
+								range
+								min={0}
+								max={23000000}
+								defaultValue={[0, 23000000]}
+								tipFormatter={value => `${value} сум`}
+							/>
+						</div>
+					</div>
+					<div>
+						Filter items
 						<div
-							onClick={() => setIsOpenOperateGiga(!isOpenOperateGiga)}
+							onClick={() => setIsOpenMemoryFilter(!isOpenMemoryFilter)}
 							className='cursor-pointer flex items-center justify-between mt-6 p-4'
 							style={
-								isOpenOperateGiga
-									? { border: '2px solid #D92E15', background: '#D92E15' }
+								isOpenMemoryFilter
+									? { border: '2px solid D92E15', background: '#D92E15' }
 									: {
 											border: '2px solid #D92E15',
 											background: 'white'
@@ -355,229 +332,318 @@ const CardFilter = ({ slug }) => {
 							<span
 								id='operative_memory'
 								style={
-									isOpenOperateGiga ? { color: 'white' } : { color: '#D92E15' }
+									isOpenMemoryFilter ? { color: 'white' } : { color: '#D92E15' }
 								}
 							>
-								Оперативная память
+								Встроенная память
 							</span>
-							{isOpenOperateGiga ? (
+							{isOpenMemoryFilter ? (
 								<img src={openElement} alt='Open element' />
 							) : (
 								<img src={closeElement} alt='Close element' />
 							)}
 						</div>
+						<form onSubmit={handleFilter}>
+							{isOpenMemoryFilter && (
+								<div
+									className='m-0 p-2'
+									style={{ border: '1px solid #D92E15' }}
+								>
+									{FilterByMemory().map(item => (
+										<div className='radio' style={{ width: '100%' }}>
+											<label className='block w-full cursor-pointer'>
+												<input
+													style={{ margin: '0 12px 0 0' }}
+													type='radio'
+													value={item}
+													checked={selectedBaseMemory === item}
+													onChange={e => setSelectedBaseMemory(e.target.value)}
+													className='hover:text-red-300'
+												/>
+												{item} Гб
+											</label>
+										</div>
+									))}
+								</div>
+							)}
 
-						{isOpenOperateGiga && (
-							<div className='m-0 p-3' style={{ border: '1px solid #D92E15' }}>
-								{FilterByOperativeMemory().map(item => (
-									<div className='radio' style={{ width: '100%' }}>
-										<label className='block w-full cursor-pointer'>
-											<input
-												style={{ margin: '0 12px 0 0' }}
-												type='radio'
-												value={item}
-												checked={selectedFastMemory === item}
-												onChange={e => setSelectedFastMemory(e.target.value)}
-												className='hover:text-red-300'
-											/>
-											{item} Гб
-										</label>
-									</div>
-								))}
-							</div>
-						)}
-
-						<div
-							onClick={() => setIsOpenFrontCamera(!isOpenFrontCamera)}
-							className='cursor-pointer flex items-center justify-between mt-6 p-4'
-							style={
-								isOpenFrontCamera
-									? { border: '2px solid #D92E15', background: '#D92E15' }
-									: {
-											border: '2px solid #D92E15',
-											background: 'white'
-									  }
-							}
-						>
-							<span
-								id='operative_memory'
+							<div
+								onClick={() => setIsOpenOperateGiga(!isOpenOperateGiga)}
+								className='cursor-pointer flex items-center justify-between mt-6 p-4'
 								style={
-									isOpenFrontCamera ? { color: 'white' } : { color: '#D92E15' }
+									isOpenOperateGiga
+										? { border: '2px solid #D92E15', background: '#D92E15' }
+										: {
+												border: '2px solid #D92E15',
+												background: 'white'
+										  }
 								}
 							>
-								Фронтальная камера
-							</span>
-							{isOpenFrontCamera ? (
-								<img src={openElement} alt='Open element' />
-							) : (
-								<img src={closeElement} alt='Close element' />
-							)}
-						</div>
-
-						{isOpenFrontCamera && (
-							<div className='m-0 p-2' style={{ border: '1px solid #D92E15' }}>
-								{FilterByFrontCamera().map(item => (
-									<div className='radio' style={{ width: '100%' }}>
-										<label className='block w-full cursor-pointer'>
-											<input
-												style={{ margin: '0 12px 0 0' }}
-												type='radio'
-												value={item}
-												checked={selectedFrontCamera == item}
-												onChange={e => setSelectedFrontCamera(e.target.value)}
-												className='hover:text-red-300'
-											/>
-											{item} Мп
-										</label>
-									</div>
-								))}
+								<span
+									id='operative_memory'
+									style={
+										isOpenOperateGiga
+											? { color: 'white' }
+											: { color: '#D92E15' }
+									}
+								>
+									Оперативная память
+								</span>
+								{isOpenOperateGiga ? (
+									<img src={openElement} alt='Open element' />
+								) : (
+									<img src={closeElement} alt='Close element' />
+								)}
 							</div>
-						)}
 
-						<div
-							onClick={() => setIsOpenAccumulator(!isOpenAccumulator)}
-							className='cursor-pointer flex items-center justify-between mt-6 p-4'
-							style={
-								isOpenAccumulator
-									? { border: '2px solid #D92E15', background: '#D92E15' }
-									: {
-											border: '2px solid #D92E15',
-											background: 'white'
-									  }
-							}
-						>
-							<span
-								id='operative_memory'
+							{isOpenOperateGiga && (
+								<div
+									className='m-0 p-3'
+									style={{ border: '1px solid #D92E15' }}
+								>
+									{FilterByOperativeMemory().map(item => (
+										<div className='radio' style={{ width: '100%' }}>
+											<label className='block w-full cursor-pointer'>
+												<input
+													style={{ margin: '0 12px 0 0' }}
+													type='radio'
+													value={item}
+													checked={selectedFastMemory === item}
+													onChange={e => setSelectedFastMemory(e.target.value)}
+													className='hover:text-red-300'
+												/>
+												{item} Гб
+											</label>
+										</div>
+									))}
+								</div>
+							)}
+
+							<div
+								onClick={() => setIsOpenFrontCamera(!isOpenFrontCamera)}
+								className='cursor-pointer flex items-center justify-between mt-6 p-4'
 								style={
-									isOpenAccumulator ? { color: 'white' } : { color: '#D92E15' }
+									isOpenFrontCamera
+										? { border: '2px solid #D92E15', background: '#D92E15' }
+										: {
+												border: '2px solid #D92E15',
+												background: 'white'
+										  }
 								}
 							>
-								Емкость аккумулятора
-							</span>
-							{isOpenAccumulator ? (
-								<img src={openElement} alt='Open element' />
-							) : (
-								<img src={closeElement} alt='Close element' />
-							)}
-						</div>
-
-						{isOpenAccumulator && (
-							<div className='m-0 p-2' style={{ border: '1px solid #D92E15' }}>
-								{FilterByAccumulator().map(item => (
-									<div className='radio' style={{ width: '100%' }}>
-										<label className='block w-full cursor-pointer'>
-											<input
-												style={{ margin: '0 12px 0 0' }}
-												type='radio'
-												value={item}
-												checked={selectedAccumulator == item}
-												onChange={e => setSelectedAccumulator(e.target.value)}
-												className='hover:text-red-300'
-											/>
-											{item} мАч
-										</label>
-									</div>
-								))}
+								<span
+									id='operative_memory'
+									style={
+										isOpenFrontCamera
+											? { color: 'white' }
+											: { color: '#D92E15' }
+									}
+								>
+									Фронтальная камера
+								</span>
+								{isOpenFrontCamera ? (
+									<img src={openElement} alt='Open element' />
+								) : (
+									<img src={closeElement} alt='Close element' />
+								)}
 							</div>
-						)}
 
-						<div
-							onClick={() => setIsOpenYadro(!isOpenYadro)}
-							className='cursor-pointer flex items-center justify-between mt-6 p-4'
-							style={
-								isOpenYadro
-									? { border: '2px solid #D92E15', background: '#D92E15' }
-									: {
-											border: '2px solid #D92E15',
-											background: 'white'
-									  }
-							}
-						>
-							<span
-								id='operative_memory'
-								style={isOpenYadro ? { color: 'white' } : { color: '#D92E15' }}
+							{isOpenFrontCamera && (
+								<div
+									className='m-0 p-2'
+									style={{ border: '1px solid #D92E15' }}
+								>
+									{FilterByFrontCamera().map(item => (
+										<div className='radio' style={{ width: '100%' }}>
+											<label className='block w-full cursor-pointer'>
+												<input
+													style={{ margin: '0 12px 0 0' }}
+													type='radio'
+													value={item}
+													checked={selectedFrontCamera == item}
+													onChange={e => setSelectedFrontCamera(e.target.value)}
+													className='hover:text-red-300'
+												/>
+												{item} Мп
+											</label>
+										</div>
+									))}
+								</div>
+							)}
+
+							<div
+								onClick={() => setIsOpenAccumulator(!isOpenAccumulator)}
+								className='cursor-pointer flex items-center justify-between mt-6 p-4'
+								style={
+									isOpenAccumulator
+										? { border: '2px solid #D92E15', background: '#D92E15' }
+										: {
+												border: '2px solid #D92E15',
+												background: 'white'
+										  }
+								}
 							>
-								Количество ядер процессора
-							</span>
-							{isOpenYadro ? (
-								<img src={openElement} alt='Open element' />
-							) : (
-								<img src={closeElement} alt='Close element' />
-							)}
-						</div>
-
-						{isOpenYadro && (
-							<div className='m-0 p-2' style={{ border: '1px solid #D92E15' }}>
-								{FilterByYadra().map(item => (
-									<div className='radio' style={{ width: '100%' }}>
-										<label className='block w-full cursor-pointer'>
-											<input
-												style={{ margin: '0 12px 0 0' }}
-												type='radio'
-												value={item}
-												checked={selectedYadra == item}
-												onChange={e => setSelectedYadra(e.target.value)}
-												className='hover:text-red-300'
-											/>
-											{item} ядра
-										</label>
-									</div>
-								))}
+								<span
+									id='operative_memory'
+									style={
+										isOpenAccumulator
+											? { color: 'white' }
+											: { color: '#D92E15' }
+									}
+								>
+									Емкость аккумулятора
+								</span>
+								{isOpenAccumulator ? (
+									<img src={openElement} alt='Open element' />
+								) : (
+									<img src={closeElement} alt='Close element' />
+								)}
 							</div>
-						)}
 
-						<div
-							onClick={() => setIsOpenCorpus(!isOpenCorpus)}
-							className='cursor-pointer flex items-center justify-between mt-6 p-4'
-							style={
-								isOpenCorpus
-									? { border: '2px solid #D92E15', background: '#D92E15' }
-									: {
-											border: '2px solid #D92E15',
-											background: 'white'
-									  }
-							}
-						>
-							<span
-								id='operative_memory'
-								style={isOpenCorpus ? { color: 'white' } : { color: '#D92E15' }}
+							{isOpenAccumulator && (
+								<div
+									className='m-0 p-2'
+									style={{ border: '1px solid #D92E15' }}
+								>
+									{FilterByAccumulator().map(item => (
+										<div className='radio' style={{ width: '100%' }}>
+											<label className='block w-full cursor-pointer'>
+												<input
+													style={{ margin: '0 12px 0 0' }}
+													type='radio'
+													value={item}
+													checked={selectedAccumulator == item}
+													onChange={e => setSelectedAccumulator(e.target.value)}
+													className='hover:text-red-300'
+												/>
+												{item} мАч
+											</label>
+										</div>
+									))}
+								</div>
+							)}
+
+							<div
+								onClick={() => setIsOpenYadro(!isOpenYadro)}
+								className='cursor-pointer flex items-center justify-between mt-6 p-4'
+								style={
+									isOpenYadro
+										? { border: '2px solid #D92E15', background: '#D92E15' }
+										: {
+												border: '2px solid #D92E15',
+												background: 'white'
+										  }
+								}
 							>
-								Материал корпуса
-							</span>
-							{isOpenCorpus ? (
-								<img src={openElement} alt='Open element' />
-							) : (
-								<img src={closeElement} alt='Close element' />
-							)}
-						</div>
-
-						{isOpenCorpus && (
-							<div className='m-0 p-2' style={{ border: '1px solid #D92E15' }}>
-								{FilterByCorpus().map(item => (
-									<div className='radio' style={{ width: '100%' }}>
-										<label className='block w-full cursor-pointer'>
-											<input
-												style={{ margin: '0 12px 0 0' }}
-												type='radio'
-												value={item}
-												checked={selectedCorpus == item}
-												onChange={e => setSelectedCorpus(e.target.value)}
-												className='hover:text-red-300'
-											/>
-											{item}
-										</label>
-									</div>
-								))}
+								<span
+									id='operative_memory'
+									style={
+										isOpenYadro ? { color: 'white' } : { color: '#D92E15' }
+									}
+								>
+									Количество ядер процессора
+								</span>
+								{isOpenYadro ? (
+									<img src={openElement} alt='Open element' />
+								) : (
+									<img src={closeElement} alt='Close element' />
+								)}
 							</div>
-						)}
 
-						<button className='p-2 bg-red-600 text-slate-200 hover:text-white hover:bg-red-800 mt-4'>
-							Искать по фильтрам
-						</button>
-					</form>
+							{isOpenYadro && (
+								<div
+									className='m-0 p-2'
+									style={{ border: '1px solid #D92E15' }}
+								>
+									{FilterByYadra().map(item => (
+										<div className='radio' style={{ width: '100%' }}>
+											<label className='block w-full cursor-pointer'>
+												<input
+													style={{ margin: '0 12px 0 0' }}
+													type='radio'
+													value={item}
+													checked={selectedYadra == item}
+													onChange={e => setSelectedYadra(e.target.value)}
+													className='hover:text-red-300'
+												/>
+												{item} ядра
+											</label>
+										</div>
+									))}
+								</div>
+							)}
+
+							<div
+								onClick={() => setIsOpenCorpus(!isOpenCorpus)}
+								className='cursor-pointer flex items-center justify-between mt-6 p-4'
+								style={
+									isOpenCorpus
+										? { border: '2px solid #D92E15', background: '#D92E15' }
+										: {
+												border: '2px solid #D92E15',
+												background: 'white'
+										  }
+								}
+							>
+								<span
+									id='operative_memory'
+									style={
+										isOpenCorpus ? { color: 'white' } : { color: '#D92E15' }
+									}
+								>
+									Материал корпуса
+								</span>
+								{isOpenCorpus ? (
+									<img src={openElement} alt='Open element' />
+								) : (
+									<img src={closeElement} alt='Close element' />
+								)}
+							</div>
+
+							{isOpenCorpus && (
+								<div
+									className='m-0 p-2'
+									style={{ border: '1px solid #D92E15' }}
+								>
+									{FilterByCorpus().map(item => (
+										<div className='radio' style={{ width: '100%' }}>
+											<label className='block w-full cursor-pointer'>
+												<input
+													style={{ margin: '0 12px 0 0' }}
+													type='radio'
+													value={item}
+													checked={selectedCorpus == item}
+													onChange={e => setSelectedCorpus(e.target.value)}
+													className='hover:text-red-300'
+												/>
+												{item}
+											</label>
+										</div>
+									))}
+								</div>
+							)}
+
+							<div className='flex' style={{ flexDirection: 'column' }}>
+								<button className='p-2 bg-red-600 text-slate-200 hover:text-white hover:bg-red-800 mt-4'>
+									Искать по фильтрам
+								</button>
+								<button
+									onClick={resetFilter}
+									className='p-2 bg-white mt-4 resetFilter'
+									style={{
+										border: '2px solid rgb(217, 46, 21)',
+										color: 'rgb(217, 46, 21)'
+									}}
+								>
+									Сбросить Фильтр
+								</button>
+							</div>
+						</form>
+					</div>
 				</div>
-			</div>
-			<div>
+			)}
+
+			<div style={{ width: '100%' }}>
 				<div
 					className='bg-white flex justify-between rounded items-center mb-10'
 					style={{
@@ -587,9 +653,116 @@ const CardFilter = ({ slug }) => {
 						boxShadow: '5px 5px 5px red'
 					}}
 				>
-					<h3 className='text-xl' style={{ color: '#223869' }}>
-						Сортировать по
-					</h3>
+					<div className='flex items-center'>
+						<div
+							onClick={() => setShowProducts(!showProducts)}
+							style={
+								showProducts
+									? {
+											cursor: 'pointer',
+											background: '#D92E15',
+											border: '2px solid #D92E15',
+											color: 'white',
+											padding: '10px',
+											borderRadius: '5px',
+											paddingBottom: '19px',
+											paddingTop: '12px'
+									  }
+									: {
+											display: 'flex',
+											justifyContent: 'center',
+											alignItems: 'center',
+											cursor: 'pointer',
+											background: '#D92E15',
+											border: '2px solid #D92E15',
+											padding: '20px',
+											borderRadius: '5px',
+											paddingBottom: '20px',
+											paddingTop: '12px'
+									  }
+							}
+						>
+							{showProducts ? (
+								<div
+									className='flex flex-col'
+									style={{
+										display: 'flex',
+										alignItems: 'center',
+										justifyContent: 'center',
+										width: '22px',
+										height: '14px',
+										position: 'relative',
+										margin: '-5px 8px'
+									}}
+								>
+									<span
+										style={{
+											width: '20px',
+											height: '3px',
+											margin: '3px 0',
+											background: 'white',
+											position: 'absolute',
+											top: '49%',
+											transform: 'rotate(45deg)'
+										}}
+									></span>
+									<span
+										style={{
+											width: '20px',
+											height: '3px',
+											margin: '3px 0',
+											background: 'white',
+											position: 'absolute',
+											top: '49%',
+											transform: 'rotate(-45deg)'
+										}}
+									></span>
+								</div>
+							) : (
+								<div
+									className='flex flex-col absolute'
+									style={{ width: '22px', height: '14px', margin: '0px 8px' }}
+								>
+									<span
+										style={{
+											width: '100%',
+											height: '3px',
+											margin: '3px 0',
+											background: 'white',
+											position: 'absolute',
+											top: 0
+										}}
+									></span>
+									<span
+										style={{
+											width: '100%',
+											height: '3px',
+											margin: '3px 0',
+											background: 'white',
+											position: 'absolute',
+											top: '50%'
+										}}
+									></span>
+									<span
+										style={{
+											width: '100%',
+											height: '3px',
+											margin: '3px 0',
+											background: 'white',
+											position: 'absolute',
+											top: '100%'
+										}}
+									></span>
+								</div>
+							)}
+						</div>
+						<h3
+							className='text-xl'
+							style={{ color: '#223869', marginLeft: '20px' }}
+						>
+							Сортировать по
+						</h3>
+					</div>
 					<form className='flex' onSubmit={e => e.preventDefault()}>
 						<div onClick={() => setSorted('asc')} className='mx-2'>
 							<button
@@ -664,7 +837,7 @@ const CardFilter = ({ slug }) => {
 				</div>
 				<div
 					className='flex'
-					style={{ flexWrap: 'wrap', justifyContent: 'start' }}
+					style={{ flexWrap: 'wrap', justifyContent: 'center' }}
 				>
 					{slug == 'all'
 						? !!fetchData() &&

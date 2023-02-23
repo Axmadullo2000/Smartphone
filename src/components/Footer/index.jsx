@@ -10,19 +10,22 @@ import './Footer.scss'
 
 const Footer = () => {
 	return (
-		<footer className='footer flex text-slate-100 justify-between' style={{paddingBottom: '40px'}}>
+		<footer
+			className='footer flex text-slate-100 justify-between'
+			style={{ paddingBottom: '40px' }}
+		>
 			<div className='flex items-start'>
 				<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
-					<Link to='/'>
-						<span className='text-red-700 hover:text-red-900'>Smart</span>{' '}
-						<span className='text-blue-700 hover:text-blue-900'>Shop</span>
+					<Link to='/' className='opacity-75 hover:opacity-100'>
+						<span className='text-red-700'>Smart</span>{' '}
+						<span className='text-blue-700'>Shop</span>
 					</Link>
 				</p>
 			</div>
 
 			<div>
 				<h5>О нас</h5>
-				<ul style={{lineHeight: '30px'}}>
+				<ul style={{ lineHeight: '30px' }}>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
 							О нас
@@ -53,7 +56,7 @@ const Footer = () => {
 
 			<div>
 				<h5>Покупателям</h5>
-				<ul style={{lineHeight: '30px'}}>
+				<ul style={{ lineHeight: '30px' }}>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
 							Доставка
@@ -89,7 +92,7 @@ const Footer = () => {
 
 			<div>
 				<h5>Услуги</h5>
-				<ul style={{lineHeight: '30px'}}>
+				<ul style={{ lineHeight: '30px' }}>
 					<li>Как сделать покупку?</li>
 					<li>Способы оплаты</li>
 					<li>Рассрочка UNIRED</li>
