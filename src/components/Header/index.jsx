@@ -234,22 +234,15 @@ const Header = () => {
 						<h2 className='text-black mb-2'>Средства связи</h2>
 						<ul>
 							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								<Link
-									to='/products/category/all'
-									style={{ padding: '20px', margin: '-15px' }}
-								>
-									Все Смартфоны
-								</Link>
+								<Link to='/products/category/all'>Все Смартфоны</Link>
 							</li>
 							{brands.map(item => {
 								return (
-									<li className='capitalize text-slate-500 hover:text-black'>
-										<Link
-											to={`/products/category/${item}`}
-											style={{ padding: '20px', margin: '-15px' }}
-										>
-											{item}
-										</Link>{' '}
+									<li
+										key={item}
+										className='capitalize text-slate-500 hover:text-black'
+									>
+										<Link to={`/products/category/${item}`}>{item}</Link>{' '}
 									</li>
 								)
 							})}

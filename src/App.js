@@ -10,6 +10,7 @@ import Login from './pages/Auth/Login'
 import Registration from './pages/Auth/Registration'
 import FilterProducts from './pages/FilterProducts'
 import HomePage from './pages/HomePage'
+import { ProductDetailInfo } from './pages/ProductDetailInfo'
 
 import './App.css'
 
@@ -22,6 +23,8 @@ function App() {
 
 			<Route path='/search/:slug' element={<SearchResult />} />
 			<Route path='/products/category/:slug' element={<FilterProducts />} />
+
+			<Route path='/products/view/:slug' element={<ProductDetailInfo />} />
 		</Routes>
 	)
 }

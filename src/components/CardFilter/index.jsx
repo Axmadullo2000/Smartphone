@@ -96,7 +96,6 @@ const CardFilter = ({ slug }) => {
 	const handleFilter = e => {
 		e.preventDefault()
 
-		resetFilter()
 		setCount(0)
 
 		return dispatch(

@@ -4,7 +4,10 @@ import {
 	fetchNewProductCardsAsyncThunk,
 	fetchPopularCardsAsyncThunk,
 	filterByFewParams,
-	getAllData, SearchAsyncThunk
+	getAllData,
+	getDetailProduct,
+	getExtraProducts,
+	SearchAsyncThunk
 } from '../asyncThunks'
 
 const initialState = {
@@ -14,6 +17,8 @@ const initialState = {
 	allData: [],
 	catalogData: [],
 	filteredData: [],
+	detailData: [],
+	extraProductDetail: []
 }
 
 const ProductSlice = createSlice({
@@ -39,8 +44,15 @@ const ProductSlice = createSlice({
 			.addCase(getAllData.fulfilled, (state, action) => {
 				state.allData = action.payload
 			})
-			.addCase(filterByFewParams.fulfilled, (state, action)=> {
+			.addCase(filterByFewParams.fulfilled, (state, action) => {
 				state.filteredData = action.payload
+			})
+
+			.addCase(getDetailProduct.fulfilled, (state, action) => {
+				state.detailData = action.payload
+			})
+			.addCase(getExtraProducts.fulfilled, (state, action) => {
+				state.extraProductDetail = action.payload
 			})
 })
 

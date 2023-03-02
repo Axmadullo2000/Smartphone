@@ -1,0 +1,43 @@
+.directionFromProducts:hover {
+	background: rgb(34, 56, 105) !important;
+	transition: 0.7s ease;
+}
+
+.phone_details {
+	display: flex;
+	border-bottom: 1px dashed #cecece;
+	align-items: center;
+}
+
+li.phone_details span:nth-child(1) {
+	font-style: normal;
+	font-weight: 600;
+	font-size: 16px;
+	line-height: 40px;
+	color: #223869;
+}
+
+li.phone_details span:nth-child(2) {
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 19px;
+	color: #5f5f5f;
+}
+
+.character_item {
+	color: #223869;
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 19px;
+}
+
+.character_value {
+	font-style: normal;
+	font-weight: normal;
+	font-size: 16px;
+	line-height: 19px;
+	text-align: end;
+	color: #5f5f5f;
+}

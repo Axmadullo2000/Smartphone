@@ -1,28 +1,30 @@
-import React, { useEffect, useRef } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import SwiperCore, { Autoplay } from 'swiper'
+import { useRef } from 'react'
+import { Autoplay, Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import { fetchNewProductCardsAsyncThunk } from '../../redux/asyncThunks'
-import { CardItem } from '../CardItem'
 
 import next from '../../assets/next.svg'
 import prev from '../../assets/prev.svg'
+import { CardItem } from '../CardItem'
 
-const NewProducts = () => {
+export const SimilarProducts = ({ similarData }) => {
 	const swiperRef = useRef()
-	const { data } = useSelector(data => data.data)
-	const dispatch = useDispatch()
-
-	useEffect(() => {
-		dispatch(fetchNewProductCardsAsyncThunk())
-	}, [])
-	SwiperCore.use([Autoplay])
 
 	return (
-		<div className='mt-10 mb-20'>
-			<h2 className='text-3xl text-center my-3 text-blue-900'>
-				Новое поступление
+		<>
+			<h2
+				style={{
+					color: '#223869',
+					fontWeight: '600',
+					fontSize: '24px',
+					lineHeight: '25px',
+					fontStyle: 'normal',
+					textAlign: 'center',
+					margin: '30px 0'
+				}}
+			>
+				Похожие товары
 			</h2>
+
 			<div className='flex justify-center mt-8 relative'>
 				<button
 					onClick={() => swiperRef.current.slidePrev()}
@@ -36,26 +38,28 @@ const NewProducts = () => {
 				>
 					<img src={prev} alt='' />
 				</button>
+
 				<Swiper
 					slidesPerView={5}
 					loop={true}
 					speed={500}
 					autoplay={{
-						delay: 1500,
+						delay: 4000,
 						disableOnInteraction: false
 					}}
-					modules={[Autoplay]}
+					modules={[Autoplay, Pagination, Navigation]}
 					onSwiper={swiper => {
 						swiperRef.current = swiper
 					}}
 				>
-					{data.results != undefined &&
-						data.results.map(slide => (
+					{similarData.similar != undefined &&
+						similarData.similar.map(slide => (
 							<SwiperSlide key={slide.id}>
 								<CardItem {...slide} />
 							</SwiperSlide>
 						))}
 				</Swiper>
+
 				<button
 					onClick={() => swiperRef.current.slideNext()}
 					className='z-50 absolute'
@@ -69,8 +73,6 @@ const NewProducts = () => {
 					<img src={next} alt='' />
 				</button>
 			</div>
-		</div>
+		</>
 	)
 }
-
-export default NewProducts

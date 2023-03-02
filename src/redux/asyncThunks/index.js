@@ -4,10 +4,7 @@ import axios from 'axios'
 
 export const SearchAsyncThunk = createAsyncThunk(
 	`search/addNewMessageThunk`,
-	async (
-		{ search, offset },
-		{ dispatch, rejectWithValue }
-	) => {
+	async ({ search, offset }, { dispatch, rejectWithValue }) => {
 		const response = await axios.get(
 			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
@@ -67,13 +64,20 @@ export const getAllData = createAsyncThunk('data/getAllData', async () => {
 	return response.data
 })
 
-
 export const filterByFewParams = createAsyncThunk(
 	'filter/filterByFewParams',
-	async ({brand, corpus, yadra, front_kamera, giga_vstoeno, giga_operate, accumulator, limit, offset}) => {
-		console.log(brand, corpus, yadra, front_kamera, giga_operate, giga_vstoeno, accumulator);
-
-			const response = await axios.get(`
+	async ({
+		brand,
+		corpus,
+		yadra,
+		front_kamera,
+		giga_vstoeno,
+		giga_operate,
+		accumulator,
+		limit,
+		offset
+	}) => {
+		const response = await axios.get(`
 			http://127.0.0.1:8000/api/phones/func/?
 			${brand != undefined ? `brand=${brand}` : null}
 			${corpus != undefined ? `&corpus=${corpus}` : null}
@@ -81,9 +85,29 @@ export const filterByFewParams = createAsyncThunk(
 			${front_kamera != undefined ? `&front_kamera=${front_kamera}` : ''}
 			&giga_vstoeno=${giga_vstoeno}
 			${giga_operate != undefined ? `&giga_operate=${giga_operate}` : ''}
-			${accumulator != undefined ? `&accumulator=${accumulator}` : ''}&limit=${limit}&offset=${offset}
-			`)		
-			return response.data
-		}
-	)
+			${
+				accumulator != undefined ? `&accumulator=${accumulator}` : ''
+			}&limit=${limit}&offset=${offset}
+			`)
+		return response.data
+	}
+)
 
+export const getDetailProduct = createAsyncThunk(
+	'getProduct/getDetailProduct',
+	async slug => {
+		const response = await axios.get(`http://127.0.0.1:8000/api/phone/${slug}/`)
+
+		return response.data
+	}
+)
+
+export const getExtraProducts = createAsyncThunk(
+	'extra/getExtraProducts',
+	async slug => {
+		const response = await axios.get(
+			`http://127.0.0.1:8000/api/airpod/${slug}/`
+		)
+		return response.data
+	}
+)
