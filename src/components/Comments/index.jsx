@@ -30,7 +30,7 @@ export const Comments = ({ id }) => {
 		try {
 			window.location.reload()
 			const response = await CrudComment.delete(id)
-			dispatch(deleteComment(id))
+			dispatch(deleteComment({ id }))
 			console.log(response)
 		} catch (e) {}
 	}
@@ -43,6 +43,17 @@ export const Comments = ({ id }) => {
 
 	return (
 		<div>
+			{comments.length > 0 && comments.Error != 'wrong id phone' && (
+				<h1
+					style={{
+						fontSize: '22px',
+						margin: '10px 0',
+						fontWeight: '600'
+					}}
+				>
+					Комментарии Пользователей
+				</h1>
+			)}
 			{comments.length > 0 &&
 				(comments.error != 'wrong id' || comments.Error != 'wrong id phone') &&
 				comments.map(item => (

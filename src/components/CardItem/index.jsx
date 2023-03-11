@@ -6,12 +6,25 @@ import percent from '../../assets/percent.svg'
 import stars from '../../assets/stars.svg'
 import truck from '../../assets/truck.svg'
 
+import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import './CardItem.scss'
 
 export const CardItem = ({ name, photo1, price, slug }) => {
+	const { comments } = useSelector(comment => comment.comment)
 	const navigate = useNavigate()
-	const productGrades = [1, 2, 3, 4, 5]
+
+	let middlePrice = 5
+
+	if (comments.length > 0) {
+		middlePrice =
+			comments.reduce(
+				(accumulator, currentValue) => accumulator + Number(currentValue.rate),
+				0
+			) / comments.length
+
+		console.log(middlePrice)
+	}
 
 	return (
 		<div
@@ -67,8 +80,15 @@ export const CardItem = ({ name, photo1, price, slug }) => {
 			/>
 			<p className='text-center'>{name}</p>
 			<div className='flex'>
-				{productGrades.map(item => (
-					<img key={item} className='stars' src={stars} alt='' width={38} height={21} />
+				{[...Array(Math.floor(middlePrice))].map(item => (
+					<img
+						key={item}
+						className='stars'
+						src={stars}
+						alt=''
+						width={38}
+						height={21}
+					/>
 				))}
 			</div>
 

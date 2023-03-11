@@ -8,6 +8,7 @@ import TooltipSlider from '../TooltipSlider'
 
 import closeElement from '../../assets/closeElement.svg'
 import openElement from '../../assets/openElement.svg'
+import up from '../../assets/up.svg'
 
 import './CardFilter.scss'
 
@@ -833,6 +834,24 @@ const CardFilter = ({ slug }) => {
 							</button>
 						</div>
 					</form>
+				</div>
+				<div>
+					<button
+						style={{
+							position: 'fixed',
+							right: '30px',
+							bottom: '20px',
+							zIndex: 999
+						}}
+						onClick={() => {
+							window.scrollTo({
+								top: 0,
+								behavior: 'smooth'
+							})
+						}}
+					>
+						<img src={up} alt='up' />
+					</button>
 				</div>
 				<div
 					className='flex'

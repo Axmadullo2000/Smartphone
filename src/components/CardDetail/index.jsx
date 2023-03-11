@@ -9,8 +9,10 @@ import { Container } from '../Zoom/Container'
 import facebook from '../../assets/facebook.svg'
 import star from '../../assets/stars.svg'
 import telegram from '../../assets/telegram.svg'
+import up from '../../assets/up.svg'
 
 import { Comments } from '../Comments'
+
 import './CardDetail.scss'
 
 const CardDetail = ({ slug }) => {
@@ -30,10 +32,25 @@ const CardDetail = ({ slug }) => {
 	const { detailData, extraProductDetail, commentData } = useSelector(
 		state => state.data
 	)
+
+	const { comments } = useSelector(comment => comment.comment)
+
 	const dispatch = useDispatch()
 
 	if (!!detailData.phone) {
 		document.title = `Купить smartphone ${detailData.phone.name}`
+	}
+
+	let middlePrice = 5
+
+	if (comments.length > 0) {
+		middlePrice =
+			comments.reduce(
+				(accumulator, currentValue) => accumulator + Number(currentValue.rate),
+				0
+			) / comments.length
+
+		console.log(middlePrice)
 	}
 
 	useEffect(() => {
@@ -336,13 +353,40 @@ const CardDetail = ({ slug }) => {
 							<div className='flex items-center justify-between'>
 								<p>Код №</p>
 								<div className='flex'>
-									{[
-										...Array(
-											!!detailData.phone && Math.floor(detailData.phone.rating)
-										)
-									].map((item, index) => {
-										return <img key={index} src={star} className='star' />
-									})}
+									{comments.length == 0
+										? !!detailData.phone &&
+										  detailData.phone.types == 'smartphone'
+											? [...Array(Math.floor(detailData.phone.rating))].map(
+													(item, index) => {
+														return (
+															<img key={index} src={star} className='star' />
+														)
+													}
+											  )
+											: [
+													...Array(
+														!!extraProductDetail.airpod &&
+															Math.floor(extraProductDetail.airpod.rating)
+													)
+											  ].map((item, index) => {
+													return <img key={index} src={star} className='star' />
+											  })
+										: // если длина массива больше чем 0
+										!!detailData.phone && detailData.phone.types == 'smartphone'
+										? [...Array(Math.floor(middlePrice))].map((item, index) => {
+												let res
+												// res += item.id
+												console.log(item)
+												console.log(comments)
+												return <img key={index} src={star} className='star' />
+										  })
+										: [
+												...Array(
+													!!extraProductDetail.airpod && Math.floor(middlePrice)
+												)
+										  ].map((item, index) => {
+												return <img key={index} src={star} className='star' />
+										  })}
 								</div>
 							</div>
 						</div>
@@ -997,34 +1041,34 @@ const CardDetail = ({ slug }) => {
 								{commentData['user info'] != undefined &&
 									commentData['user info'].username}
 							</li>
-							<h1
-								style={{
-									fontSize: '22px',
-									margin: '10px 0',
-									fontWeight: '600'
-								}}
-							>
-								Комментарии Пользователей
-							</h1>
+
 							<Comments id={detailData.phone.id} />
 						</>
 					)}
 
 					{showFullDescription.feedback && !!extraProductDetail.airpod && (
-						<>
-							<h1
-								style={{
-									fontSize: '22px',
-									margin: '10px 0',
-									fontWeight: '600'
-								}}
-							>
-								Комментарии Пользователей
-							</h1>
-							<Comments id={extraProductDetail.airpod.id} />
-						</>
+						<Comments id={extraProductDetail.airpod.id} />
 					)}
 				</div>
+			</div>
+
+			<div>
+				<button
+					style={{
+						position: 'fixed',
+						right: '30px',
+						bottom: '20px',
+						zIndex: 999
+					}}
+					onClick={() => {
+						window.scrollTo({
+							top: 0,
+							behavior: 'smooth'
+						})
+					}}
+				>
+					<img src={up} alt='up' />
+				</button>
 			</div>
 
 			{!!detailData.phone && detailData.phone.types == 'smartphone' && (
