@@ -18,7 +18,8 @@ const initialState = {
 	catalogData: [],
 	filteredData: [],
 	detailData: [],
-	extraProductDetail: []
+	extraProductDetail: [],
+	commentData: []
 }
 
 const ProductSlice = createSlice({

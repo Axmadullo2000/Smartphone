@@ -1,0 +1,21 @@
+.update_comment {
+	display: flex;
+	flex-direction: column;
+}
+
+.comment_form_content {
+	border: 1px solid silver;
+	margin: 10px 0;
+	padding: 10px;
+}
+
+.update_comment_btn {
+	background: green;
+	color: #eee;
+}
+
+.update_comment_btn:hover {
+	background: green;
+	opacity: 0.8;
+	color: #fff;
+}

@@ -1,20 +1,62 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+
+import { AuthService } from '../../Service'
+import Loader from '../Loader'
 
 export const ValidateRegistration = () => {
 	const {
 		register,
 		formState: { errors },
-		handleSubmit,
+		handleSubmit
 	} = useForm({
-		mode: 'onSubmit', // "onChange"
+		mode: 'onSubmit' // "onChange"
 	})
 
 	const [registerData, setRegisterData] = useState({})
+	const [username, setUsername] = useState('')
+	const [email, setEmail] = useState('')
+	let [error, setError] = useState('')
+	const [loading, setLoading] = useState(false)
+	const [result, setResult] = useState('')
+	const registerInfoData = {
+		username: username,
+		email: email
+	}
+
+	const dispatch = useDispatch()
+
+	const { userData } = useSelector(state => state.auth)
+
+	let [success, setSuccess] = useState(true)
+
+	const registerUser = async () => {
+		const response = await AuthService.register(registerInfoData)
+		try {
+			setResult('Your password sended to the your email address!!!')
+			setError('')
+		} catch (e) {
+			setError(e.response.data)
+		}
+	}
 
 	const onSubmit = data => {
 		setRegisterData(data)
+		setTimeout(() => {
+			setLoading(false)
+		}, 7000)
+
+		setTimeout(() => {
+			if (username.length > 5 && email.length > 10) {
+				setSuccess(true)
+				registerUser()
+			} else {
+				setSuccess(false)
+			}
+		}, 3000)
+		setLoading(true)
 	}
 
 	return (
@@ -44,9 +86,11 @@ export const ValidateRegistration = () => {
 									id='username'
 									{...register('username', {
 										required: true,
-										minLength: 3,
-										maxLength: 60,
+										minLength: 5,
+										maxLength: 60
 									})}
+									value={username}
+									onChange={e => setUsername(e.target.value)}
 									name='username'
 									required
 									className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
@@ -61,67 +105,21 @@ export const ValidateRegistration = () => {
 									id='email-address'
 									{...register('email', {
 										required: true,
-										minLength: 5,
-										maxLength: 50,
+										minLength: 10,
+										maxLength: 50
 									})}
+									value={email}
+									onChange={e => setEmail(e.target.value)}
 									name='email'
 									type='email'
 									required
-									className='my-2 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
+									className='my-2 mt-4 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
 									placeholder='Email address'
 								/>
 							</div>
-							<div>
-								<label htmlFor='password' className='sr-only'>
-									Password
-								</label>
-								<input
-									id='password'
-									{...register('password', {
-										required: true,
-										minLength: 3,
-										maxLength: 40,
-									})}
-									name='password'
-									type='password'
-									autoComplete='current-password'
-									required
-									className='my-2 relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-									placeholder='Password'
-								/>
-								{errors.password && <p>Password field is required!!!</p>}
-							</div>
-							<div>
-								<label htmlFor='new_password' className='sr-only'>
-									Repeat Password
-								</label>
-								<input
-									id='new_password'
-									{...register('new_password', {
-										required: true,
-										minLength: 3,
-										maxLength: 40,
-									})}
-									name='new_password'
-									type='password'
-									autoComplete='new-password'
-									required
-									className='relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-									placeholder='Repeat Password'
-								/>
-								{errors.new_password && (
-									<p>Repeat Password field is required!!!</p>
-								)}
-							</div>
 						</div>
 
-						{registerData.password != registerData.new_password && (
-							<p className='text-red-300'>
-								Password must have been similary!!!
-							</p>
-						)}
-
-						<div className='flex'>
+						<div className=''>
 							<div className='flex items-center justify-between'>
 								<div className='text-sm'>
 									<Link
@@ -132,6 +130,19 @@ export const ValidateRegistration = () => {
 									</Link>
 								</div>
 							</div>
+							{loading && <Loader />}
+							{!success && (
+								<div>
+									<p className='mt-2 text-red-500'>
+										Username or Email incorrect wrote
+									</p>
+								</div>
+							)}
+							{result != '' && (
+								<div>
+									<p className='text-green-600 mt-3'>{result}</p>
+								</div>
+							)}
 						</div>
 
 						<div>

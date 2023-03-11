@@ -1,22 +1,28 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link, useLocation, useNavigate } from 'react-router-dom'
 
-import { getAllData } from '../../redux/asyncThunks'
 import Basket from '../Basket'
+
+import { logoutAction } from '../../redux/slices/AuthSlice'
+import { AuthService } from '../../Service'
 
 import basket from '../../assets/basket.svg'
 import headphone from '../../assets/headphone.svg'
+import loggedinUser from '../../assets/loggedinUser.svg'
 import user from '../../assets/user.svg'
 
+import { getAllData } from '../../redux/asyncThunks'
 import './Header.scss'
 
 const Header = () => {
-	const { data, allData } = useSelector(state => state.data)
+	const { allData } = useSelector(state => state.data)
+	const { userData, loggednIn } = useSelector(auth => auth.auth)
 	const ref = useRef()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [basketModalOpen, setBasketModalOpen] = useState(false)
 	const [searchItem, setSearchItem] = useState('')
+	const { pathname } = useLocation()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 
@@ -34,9 +40,6 @@ const Header = () => {
 	}
 
 	!!allData.results && allData.results.map(item => brand.push(item.brand))
-	useEffect(() => {
-		dispatch(getAllData())
-	}, [])
 
 	const brands = brand.filter(function (item, pos) {
 		return brand.indexOf(item) == pos
@@ -46,6 +49,17 @@ const Header = () => {
 		document.addEventListener('click', checkOpening)
 	}, [isMenuOpen])
 
+	const logoutUser = async () => {
+		try {
+			const response = await AuthService.logout()
+			dispatch(logoutAction(response))
+		} catch (e) {}
+	}
+
+	console.log(loggednIn)
+	useEffect(() => {
+		dispatch(getAllData())
+	}, [])
 	return (
 		<>
 			<div
@@ -125,7 +139,6 @@ const Header = () => {
 								style={{
 									width: '100%',
 									height: '3px',
-
 									background: '#585858',
 									position: 'absolute',
 									top: '50%',
@@ -187,17 +200,44 @@ const Header = () => {
 					</label>
 				</form>
 
-				<button
-					className='w-40 flex hover:bg-red-600'
-					onClick={() => navigate('/sign-up')}
-				>
-					<img
-						src={user}
-						alt=''
-						className='bg-slate-100 hover:bg-red-900 p-3 rounded-lg'
-					/>
-					<p className='text-white text-sm ml-2'>Вход / Регистрация</p>
-				</button>
+				{!loggednIn ? (
+					<button
+						className='w-40 flex hover:bg-red-600'
+						onClick={() => {
+							if (pathname == '/') {
+								navigate('/sign-up')
+							} else if (pathname == '/sign-up') {
+								navigate('/sign-in')
+							} else {
+								navigate('/sign-up')
+							}
+						}}
+					>
+						<img
+							src={user}
+							alt=''
+							className='bg-slate-100 hover:bg-red-900 p-3 rounded-lg'
+						/>
+						<p className='text-white text-sm ml-2'>Вход /Регистрация</p>
+					</button>
+				) : (
+					<div className='w-40 flex hover:bg-red-600'>
+						<img
+							src={loggedinUser}
+							alt=''
+							className='bg-slate-100 p-3 rounded-lg'
+						/>
+						<div className=''>
+							<p className='text-white text-sm ml-2'>
+								{!!userData.username && userData.username}
+							</p>
+							<button onClick={logoutUser} className='ml-2 mt-2'>
+								Выход
+							</button>
+						</div>
+					</div>
+				)}
+
 				<button
 					className='w-40 flex items-center ml-4 hover:bg-red-600'
 					onClick={() => setBasketModalOpen(old => !old)}

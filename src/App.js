@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch } from 'react-redux'
 import { Route, Routes } from 'react-router-dom'
 
 import 'rc-slider/assets/index.css'
@@ -12,9 +13,30 @@ import FilterProducts from './pages/FilterProducts'
 import HomePage from './pages/HomePage'
 import { ProductDetailInfo } from './pages/ProductDetailInfo'
 
+import { registerAction } from './redux/slices/AuthSlice'
+import { AuthService } from './Service'
+import { getItem } from './Service/localData'
+
 import './App.css'
+import { ForgotPasswordPage } from './pages/Auth/ForgotPassword'
 
 function App() {
+	const dispatch = useDispatch()
+
+	const checkUser = async () => {
+		try {
+			const response = await AuthService.authentication()
+			console.log(response)
+			dispatch(registerAction(response.user_info))
+		} catch (e) {}
+	}
+
+	const token = getItem('token')
+
+	useEffect(() => {
+		checkUser()
+	}, [token])
+
 	return (
 		<Routes>
 			<Route path='/' element={<HomePage />} />
@@ -25,6 +47,7 @@ function App() {
 			<Route path='/products/category/:slug' element={<FilterProducts />} />
 
 			<Route path='/products/view/:slug' element={<ProductDetailInfo />} />
+			<Route path='/accounts/reset-password' element={<ForgotPasswordPage />} />
 		</Routes>
 	)
 }

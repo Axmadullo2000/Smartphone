@@ -1,3 +1,11 @@
+div.main_loader {
+	margin: 0 auto !important;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+	z-index: 999;
+}
+
 .lds-spinner {
 	color: official;
 	display: inline-block;
@@ -9,6 +17,7 @@
 	transform-origin: 40px 40px;
 	animation: lds-spinner 1.2s linear infinite;
 }
+
 .lds-spinner div:after {
 	content: ' ';
 	display: block;
@@ -18,7 +27,7 @@
 	width: 6px;
 	height: 18px;
 	border-radius: 20%;
-	background: #fff;
+	background: rgb(217, 46, 21);
 }
 .lds-spinner div:nth-child(1) {
 	transform: rotate(0deg);

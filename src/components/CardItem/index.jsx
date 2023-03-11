@@ -3,7 +3,7 @@ import React from 'react'
 import basket from '../../assets/basket.svg'
 import energy from '../../assets/energy.svg'
 import percent from '../../assets/percent.svg'
-import stars from '../../assets/stars.png'
+import stars from '../../assets/stars.svg'
 import truck from '../../assets/truck.svg'
 
 import { useNavigate } from 'react-router-dom'
@@ -11,6 +11,7 @@ import './CardItem.scss'
 
 export const CardItem = ({ name, photo1, price, slug }) => {
 	const navigate = useNavigate()
+	const productGrades = [1, 2, 3, 4, 5]
 
 	return (
 		<div
@@ -65,7 +66,12 @@ export const CardItem = ({ name, photo1, price, slug }) => {
 				style={{ width: '225px', height: '300px' }}
 			/>
 			<p className='text-center'>{name}</p>
-			<img className='stars' src={stars} alt='' />
+			<div className='flex'>
+				{productGrades.map(item => (
+					<img key={item} className='stars' src={stars} alt='' width={38} height={21} />
+				))}
+			</div>
+
 			<div className='flex items-center justify-between mb-5'>
 				<p
 					className='text-blue-500'

@@ -7,9 +7,10 @@ import { ExtraProduct } from '../ExtraProduct'
 import { Container } from '../Zoom/Container'
 
 import facebook from '../../assets/facebook.svg'
-import stars from '../../assets/stars.png'
+import star from '../../assets/stars.svg'
 import telegram from '../../assets/telegram.svg'
 
+import { Comments } from '../Comments'
 import './CardDetail.scss'
 
 const CardDetail = ({ slug }) => {
@@ -26,11 +27,13 @@ const CardDetail = ({ slug }) => {
 		feedback: false
 	})
 
-	const { detailData, extraProductDetail } = useSelector(state => state.data)
+	const { detailData, extraProductDetail, commentData } = useSelector(
+		state => state.data
+	)
 	const dispatch = useDispatch()
 
 	if (!!detailData.phone) {
-		document.title = `Купить Смартфон ${detailData.phone.name}`
+		document.title = `Купить smartphone ${detailData.phone.name}`
 	}
 
 	useEffect(() => {
@@ -53,7 +56,7 @@ const CardDetail = ({ slug }) => {
 				>
 					<Link to='/'>Главная</Link>
 				</li>
-				{!!detailData.phone && detailData.phone.types == 'смартфон' && (
+				{!!detailData.phone && detailData.phone.types == 'smartphone' && (
 					<li
 						className='directionFromProducts mx-2'
 						style={{
@@ -64,7 +67,7 @@ const CardDetail = ({ slug }) => {
 							borderRadius: '0 4px 4px 0'
 						}}
 					>
-						<Link to='/products/category/all/'>Все смартфоны</Link>
+						<Link to='/products/category/all/'>Все Смартфоны</Link>
 					</li>
 				)}
 				<li
@@ -112,13 +115,14 @@ const CardDetail = ({ slug }) => {
 						)}
 						{showPhone.second && (
 							<div>
-								{!!detailData.phone && detailData.phone.types == 'смартфон' && (
-									<Container
-										isActive={isActive}
-										setIsActive={setIsActive}
-										imageURL={detailData.phone.photo2}
-									/>
-								)}
+								{!!detailData.phone &&
+									detailData.phone.types == 'smartphone' && (
+										<Container
+											isActive={isActive}
+											setIsActive={setIsActive}
+											imageURL={detailData.phone.photo2}
+										/>
+									)}
 								{!!extraProductDetail.airpod &&
 									extraProductDetail.airpod.types == 'extra' && (
 										<Container
@@ -131,13 +135,14 @@ const CardDetail = ({ slug }) => {
 						)}
 						{showPhone.third && (
 							<div>
-								{!!detailData.phone && detailData.phone.types == 'смартфон' && (
-									<Container
-										isActive={isActive}
-										setIsActive={setIsActive}
-										imageURL={detailData.phone.photo3}
-									/>
-								)}
+								{!!detailData.phone &&
+									detailData.phone.types == 'smartphone' && (
+										<Container
+											isActive={isActive}
+											setIsActive={setIsActive}
+											imageURL={detailData.phone.photo3}
+										/>
+									)}
 							</div>
 						)}
 					</div>
@@ -168,7 +173,7 @@ const CardDetail = ({ slug }) => {
 								)}
 								{!!extraProductDetail.airpod && (
 									<img
-										width={120}	
+										width={120}
 										height={120}
 										src={extraProductDetail.airpod.photo1}
 									/>
@@ -251,7 +256,7 @@ const CardDetail = ({ slug }) => {
 						</p>
 						<div className='flex items-center'>
 							<p>Поделиться:</p>
-							{!!detailData.phone && detailData.phone.types == 'смартфон' && (
+							{!!detailData.phone && detailData.phone.types == 'smartphone' && (
 								<div className='flex'>
 									<>
 										<Link
@@ -326,15 +331,40 @@ const CardDetail = ({ slug }) => {
 							{!!detailData.phone && detailData.phone.name}
 						</p>
 						<p style={{ color: '#3c763d' }}>Есть в наличии</p>
-						<div className='flex justify-between'>
-							<p>Код №</p>
-							<img className='stars' src={stars} alt='' />
+
+						<div className=''>
+							<div className='flex items-center justify-between'>
+								<p>Код №</p>
+								<div className='flex'>
+									{[
+										...Array(
+											!!detailData.phone && Math.floor(detailData.phone.rating)
+										)
+									].map((item, index) => {
+										return <img key={index} src={star} className='star' />
+									})}
+								</div>
+							</div>
 						</div>
 					</div>
 					<div>
 						<h3 style={{ color: '#223869', marginBottom: '40px' }}>
 							Характеристики
 						</h3>
+						{!!detailData.phone && detailData.phone.types == 'smartphone' && (
+							<h2 style={{ color: '#223869', fontSize: '22px' }}>
+								Осталось {!!detailData.phone && detailData.phone.count} штук
+							</h2>
+						)}
+						{!!extraProductDetail.airpod &&
+							extraProductDetail.airpod.types == 'extra' && (
+								<h2 style={{ color: '#223869', fontSize: '22px' }}>
+									Осталось{' '}
+									{!!extraProductDetail.airpod &&
+										extraProductDetail.airpod.count}{' '}
+									штук
+								</h2>
+							)}
 						<ul>
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types == 'extra' && (
@@ -358,15 +388,16 @@ const CardDetail = ({ slug }) => {
 								className='flex justify-between'
 								style={{ borderBottom: '1px dashed #cecece', margin: '10px 0' }}
 							>
-								{!!detailData.phone && detailData.phone.types == 'смартфон' && (
-									<>
-										{' '}
-										<span className='character_item'>Тип </span>
-										<span className='character_value'>
-											{detailData.phone.Version_OS}
-										</span>
-									</>
-								)}
+								{!!detailData.phone &&
+									detailData.phone.types == 'smartphone' && (
+										<>
+											{' '}
+											<span className='character_item'>Тип </span>
+											<span className='character_value'>
+												{detailData.phone.Version_OS}
+											</span>
+										</>
+									)}
 								{!!extraProductDetail.airpod &&
 									extraProductDetail.airpod.types == 'extra' && (
 										<>
@@ -385,14 +416,15 @@ const CardDetail = ({ slug }) => {
 									margin: '10px 0'
 								}}
 							>
-								{!!detailData.phone && detailData.phone.types == 'смартфон' && (
-									<>
-										<span className='character_item'>Тип Корпуса</span>
-										<span className='character_value'>
-											{!!detailData.phone && detailData.phone.corpus}
-										</span>
-									</>
-								)}
+								{!!detailData.phone &&
+									detailData.phone.types == 'smartphone' && (
+										<>
+											<span className='character_item'>Тип Корпуса</span>
+											<span className='character_value'>
+												{!!detailData.phone && detailData.phone.corpus}
+											</span>
+										</>
+									)}
 								{!!extraProductDetail.airpod &&
 									extraProductDetail.airpod.types == 'extra' && (
 										<>
@@ -409,16 +441,17 @@ const CardDetail = ({ slug }) => {
 								className='flex justify-between'
 								style={{ borderBottom: '1px dashed #cecece', margin: '10px 0' }}
 							>
-								{!!detailData.phone && detailData.phone.types == 'смартфон' && (
-									<>
-										<span className='character_item'>Тип SIM-карты </span>
-										<span className='character_value'>
-											{!!detailData.phone &&
-												detailData.phone.sim_card &&
-												detailData.phone.sim_card != undefined}
-										</span>
-									</>
-								)}
+								{!!detailData.phone &&
+									detailData.phone.types == 'smartphone' && (
+										<>
+											<span className='character_item'>Тип SIM-карты </span>
+											<span className='character_value'>
+												{!!detailData.phone &&
+													detailData.phone.sim_card &&
+													detailData.phone.sim_card != undefined}
+											</span>
+										</>
+									)}
 								{!!extraProductDetail.airpod &&
 									extraProductDetail.airpod.types == 'extra' && (
 										<>
@@ -433,14 +466,15 @@ const CardDetail = ({ slug }) => {
 								className='flex justify-between'
 								style={{ borderBottom: '1px dashed #cecece', margin: '10px 0' }}
 							>
-								{!!detailData.phone && detailData.phone.types == 'смартфон' && (
-									<>
-										<span className='character_item'>Размеры (ШxВxТ) </span>
-										<span className='character_value'>
-											{!!detailData.phone && detailData.phone.allow_display}
-										</span>
-									</>
-								)}
+								{!!detailData.phone &&
+									detailData.phone.types == 'smartphone' && (
+										<>
+											<span className='character_item'>Размеры (ШxВxТ) </span>
+											<span className='character_value'>
+												{!!detailData.phone && detailData.phone.allow_display}
+											</span>
+										</>
+									)}
 								{!!extraProductDetail.airpod &&
 									extraProductDetail.airpod.types == 'extra' && (
 										<>
@@ -451,7 +485,7 @@ const CardDetail = ({ slug }) => {
 										</>
 									)}
 							</li>
-							{!!detailData.phone && detailData.phone.types == 'смартфон' && (
+							{!!detailData.phone && detailData.phone.types == 'smartphone' && (
 								<li
 									className='flex justify-between'
 									style={{
@@ -598,6 +632,7 @@ const CardDetail = ({ slug }) => {
 					>
 						Характеристики
 					</li>
+
 					<li
 						style={
 							showFullDescription.feedback
@@ -625,7 +660,7 @@ const CardDetail = ({ slug }) => {
 				<div style={{ marginTop: '40px' }}>
 					{showFullDescription.description && (
 						<div>
-							{!!detailData.phone && detailData.phone.types == 'смартфон' && (
+							{!!detailData.phone && detailData.phone.types == 'smartphone' && (
 								<>
 									<p
 										style={{
@@ -719,7 +754,7 @@ const CardDetail = ({ slug }) => {
 								}
 							</div>
 
-							{!!detailData.phone && detailData.phone.types == 'смартфон' && (
+							{!!detailData.phone && detailData.phone.types == 'smartphone' && (
 								<div style={{ lineHeight: '40px' }}>
 									<h2
 										style={{
@@ -949,15 +984,50 @@ const CardDetail = ({ slug }) => {
 								)}
 						</div>
 					)}
-					{showFullDescription.feedback && (
-						<div>
-							<p></p>
-						</div>
+
+					{showFullDescription.feedback && !!detailData.phone && (
+						<>
+							<li
+								className='flex justify-between'
+								style={{
+									borderBottom: '1px dashed #cecece',
+									margin: '10px 0'
+								}}
+							>
+								{commentData['user info'] != undefined &&
+									commentData['user info'].username}
+							</li>
+							<h1
+								style={{
+									fontSize: '22px',
+									margin: '10px 0',
+									fontWeight: '600'
+								}}
+							>
+								Комментарии Пользователей
+							</h1>
+							<Comments id={detailData.phone.id} />
+						</>
+					)}
+
+					{showFullDescription.feedback && !!extraProductDetail.airpod && (
+						<>
+							<h1
+								style={{
+									fontSize: '22px',
+									margin: '10px 0',
+									fontWeight: '600'
+								}}
+							>
+								Комментарии Пользователей
+							</h1>
+							<Comments id={extraProductDetail.airpod.id} />
+						</>
 					)}
 				</div>
 			</div>
 
-			{!!detailData.phone && detailData.phone.types == 'смартфон' && (
+			{!!detailData.phone && detailData.phone.types == 'smartphone' && (
 				<ExtraProduct similarData={detailData} />
 			)}
 			{!!extraProductDetail.airpod &&

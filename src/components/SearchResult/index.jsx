@@ -1,16 +1,19 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import { SearchAsyncThunk } from '../../redux/asyncThunks'
 import Footer from '../Footer'
 import Header from '../Header'
 import Loader from '../Loader'
 
+import './SearchResult.scss'
+
 export const SearchResult = () => {
 	const { data, status } = useSelector(data => data.data)
 	const dispatch = useDispatch()
 	let { slug } = useParams()
+	const navigate = useNavigate()
 	const arr = []
 
 	slug = slug?.trim()
@@ -20,6 +23,7 @@ export const SearchResult = () => {
 			arr.push(i)
 		}
 	}
+	Count()
 
 	const count = 0
 
@@ -27,6 +31,7 @@ export const SearchResult = () => {
 		dispatch(SearchAsyncThunk({ search: slug, offset: count }))
 		Count()
 	}, [slug])
+
 	return (
 		<div>
 			<Header />
@@ -34,7 +39,12 @@ export const SearchResult = () => {
 			<div className='' style={{ width: '600px', margin: 'auto' }}>
 				{!!data.results &&
 					data.results.map(item => (
-						<div key={item.id} className='flex m-auto my-2 border'>
+						<div
+							style={{ cursor: 'pointer' }}
+							onClick={() => navigate(`/products/view/${item.slug}`)}
+							key={item.id}
+							className='cardElement flex'
+						>
 							{status == '' ? (
 								<Loader />
 							) : (

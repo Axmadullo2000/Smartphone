@@ -1,0 +1,9 @@
+.cardElement {
+	border-radius: 2px;
+	margin: 20px 0;
+	border: 1px solid transparent;
+	transition: 0.5s ease;
+}
+.cardElement:hover {
+	border: 1px solid red;
+}
