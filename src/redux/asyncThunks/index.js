@@ -1,12 +1,11 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-
 import axios from 'axios'
 
 export const SearchAsyncThunk = createAsyncThunk(
 	`search/addNewMessageThunk`,
 	async ({ search, offset }, { dispatch, rejectWithValue }) => {
 		const response = await axios.get(
-			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
 		return response.data
 		//здесь будут доступны data, id, dispatch, rejectWithValue
@@ -17,7 +16,7 @@ export const prevBtnAsyncThunk = createAsyncThunk(
 	'prev/prevBtnAsyncThunk',
 	async ({ search, offset }) => {
 		const response = await axios.get(
-			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
 		const prevDataResponse = await axios.get(response.data.previous)
 		return prevDataResponse.data
@@ -28,7 +27,7 @@ export const nextBtnAsyncThunk = createAsyncThunk(
 	'next/nextBtnAsyncThunk',
 	async ({ search, offset }) => {
 		const response = await axios.get(
-			`http://127.0.0.1:8000/api/phones/func/?search=${search}&limit=5&offset=${offset}`
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?search=${search}&limit=5&offset=${offset}`
 		)
 		const nextDataResponse = await axios.get(response.data.next)
 		return nextDataResponse.data
@@ -39,7 +38,7 @@ export const fetchNewProductCardsAsyncThunk = createAsyncThunk(
 	'fetch/fetchNewProductCardsAsyncThunk',
 	async () => {
 		const response = await axios.get(
-			`http://127.0.0.1:8000/api/phones/func/?limit=20&offset=40`
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=20&offset=40`
 		)
 
 		return response.data
@@ -50,7 +49,7 @@ export const fetchPopularCardsAsyncThunk = createAsyncThunk(
 	'fetch/fetchPopularCardsAsyncThunk',
 	async () => {
 		const response = await axios.get(
-			`http://127.0.0.1:8000/api/phones/func/?limit=18&offset=5`
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=18&offset=5`
 		)
 
 		return response.data
@@ -59,7 +58,7 @@ export const fetchPopularCardsAsyncThunk = createAsyncThunk(
 
 export const getAllData = createAsyncThunk('data/getAllData', async () => {
 	const response = await axios.get(
-		'http://127.0.0.1:8000/api/phones/func/?limit=68&offset=0'
+		'http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=68&offset=0'
 	)
 	return response.data
 })
@@ -78,7 +77,7 @@ export const filterByFewParams = createAsyncThunk(
 		offset
 	}) => {
 		const response = await axios.get(`
-			http://127.0.0.1:8000/api/phones/func/?
+			http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?
 			${brand != undefined ? `brand=${brand}` : null}
 			${corpus != undefined ? `&corpus=${corpus}` : null}
 			${yadra != undefined ? `&yadra=${yadra}` : null}
@@ -96,7 +95,9 @@ export const filterByFewParams = createAsyncThunk(
 export const getDetailProduct = createAsyncThunk(
 	'getProduct/getDetailProduct',
 	async slug => {
-		const response = await axios.get(`http://127.0.0.1:8000/api/phone/${slug}/`)
+		const response = await axios.get(
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phone/${slug}/`
+		)
 
 		return response.data
 	}
@@ -106,7 +107,7 @@ export const getExtraProducts = createAsyncThunk(
 	'extra/getExtraProducts',
 	async slug => {
 		const response = await axios.get(
-			`http://127.0.0.1:8000/api/airpod/${slug}/`
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/airpod/${slug}/`
 		)
 		return response.data
 	}

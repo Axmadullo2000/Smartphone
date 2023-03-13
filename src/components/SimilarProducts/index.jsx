@@ -55,7 +55,7 @@ export const SimilarProducts = ({ similarData }) => {
 					{similarData.similar != undefined &&
 						similarData.similar.map(slide => (
 							<SwiperSlide key={slide.id}>
-								<CardItem {...slide} />
+								<CardItem {...slide} star={4} />
 							</SwiperSlide>
 						))}
 				</Swiper>

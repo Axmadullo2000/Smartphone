@@ -56,7 +56,6 @@ const Header = () => {
 		} catch (e) {}
 	}
 
-	console.log(loggednIn)
 	useEffect(() => {
 		dispatch(getAllData())
 	}, [])

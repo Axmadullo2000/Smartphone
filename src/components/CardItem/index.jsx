@@ -1,17 +1,20 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
 
 import basket from '../../assets/basket.svg'
 import energy from '../../assets/energy.svg'
 import percent from '../../assets/percent.svg'
 import stars from '../../assets/stars.svg'
 import truck from '../../assets/truck.svg'
+import { SearchAsyncThunk } from '../../redux/asyncThunks'
 
-import { useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import './CardItem.scss'
 
 export const CardItem = ({ name, photo1, price, slug }) => {
 	const { comments } = useSelector(comment => comment.comment)
+	const { data } = useSelector(state => state.data)
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
 	let middlePrice = 5
@@ -22,19 +25,15 @@ export const CardItem = ({ name, photo1, price, slug }) => {
 				(accumulator, currentValue) => accumulator + Number(currentValue.rate),
 				0
 			) / comments.length
-
-		console.log(middlePrice)
 	}
+	console.log(data)
+
+	useEffect(() => {
+		dispatch(SearchAsyncThunk({ search: name, offset: 0 }))
+	}, [])
 
 	return (
 		<div
-			onClick={() => {
-				window.scrollTo({
-					top: 0,
-					behavior: 'smooth'
-				})
-				navigate(`/products/view/${slug}`)
-			}}
 			className='card border mx-3 px-2 my-2'
 			style={{ width: '250px', borderRadius: '18px', height: '500px' }}
 		>
@@ -74,11 +73,29 @@ export const CardItem = ({ name, photo1, price, slug }) => {
 				/>
 			</div>
 			<img
+				onClick={() => {
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					})
+					navigate(`/products/view/${slug}`)
+				}}
 				src={photo1}
 				alt={name}
 				style={{ width: '225px', height: '300px' }}
 			/>
-			<p className='text-center'>{name}</p>
+			<p
+				onClick={() => {
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					})
+					navigate(`/products/view/${slug}`)
+				}}
+				className='text-center'
+			>
+				{name}
+			</p>
 			<div className='flex'>
 				{[...Array(Math.floor(middlePrice))].map(item => (
 					<img
@@ -94,6 +111,13 @@ export const CardItem = ({ name, photo1, price, slug }) => {
 
 			<div className='flex items-center justify-between mb-5'>
 				<p
+					onClick={() => {
+						window.scrollTo({
+							top: 0,
+							behavior: 'smooth'
+						})
+						navigate(`/products/view/${slug}`)
+					}}
 					className='text-blue-500'
 					style={{ fontSize: '22px', fontWeight: 'bold' }}
 				>
@@ -105,6 +129,10 @@ export const CardItem = ({ name, photo1, price, slug }) => {
 						padding: '10px',
 						borderRadius: '10px',
 						margin: '0 10px'
+					}}
+					onClick={() => {
+						dispatch(addToBasketItem())
+						console.log(data)
 					}}
 				>
 					<img src={basket} width={24} height={24} alt='' />

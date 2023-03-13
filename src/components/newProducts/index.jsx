@@ -7,6 +7,7 @@ import { CardItem } from '../CardItem'
 
 import next from '../../assets/next.svg'
 import prev from '../../assets/prev.svg'
+import { addToBasketItem } from '../../redux/slices/AddToBasketSlice'
 
 const NewProducts = () => {
 	const swiperRef = useRef()

@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
 import { SearchAsyncThunk } from '../../redux/asyncThunks'
+
 import Footer from '../Footer'
 import Header from '../Header'
 import Loader from '../Loader'
