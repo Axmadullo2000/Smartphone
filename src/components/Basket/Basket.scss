@@ -1,0 +1,48 @@
+.basket-body {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+
+.basket-list {
+	height: 80%;
+	overflow-y: scroll;
+	&::-webkit-scrollbar {
+		display: none;
+	}
+}
+
+.cart-bottom {
+	display: flex;
+	flex-direction: column;
+}
+.total-box {
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 15px;
+	padding: 10px 10px;
+	color: #ffffff;
+	background-color: #000;
+}
+
+.order-btn {
+	width: 100%;
+	max-width: 215px;
+	padding: 10px 0px;
+	font-style: normal;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 19px;
+	color: #ffffff;
+	background: linear-gradient(180deg, #ff5c43 0%, #d92e15 100%);
+	box-shadow: 0px 0px 12px 1px rgb(0 0 0 / 29%);
+	border-radius: 5px;
+}
+
+.order-btn-box{
+display: flex;
+justify-content: flex-end;
+}
