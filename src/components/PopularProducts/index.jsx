@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import SwiperCore, { Autoplay, Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { fetchPopularCardsAsyncThunk } from '../../redux/asyncThunks'
@@ -8,6 +7,7 @@ import { CardItem } from '../CardItem'
 
 import next from '../../assets/next.svg'
 import prev from '../../assets/prev.svg'
+import { Autoplay, Navigation, Pagination } from 'swiper'
 
 const PopularProducts = () => {
 	const swiperRef = useRef()
@@ -18,7 +18,7 @@ const PopularProducts = () => {
 		dispatch(fetchPopularCardsAsyncThunk())
 	}, [])
 
-	SwiperCore.use([Autoplay])
+	// SwiperCore.use([Autoplay])
 
 	return (
 		<div style={{ marginTop: '100px', marginBottom: '60px' }}>

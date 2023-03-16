@@ -19,6 +19,7 @@ import { getItem } from './Service/localData'
 
 import './App.css'
 import { ForgotPasswordPage } from './pages/Auth/ForgotPassword'
+import { ProductsInBasket } from './pages/ProductsInBasket'
 
 function App() {
 	const dispatch = useDispatch()
@@ -48,6 +49,7 @@ function App() {
 
 			<Route path='/products/view/:slug' element={<ProductDetailInfo />} />
 			<Route path='/accounts/reset-password' element={<ForgotPasswordPage />} />
+			<Route path='/customer/cart/' element={<ProductsInBasket />} />
 		</Routes>
 	)
 }

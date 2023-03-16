@@ -38,7 +38,7 @@ export const fetchNewProductCardsAsyncThunk = createAsyncThunk(
 	'fetch/fetchNewProductCardsAsyncThunk',
 	async () => {
 		const response = await axios.get(
-			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=20&offset=40`
+			'http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=65&offset=50'
 		)
 
 		return response.data

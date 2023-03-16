@@ -13,6 +13,7 @@ import {
 const initialState = {
 	status: '',
 	data: [],
+	newData: [],
 	popularData: [],
 	allData: [],
 	catalogData: [],
@@ -37,7 +38,7 @@ const ProductSlice = createSlice({
 			})
 
 			.addCase(fetchNewProductCardsAsyncThunk.fulfilled, (state, action) => {
-				state.data = action.payload
+				state.newData = action.payload
 			})
 			.addCase(fetchPopularCardsAsyncThunk.fulfilled, (state, action) => {
 				state.popularData = action.payload

@@ -1,29 +1,26 @@
 import React, { useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import SwiperCore, { Autoplay } from 'swiper'
+import { Autoplay, Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
+
 import { fetchNewProductCardsAsyncThunk } from '../../redux/asyncThunks'
 import { CardItem } from '../CardItem'
 
 import next from '../../assets/next.svg'
 import prev from '../../assets/prev.svg'
-import { addToBasketItem } from '../../redux/slices/AddToBasketSlice'
 
-const NewProducts = () => {
+const newProducts = () => {
 	const swiperRef = useRef()
-	const { data } = useSelector(data => data.data)
+	const { newData } = useSelector(data => data.data)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
 		dispatch(fetchNewProductCardsAsyncThunk())
 	}, [])
-	SwiperCore.use([Autoplay])
 
 	return (
-		<div className='mt-10 mb-20'>
-			<h2 className='text-3xl text-center my-3 text-blue-900'>
-				Новое поступление
-			</h2>
+		<div style={{ marginTop: '100px', marginBottom: '60px' }}>
+			<h2 className='text-3xl text-center my-3 text-blue-900'>Новые товары </h2>
 			<div className='flex justify-center mt-8 relative'>
 				<button
 					onClick={() => swiperRef.current.slidePrev()}
@@ -41,17 +38,17 @@ const NewProducts = () => {
 					slidesPerView={5}
 					loop={true}
 					speed={500}
+					modules={[Autoplay, Pagination, Navigation]}
 					autoplay={{
-						delay: 1500,
+						delay: 4000,
 						disableOnInteraction: false
 					}}
-					modules={[Autoplay]}
 					onSwiper={swiper => {
 						swiperRef.current = swiper
 					}}
 				>
-					{data.results != undefined &&
-						data.results.map(slide => (
+					{!!newData.results &&
+						newData.results.map(slide => (
 							<SwiperSlide key={slide.id}>
 								<CardItem {...slide} />
 							</SwiperSlide>
@@ -74,4 +71,4 @@ const NewProducts = () => {
 	)
 }
 
-export default NewProducts
+export default newProducts

@@ -28,18 +28,16 @@ export const Comments = ({ id }) => {
 
 	const removeComment = async id => {
 		try {
-			window.location.reload()
 			const response = await CrudComment.delete(id)
 			dispatch(deleteComment({ id }))
 			console.log(response)
 		} catch (e) {}
+		window.location.reload()
 	}
 
 	useEffect(() => {
 		fetchPostedComments()
 	}, [dispatch])
-
-	console.log(comments)
 
 	return (
 		<div>
