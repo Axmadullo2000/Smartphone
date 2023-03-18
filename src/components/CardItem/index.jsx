@@ -1,14 +1,15 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-
 import { useCart } from 'react-use-cart'
+
+import { SearchAsyncThunk } from '../../redux/asyncThunks'
+
 import basket from '../../assets/basket.svg'
 import energy from '../../assets/energy.svg'
 import percent from '../../assets/percent.svg'
 import stars from '../../assets/stars.svg'
 import truck from '../../assets/truck.svg'
-import { SearchAsyncThunk } from '../../redux/asyncThunks'
 
 import './CardItem.scss'
 
@@ -19,7 +20,6 @@ export const CardItem = item => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	// cart
 	const { addItem } = useCart()
 
 	let middlePrice = 5
