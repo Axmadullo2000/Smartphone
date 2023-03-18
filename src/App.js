@@ -10,7 +10,7 @@ import { SearchResult } from './components/SearchResult'
 import Login from './pages/Auth/Login'
 import Registration from './pages/Auth/Registration'
 import FilterProducts from './pages/FilterProducts'
-import HomePage from './pages/HomePage'
+// import HomePage from './pages/HomePage'
 import { ProductDetailInfo } from './pages/ProductDetailInfo'
 
 import { registerAction } from './redux/slices/AuthSlice'
@@ -41,7 +41,7 @@ function App() {
 
 	return (
 		<Routes>
-			<Route path='/' element={<HomePage />} />
+			{/* <Route path='/' element={<HomePage />} /> */}
 			<Route path='/sign-up' element={<Registration />} />
 			<Route path='/sign-in' element={<Login />} />
 
@@ -50,7 +50,8 @@ function App() {
 
 			<Route path='/products/view/:slug' element={<ProductDetailInfo />} />
 			<Route path='/accounts/reset-password' element={<ForgotPasswordPage />} />
-			<Route path='/customer/cart/' element={<ProductsInBasket />} />
+			<Route path='/' element={<ProductsInBasket />} />
+			{/* /customer/cart/ */}
 			<Route path='/customer/checkout/' element={<Checkout />} />
 		</Routes>
 	)
