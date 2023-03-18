@@ -20,6 +20,7 @@ import { getItem } from './Service/localData'
 import './App.css'
 import { ForgotPasswordPage } from './pages/Auth/ForgotPassword'
 import { Checkout } from './pages/Checkout'
+import HomePage from './pages/HomePage'
 import { ProductsInBasket } from './pages/ProductsInBasket'
 
 function App() {
@@ -41,7 +42,7 @@ function App() {
 
 	return (
 		<Routes>
-			{/* <Route path='/' element={<HomePage />} /> */}
+			<Route path='/' element={<HomePage />} />
 			<Route path='/sign-up' element={<Registration />} />
 			<Route path='/sign-in' element={<Login />} />
 
@@ -50,8 +51,8 @@ function App() {
 
 			<Route path='/products/view/:slug' element={<ProductDetailInfo />} />
 			<Route path='/accounts/reset-password' element={<ForgotPasswordPage />} />
-			<Route path='/' element={<ProductsInBasket />} />
-			{/* /customer/cart/ */}
+			<Route path='/customer/cart/' element={<ProductsInBasket />} />
+
 			<Route path='/customer/checkout/' element={<Checkout />} />
 		</Routes>
 	)
