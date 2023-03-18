@@ -205,7 +205,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								<>
 									<Link
 										to={`https://t.me/share/url?url=http://139.59.15.161:3000/products/view/
-												${detailData.phone.id}/`}
+												${detailData.phone.slug}/`}
 										style={{
 											padding: '5px',
 											background: '#f4f4f4',
@@ -217,7 +217,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									</Link>
 
 									<Link
-										to={`https://www.facebook.com/sharer/sharer.php?u=http://139.59.15.161:3000/products/view/${detailData.phone.id}`}
+										to={`https://www.facebook.com/sharer/sharer.php?u=http://139.59.15.161:3000/products/view/${detailData.phone.slug}`}
 										style={{
 											padding: '5px',
 											background: '#f4f4f4',
