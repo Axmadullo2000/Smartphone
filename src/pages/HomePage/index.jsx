@@ -5,7 +5,7 @@ import Header from '../../components/Header'
 import NewProducts from '../../components/NewProducts'
 import PopularProducts from '../../components/PopularProducts'
 
-const HomePage = () => {
+export default function HomePage() {
 	useEffect(() => {
 		document.title =
 			'Интернет магазин SMARTSHOP.UZ | смартфоны, доставка по Ташкенту и всей Республики Узбекистан'
@@ -19,5 +19,3 @@ const HomePage = () => {
 		</div>
 	)
 }
-
-export default HomePage
