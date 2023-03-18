@@ -1,14 +1,14 @@
 .basket_link {
 	background: #d92e15;
 	color: #fff;
-	fontsize: 15px;
+	font-size: 15px;
 	padding: 8px 22px 8px 15px;
 	border-radius: 10px;
 }
 
 .basket_link:first-child {
-	border-top-right-radius: 60px 25px;
-	border-bottom-right-radius: 60px 25px;
+	border-top-right-radius: 40px;
+	border-bottom-right-radius: 40px;
 }
 
 .basket_link:hover {

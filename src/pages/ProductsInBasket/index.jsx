@@ -240,7 +240,12 @@ export const ProductsInBasket = () => {
 								</span>
 							</li>
 						</ul>
-						<button className='get_offer'>Оформить заказ</button>
+						<button
+							className='get_offer'
+							onClick={() => navigate('/customer/checkout/')}
+						>
+							Оформить заказ
+						</button>
 					</div>
 				</div>
 			</div>

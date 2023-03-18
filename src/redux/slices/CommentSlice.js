@@ -11,7 +11,7 @@ export const CommentSlice = createSlice({
 	initialState,
 	reducers: {
 		createComment(state, action) {
-			state.addedComment = [...comments, action.payload]
+			state.addedComment = [...state.comments, action.payload]
 		},
 		getComment(state, action) {
 			state.comments = action.payload
@@ -20,7 +20,7 @@ export const CommentSlice = createSlice({
 			state.comments.filter(item => item.id != action.payload.id)
 		},
 		updateCommentAction(state, action) {
-			state.comments = [...comments, action.payload]
+			state.comments = [...state.comments, action.payload]
 		}
 	}
 })
