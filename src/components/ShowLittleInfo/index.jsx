@@ -204,7 +204,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							<div className='flex'>
 								<>
 									<Link
-										to={`https://t.me/share/url?url=localhost:3000/products/view/
+										to={`https://t.me/share/url?url=http://139.59.15.161:3000/products/view/
 												${detailData.phone.id}/`}
 										style={{
 											padding: '5px',
@@ -217,7 +217,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									</Link>
 
 									<Link
-										to={`https://www.facebook.com/sharer/sharer.php?u=localhost:3000/products/view/${detailData.phone.id}`}
+										to={`https://www.facebook.com/sharer/sharer.php?u=http://139.59.15.161:3000/products/view/${detailData.phone.id}`}
 										style={{
 											padding: '5px',
 											background: '#f4f4f4',
