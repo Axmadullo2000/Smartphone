@@ -11,5 +11,6 @@ export const store = configureStore({
 		auth: AuthSlice,
 		comment: CommentSlice,
 		basket: AddToBasketSlice
-	}
+	},
+	devTools: process.env.NODE_ENV === 'production'
 })
