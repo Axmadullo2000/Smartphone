@@ -7,21 +7,20 @@ import 'rc-tooltip/assets/bootstrap.css'
 import 'swiper/css'
 
 import { SearchResult } from './components/SearchResult'
+import { ForgotPasswordPage } from './pages/Auth/ForgotPassword'
 import Login from './pages/Auth/Login'
 import Registration from './pages/Auth/Registration'
+import { Checkout } from './pages/Checkout'
 import FilterProducts from './pages/FilterProducts'
-// import HomePage from './pages/HomePage'
+import HomePage from './pages/HomePage'
 import { ProductDetailInfo } from './pages/ProductDetailInfo'
+import { ProductsInBasket } from './pages/ProductsInBasket'
 
 import { registerAction } from './redux/slices/AuthSlice'
 import { AuthService } from './Service'
 import { getItem } from './Service/localData'
 
 import './App.css'
-import { ForgotPasswordPage } from './pages/Auth/ForgotPassword'
-import { Checkout } from './pages/Checkout'
-import HomePage from './pages/HomePage'
-import { ProductsInBasket } from './pages/ProductsInBasket'
 
 function App() {
 	const dispatch = useDispatch()

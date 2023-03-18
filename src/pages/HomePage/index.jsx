@@ -10,6 +10,7 @@ export default function HomePage() {
 		document.title =
 			'Интернет магазин SMARTSHOP.UZ | смартфоны, доставка по Ташкенту и всей Республики Узбекистан'
 	}, [])
+
 	return (
 		<div>
 			<Header />

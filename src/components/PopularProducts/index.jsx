@@ -16,7 +16,7 @@ const PopularProducts = () => {
 
 	useEffect(() => {
 		dispatch(fetchPopularCardsAsyncThunk())
-	}, [])
+	}, [dispatch])
 
 	// SwiperCore.use([Autoplay])
 
@@ -51,7 +51,7 @@ const PopularProducts = () => {
 						swiperRef.current = swiper
 					}}
 				>
-					{popularData.results != undefined &&
+					{popularData.results !== undefined &&
 						popularData.results.map(slide => (
 							<SwiperSlide key={slide.id}>
 								<CardItem {...slide} />
