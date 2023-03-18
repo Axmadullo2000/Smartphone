@@ -98,7 +98,12 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 									>
 										Корзина
 									</button>
-									<button className='order-btn'>Заказать</button>
+									<button
+										onClick={() => navigate('/customer/checkout/')}
+										className='order-btn'
+									>
+										Заказать
+									</button>
 								</div>
 							</div>
 						</div>
