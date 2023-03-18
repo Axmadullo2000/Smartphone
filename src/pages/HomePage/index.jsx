@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-// import NewProducts from '../../components/NewProducts'
+import NewProducts from '../../components/NewProducts'
 import PopularProducts from '../../components/PopularProducts'
 
 export default function HomePage() {
@@ -14,7 +14,7 @@ export default function HomePage() {
 	return (
 		<div>
 			<Header />
-			{/* <NewProducts /> */}
+			<NewProducts />
 			<PopularProducts />
 			<Footer />
 		</div>
