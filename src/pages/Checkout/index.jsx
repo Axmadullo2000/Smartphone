@@ -27,6 +27,7 @@ export const Checkout = () => {
 					<h3>{t("checkout.orderinfo")}</h3>
 				</div>
 			</div>
+
 			<Footer />
 		</>
 	);
