@@ -1,109 +1,109 @@
-import React, { useEffect, useRef } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { useCart } from 'react-use-cart'
+import React, { useEffect, useRef } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCart } from "react-use-cart";
 
-import { BasketCard } from '../BasketCard'
+import { BasketCard } from "../BasketCard";
 
-import close from '../../assets/close.svg'
+import close from "../../assets/close.svg";
 
-import './Basket.scss'
+import "./Basket.scss";
+import { useTranslation } from 'react-i18next';
 
 const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
-	const ref = useRef()
-	const checkIfClickedOutside = e => {
+	const {t} = useTranslation();
+	const ref = useRef();
+	const checkIfClickedOutside = (e) => {
 		if (basketModalOpen && ref.current && !ref.current.contains(e.target)) {
-			setBasketModalOpen(false)
+			setBasketModalOpen(false);
 		}
-	}
+	};
 
-	const navigate = useNavigate()
+	const navigate = useNavigate();
 
-	const { isEmpty, items, cartTotal, totalItems } = useCart()
+	const { isEmpty, items, cartTotal, totalItems } = useCart();
 
 	useEffect(() => {
-		document.addEventListener('mousedown', checkIfClickedOutside)
-	}, [basketModalOpen])
+		document.addEventListener("mousedown", checkIfClickedOutside);
+	}, [basketModalOpen]);
 
 	return (
 		<>
 			{basketModalOpen && (
 				<div
-					className='p-10 fixed right-0 h-full'
+					className="p-10 fixed right-0 h-full"
 					style={{
-						width: '700px',
+						width: "700px",
 						zIndex: 999,
-						background: 'white',
-						height: '100vh',
-						overflow: 'scroll'
+						background: "white",
+						height: "100vh",
+						overflow: "scroll",
 					}}
-					ref={ref}
-				>
+					ref={ref}>
 					<div>
 						<div>
 							<button
-								onClick={() => setBasketModalOpen(old => !old)}
-								style={{ position: 'absolute', right: '0px', top: '35px' }}
-							>
-								<img src={close} />
+								onClick={() => setBasketModalOpen((old) => !old)}
+								style={{ position: "absolute", right: "0px", top: "35px" }}>
+								<img src={close} alt="close button" />
 							</button>
-							<div className='flex justify-between'>
+							<div className="flex justify-between">
 								<h2
 									style={{
-										color: '#223869',
-										fontSize: '24px',
-										lineHeight: '30px',
-										fontWeight: 'bold',
-										fontStyle: 'normal'
-									}}
-								>
-									{isEmpty ? <p>Ваша корзина пуста</p> : <p>Ваша корзина</p>}
+										color: "#223869",
+										fontSize: "24px",
+										lineHeight: "30px",
+										fontWeight: "bold",
+										fontStyle: "normal",
+									}}>
+									{isEmpty ? <p>{t("basket.emptyCart")}</p> : <p>{t("basket.yourCart")}</p>}
 								</h2>
 								<Link
-									to='/customer/cart/'
+									to="/customer/cart/"
 									style={{
-										padding: '8px 50px 8px 32px',
-										background: '#F0F0F0',
-										marginRight: '22px',
-										color: '#223869'
-									}}
-								>
-									Перейти в корзину
+										padding: "8px 50px 8px 32px",
+										background: "#F0F0F0",
+										marginRight: "22px",
+										color: "#223869",
+									}}>
+									{t("basket.cartPage")}
 								</Link>
 							</div>
 						</div>
 						<div
-							className='basket-body'
-							style={{ marginTop: '40px', overflow: 'scroll' }}
-						>
-							<ul className='basket-list'>
+							className="basket-body"
+							style={{ marginTop: "40px", overflow: "scroll" }}>
+							<ul className="basket-list">
 								{items.map((item, index) => (
 									<BasketCard key={index} item={item} />
 								))}
 							</ul>
-							<div className='cart-bottom'>
+							<div className="cart-bottom">
 								{totalItems != 0 && (
-									<div className='total-box'>
-										<p className='total-counts'>
-											Общее количество: {totalItems} шт.
+									<div className="total-box">
+										<p className="total-counts">
+										{t("basket.totalItems")}: {totalItems} {t("basket.countItems")}.
 										</p>
-										<p className='total-price'>
-											Общая сумма: <span>{cartTotal} сумов</span>
+										<p className="total-price">
+										{t("basket.totalPrice")}: <span>{cartTotal} {t("basket.soum")}</span>
 										</p>
 									</div>
 								)}
 								<div>
 									<button
-										onClick={() => navigate('/customer/cart/')}
-										className='basket-btn'
-									>
-										Корзина
+										onClick={() => navigate("/customer/cart/")}
+										className="basket-btn">
+										{t("basket.cart")}
 									</button>
+
+									<button className="order-btn">{t("basket.order")}</button>
+
 									<button
 										onClick={() => navigate('/customer/checkout/')}
 										className='order-btn'
 									>
 										Заказать
 									</button>
+
 								</div>
 							</div>
 						</div>
@@ -111,7 +111,7 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 				</div>
 			)}
 		</>
-	)
-}
+	);
+};
 
-export default Basket
+export default Basket;

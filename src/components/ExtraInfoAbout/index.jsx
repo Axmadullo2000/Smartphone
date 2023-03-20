@@ -1,127 +1,121 @@
-import { useSelector } from 'react-redux'
-
-import { Comments } from '../Comments'
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Comments } from "../Comments";
 
 export const ExtraInfoAbout = ({
 	showFullDescription,
-	setShowFullDescription
+	setShowFullDescription,
 }) => {
 	const { detailData, extraProductDetail, commentData } = useSelector(
-		data => data.data
-	)
-
+		(data) => data.data,
+	);
+	const { t } = useTranslation();
 	return (
 		<div
 			style={{
-				marginTop: '5rem',
-				background: 'white',
-				padding: '50px',
-				width: '1200px'
-			}}
-		>
-			<ul className='flex'>
+				marginTop: "5rem",
+				background: "white",
+				padding: "50px",
+				width: "1200px",
+			}}>
+			<ul className="flex">
 				<li
 					style={
 						showFullDescription.description
 							? {
-									color: '#d92e15',
-									borderBottom: '3px solid #d92e15',
-									fontWeight: '700',
-									cursor: 'pointer'
+									color: "#d92e15",
+									borderBottom: "3px solid #d92e15",
+									fontWeight: "700",
+									cursor: "pointer",
 							  }
-							: { cursor: 'pointer', color: '#838383' }
+							: { cursor: "pointer", color: "#838383" }
 					}
-					className='mx-2'
+					className="mx-2"
 					onClick={() =>
 						setShowFullDescription({
 							description: true,
 							characteristic: false,
-							feedback: false
+							feedback: false,
 						})
-					}
-				>
-					Описание
+					}>
+					{t("extraInfoAbout.desc")}
 				</li>
 				<li
 					style={
 						showFullDescription.characteristic
 							? {
-									color: '#d92e15',
-									borderBottom: '3px solid #d92e15',
-									fontWeight: '700',
-									cursor: 'pointer'
+									color: "#d92e15",
+									borderBottom: "3px solid #d92e15",
+									fontWeight: "700",
+									cursor: "pointer",
 							  }
-							: { cursor: 'pointer', color: '#838383' }
+							: { cursor: "pointer", color: "#838383" }
 					}
-					className='mx-2'
+					className="mx-2"
 					onClick={() =>
 						setShowFullDescription({
 							description: false,
 							characteristic: true,
-							feedback: false
+							feedback: false,
 						})
-					}
-				>
-					Характеристики
+					}>
+					{t("extraInfoAbout.character")}
 				</li>
 
 				<li
 					style={
 						showFullDescription.feedback
 							? {
-									color: '#d92e15',
-									borderBottom: '3px solid #d92e15',
-									fontWeight: '700',
-									cursor: 'pointer'
+									color: "#d92e15",
+									borderBottom: "3px solid #d92e15",
+									fontWeight: "700",
+									cursor: "pointer",
 							  }
-							: { cursor: 'pointer', color: '#838383' }
+							: { cursor: "pointer", color: "#838383" }
 					}
-					className='mx-2'
+					className="mx-2"
 					onClick={() =>
 						setShowFullDescription({
 							description: false,
 							characteristic: false,
-							feedback: true
+							feedback: true,
 						})
-					}
-				>
-					Отзывы
+					}>
+					{t("extraInfoAbout.feedback")}
 				</li>
 			</ul>
 
-			<div style={{ marginTop: '40px' }}>
+			<div style={{ marginTop: "40px" }}>
 				{showFullDescription.description && (
 					<div>
-						{!!detailData.phone && detailData.phone.types == 'smartphone' && (
+						{!!detailData.phone && detailData.phone.types == "smartphone" && (
 							<>
 								<p
 									style={{
-										color: '#223869',
-										marginBottom: '12px',
-										fontWeight: '600'
-									}}
-								>
+										color: "#223869",
+										marginBottom: "12px",
+										fontWeight: "600",
+									}}>
 									{!!detailData.phone && detailData.phone.name}
 								</p>
-								<p style={{ lineHeight: '30px' }}>
+								<p style={{ lineHeight: "30px" }}>
 									{!!detailData.phone && detailData.phone.description}
 								</p>
 							</>
 						)}
 						{!!extraProductDetail.airpod &&
-							extraProductDetail.airpod.types == 'extra' && (
+							extraProductDetail.airpod.types == "extra" && (
 								<>
 									<p
 										style={{
-											color: '#223869',
-											marginBottom: '12px',
-											fontWeight: '600'
-										}}
-									>
+											color: "#223869",
+											marginBottom: "12px",
+											fontWeight: "600",
+										}}>
 										{!!extraProductDetail.airpod &&
 											extraProductDetail.airpod.name}
 									</p>
-									<p style={{ lineHeight: '30px' }}>
+									<p style={{ lineHeight: "30px" }}>
 										{!!extraProductDetail.airpod &&
 											extraProductDetail.airpod.description}
 									</p>
@@ -133,51 +127,58 @@ export const ExtraInfoAbout = ({
 					<div>
 						<p
 							style={{
-								color: '#223869',
-								fontWeight: '600',
-								fontSize: '20px',
-								lineHeight: '24px',
-								marginBottom: '30px'
-							}}
-						>
-							Характеристики
+								color: "#223869",
+								fontWeight: "600",
+								fontSize: "20px",
+								lineHeight: "24px",
+								marginBottom: "30px",
+							}}>
+							{t("extraInfoAbout.character")}
 						</p>
 
 						<div>
 							{
 								<>
-									<ul style={{ lineHeight: '40px' }}>
+									<ul style={{ lineHeight: "40px" }}>
 										{!!detailData.phone && (
-											<li className='phone_details'>
-												<span style={{ width: '50%' }}>Версия ОС</span>
+											<li className="phone_details">
+												<span style={{ width: "50%" }}>
+													{t("extraInfoAbout.version")}
+												</span>
 												<span>{detailData.phone.Version_OS}</span>
 											</li>
 										)}
 										{!!detailData.phone && (
-											<li className='phone_details'>
-												<span style={{ width: '50%' }}>Корпус </span>
+											<li className="phone_details">
+												<span style={{ width: "50%" }}>
+													{t("extraInfoAbout.corpus")}{" "}
+												</span>
 												<span>{detailData.phone.corpus}</span>
 											</li>
 										)}
 										{!!detailData.phone && (
-											<li className='phone_details'>
-												<span style={{ width: '50%' }}>
-													Количество SIM-карт{' '}
+											<li className="phone_details">
+												<span style={{ width: "50%" }}>
+													{t("extraInfoAbout.countSimCart")}
 												</span>
 												<span>{detailData.phone.sim_card}</span>
 											</li>
 										)}
 
 										{!!detailData.phone && (
-											<li className='phone_details'>
-												<span style={{ width: '50%' }}>Размеры </span>
+											<li className="phone_details">
+												<span style={{ width: "50%" }}>
+													{t("extraInfoAbout.size")}{" "}
+												</span>
 												<span>{detailData.phone.size}</span>
 											</li>
 										)}
 
 										{!!detailData.phone && (
-											<li className='phone_details'>
-												<span style={{ width: '50%' }}>Вес </span>
+											<li className="phone_details">
+												<span style={{ width: "50%" }}>
+													{t("extraInfoAbout.weight")}{" "}
+												</span>
 												<span>{detailData.phone.sim_card}</span>
 											</li>
 										)}
@@ -186,38 +187,43 @@ export const ExtraInfoAbout = ({
 							}
 						</div>
 
-						{!!detailData.phone && detailData.phone.types == 'smartphone' && (
-							<div style={{ lineHeight: '40px' }}>
+						{!!detailData.phone && detailData.phone.types == "smartphone" && (
+							<div style={{ lineHeight: "40px" }}>
 								<h2
 									style={{
-										borderBottom: '1px dashed #cecece',
-										color: '#d92e15',
-										fontWeight: '600',
-										fontSize: '20px',
-										marginTop: '22px'
-									}}
-								>
-									Экран
+										borderBottom: "1px dashed #cecece",
+										color: "#d92e15",
+										fontWeight: "600",
+										fontSize: "20px",
+										marginTop: "22px",
+									}}>
+									{t("extraInfoAbout.screen")}
 								</h2>
 								<ul>
 									{detailData.phone != undefined && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Тип экрана</span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.typeScreen")}
+											</span>
 											<span>{detailData.phone.display_type}</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Диагональ </span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.diagonal")}{" "}
+											</span>
 											<span>
-												{detailData.phone.diagonale}{' '}
+												{detailData.phone.diagonale}{" "}
 												{detailData.phone.allow_display}
 											</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Разрешение экрана </span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.sizeScreen")}
+											</span>
 											<span>{detailData.phone.allow_display.slice(1, 9)}</span>
 										</li>
 									)}
@@ -225,44 +231,53 @@ export const ExtraInfoAbout = ({
 
 								<h2
 									style={{
-										borderBottom: '1px dashed #cecece',
-										color: '#d92e15',
-										fontWeight: '600',
-										fontSize: '20px',
-										marginTop: '22px'
-									}}
-								>
-									Мультимедиа{' '}
+										borderBottom: "1px dashed #cecece",
+										color: "#d92e15",
+										fontWeight: "600",
+										fontSize: "20px",
+										marginTop: "22px",
+									}}>
+									{t("extraInfoAbout.media")}
 								</h2>
 								<ul>
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Фотокамера</span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.camera")}
+											</span>
 											<span>
 												{!!detailData.phone && detailData.phone.photo_kamera}
 											</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Фронтальная камера</span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.frontCamera")}
+											</span>
 											<span>
-												{!!detailData.phone && detailData.phone.front_kamera} МП
+												{!!detailData.phone && detailData.phone.front_kamera}{" "}
+												{t("cardFilter.mp")}
 											</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Разъем для наушников</span>
-											<span className='capitalize'>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.sizeHeadphone")}
+											</span>
+											<span className="capitalize">
 												{!!detailData.phone && detailData.phone.headphone_jack}
 											</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}> Аудио</span>
-											<span className='capitalize'>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{" "}
+												{t("extraInfoAbout.audio")}
+											</span>
+											<span className="capitalize">
 												{!!detailData.phone && detailData.phone.audio}
 											</span>
 										</li>
@@ -270,25 +285,28 @@ export const ExtraInfoAbout = ({
 								</ul>
 								<h2
 									style={{
-										borderBottom: '1px dashed #cecece',
-										color: '#d92e15',
-										fontWeight: '600',
-										fontSize: '20px',
-										marginTop: '22px'
-									}}
-								>
-									Связь{' '}
+										borderBottom: "1px dashed #cecece",
+										color: "#d92e15",
+										fontWeight: "600",
+										fontSize: "20px",
+										marginTop: "22px",
+									}}>
+									{t("extraInfoAbout.connection")}
 								</h2>
 								<ul>
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Стандарт</span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.standart")}
+											</span>
 											<span>{detailData.phone.standart}</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Интерфейсы</span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.interface")}
+											</span>
 											<span>
 												{!!detailData.phone && detailData.phone.Interface}
 											</span>
@@ -297,65 +315,74 @@ export const ExtraInfoAbout = ({
 								</ul>
 								<h2
 									style={{
-										borderBottom: '1px dashed #cecece',
-										color: '#d92e15',
-										fontWeight: '600',
-										fontSize: '20px',
-										marginTop: '22px'
-									}}
-								>
-									Память и процессор{' '}
+										borderBottom: "1px dashed #cecece",
+										color: "#d92e15",
+										fontWeight: "600",
+										fontSize: "20px",
+										marginTop: "22px",
+									}}>
+									{t("extraInfoAbout.memoryAndPro")}
 								</h2>
 								<ul>
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Процессор</span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.protsessor")}
+											</span>
 											<span>
-												{!!detailData.phone && detailData.phone.yadra} ядра
+												{!!detailData.phone && detailData.phone.yadra}{" "}
+												{t("extraInfoAbout.yadr")}
 											</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>
-												Объем встроенной памяти
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.memory")}
 											</span>
 											<span>
-												{!!detailData.phone && detailData.phone.giga_vstoeno} Гб
+												{!!detailData.phone && detailData.phone.giga_vstoeno}{" "}
+												{t("cardFilter.gb")}
 											</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>
-												Объем оперативной памяти
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.operativeMemory")}
 											</span>
 											<span>
-												{!!detailData.phone && detailData.phone.giga_operate} Гб
+												{!!detailData.phone && detailData.phone.giga_operate}{" "}
+												{t("cardFilter.gb")}
 											</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Слот для карт памяти</span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.cartMemory")}
+											</span>
 											<span>
 												{!!detailData.phone && detailData.phone.sloy_card}
 											</span>
 										</li>
 									)}
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>Аккумулятор</span>
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("cardFilter.acumlator")}
+											</span>
 											<span>
-												{!!detailData.phone && detailData.phone.accumulator} мА
+												{!!detailData.phone && detailData.phone.accumulator}{" "}
+												{t("cardFilter.amper")}
 											</span>
 										</li>
 									)}
 
 									{!!detailData.phone && (
-										<li className='phone_details'>
-											<span style={{ width: '50%' }}>
-												Дополнительная информация{' '}
+										<li className="phone_details">
+											<span style={{ width: "50%" }}>
+												{t("extraInfoAbout.extaInfo")}
 											</span>
 											<span>
 												{!!detailData.phone && detailData.phone.dop_infa}
@@ -366,38 +393,48 @@ export const ExtraInfoAbout = ({
 							</div>
 						)}
 						{!!extraProductDetail.airpod &&
-							extraProductDetail.airpod.types == 'extra' && (
+							extraProductDetail.airpod.types == "extra" && (
 								<ul>
-									<li className='phone_details'>
-										<span style={{ width: '50%' }}>Тип </span>
+									<li className="phone_details">
+										<span style={{ width: "50%" }}>
+											{t("extraInfoAbout.type")}{" "}
+										</span>
 										<span>{extraProductDetail.airpod.enterface}</span>
 									</li>
 									{!!extraProductDetail.airpod &&
-										extraProductDetail.airpod.types == 'extra' && (
-											<li className='phone_details'>
-												<span style={{ width: '50%' }}>Вид </span>
+										extraProductDetail.airpod.types == "extra" && (
+											<li className="phone_details">
+												<span style={{ width: "50%" }}>
+													{t("showLittleinfo.view")}{" "}
+												</span>
 												<span>{extraProductDetail.airpod.vid}</span>
 											</li>
 										)}
-									<li className='phone_details'>
-										<span style={{ width: '50%' }}>Корпус </span>
+									<li className="phone_details">
+										<span style={{ width: "50%" }}>
+											{t("extraInfoAbout.corpuse")}
+										</span>
 										<span>{extraProductDetail.airpod.corpus}</span>
 									</li>
-									<li className='phone_details'>
-										<span style={{ width: '50%' }}>Время работы </span>
+									<li className="phone_details">
+										<span style={{ width: "50%" }}>
+											{t("extraInfoAbout.workTime")}
+										</span>
 										<span>{extraProductDetail.airpod.time_work}</span>
 									</li>
-									<li className='phone_details'>
-										<span style={{ width: '50%' }}>Вес </span>
+									<li className="phone_details">
+										<span style={{ width: "50%" }}>{t("searchResult.weight")} </span>
 										<span>{extraProductDetail.airpod.weight}</span>
 									</li>
-									<li className='phone_details'>
-										<span style={{ width: '50%' }}>Шумоподавление </span>
+									<li className="phone_details">
+										<span style={{ width: "50%" }}>
+											{t("extraInfoAbout.noise")}{" "}
+										</span>
 										<span>{extraProductDetail.airpod.anti_shum}</span>
 									</li>
-									<li className='phone_details'>
-										<span style={{ width: '50%' }}>
-											Дополнительная информация{' '}
+									<li className="phone_details">
+										<span style={{ width: "50%" }}>
+											{t("extraInfoAbout.plusInfo")}
 										</span>
 										<span>{extraProductDetail.airpod.dop_infa}</span>
 									</li>
@@ -409,14 +446,13 @@ export const ExtraInfoAbout = ({
 				{showFullDescription.feedback && !!detailData.phone && (
 					<>
 						<li
-							className='flex justify-between'
+							className="flex justify-between"
 							style={{
-								borderBottom: '1px dashed #cecece',
-								margin: '10px 0'
-							}}
-						>
-							{commentData['user info'] != undefined &&
-								commentData['user info'].username}
+								borderBottom: "1px dashed #cecece",
+								margin: "10px 0",
+							}}>
+							{commentData["user info"] != undefined &&
+								commentData["user info"].username}
 						</li>
 
 						<Comments id={detailData.phone.id} />
@@ -428,5 +464,5 @@ export const ExtraInfoAbout = ({
 				)}
 			</div>
 		</div>
-	)
-}
+	);
+};

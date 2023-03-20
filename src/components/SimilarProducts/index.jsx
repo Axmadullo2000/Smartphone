@@ -5,10 +5,10 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import next from '../../assets/next.svg'
 import prev from '../../assets/prev.svg'
 import { CardItem } from '../CardItem'
-
+import {useTranslation} from "react-i18next"
 export const SimilarProducts = ({ similarData }) => {
 	const swiperRef = useRef()
-
+	const {t} = useTranslation()
 	return (
 		<>
 			<h2
@@ -22,7 +22,7 @@ export const SimilarProducts = ({ similarData }) => {
 					margin: '30px 0'
 				}}
 			>
-				Похожие товары
+				{t("similarProducts.title")}
 			</h2>
 
 			<div className='flex justify-center mt-8 relative'>

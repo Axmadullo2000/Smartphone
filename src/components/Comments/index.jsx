@@ -1,93 +1,89 @@
-import { useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
-import { CreateComment } from '../CreateComment'
-import { UpdateComment } from '../UpdateComment'
+import { CreateComment } from "../CreateComment";
+import { UpdateComment } from "../UpdateComment";
 
-import { deleteComment, getComment } from '../../redux/slices/CommentSlice'
+import { deleteComment, getComment } from "../../redux/slices/CommentSlice";
 
-import { CrudComment } from '../../Service/Comment'
+import { CrudComment } from "../../Service/Comment";
 
-import star from '../../assets/stars.svg'
+import star from "../../assets/stars.svg";
 
-import './Comments.scss'
-
+import "./Comments.scss";
+import { useTranslation } from 'react-i18next';
 export const Comments = ({ id }) => {
-	const { userData, loggednIn } = useSelector(state => state.auth)
-	const { comments } = useSelector(state => state.comment)
-	const dispatch = useDispatch()
-
-	const navigate = useNavigate()
+	const {t} = useTranslation();
+	const { userData, loggednIn } = useSelector((state) => state.auth);
+	const { comments } = useSelector((state) => state.comment);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
 	const fetchPostedComments = async () => {
 		try {
-			const response = await CrudComment.get(id)
-			dispatch(getComment(response))
+			const response = await CrudComment.get(id);
+			dispatch(getComment(response));
 		} catch (e) {}
-	}
+	};
 
-	const removeComment = async id => {
+	const removeComment = async (id) => {
 		try {
-			const response = await CrudComment.delete(id)
-			dispatch(deleteComment({ id }))
-			console.log(response)
+			const response = await CrudComment.delete(id);
+			dispatch(deleteComment({ id }));
+			console.log(response);
 		} catch (e) {}
-		window.location.reload()
-	}
+		window.location.reload();
+	};
 
 	useEffect(() => {
-		fetchPostedComments()
-	}, [dispatch])
+		fetchPostedComments();
+	}, [dispatch]);
 
 	return (
 		<div>
-			{comments.length > 0 && comments.Error != 'wrong id phone' && (
+			{comments.length > 0 && comments.Error != "wrong id phone" && (
 				<h1
 					style={{
-						fontSize: '22px',
-						margin: '10px 0',
-						fontWeight: '600'
-					}}
-				>
-					Комментарии Пользователей
+						fontSize: "22px",
+						margin: "10px 0",
+						fontWeight: "600",
+					}}>
+					 {t("comments.userComment")}
 				</h1>
 			)}
 			{comments.length > 0 &&
-				(comments.error != 'wrong id' || comments.Error != 'wrong id phone') &&
-				comments.map(item => (
+				(comments.error != "wrong id" || comments.Error != "wrong id phone") &&
+				comments.map((item) => (
 					<div
 						key={item.id}
 						style={{
-							border: '1px solid red',
-							margin: '20px 0',
-							padding: '10px',
-							cursor: 'pointer'
-						}}
-					>
+							border: "1px solid red",
+							margin: "20px 0",
+							padding: "10px",
+							cursor: "pointer",
+						}}>
 						<div>
 							<p
 								style={{
-									color: '#838383',
-									fontSize: '16px',
-									lineHeight: '20px'
-								}}
-							>
+									color: "#838383",
+									fontSize: "16px",
+									lineHeight: "20px",
+								}}>
 								{item.username}
 							</p>
 							<p
 								style={{
-									color: 'red',
-									fontSize: '16px',
-									lineHeight: '20px',
-									marginTop: '12px'
-								}}
-							>
+									color: "red",
+									fontSize: "16px",
+									lineHeight: "20px",
+									marginTop: "12px",
+								}}>
 								{item.comment}
 							</p>
 						</div>
-						<div className='flex'>
+						<div className="flex">
 							{[...Array(Math.floor(item.rate))].map((item, index) => {
-								return <img key={index} src={star} className='star' />
+								return <img key={index} src={star} className="star" />;
 							})}
 						</div>
 						{loggednIn && item.accounts == userData.id && (
@@ -95,13 +91,12 @@ export const Comments = ({ id }) => {
 								<button
 									onClick={() => removeComment(item.id)}
 									style={{
-										background: 'rgb(217, 46, 21)',
-										padding: '10px',
-										color: '#fff',
-										marginLeft: '10px'
-									}}
-								>
-									Удалить
+										background: "rgb(217, 46, 21)",
+										padding: "10px",
+										color: "#fff",
+										marginLeft: "10px",
+									}}>
+									 {t("basketCard.delete")}
 								</button>
 							</div>
 						)}
@@ -113,13 +108,13 @@ export const Comments = ({ id }) => {
 
 			{loggednIn && <CreateComment id={id} />}
 			{!loggednIn && (
-				<p className='wish_to_feedback'>
-					Чтобы Оставить Комментарий
-					<Link to='/sign-in/' className='feedback_link'>
-						Войдите в профиль
+				<p className="wish_to_feedback">
+					 {t("comments.writeComment")}
+					<Link to="/sign-in/" className="feedback_link">
+					{t("comments.loginProfile")}
 					</Link>
 				</p>
 			)}
 		</div>
-	)
-}
+	);
+};

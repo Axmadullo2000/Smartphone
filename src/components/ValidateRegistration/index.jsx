@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-
+import {useTranslation} from "react-i18next"
 import { AuthService } from '../../Service'
 import Loader from '../Loader'
 
@@ -27,7 +27,7 @@ export const ValidateRegistration = () => {
 	}
 
 	const dispatch = useDispatch()
-
+	const {t} = useTranslation();
 	const { userData } = useSelector(state => state.auth)
 
 	let [success, setSuccess] = useState(true)
@@ -35,7 +35,7 @@ export const ValidateRegistration = () => {
 	const registerUser = async () => {
 		const response = await AuthService.register(registerInfoData)
 		try {
-			setResult('Your password sended to the your email address!!!')
+			setResult(`{t("validateRegistration.passwordSent")}`)
 			setError('')
 		} catch (e) {
 			setError(e.response.data)
@@ -71,16 +71,16 @@ export const ValidateRegistration = () => {
 							</p>
 						</div>
 						<h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
-							Registrate your account
+							{t("validateRegistration.registerAccount")}
 						</h2>
 					</div>
 					<form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
 						<input type='hidden' name='remember' defaultValue='true' />
 						<div className='-space-y-px rounded-md shadow-sm'>
 							<div>
-								{errors.username && <p>Username is required!!!</p>}
+								{errors.username && <p>{t("validateRegistration.userNameReq")}</p>}
 								<label htmlFor='username' className='sr-only'>
-									Username
+								{t("validateRegistration.userName")}
 								</label>
 								<input
 									id='username'
@@ -94,12 +94,12 @@ export const ValidateRegistration = () => {
 									name='username'
 									required
 									className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-									placeholder='Your Username'
+									placeholder={t("validateRegistration.userNamePl")}
 								/>
 							</div>
 							<div>
 								<label htmlFor='email-address' className='sr-only'>
-									Email address
+								{t("validateRegistration.email")}
 								</label>
 								<input
 									id='email-address'
@@ -114,7 +114,7 @@ export const ValidateRegistration = () => {
 									type='email'
 									required
 									className='my-2 mt-4 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-									placeholder='Email address'
+									placeholder={t("validateRegistration.email")}
 								/>
 							</div>
 						</div>
@@ -126,7 +126,7 @@ export const ValidateRegistration = () => {
 										to='/sign-in'
 										className='text-xl font-medium text-indigo-600 hover:text-indigo-500'
 									>
-										Already have an account?
+										{t("forgotPAssword.haveAccount")}
 									</Link>
 								</div>
 							</div>
@@ -134,7 +134,7 @@ export const ValidateRegistration = () => {
 							{!success && (
 								<div>
 									<p className='mt-2 text-red-500'>
-										Username or Email incorrect wrote
+									{t("validateRegistration.incorrectwrite")}
 									</p>
 								</div>
 							)}
@@ -150,7 +150,7 @@ export const ValidateRegistration = () => {
 								type='submit'
 								className='group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 							>
-								Register
+								{t("validateRegistration.register")}
 							</button>
 						</div>
 					</form>

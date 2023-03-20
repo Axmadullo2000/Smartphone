@@ -1,7 +1,7 @@
 import { useRef } from 'react'
 import { Autoplay, Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-
+import {useTranslation} from "react-i18next"
 import { CardItem } from '../CardItem'
 import { SimilarProducts } from '../SimilarProducts'
 
@@ -10,7 +10,7 @@ import prev from '../../assets/prev.svg'
 
 export const ExtraProduct = ({ similarData }) => {
 	const swiperRef = useRef()
-
+	const {t} = useTranslation()
 	console.log(similarData.also_buy)
 	return (
 		<div>
@@ -27,7 +27,7 @@ export const ExtraProduct = ({ similarData }) => {
 							margin: '30px 0'
 						}}
 					>
-						Вместе с этим товаром покупают
+						{t("extraProduct.title")}
 					</h2>
 
 					{!!similarData.also_buy && similarData.also_buy.length > 0 && (
