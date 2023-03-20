@@ -574,6 +574,7 @@ const CardFilter = ({ slug }) => {
 								</div>
 							)}
 
+
 							<div
 								onClick={() => setIsOpenCorpus(!isOpenCorpus)}
 								className='cursor-pointer flex items-center justify-between mt-6 p-4'
