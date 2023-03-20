@@ -94,7 +94,16 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 										className="basket-btn">
 										{t("basket.cart")}
 									</button>
+
 									<button className="order-btn">{t("basket.order")}</button>
+
+									<button
+										onClick={() => navigate('/customer/checkout/')}
+										className='order-btn'
+									>
+										Заказать
+									</button>
+
 								</div>
 							</div>
 						</div>
