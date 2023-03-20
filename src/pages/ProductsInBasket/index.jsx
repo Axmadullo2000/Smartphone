@@ -87,8 +87,8 @@ export const ProductsInBasket = () => {
 									>
 										<img
 											style={{
-												width: '150px',
-												height: '150px'
+												maxWidth: '150px',
+												minHeight: '150px'
 											}}
 											className='cursor-pointer'
 											src={item.photo1}
@@ -99,7 +99,7 @@ export const ProductsInBasket = () => {
 										onClick={() => navigate(`/products/view/${item.slug}`)}
 										className='product_name'
 									>
-										<p style={{ marginTop: '50px' }}>{item.name}</p>
+										<p style={{ marginTop: '20px' }}>{item.name}</p>
 									</div>
 									<div
 										className='flex'
@@ -114,7 +114,7 @@ export const ProductsInBasket = () => {
 													onClick={() =>
 														updateItemQuantity(item.id, item.quantity - 1)
 													}
-													className='hover:text-red-400'
+													className='hover:text-red-400'ч
 												>
 													-
 												</button>
