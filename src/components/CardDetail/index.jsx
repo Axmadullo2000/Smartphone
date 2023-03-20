@@ -6,12 +6,13 @@ import { getDetailProduct, getExtraProducts } from '../../redux/asyncThunks'
 import { ExtraInfoAbout } from '../ExtraInfoAbout'
 import { ExtraProduct } from '../ExtraProduct'
 import { ShowLittleInfo } from '../ShowLittleInfo'
-
+import { useTranslation } from 'react-i18next';
 import up from '../../assets/up.svg'
 
 import './CardDetail.scss'
 
 const CardDetail = ({ slug }) => {
+	const {t} = useTranslation();
 	const [showFullDescription, setShowFullDescription] = useState({
 		description: true,
 		characteristic: false,
@@ -48,7 +49,7 @@ const CardDetail = ({ slug }) => {
 						borderRadius: '4px 4px 4px 4px'
 					}}
 				>
-					<Link to='/'>Главная</Link>
+					<Link to='/'>{t("cardDetail.main")}</Link>
 				</li>
 				{!!detailData.phone && detailData.phone.types == 'smartphone' && (
 					<li
@@ -61,7 +62,7 @@ const CardDetail = ({ slug }) => {
 							borderRadius: '0 4px 4px 0'
 						}}
 					>
-						<Link to='/products/category/all/'>Все Смартфоны</Link>
+						<Link to='/products/category/all/'>{t("header.catalogAll")}</Link>
 					</li>
 				)}
 				<li

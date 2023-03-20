@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, useParams } from 'react-router-dom'
 
@@ -11,6 +12,7 @@ import Loader from '../Loader'
 import './SearchResult.scss'
 
 export const SearchResult = () => {
+	const {t} = useTranslation()
 	const { data, status } = useSelector(data => data.data)
 	const dispatch = useDispatch()
 	let { slug } = useParams()
@@ -36,7 +38,7 @@ export const SearchResult = () => {
 	return (
 		<div>
 			<Header />
-			<h2 className='text-center text-2xl text-stone-50 mb-5'>SearchResult</h2>
+			<h2 className='text-center text-2xl text-stone-50 mb-5'>{t("searchResult.title")}</h2>
 			<div className='' style={{ width: '600px', margin: 'auto' }}>
 				{!!data.results &&
 					data.results.map(item => (
@@ -52,12 +54,12 @@ export const SearchResult = () => {
 								<img src={item.photo1} alt='' width={300} />
 							)}
 							<ul className='ml-4 mt-4'>
-								<li>Тип {item.name.slice(0, 8)}</li>
-								<li>Версия ОС {item.Version_OS}</li>
-								<li>Корпус {item.corpus}</li>
-								<li>Тип Sim-карты {item.sim_card}</li>
-								<li>Размеры {item.size}</li>
-								<li>Вес {item.weight}</li>
+								<li>{t("searchResult.type")} {item.name.slice(0, 8)}</li>
+								<li>{t("searchResult.version")} {item.Version_OS}</li>
+								<li>{t("searchResult.corpus")} {item.corpus}</li>
+								<li>{t("searchResult.typeSimCard")} {item.sim_card}</li>
+								<li>{t("searchResult.size")} {item.size}</li>
+								<li>{t("searchResult.weight")} {item.weight}</li>
 							</ul>
 						</div>
 					))}

@@ -8,8 +8,9 @@ import { CardItem } from '../CardItem'
 
 import next from '../../assets/next.svg'
 import prev from '../../assets/prev.svg'
-
+import {useTranslation} from "react-i18next"
 const PopularProducts = () => {
+	const {t} = useTranslation();
 	const swiperRef = useRef()
 	const { popularData } = useSelector(data => data.data)
 	const dispatch = useDispatch()
@@ -23,7 +24,7 @@ const PopularProducts = () => {
 	return (
 		<div style={{ marginTop: '100px', marginBottom: '60px' }}>
 			<h2 className='text-3xl text-center my-3 text-blue-900'>
-				Популярные товары{' '}
+				{t("popularProduct.title")}
 			</h2>
 			<div className='flex justify-center mt-8 relative'>
 				<button

@@ -11,6 +11,7 @@ import openElement from '../../assets/openElement.svg'
 import up from '../../assets/up.svg'
 
 import './CardFilter.scss'
+import { t } from 'i18next'
 
 const CardFilter = ({ slug }) => {
 	const [sortType, setSorted] = useState('asc')
@@ -249,17 +250,17 @@ const CardFilter = ({ slug }) => {
 				>
 					<h3 className='text-xl text-red-700'>
 						<span className='capitalize'>
-							{slug != 'all' ? slug : 'Все '} Смартфоны
+							{slug != 'all' ? slug : 'Все '} {t("cardFilter.smartPhone")}
 						</span>
 					</h3>
 					<div>
 						{pathname == '/products/category/all' ? (
 							<Link to='/products/category/all' className='text-red-700'>
-								Все Смартфоны
+								{t("header.catalogAll")}
 							</Link>
 						) : (
 							<Link to='/products/category/all' className='text-red-450'>
-								Все Смартфоны
+								{t("header.catalogAll")}
 							</Link>
 						)}
 
@@ -286,7 +287,7 @@ const CardFilter = ({ slug }) => {
 								color: '#223869'
 							}}
 						>
-							Стоимость
+							{t("cardFilter.price")}
 						</h3>
 						{
 							<>
@@ -311,12 +312,12 @@ const CardFilter = ({ slug }) => {
 								min={0}
 								max={23000000}
 								defaultValue={[0, 23000000]}
-								tipFormatter={value => `${value} сум`}
+								tipFormatter={value => `${value} {t("basket.soum")}`}
 							/>
 						</div>
 					</div>
 					<div>
-						Filter items
+					{t("cardFilter.filterItem")}
 						<div
 							onClick={() => setIsOpenMemoryFilter(!isOpenMemoryFilter)}
 							className='cursor-pointer flex items-center justify-between mt-6 p-4'
@@ -335,7 +336,7 @@ const CardFilter = ({ slug }) => {
 									isOpenMemoryFilter ? { color: 'white' } : { color: '#D92E15' }
 								}
 							>
-								Встроенная память
+								{t("cardFilter.memory")}
 							</span>
 							{isOpenMemoryFilter ? (
 								<img src={openElement} alt='Open element' />
@@ -360,7 +361,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedBaseMemory(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} Гб
+												{item} {t("cardFilter.gb")}
 											</label>
 										</div>
 									))}
@@ -387,7 +388,7 @@ const CardFilter = ({ slug }) => {
 											: { color: '#D92E15' }
 									}
 								>
-									Оперативная память
+									{t("cardFilter.operativeMemory")}
 								</span>
 								{isOpenOperateGiga ? (
 									<img src={openElement} alt='Open element' />
@@ -412,7 +413,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedFastMemory(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} Гб
+												{item} {t("cardFilter.gb")}
 											</label>
 										</div>
 									))}
@@ -439,7 +440,7 @@ const CardFilter = ({ slug }) => {
 											: { color: '#D92E15' }
 									}
 								>
-									Фронтальная камера
+									{t("cardFilter.camera")}
 								</span>
 								{isOpenFrontCamera ? (
 									<img src={openElement} alt='Open element' />
@@ -464,7 +465,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedFrontCamera(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} Мп
+												{item} {t("cardFilter.mp")}
 											</label>
 										</div>
 									))}
@@ -491,7 +492,7 @@ const CardFilter = ({ slug }) => {
 											: { color: '#D92E15' }
 									}
 								>
-									Емкость аккумулятора
+									{t("cardFilter.acumlator")}
 								</span>
 								{isOpenAccumulator ? (
 									<img src={openElement} alt='Open element' />
@@ -516,7 +517,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedAccumulator(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} мАч
+												{item} {t("cardFilter.amper")}
 											</label>
 										</div>
 									))}
@@ -541,7 +542,7 @@ const CardFilter = ({ slug }) => {
 										isOpenYadro ? { color: 'white' } : { color: '#D92E15' }
 									}
 								>
-									Количество ядер процессора
+									{t("cardFilter.protsessor")}
 								</span>
 								{isOpenYadro ? (
 									<img src={openElement} alt='Open element' />
@@ -566,7 +567,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedYadra(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} ядра
+												{item} {t("cardFilter.yadr")}
 											</label>
 										</div>
 									))}
@@ -591,7 +592,7 @@ const CardFilter = ({ slug }) => {
 										isOpenCorpus ? { color: 'white' } : { color: '#D92E15' }
 									}
 								>
-									Материал корпуса
+									{t("cardFilter.copus")}
 								</span>
 								{isOpenCorpus ? (
 									<img src={openElement} alt='Open element' />
@@ -625,7 +626,7 @@ const CardFilter = ({ slug }) => {
 
 							<div className='flex' style={{ flexDirection: 'column' }}>
 								<button className='p-2 bg-red-600 text-slate-200 hover:text-white hover:bg-red-800 mt-4'>
-									Искать по фильтрам
+								{t("cardFilter.searchByFilter")}
 								</button>
 								<button
 									onClick={resetFilter}
@@ -635,7 +636,7 @@ const CardFilter = ({ slug }) => {
 										color: 'rgb(217, 46, 21)'
 									}}
 								>
-									Сбросить Фильтр
+									{t("cardFilter.clearFilter")}
 								</button>
 							</div>
 						</form>
@@ -760,7 +761,7 @@ const CardFilter = ({ slug }) => {
 							className='text-xl'
 							style={{ color: '#223869', marginLeft: '20px' }}
 						>
-							Сортировать по
+						{t("cardFilter.sort")}
 						</h3>
 					</div>
 					<form className='flex' onSubmit={e => e.preventDefault()}>
@@ -784,7 +785,7 @@ const CardFilter = ({ slug }) => {
 										  }
 								}
 							>
-								Цене ниже
+								{t("cardFilter.priceBelow")}
 							</button>
 						</div>
 						<div onClick={() => setSorted('desc')} className='mx-2'>
@@ -807,7 +808,7 @@ const CardFilter = ({ slug }) => {
 										  }
 								}
 							>
-								Цене выше
+								{t("cardFilter.priceHigher")}
 							</button>
 						</div>
 						<div className='mx-2' onClick={resetSort}>
@@ -830,7 +831,7 @@ const CardFilter = ({ slug }) => {
 										  }
 								}
 							>
-								Сбросить
+								{t("cardFilter.clear")}
 							</button>
 						</div>
 					</form>

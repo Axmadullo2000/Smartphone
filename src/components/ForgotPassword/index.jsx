@@ -4,30 +4,31 @@ import { useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 import { AuthService } from '../../Service'
+import {useTranslation} from "react-i18next"
 
 export const ForgotPassword = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [passwordRepeat, setPasswordRepeat] = useState('')
 	const [success, setSuccess] = useState(false)
-
+	const {t} = useTranslation()
 	const navigate = useNavigate()
 
 	const formSchema = Yup.object().shape({
 		email: Yup.string()
-			.required('Email is required')
-			.min(10, 'Email length should be at least 10 characters')
-			.max(60, 'Email cannot exceed more than 60 characters'),
+			.required(`${t("forgotPAssword.emailReq")}`)
+			.min(10, `${t("forgotPAssword.emailMin")}`)
+			.max(60, `${t("forgotPAssword.emailMax")}`),
 		password: Yup.string()
-			.required('Password is required')
-			.min(8, 'Password length should be at least 8 characters')
-			.max(32, 'Password cannot exceed more than 32 characters')
-			.oneOf([Yup.ref('passwordRepeat')], 'Passwords do not match'),
+			.required(`${t("forgotPAssword.passwordReq")}`)
+			.min(8, `${t("forgotPAssword.passwordMin")}`)
+			.max(32, `${t("forgotPAssword.passwordMax")}`)
+			.oneOf([Yup.ref('passwordRepeat')], `${t("forgotPAssword.ConfirmpasswordReq")}`),
 		passwordRepeat: Yup.string()
 			.required('Confirm Password is required')
-			.min(8, 'Password length should be at least 8 characters')
-			.max(32, 'Password cannot exceed more than 32 characters')
-			.oneOf([Yup.ref('password')], 'Passwords do not match')
+			.min(8, `${t("forgotPAssword.passwordMin")}`)
+			.max(32, `${t("forgotPAssword.passwordMax")}`)
+			.oneOf([Yup.ref('password')], `${t("forgotPAssword.ConfirmpasswordReq")}`)
 	})
 
 	const {
@@ -74,7 +75,7 @@ export const ForgotPassword = () => {
 								</p>
 							</div>
 							<h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
-								Reset Your Password
+							{t("forgotPAssword.resetPassword")}
 							</h2>
 						</div>
 						<form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
@@ -83,7 +84,7 @@ export const ForgotPassword = () => {
 								<div>
 									<p style={{ color: 'red' }}>{errors.email?.message}</p>
 									<label htmlFor='email' className='sr-only'>
-										Email
+									{t("forgotPAssword.email")}
 									</label>
 									<input
 										id='email'
@@ -93,12 +94,12 @@ export const ForgotPassword = () => {
 										onChange={e => setEmail(e.target.value)}
 										required
 										className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-										placeholder='Your Email'
+										placeholder={t("forgotPAssword.email")}
 									/>
 								</div>
 								<div>
 									<label htmlFor='password' className='sr-only'>
-										Password
+									{t("forgotPAssword.password")}
 									</label>
 									<p style={{ color: 'red' }}>{errors.password?.message}</p>
 									<input
@@ -110,7 +111,7 @@ export const ForgotPassword = () => {
 										type='password'
 										required
 										className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-										placeholder='Enter Password'
+										placeholder={t("forgotPAssword.password")}
 										style={{ marginTop: '5px' }}
 									/>
 								</div>
@@ -119,7 +120,7 @@ export const ForgotPassword = () => {
 										{errors.passwordRepeat?.message}
 									</p>
 									<label htmlFor='repeat_password' className='sr-only'>
-										Repeat Password
+									{t("forgotPAssword.confirmPassword")}
 									</label>
 									<input
 										id='passwordRepeat'
@@ -130,7 +131,7 @@ export const ForgotPassword = () => {
 										type='password'
 										required
 										className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-										placeholder='Repeat Your Password'
+										placeholder={t("forgotPAssword.confirmPassword")}
 										style={{ marginTop: '5px' }}
 									/>
 								</div>
@@ -148,15 +149,14 @@ export const ForgotPassword = () => {
 													lineHeight: '22px'
 												}}
 											>
-												Ваша ссылка для изменения пароля отправлена вам на
-												почту.
+												{t("forgotPAssword.sendEmail")}
 											</p>
 										)}
 										<Link
 											to='/sign-in'
 											className='text-xl font-medium text-indigo-600 hover:text-indigo-500'
 										>
-											Already have an account?
+											{t("forgotPAssword.haveAccount")}
 										</Link>
 									</div>
 								</div>
@@ -167,7 +167,7 @@ export const ForgotPassword = () => {
 									type='submit'
 									className='group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 								>
-									Change Password
+									{t("forgotPAssword.changePassword")}
 								</button>
 							</div>
 						</form>
