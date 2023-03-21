@@ -46,7 +46,7 @@ export const Checkout = () => {
 
 	console.log(errors)
 
-	const { items, totalUniqueItems } = useCart()
+	const { items, cartTotal } = useCart()
 	console.log(items)
 	return (
 		<>
@@ -229,7 +229,7 @@ export const Checkout = () => {
 							<p>Товар</p>
 							<p>Итог</p>
 						</div>
-						<div className=''>
+						<div>
 							{!!items.length &&
 								items.map(item => (
 									<div
@@ -251,6 +251,10 @@ export const Checkout = () => {
 										</div>
 									</div>
 								))}
+						</div>
+						<div className='flex justify-between' style={{ marginTop: '5rem' }}>
+							<p>Стоимость</p>
+							<p>{cartTotal}</p>
 						</div>
 					</div>
 				</div>
