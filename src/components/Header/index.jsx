@@ -278,7 +278,10 @@ const Header = () => {
 				</button>
 				<select
 					defaultValue={i18n.language}
-					onChange={e => i18n.changeLanguage(e.target.value)}
+					onChange={e => {
+						i18n.changeLanguage(e.target.value)
+						localStorage.setItem("lang", e.target.value)
+					}}
 					style={{maxWidth: '50px', height: '100%'}}
 				>
 					<option value='ru'>Ru</option>
