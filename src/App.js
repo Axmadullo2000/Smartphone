@@ -44,7 +44,7 @@ function App() {
 
 	i18n.use(initReactI18next).init({
 		debug: true,
-		fallbackLng: "ru",
+		fallbackLng: localStorage.getItem("lang") || "ru",
 		interpolation: {
 			escapeValue: false,
 		},
