@@ -1,6 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
-
+import {useTranslation} from "react-i18next"
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 
@@ -19,19 +19,19 @@ export const ProductsInBasket = () => {
 		cartTotal
 	} = useCart()
 	const navigate = useNavigate()
-
+	const {t} = useTranslation();
 	return (
 		<>
 			<Header />
 			<ul className='flex ml-8 mt-5 basket_direction'>
 				<li className='basket_link'>
-					<Link to='/'>Главная</Link>
+					<Link to='/'>{t("cardDetail.main")}</Link>
 				</li>
 				<li
 					style={{ background: '#223869', color: '#fff' }}
 					className='basket_link ml-3'
 				>
-					Корзина
+					{t("productsInCart.cart")}
 				</li>
 			</ul>
 			<h2
@@ -44,7 +44,7 @@ export const ProductsInBasket = () => {
 					marginLeft: '32px'
 				}}
 			>
-				Ваша Корзина
+				{t("productsInCart.yourCart")}
 			</h2>
 			<div
 				className='flex'
@@ -66,7 +66,7 @@ export const ProductsInBasket = () => {
 								marginTop: '22px'
 							}}
 						>
-							Ваша корзина для покупок пуста
+							{t("productsInCart.emptyCart")}
 						</h2>
 					) : (
 						<>
@@ -147,7 +147,7 @@ export const ProductsInBasket = () => {
 											style={{ width: '36px', height: '36px' }}
 											onClick={() => removeItem(item.id)}
 										>
-											<img src={close} />
+											<img src={close} alt="close" />
 										</button>
 									</div>
 								</div>
@@ -191,7 +191,7 @@ export const ProductsInBasket = () => {
 								  }
 						}
 					>
-						<h2 className='price_of_product'>Сумма заказа</h2>
+						<h2 className='price_of_product'>{t("productsInCart.orderPrice")}</h2>
 						<ul className=''>
 							<li
 								className='flex space-x-28 items-center'
@@ -201,9 +201,9 @@ export const ProductsInBasket = () => {
 									className='basket_textKey_color'
 									style={{ fontSize: '14px', color: '#717171' }}
 								>
-									Кол-во товаров:
+									{t("productsInCart.orderCount")}:
 								</span>
-								<span className='basket_textValue_color'>{totalItems} шт.</span>
+								<span className='basket_textValue_color'>{totalItems} {t("basket.countItems")}.</span>
 							</li>
 							<li
 								className='flex space-x-16 items-center price_product ml-1'
@@ -213,9 +213,9 @@ export const ProductsInBasket = () => {
 									className='basket_textKey_color'
 									style={{ fontSize: '14px', color: '#717171' }}
 								>
-									Стоимость:
+									{t("productsInCart.cost")}:
 								</span>
-								<span className='basket_textValue_color'>{cartTotal} сум.</span>
+								<span className='basket_textValue_color'>{cartTotal} {t("basketCard.soum")}.</span>
 							</li>
 							<div
 								style={{
@@ -230,13 +230,13 @@ export const ProductsInBasket = () => {
 									className='basket_textKey_color'
 									style={{ fontSize: '14px', color: '#717171' }}
 								>
-									Всего к оплате:
+									{t("productsInCart.totalPay")}:
 								</span>
 								<span
 									style={{ color: 'red' }}
 									className='basket_textValue_color'
 								>
-									{cartTotal} сум.
+									{cartTotal} {t("basketCard.soum")}.
 								</span>
 							</li>
 						</ul>
@@ -244,7 +244,7 @@ export const ProductsInBasket = () => {
 							className='get_offer'
 							onClick={() => navigate('/customer/checkout/')}
 						>
-							Оформить заказ
+							{t("productsInCart.order")}
 						</button>
 					</div>
 				</div>

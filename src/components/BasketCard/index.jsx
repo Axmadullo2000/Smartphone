@@ -1,11 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
-
+import { useTranslation } from 'react-i18next';
 import './BasketCard.scss'
 
 export const BasketCard = ({ item }) => {
 	const navigate = useNavigate()
+	const {t} = useTranslation();
 
 	const { name, price, photo1, id, quantity } = item
 	const { updateItemQuantity, removeItem } = useCart()
@@ -29,11 +30,11 @@ export const BasketCard = ({ item }) => {
 						{name}
 					</h4>
 					<span onClick={() => navigate(`/products/view/${item.slug}`)}>
-						Цена: {price} сум
+					{t("basketCard.price")}: {price} {t("basketCard.soum")}
 					</span>
 
 					<div className='card-count'>
-						<span className='card-count-info'>Кол-во:</span>
+						<span className='card-count-info'>{t("basket.totalItems")}:</span>
 						<button
 							className='card-minus-btn'
 							onClick={() => updateItemQuantity(id, quantity - 1)}
@@ -58,9 +59,9 @@ export const BasketCard = ({ item }) => {
 					</div>
 				</div>
 				<div className='card-total'>
-					<p className='card-total-price'>{price * quantity} сум</p>
+					<p className='card-total-price'>{price * quantity} {t("basketCard.soum")}</p>
 					<button className='card-delete-btn' onClick={() => removeItem(id)}>
-						Удалить
+					{t("basketCard.delete")}
 					</button>
 				</div>
 			</div>

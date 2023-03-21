@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 
 import { updateCommentAction } from '../../redux/slices/CommentSlice'
 import { CrudComment } from '../../Service/Comment'
-
+import {useTranslation} from "react-i18next"
 import './UpdateComment.scss'
 
 export const UpdateComment = ({ id }) => {
@@ -13,6 +13,7 @@ export const UpdateComment = ({ id }) => {
 	const navigate = useNavigate()
 	const { pathname } = useLocation()
 	const dispatch = useDispatch()
+	const {t} = useTranslation()
 
 	const data = {
 		rate: Math.floor(updateGrade),
@@ -39,7 +40,7 @@ export const UpdateComment = ({ id }) => {
 			<form onSubmit={submitUpdate} className='update_comment'>
 				<input
 					type={'number'}
-					placeholder='Enter your grade between 1 to 5'
+					placeholder={t("updateComment.inputStarPlaceholder")}
 					required
 					min={1}
 					max={5}
@@ -49,13 +50,13 @@ export const UpdateComment = ({ id }) => {
 				/>
 				<textarea
 					name='comment'
-					placeholder='Type your comment'
+					placeholder={t("updateComment.typeCommentPlaceholder")}
 					className='comment_form_content'
 					value={updateComment}
 					onChange={e => setUpdateComment(e.target.value)}
 				></textarea>
 				<button className='comment_form_content update_comment_btn'>
-					Обновить отзыв
+					{t("updateComment.updateFeedback")}
 				</button>
 			</form>
 		</div>

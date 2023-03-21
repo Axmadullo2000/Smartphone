@@ -1,16 +1,19 @@
+import { Link } from 'react-router-dom'
+
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
 import * as Yup from 'yup'
 
+import { useTranslation } from 'react-i18next'
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
-
 import './Checkout.scss'
 
 export const Checkout = () => {
+	const { t } = useTranslation()
+
 	const [firstName, setFirstName] = useState('')
 	const [secondName, setSecondName] = useState('')
 	const [phoneNumber, setPhoneNumber] = useState('')
@@ -44,27 +47,27 @@ export const Checkout = () => {
 	const [deliveryInfo, setDeliverInfo] = useState(false)
 	const [payment, setPayment] = useState(false)
 
-	console.log(errors)
-
 	const { items, cartTotal } = useCart()
 	console.log(items)
 	return (
-		<>
+		<div>
 			<Header />
-
 			<div className='checkout_container ml-7'>
 				<ul className='flex  mt-5'>
 					<li className='checkout_direction'>
-						<Link to='/'>Главная</Link>
+						<Link to='/'>{t('cardDetail.main')}</Link>
 					</li>
 					<li className='checkout_direction mx-4'>
-						<Link to='/customer/cart/'>Корзина</Link>
+						<Link to='/customer/cart/'>{t('basket.cart')}</Link>
 					</li>
-					<li className='checkout_direction'>Оформить заказ</li>
+					<li className='checkout_direction'>{t('checkout.order')}</li>
 				</ul>
 
-				<h2 className='mt-5 get_offer_checkout'>Оформить заказ</h2>
+				<h2 className='mt-5 get_offer_checkout'>{t('checkout.order')}</h2>
 
+				<div>
+					<h3>{t('checkout.orderinfo')}</h3>
+				</div>
 				<div className='flex justify-between'>
 					<div style={{ width: '50%' }}>
 						<h3 style={{ fontWeight: 'bold' }}>1) Информация о покупателе</h3>
@@ -114,6 +117,11 @@ export const Checkout = () => {
 								<>
 									<div>
 										<button
+											style={{
+												padding: '10px 15px',
+												background: 'red',
+												color: 'white'
+											}}
 											onClick={() => {
 												setDeliverInfo(true)
 												setUserInfo(false)
@@ -166,6 +174,11 @@ export const Checkout = () => {
 											setUserInfo(true)
 											setDeliverInfo(false)
 										}}
+										style={{
+											padding: '10px 15px',
+											background: 'red',
+											color: 'white'
+										}}
 									>
 										предыдущий шаг
 									</button>
@@ -173,6 +186,12 @@ export const Checkout = () => {
 										onClick={() => {
 											setPayment(true)
 											setDeliverInfo(false)
+										}}
+										style={{
+											padding: '10px 15px',
+											background: 'red',
+											color: 'white',
+											marginLeft: '15px'
 										}}
 									>
 										следующий шаг
@@ -215,10 +234,24 @@ export const Checkout = () => {
 											setDeliverInfo(true)
 											setPayment(false)
 										}}
+										style={{
+											padding: '10px 15px',
+											background: 'red',
+											color: 'white'
+										}}
 									>
 										предыдущий шаг
 									</button>
-									<button>Оформить заказ</button>
+									<button
+										style={{
+											padding: '10px 15px',
+											background: 'green',
+											color: 'white',
+											marginLeft: '15px'
+										}}
+									>
+										Оформить заказ
+									</button>
 								</div>
 							</div>
 						)}
@@ -230,37 +263,41 @@ export const Checkout = () => {
 							<p>Итог</p>
 						</div>
 						<div>
-							{!!items.length &&
-								items.map(item => (
-									<div
-										className='flex justify-between'
-										style={{ marginTop: '5rem' }}
-									>
-										<div>
-											<p>{item.name}</p>
-											<p>
-												{item.quantity} * {item.price} сум
-											</p>
-											<img
-												src={item.photo1}
-												style={{ maxWidth: '147px', height: '100%' }}
-											/>
+							<div className=''>
+								{!!items.length &&
+									items.map(item => (
+										<div
+											className='flex justify-between'
+											style={{ marginTop: '5rem' }}
+										>
+											<div>
+												<p>{item.name}</p>
+												<p>
+													{item.quantity} * {item.price} сум
+												</p>
+												<img
+													src={item.photo1}
+													style={{ maxWidth: '147px', height: '100%' }}
+												/>
+											</div>
+											<div>
+												<p>{item.quantity * item.price} сум</p>
+											</div>
 										</div>
-										<div>
-											<p>{item.quantity * item.price} сум</p>
-										</div>
-									</div>
-								))}
-						</div>
-						<div className='flex justify-between' style={{ marginTop: '5rem' }}>
-							<p>Стоимость</p>
-							<p>{cartTotal}</p>
+									))}
+							</div>
+							<div
+								className='flex justify-between'
+								style={{ marginTop: '5rem' }}
+							>
+								<p>Стоимость</p>
+								<p>{cartTotal}</p>
+							</div>
 						</div>
 					</div>
 				</div>
+				<Footer />
 			</div>
-
-			<Footer />
-		</>
+		</div>
 	)
 }

@@ -8,8 +8,10 @@ import { CardItem } from '../CardItem'
 
 import next from '../../assets/next.svg'
 import prev from '../../assets/prev.svg'
+import { useTranslation } from 'react-i18next'
 
 export default function NewProducts() {
+	const {t} = useTranslation();
 	const newRef = useRef()
 	const { newData } = useSelector(data => data.data)
 	const dispatch = useDispatch()
@@ -20,7 +22,9 @@ export default function NewProducts() {
 
 	return (
 		<div style={{ marginTop: '100px', marginBottom: '60px' }}>
-			<h2 className='text-3xl text-center my-3 text-blue-900'>Новые товары </h2>
+			<h2 className='text-3xl text-center my-3 text-blue-900'>
+				{t("newProduct.title")}
+				 </h2>
 			<div className='flex justify-center mt-8 relative'>
 				<button
 					onClick={() => newRef.current.slidePrev()}

@@ -6,9 +6,11 @@ import { BasketCard } from '../BasketCard'
 
 import close from '../../assets/close.svg'
 
+import { useTranslation } from 'react-i18next'
 import './Basket.scss'
 
 const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
+	const { t } = useTranslation()
 	const ref = useRef()
 	const checkIfClickedOutside = e => {
 		if (basketModalOpen && ref.current && !ref.current.contains(e.target)) {
@@ -44,7 +46,7 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 								onClick={() => setBasketModalOpen(old => !old)}
 								style={{ position: 'absolute', right: '0px', top: '35px' }}
 							>
-								<img src={close} />
+								<img src={close} alt='close button' />
 							</button>
 							<div className='flex justify-between'>
 								<h2
@@ -56,7 +58,11 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 										fontStyle: 'normal'
 									}}
 								>
-									{isEmpty ? <p>Ваша корзина пуста</p> : <p>Ваша корзина</p>}
+									{isEmpty ? (
+										<p>{t('basket.emptyCart')}</p>
+									) : (
+										<p>{t('basket.yourCart')}</p>
+									)}
 								</h2>
 								<Link
 									to='/customer/cart/'
@@ -67,7 +73,7 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 										color: '#223869'
 									}}
 								>
-									Перейти в корзину
+									{t('basket.cartPage')}
 								</Link>
 							</div>
 						</div>
@@ -84,10 +90,14 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 								{totalItems != 0 && (
 									<div className='total-box'>
 										<p className='total-counts'>
-											Общее количество: {totalItems} шт.
+											{t('basket.totalItems')}: {totalItems}{' '}
+											{t('basket.countItems')}.
 										</p>
 										<p className='total-price'>
-											Общая сумма: <span>{cartTotal} сумов</span>
+											{t('basket.totalPrice')}:{' '}
+											<span>
+												{cartTotal} {t('basket.soum')}
+											</span>
 										</p>
 									</div>
 								)}
@@ -96,13 +106,14 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 										onClick={() => navigate('/customer/cart/')}
 										className='basket-btn'
 									>
-										Корзина
+										{t('basket.cart')}
 									</button>
+
 									<button
 										onClick={() => navigate('/customer/checkout/')}
 										className='order-btn'
 									>
-										Заказать
+										{t('basket.order')}
 									</button>
 								</div>
 							</div>

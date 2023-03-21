@@ -17,7 +17,7 @@ export const CommentSlice = createSlice({
 			state.comments = action.payload
 		},
 		deleteComment(state, action) {
-			state.comments.filter(item => item.id != action.payload.id)
+			state.comments.filter(item => item.id !== action.payload.id)
 		},
 		updateCommentAction(state, action) {
 			state.comments = [...state.comments, action.payload]

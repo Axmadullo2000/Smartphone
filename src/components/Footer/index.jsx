@@ -1,6 +1,6 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-
 import facebook from '../../assets/facebook.svg'
 import headphone from '../../assets/headphone.svg'
 import instagram from '../../assets/instagram.svg'
@@ -9,6 +9,7 @@ import telegram from '../../assets/telegram.svg'
 import './Footer.scss'
 
 const Footer = () => {
+	const { t } = useTranslation()
 	return (
 		<footer
 			className='footer flex text-slate-100 justify-between'
@@ -24,85 +25,85 @@ const Footer = () => {
 			</div>
 
 			<div>
-				<h5>О нас</h5>
+				<h5>{t('footer.about')}</h5>
 				<ul style={{ lineHeight: '30px' }}>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							О нас
+							{t('footer.about')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Новости
+							{t('footer.news')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Гарантия
+							{t('footer.gaurantee')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Акции
+							{t('footer.sale')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Адреса магазинов
+							{t('footer.adress')}
 						</Link>
 					</li>
 				</ul>
 			</div>
 
 			<div>
-				<h5>Покупателям</h5>
+				<h5>{t('footer.buy')}</h5>
 				<ul style={{ lineHeight: '30px' }}>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Доставка
+							{t('footer.pickup')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Контакты
+							{t('footer.contact')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Сервис центр
+							{t('footer.serviceCenter')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Оставить отзыв
+							{t('footer.feedback')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Вакансии
+							{t('footer.vacancy')}
 						</Link>
 					</li>
 					<li>
 						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							Корпоративным покупателям
+							{t('footer.corporateBuy')}
 						</Link>
 					</li>
 				</ul>
 			</div>
 
 			<div>
-				<h5>Услуги</h5>
+				<h5>{t('footer.services')}</h5>
 				<ul style={{ lineHeight: '30px' }}>
-					<li>Как сделать покупку?</li>
-					<li>Способы оплаты</li>
-					<li>Рассрочка UNIRED</li>
-					<li>Сотрудничество</li>
-					<li>Рассрочка zMARKET</li>
+					<li>{t('footer.canIBuy')}</li>
+					<li>{t('footer.payment')}</li>
+					<li>{t('footer.unired')}</li>
+					<li>{t('footer.Cooperation')}</li>
+					<li>{t('footer.zmarket')}</li>
 				</ul>
 			</div>
 
 			<div className='mr-5'>
-				<h5>Контакты</h5>
+				<h5>{t('footer.contact')}</h5>
 				<div className='flex'>
 					<button>
 						<img src={facebook} alt='' width={44} height={44} />

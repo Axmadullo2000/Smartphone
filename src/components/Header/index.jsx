@@ -10,6 +10,7 @@ import { getAllData } from '../../redux/asyncThunks'
 import { logoutAction } from '../../redux/slices/AuthSlice'
 import { AuthService } from '../../Service'
 
+import { useTranslation } from 'react-i18next'
 import basket from '../../assets/basket.svg'
 import headphone from '../../assets/headphone.svg'
 import loggedinUser from '../../assets/loggedinUser.svg'
@@ -28,6 +29,7 @@ const Header = () => {
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
 	const { totalItems, totalUniqueItems } = useCart()
+	const { t, i18n } = useTranslation()
 
 	const brand = []
 
@@ -113,7 +115,7 @@ const Header = () => {
 								}}
 							></span>
 						</div>
-						<div className='text-xl opacity-60'>Каталог</div>
+						<div className='text-xl opacity-60'>{t('header.catalog')}</div>
 					</div>
 				) : (
 					<div
@@ -164,19 +166,20 @@ const Header = () => {
 								fontSize: '18px'
 							}}
 						>
-							Каталог
+							{t('header.catalog')}
 						</div>
 					</div>
 				)}
 
 				<form onSubmit={searchHandleSubmit}>
 					<label htmlFor='search' className='flex relative p-4'>
+						{/* Search your favourite smartphones */}
 						<input
 							id='search'
 							required
 							value={searchItem}
 							onChange={e => setSearchItem(e.target.value)}
-							placeholder={'Search your favourite smartphones'}
+							placeholder={t('header.searchFavourite')}
 							style={{ width: '450px' }}
 							type='text'
 							className='search_panel ml-5 mt-1 block px-3 p-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm placeholder-slate-400
@@ -221,7 +224,9 @@ const Header = () => {
 							alt=''
 							className='bg-slate-100 hover:bg-red-900 p-3 rounded-lg'
 						/>
-						<p className='text-white text-sm ml-2'>Вход /Регистрация</p>
+						<p className='text-white text-sm ml-2'>
+							{t('header.login')} /{t('header.register')}
+						</p>
 					</button>
 				) : (
 					<div className='w-40 flex hover:bg-red-600'>
@@ -235,7 +240,7 @@ const Header = () => {
 								{!!userData.username && userData.username}
 							</p>
 							<button onClick={logoutUser} className='ml-2 mt-2'>
-								Выход
+								{t('header.logout')}
 							</button>
 						</div>
 					</div>
@@ -268,10 +273,18 @@ const Header = () => {
 						/>
 					</Badge>
 					<span className='text-white text-sm ml-2'>
-						Корзина / Оформление заказа
+						{t('header.cart')} / {t('header.order')}
 					</span>
 				</button>
-
+				<select
+					defaultValue={i18n.language}
+					onChange={e => i18n.changeLanguage(e.target.value)}
+					style={{maxWidth: '50px', height: '100%'}}
+				>
+					<option value='ru'>Ru</option>
+					<option value='uz'>Uz</option>
+					<option value='uk'>Ukr</option>
+				</select>
 				<button className='w-70 p-3 flex ml-5'>
 					<img
 						className='bg-slate-10'
@@ -290,10 +303,12 @@ const Header = () => {
 					style={{ width: '750px', background: 'rgb(255, 254, 256)' }}
 				>
 					<div>
-						<h2 className='text-black mb-2'>Средства связи</h2>
+						<h2 className='text-black mb-2'>{t('header.catalogTitle')}</h2>
 						<ul>
 							<li className='text-slate-250 opacity-70 hover:opacity-100'>
-								<Link to='/products/category/all'>Все Смартфоны</Link>
+								<Link to='/products/category/all'>
+									{t('header.catalogAll')}
+								</Link>
 							</li>
 							{brands.map(item => {
 								return (
