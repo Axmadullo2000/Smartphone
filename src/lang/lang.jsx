@@ -9,7 +9,10 @@ export const lang = {
 			order: 'Оформление заказа',
 			catalogTitle: 'Средства связи',
 			catalogAll: 'Все Смартфоны',
-			searchFavourite: 'Поищите ваш любимый Смарфтон'
+			searchFavourite: 'Поищите ваш любимый Смарфтон',
+			uz: 'Узбекский',
+			ru: 'Русский',
+			ukr: 'Украинский'
 		},
 		basket: {
 			emptyCart: 'Ваша корзина пуста',
@@ -31,6 +34,7 @@ export const lang = {
 			main: 'Главная'
 		},
 		cardFilter: {
+			all: 'Все',
 			smartPhone: 'Смартфоны',
 			price: 'Стоимость',
 			filterItem: 'Фильтровать элементы',
@@ -165,8 +169,81 @@ export const lang = {
 		},
 		checkout: {
 			order: 'Оформить заказ',
-			orderinfo: 'Информация о покупателе'
+			orderinfo: 'Информация о покупателе',
+			deliveryInfo: 'Информация о доставке',
+			detailInfoAboutDelivery:
+				'Пожалуйста укажите дату и удобное для вас время и место доставки товара (дата/адрес/время). Доставка осуществляется в течение 48 часов после подтверждения заказа.',
+			region: 'Регион доставки',
+			city: {
+				first: 'Ташкент',
+				second: 'Ташкентская область',
+				third: 'Бухарская область',
+				fourth: 'Джизакская область',
+				fifth: 'Кашкадарьинська область',
+				six: 'Навоийнская область',
+				seventh: 'Наманганская область',
+				eighth: 'Самаркандская область',
+				nineth: 'Сурхандарьинськая область',
+				tenth: 'Сырдарьинская область',
+				eleventh: 'Андижанская область',
+				twelveth: 'Ферганская область',
+				thirteenth: 'Хорезмская область',
+				fourteenth: 'Республика Каракалпакстан'
+			},
+			addressDelivery: 'Адреса для доставки',
+			typeOfDelivery: 'Тип Доставки',
+			standart:
+				'Стандартная доставка (стоимость доставки оплачивается отдельно!)',
+			extraComment: 'Примечание для доставки (не более 500 символов)',
+
+			name: 'Ваше имя',
+			lastName: 'Фамилия (не обязательно)',
+			mobile: 'Мобильный телефон',
+			nextStep: 'Следующий шаг',
+			prevStep: 'Предыдущий шаг',
+			makeOrder: 'Оформить заказ',
+			yourOrder: 'Ваш заказ',
+			product: 'Товар',
+			overAll: 'Итого',
+			soum: 'сум',
+			price: 'Стоимость',
+			typeOfDelivery: 'Тип Доставки',
+			choosePayment: 'Способ оплаты',
+			validation: {
+				name: {
+					required: 'Необходимо заполнить «Ваше имя».',
+					notEnough: 'Длина имени должен быть большим 4 букв',
+					moreThanEnough: 'Длина имени должен быть меньшим 40 букв'
+				},
+				phoneNumber: {
+					required: 'Необходимо заполнить «Мобильный телефон».'
+				},
+				address: {
+					required: 'Необходимо заполнить «Тип доставки».'
+				},
+				typeDelivery: {
+					required: 'Поле Типа Доставки Обязательно к закполнению!!!'
+				}
+			},
+
+			paymentInfo: {
+				name: 'Платежная информация',
+				nal: 'Наличные',
+				terminal: 'Терминал',
+				combo: 'Комбинированный',
+				uzcard: 'УзКард',
+				humo: 'Хумо',
+				visa: 'Виза/Мастер'
+			}
 		},
+
+		successShopping: {
+			ordering: 'Оформление заказа',
+			congratulations: 'Поздравляем',
+			message:
+				'Ваш заказ оформлен. На указанный вами электронный адрес отправлено	письмо с подробной информацией.'
+		},
+
 		productsInCart: {
 			yourCart: 'Ваша Корзина',
 			cart: 'Корзина',
@@ -215,7 +292,10 @@ export const lang = {
 			order: 'Кошик',
 			catalogTitle: "Засоби зв'язку",
 			catalogAll: 'Усі Смартфони',
-			searchFavourite: 'Пошукайте ваш улюблений Смарфтон'
+			searchFavourite: 'Пошукайте ваш улюблений Смарфтон',
+			uz: 'Узбецька',
+			ru: 'Російська',
+			ukr: 'Українська'
 		},
 		basket: {
 			emptyCart: 'Ваш кошик порожній',
@@ -369,7 +449,75 @@ export const lang = {
 		},
 		checkout: {
 			order: 'Оформити замовлення',
-			orderinfo: 'Інформація про покупця'
+			orderinfo: 'Інформація про покупця',
+			name: "Ваше ім'я",
+			lastName: "Прізвище (не обов'язково)",
+			mobile: 'Мобільний телефон',
+
+			deliveryInfo: 'Інформація про доставку',
+			detailInfoAboutDelivery:
+				'Будь ласка вкажіть дату і зручний для Вас час і місце доставки товару (дата/адреса/час). Доставка здійснюється протягом 48 годин після підтвердження замовлення.',
+			region: 'Регіон доставки',
+
+			city: {
+				first: 'Ташкент',
+				second: 'Ташкентська область',
+				third: 'Бухарська область',
+				fourth: 'Джизакська область',
+				fifth: "Кашкадар'їнська область",
+				six: 'Навоийская область',
+				seventh: 'Наманганська область',
+				eighth: 'Самаркандська область',
+				nineth: "Сурхандар'їнська область",
+				tenth: "Сирдар'їнська область",
+				eleventh: 'Андижанська область',
+				twelveth: 'Ферганська область',
+				thirteenth: 'Хорезмская область',
+				fourteenth: 'Республіка Каракалпакстан'
+			},
+			addressDelivery: 'Адреса для доставки',
+			typeOfDelivery: 'Тип Доставки',
+			standart: 'Стандартная доставка (вартість доставки оплачується окремо!)',
+			extraComment: 'Примітка для доставки (не більше 500 символів)',
+
+			nextStep: 'Наступний крок',
+			prevStep: 'Попередній крок',
+			makeOrder: 'Оформити замовлення',
+			yourOrder: 'Ваше замовлення',
+			product: 'Товар',
+			overAll: 'Итог',
+			soum: 'сум',
+			price: 'Вартість',
+			choosePayment: 'Спосіб оплати',
+			validation: {
+				name: {
+					required: 'Необхідно заповнити "Ваше ім\'я.',
+					notEnough: 'Довжина імені повинен бути великим 4 букв',
+					moreThanEnough: 'Довжина імені повинен бути меншим 40 букв'
+				},
+				phoneNumber: {
+					required: 'Необхідно заповнити "мобільний телефон".'
+				},
+				address: {
+					required: 'Необхідно заповнити "адреса для доставки".'
+				}
+			},
+			paymentInfo: {
+				name: 'Інформація про Толове',
+				nal: 'Готівка',
+				terminal: 'Термінал',
+				combo: 'Комбінований',
+				uzcard: 'UZCARD',
+				humo: 'HUMO',
+				visa: 'Visa/Master'
+			}
+		},
+
+		successShopping: {
+			ordering: 'Оформлення замовлення',
+			congratulations: 'Вітати',
+			message:
+				'Ваше замовлення оформлене. На вказану Вами електронну адресу надіслано листа з детальною інформацією.'
 		},
 		productsInCart: {
 			yourCart: 'Ваш Кошик',
@@ -419,7 +567,10 @@ export const lang = {
 			order: 'Buyurtma',
 			catalogTitle: 'Aloqa vositalari',
 			catalogAll: 'Barcha smartfonlar',
-			searchFavourite: 'Sevimli Smarftoningizni qidiring'
+			searchFavourite: 'Sevimli Smarftoningizni qidiring',
+			uz: "O'zbek",
+			ru: 'Russ',
+			ukr: 'Ukrain'
 		},
 		basket: {
 			emptyCart: "Savatingiz bo'sh",
@@ -515,7 +666,7 @@ export const lang = {
 			passwordMin: "Parol kamida 8 ta belgidan iborat bo'lishi kerak",
 			passwordMax: 'Parol 32 belgidan oshmasligi kerak',
 			resetPassword: "Parolni qayta o'rnatish",
-			analogPassword: 'Parollar bir xil bo\'lishi shart',
+			analogPassword: "Parollar bir xil bo'lishi shart",
 			email: 'Elektron pochta',
 			password: 'Parol',
 			confirmPassword: 'Parolni qayta kiriting',
@@ -572,7 +723,75 @@ export const lang = {
 		},
 		checkout: {
 			order: 'Buyurtmani tasdiqlash',
-			orderinfo: "Xaridor haqida ma'lumot"
+			orderinfo: "Xaridor haqida ma'lumot",
+			deliveryInfo: "Yetkazib berish tog'risida ma'lumot",
+			detailInfoAboutDelivery:
+				"Iltimos, siz uchun qulay bo'lgan sana va tovarlarni etkazib berish vaqti va joyini (sana/manzil/vaqt) ko'rsating. Yetkazib berish buyurtma tasdiqlangandan keyin 48 soat ichida amalga oshiriladi.",
+			region: 'Yetkazib beriladigan Hudud',
+
+			city: {
+				first: 'Toshkent',
+				second: 'Toshkent Viloyati',
+				third: 'Buhoro Viloyati',
+				fourth: 'Jizzah Viloyati',
+				fifth: 'Kashkadaryo Viloyati',
+				six: 'Navoiy Viloyati',
+				seventh: 'Namangan Viloyati',
+				eighth: 'Samarqand Viloyati',
+				nineth: 'Surxandaryo Viloyati',
+				tenth: 'Sirdaryo Viloyati',
+				eleventh: 'Andijon Viloyati',
+				twelveth: "Farg'ona Viloyati",
+				thirteenth: 'Xorazm Viloyati',
+				fourteenth: "Qoraqalpog'iston Respublikasi"
+			},
+			addressDelivery: 'Yetkzib berish manzili',
+			typeOfDelivery: 'Yetkazib berish turi',
+			standart:
+				"Standart yetkazib berish (yetkazib berish narxi alohida to'lanadi!)",
+			extraComment:
+				'Yetkazib berish uchun eslatma (500 belgidan oshmasligi kerak)',
+			name: 'Ismingiz',
+			lastName: 'Familiyangizni kiriting (Majburiy emas)',
+			mobile: 'Telefon raqamingiz',
+			nextStep: 'Keyingi qadam',
+			prevStep: 'Oldingi qadam',
+			makeOrder: 'Zakaz amalga oshirish',
+			yourOrder: 'Sizning Haridingiz',
+			product: 'Tovar',
+			overAll: 'Umumiy',
+			soum: "so'm",
+			price: 'Narxi',
+			typeOfDelivery: 'Yetkazib berish turi',
+			choosePayment: "Tolo'v turi",
+			validation: {
+				name: {
+					required: 'Ismingizni kiriting!',
+					notEnough: "Ismingiz 4 ta harfdan ko'proq bo'lishi kerak",
+					moreThanEnough: "Ismingiz 40 ta harfdan kamroq bo'lishi kerak"
+				},
+				phoneNumber: {
+					required: 'Telefon raqamingizni kiriting!'
+				},
+				address: {
+					required: 'Tovar yetkazib beriladigon joy nomini yozing!'
+				}
+			},
+			paymentInfo: {
+				name: "Tolov haqida Ma'lumot",
+				nal: 'Naqd pul',
+				terminal: 'Terminal',
+				combo: 'Birlashtirilgan',
+				uzcard: 'UZCARD',
+				humo: 'HUMO',
+				visa: 'Visa/Master'
+			}
+		},
+		successShopping: {
+			ordering: 'Buyurtma berish',
+			congratulations: 'Tabriklaymiz!',
+			message:
+				"Sizning buyurtmangiz rasmiylashtirilgan. Siz ko'rsatgan elektron pochta manziliga batafsil ma'lumot bilan xat yuborildi."
 		},
 		productsInCart: {
 			yourCart: 'Sizning savatingiz',

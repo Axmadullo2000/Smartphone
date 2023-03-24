@@ -1,12 +1,12 @@
 import React from 'react'
+import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
-import { useTranslation } from 'react-i18next';
 import './BasketCard.scss'
 
 export const BasketCard = ({ item }) => {
 	const navigate = useNavigate()
-	const {t} = useTranslation();
+	const { t } = useTranslation()
 
 	const { name, price, photo1, id, quantity } = item
 	const { updateItemQuantity, removeItem } = useCart()
@@ -30,18 +30,24 @@ export const BasketCard = ({ item }) => {
 						{name}
 					</h4>
 					<span onClick={() => navigate(`/products/view/${item.slug}`)}>
-					{t("basketCard.price")}: {price} {t("basketCard.soum")}
+						{t('basketCard.price')}: {price} {t('basketCard.soum')}
 					</span>
 
 					<div className='card-count'>
-						<span className='card-count-info'>{t("basket.totalItems")}:</span>
-						<button
-							className='card-minus-btn'
-							onClick={() => updateItemQuantity(id, quantity - 1)}
-							style={{ fontSize: '26px' }}
-						>
-							-
-						</button>
+						<span className='card-count-info'>{t('basket.totalItems')}:</span>
+						{quantity > 1 ? (
+							<button
+								className='card-minus-btn'
+								onClick={() => updateItemQuantity(id, quantity - 1)}
+								style={{ fontSize: '26px' }}
+							>
+								-
+							</button>
+						) : (
+							<button className='card-minus-btn' style={{ fontSize: '26px' }}>
+								-
+							</button>
+						)}
 						<span
 							onClick={() => navigate(`/products/view/${item.slug}`)}
 							className='card-item-count'
@@ -49,6 +55,7 @@ export const BasketCard = ({ item }) => {
 						>
 							{quantity}
 						</span>
+
 						<button
 							className='card-add-btn'
 							onClick={() => updateItemQuantity(id, quantity + 1)}
@@ -59,9 +66,11 @@ export const BasketCard = ({ item }) => {
 					</div>
 				</div>
 				<div className='card-total'>
-					<p className='card-total-price'>{price * quantity} {t("basketCard.soum")}</p>
+					<p className='card-total-price'>
+						{price * quantity} {t('basketCard.soum')}
+					</p>
 					<button className='card-delete-btn' onClick={() => removeItem(id)}>
-					{t("basketCard.delete")}
+						{t('basketCard.delete')}
 					</button>
 				</div>
 			</div>

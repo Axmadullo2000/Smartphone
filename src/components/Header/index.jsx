@@ -12,7 +12,6 @@ import { AuthService } from '../../Service'
 
 import { useTranslation } from 'react-i18next'
 import basket from '../../assets/basket.svg'
-import headphone from '../../assets/headphone.svg'
 import loggedinUser from '../../assets/loggedinUser.svg'
 import user from '../../assets/user.svg'
 
@@ -247,8 +246,9 @@ const Header = () => {
 				)}
 
 				<button
-					className='w-40 flex items-center ml-4 hover:bg-red-600'
+					className='flex items-center hover:bg-red-600'
 					onClick={() => setBasketModalOpen(true)}
+					style={{ maxWidth: '160px' }}
 				>
 					<Badge
 						badgeContent={totalUniqueItems}
@@ -280,23 +280,24 @@ const Header = () => {
 					defaultValue={i18n.language}
 					onChange={e => {
 						i18n.changeLanguage(e.target.value)
-						localStorage.setItem("lang", e.target.value)
+						localStorage.setItem('lang', e.target.value)
+						window.location.reload()
 					}}
-					style={{maxWidth: '50px', height: '100%'}}
+					style={{
+						width: '95px',
+						height: '40px',
+						maxWidth: '100%',
+						background: '#f1f5f9'
+					}}
 				>
-					<option value='ru'>Ru</option>
-					<option value='uz'>Uz</option>
-					<option value='uk'>Ukr</option>
+					<option value='ru'>{t('header.ru')}</option>
+					<option value='uz'>{t('header.uz')}</option>
+					<option value='uk'>{t('header.ukr')}</option>
 				</select>
 				<button className='w-70 p-3 flex ml-5'>
-					<img
-						className='bg-slate-10'
-						src={headphone}
-						width={36}
-						height={36}
-						alt=''
-					/>
-					<p className='text-white text-2xl ml-2'>(91) 792 12 32</p>
+					<p style={{ fontSize: '19px' }} className='text-white ml-2'>
+						(91) 792 12 32
+					</p>
 				</button>
 			</div>
 

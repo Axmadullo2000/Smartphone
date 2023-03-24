@@ -10,8 +10,8 @@ import closeElement from '../../assets/closeElement.svg'
 import openElement from '../../assets/openElement.svg'
 import up from '../../assets/up.svg'
 
-import './CardFilter.scss'
 import { t } from 'i18next'
+import './CardFilter.scss'
 
 const CardFilter = ({ slug }) => {
 	const [sortType, setSorted] = useState('asc')
@@ -250,17 +250,17 @@ const CardFilter = ({ slug }) => {
 				>
 					<h3 className='text-xl text-red-700'>
 						<span className='capitalize'>
-							{slug != 'all' ? slug : 'Все '} {t("cardFilter.smartPhone")}
+							{slug != 'all' ? slug : 'Все '} {t('cardFilter.smartPhone')}
 						</span>
 					</h3>
 					<div>
 						{pathname == '/products/category/all' ? (
 							<Link to='/products/category/all' className='text-red-700'>
-								{t("header.catalogAll")}
+								{t('header.catalogAll')}
 							</Link>
 						) : (
 							<Link to='/products/category/all' className='text-red-450'>
-								{t("header.catalogAll")}
+								{t('header.catalogAll')}
 							</Link>
 						)}
 
@@ -287,7 +287,7 @@ const CardFilter = ({ slug }) => {
 								color: '#223869'
 							}}
 						>
-							{t("cardFilter.price")}
+							{t('cardFilter.price')}
 						</h3>
 						{
 							<>
@@ -312,12 +312,12 @@ const CardFilter = ({ slug }) => {
 								min={0}
 								max={23000000}
 								defaultValue={[0, 23000000]}
-								tipFormatter={value => `${value} {t("basket.soum")}`}
+								tipFormatter={value => `${value} ${t('basket.soum')}`}
 							/>
 						</div>
 					</div>
 					<div>
-					{t("cardFilter.filterItem")}
+						{t('cardFilter.filterItem')}
 						<div
 							onClick={() => setIsOpenMemoryFilter(!isOpenMemoryFilter)}
 							className='cursor-pointer flex items-center justify-between mt-6 p-4'
@@ -336,7 +336,7 @@ const CardFilter = ({ slug }) => {
 									isOpenMemoryFilter ? { color: 'white' } : { color: '#D92E15' }
 								}
 							>
-								{t("cardFilter.memory")}
+								{t('cardFilter.memory')}
 							</span>
 							{isOpenMemoryFilter ? (
 								<img src={openElement} alt='Open element' />
@@ -361,7 +361,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedBaseMemory(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} {t("cardFilter.gb")}
+												{item} {t('cardFilter.gb')}
 											</label>
 										</div>
 									))}
@@ -388,7 +388,7 @@ const CardFilter = ({ slug }) => {
 											: { color: '#D92E15' }
 									}
 								>
-									{t("cardFilter.operativeMemory")}
+									{t('cardFilter.operativeMemory')}
 								</span>
 								{isOpenOperateGiga ? (
 									<img src={openElement} alt='Open element' />
@@ -413,7 +413,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedFastMemory(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} {t("cardFilter.gb")}
+												{item} {t('cardFilter.gb')}
 											</label>
 										</div>
 									))}
@@ -440,7 +440,7 @@ const CardFilter = ({ slug }) => {
 											: { color: '#D92E15' }
 									}
 								>
-									{t("cardFilter.camera")}
+									{t('cardFilter.camera')}
 								</span>
 								{isOpenFrontCamera ? (
 									<img src={openElement} alt='Open element' />
@@ -465,7 +465,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedFrontCamera(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} {t("cardFilter.mp")}
+												{item} {t('cardFilter.mp')}
 											</label>
 										</div>
 									))}
@@ -492,7 +492,7 @@ const CardFilter = ({ slug }) => {
 											: { color: '#D92E15' }
 									}
 								>
-									{t("cardFilter.acumlator")}
+									{t('cardFilter.acumlator')}
 								</span>
 								{isOpenAccumulator ? (
 									<img src={openElement} alt='Open element' />
@@ -517,7 +517,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedAccumulator(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} {t("cardFilter.amper")}
+												{item} {t('cardFilter.amper')}
 											</label>
 										</div>
 									))}
@@ -542,7 +542,7 @@ const CardFilter = ({ slug }) => {
 										isOpenYadro ? { color: 'white' } : { color: '#D92E15' }
 									}
 								>
-									{t("cardFilter.protsessor")}
+									{t('cardFilter.protsessor')}
 								</span>
 								{isOpenYadro ? (
 									<img src={openElement} alt='Open element' />
@@ -567,13 +567,12 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedYadra(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} {t("cardFilter.yadr")}
+												{item} {t('cardFilter.yadr')}
 											</label>
 										</div>
 									))}
 								</div>
 							)}
-
 
 							<div
 								onClick={() => setIsOpenCorpus(!isOpenCorpus)}
@@ -593,7 +592,7 @@ const CardFilter = ({ slug }) => {
 										isOpenCorpus ? { color: 'white' } : { color: '#D92E15' }
 									}
 								>
-									{t("cardFilter.copus")}
+									{t('cardFilter.copus')}
 								</span>
 								{isOpenCorpus ? (
 									<img src={openElement} alt='Open element' />
@@ -627,7 +626,7 @@ const CardFilter = ({ slug }) => {
 
 							<div className='flex' style={{ flexDirection: 'column' }}>
 								<button className='p-2 bg-red-600 text-slate-200 hover:text-white hover:bg-red-800 mt-4'>
-								{t("cardFilter.searchByFilter")}
+									{t('cardFilter.searchByFilter')}
 								</button>
 								<button
 									onClick={resetFilter}
@@ -637,7 +636,7 @@ const CardFilter = ({ slug }) => {
 										color: 'rgb(217, 46, 21)'
 									}}
 								>
-									{t("cardFilter.clearFilter")}
+									{t('cardFilter.clearFilter')}
 								</button>
 							</div>
 						</form>
@@ -762,7 +761,7 @@ const CardFilter = ({ slug }) => {
 							className='text-xl'
 							style={{ color: '#223869', marginLeft: '20px' }}
 						>
-						{t("cardFilter.sort")}
+							{t('cardFilter.sort')}
 						</h3>
 					</div>
 					<form className='flex' onSubmit={e => e.preventDefault()}>
@@ -786,7 +785,7 @@ const CardFilter = ({ slug }) => {
 										  }
 								}
 							>
-								{t("cardFilter.priceBelow")}
+								{t('cardFilter.priceBelow')}
 							</button>
 						</div>
 						<div onClick={() => setSorted('desc')} className='mx-2'>
@@ -809,7 +808,7 @@ const CardFilter = ({ slug }) => {
 										  }
 								}
 							>
-								{t("cardFilter.priceHigher")}
+								{t('cardFilter.priceHigher')}
 							</button>
 						</div>
 						<div className='mx-2' onClick={resetSort}>
@@ -832,7 +831,7 @@ const CardFilter = ({ slug }) => {
 										  }
 								}
 							>
-								{t("cardFilter.clear")}
+								{t('cardFilter.clear')}
 							</button>
 						</div>
 					</form>
