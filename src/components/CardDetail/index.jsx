@@ -7,6 +7,7 @@ import { ExtraInfoAbout } from '../ExtraInfoAbout'
 import { ExtraProduct } from '../ExtraProduct'
 import { ShowLittleInfo } from '../ShowLittleInfo'
 import { useTranslation } from 'react-i18next';
+
 import up from '../../assets/up.svg'
 
 import './CardDetail.scss'
@@ -19,11 +20,9 @@ const CardDetail = ({ slug }) => {
 		feedback: false
 	})
 
-	const { detailData, extraProductDetail, commentData } = useSelector(
+	const { detailData, extraProductDetail } = useSelector(
 		state => state.data
 	)
-
-	const { comments } = useSelector(comment => comment.comment)
 
 	const dispatch = useDispatch()
 
@@ -34,7 +33,7 @@ const CardDetail = ({ slug }) => {
 	useEffect(() => {
 		dispatch(getDetailProduct(slug))
 		dispatch(getExtraProducts(slug))
-	}, [slug])
+	}, [dispatch, slug])
 
 	return (
 		<div style={{ marginLeft: '25px', background: '#f6f6f6' }}>
@@ -51,7 +50,7 @@ const CardDetail = ({ slug }) => {
 				>
 					<Link to='/'>{t("cardDetail.main")}</Link>
 				</li>
-				{!!detailData.phone && detailData.phone.types == 'smartphone' && (
+				{!!detailData.phone && detailData.phone.types === 'smartphone' && (
 					<li
 						className='directionFromProducts mx-2'
 						style={{
@@ -102,11 +101,11 @@ const CardDetail = ({ slug }) => {
 					<img src={up} alt='up' />
 				</button>
 			</div>
-			{!!detailData.phone && detailData.phone.types == 'smartphone' && (
+			{!!detailData.phone && detailData.phone.types === 'smartphone' && (
 				<ExtraProduct similarData={detailData} />
 			)}
 			{!!extraProductDetail.airpod &&
-				extraProductDetail.airpod.types == 'extra' && (
+				extraProductDetail.airpod.types === 'extra' && (
 					<ExtraProduct similarData={extraProductDetail} />
 				)}
 		</div>

@@ -1,7 +1,8 @@
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Autoplay, Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import {useTranslation} from "react-i18next"
+
 import { CardItem } from '../CardItem'
 import { SimilarProducts } from '../SimilarProducts'
 
@@ -10,8 +11,8 @@ import prev from '../../assets/prev.svg'
 
 export const ExtraProduct = ({ similarData }) => {
 	const swiperRef = useRef()
-	const {t} = useTranslation()
-	console.log(similarData.also_buy)
+	const { t } = useTranslation()
+
 	return (
 		<div>
 			{!!similarData.also_buy && similarData.also_buy.length > 0 && (
@@ -27,7 +28,7 @@ export const ExtraProduct = ({ similarData }) => {
 							margin: '30px 0'
 						}}
 					>
-						{t("extraProduct.title")}
+						{t('extraProduct.title')}
 					</h2>
 
 					{!!similarData.also_buy && similarData.also_buy.length > 0 && (
@@ -58,7 +59,7 @@ export const ExtraProduct = ({ similarData }) => {
 									swiperRef.current = swiper
 								}}
 							>
-								{similarData.also_buy != undefined &&
+								{similarData.also_buy !== undefined &&
 									similarData.also_buy.map(slide => (
 										<SwiperSlide key={slide.id}>
 											<CardItem {...slide} />

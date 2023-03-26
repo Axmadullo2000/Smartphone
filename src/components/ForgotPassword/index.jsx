@@ -1,10 +1,10 @@
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
-
 import { useTranslation } from 'react-i18next'
+
 import { AuthService } from '../../Service'
 
 export const ForgotPassword = () => {
@@ -13,7 +13,6 @@ export const ForgotPassword = () => {
 	const [passwordRepeat, setPasswordRepeat] = useState('')
 	const [success, setSuccess] = useState(false)
 	const { t } = useTranslation()
-	const navigate = useNavigate()
 
 	const formSchema = Yup.object().shape({
 		email: Yup.string()
@@ -38,7 +37,6 @@ export const ForgotPassword = () => {
 
 	const {
 		register,
-		watch,
 		formState: { errors },
 		handleSubmit
 	} = useForm({
@@ -55,13 +53,11 @@ export const ForgotPassword = () => {
 	const createPassword = async () => {
 		try {
 			await AuthService.forgotPassword(validData)
-			console.log(validData)
 			setSuccess(true)
 		} catch (e) {}
 	}
 
 	const onSubmit = () => {
-		console.log(validData)
 		createPassword()
 	}
 

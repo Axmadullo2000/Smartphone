@@ -680,7 +680,6 @@ export const Checkout = () => {
 							background: 'white',
 							padding: '0 22px 52px 20px'
 						}}
-						// className='mr-6'
 					>
 						<div
 							style={{

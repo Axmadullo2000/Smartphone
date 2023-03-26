@@ -33,7 +33,6 @@ function App() {
 	const checkUser = async () => {
 		try {
 			const response = await AuthService.authentication()
-			console.log(response)
 			dispatch(registerAction(response.user_info))
 		} catch (e) {}
 	}

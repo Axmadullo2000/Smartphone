@@ -157,7 +157,6 @@ export const lang = {
 			updateFeedback: 'Обновить отзыв'
 		},
 		validateRegistration: {
-			passwordSent: 'Ваш пароль отправлен на ваш электронный адрес!!!',
 			registerAccount: 'Зарегистрируйте свою учетную запись',
 			userNameReq: 'Имя пользователя требуется!!!',
 			userName: 'Имя пользователя',
@@ -165,7 +164,8 @@ export const lang = {
 			email: 'Адрес электронной почты',
 			incorrectwrite:
 				'Неверно написанное имя пользователя или адрес электронной почты',
-			register: 'Зарегистрировать'
+			register: 'Зарегистрировать',
+			passwordSent: 'Ваш пароль отправлен на ваш электронный адрес!!!'
 		},
 		checkout: {
 			order: 'Оформить заказ',
@@ -207,7 +207,6 @@ export const lang = {
 			overAll: 'Итого',
 			soum: 'сум',
 			price: 'Стоимость',
-			typeOfDelivery: 'Тип Доставки',
 			choosePayment: 'Способ оплаты',
 			validation: {
 				name: {
@@ -437,7 +436,6 @@ export const lang = {
 			updateFeedback: 'Оновити відгук'
 		},
 		validateRegistration: {
-			passwordSent: 'Ваш пароль надіслано на вашу електронну адресу!!!',
 			registerAccount: 'Зареєструйте свій обліковий запис',
 			userNameReq: "Ім'я користувача потрібне!!!",
 			userName: "Ім'я користувача",
@@ -445,7 +443,8 @@ export const lang = {
 			email: 'Адреса електронної пошти',
 			incorrectwrite:
 				"Невірно написане ім'я користувача або адресу електронної пошти",
-			register: 'Зареєструвати'
+			register: 'Зареєструвати',
+			passwordSent: 'Ваш пароль надіслано на вашу электронну адресу!!!'
 		},
 		checkout: {
 			order: 'Оформити замовлення',
@@ -711,7 +710,6 @@ export const lang = {
 			updateFeedback: 'Izohni yangilash'
 		},
 		validateRegistration: {
-			passwordSent: 'Parolingiz elektron pochta manzilingizga yuborildi!!!',
 			registerAccount: "Ro'yxatdan o'ting",
 			userNameReq: 'Foydalanuvchi nomi kerak!!!',
 			userName: 'Foydalanuvchi nomi',
@@ -719,7 +717,8 @@ export const lang = {
 			email: 'E-mail manzili',
 			incorrectwrite:
 				'Foydalanuvchi nomi yoki elektron pochta manzili xato yozilgan',
-			register: "Ro'yxatdan o'tish"
+			register: "Ro'yxatdan o'tish",
+			passwordSent: 'Parolingiz elektron pochta manzilingizga yuborildi!!!'
 		},
 		checkout: {
 			order: 'Buyurtmani tasdiqlash',
@@ -762,7 +761,7 @@ export const lang = {
 			overAll: 'Umumiy',
 			soum: "so'm",
 			price: 'Narxi',
-			typeOfDelivery: 'Yetkazib berish turi',
+
 			choosePayment: "Tolo'v turi",
 			validation: {
 				name: {

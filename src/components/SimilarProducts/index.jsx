@@ -1,14 +1,16 @@
 import { useRef } from 'react'
+import { useTranslation } from 'react-i18next'
 import { Autoplay, Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
+import { CardItem } from '../CardItem'
+
 import next from '../../assets/next.svg'
 import prev from '../../assets/prev.svg'
-import { CardItem } from '../CardItem'
-import {useTranslation} from "react-i18next"
+
 export const SimilarProducts = ({ similarData }) => {
 	const swiperRef = useRef()
-	const {t} = useTranslation()
+	const { t } = useTranslation()
 	return (
 		<>
 			<h2
@@ -22,7 +24,7 @@ export const SimilarProducts = ({ similarData }) => {
 					margin: '30px 0'
 				}}
 			>
-				{t("similarProducts.title")}
+				{t('similarProducts.title')}
 			</h2>
 
 			<div className='flex justify-center mt-8 relative'>
@@ -52,7 +54,7 @@ export const SimilarProducts = ({ similarData }) => {
 						swiperRef.current = swiper
 					}}
 				>
-					{similarData.similar != undefined &&
+					{similarData.similar !== undefined &&
 						similarData.similar.map(slide => (
 							<SwiperSlide key={slide.id}>
 								<CardItem {...slide} star={4} />

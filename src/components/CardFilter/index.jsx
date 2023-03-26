@@ -1,3 +1,4 @@
+import { t } from 'i18next'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
@@ -10,7 +11,6 @@ import closeElement from '../../assets/closeElement.svg'
 import openElement from '../../assets/openElement.svg'
 import up from '../../assets/up.svg'
 
-import { t } from 'i18next'
 import './CardFilter.scss'
 
 const CardFilter = ({ slug }) => {
@@ -53,20 +53,21 @@ const CardFilter = ({ slug }) => {
 
 	const fetchData = (products = allData) => {
 		let data = []
-		if (products.results != undefined) {
+		if (products.results !== undefined) {
 			array = [...products.results]
 			// filtering with range
 			array.filter(product => {
-				if (count == 0) {
+				if (count === 0) {
 					productData.push(product)
 				} else {
 					if (product.price > count[0] && product.price < count[1]) {
 						productData.push(product)
 					}
 				}
+				return productData
 			})
 			// Asc/Desc filtering
-			if (sortType == 'asc') {
+			if (sortType === 'asc') {
 				data = productData.sort((a, b) => a.price - b.price)
 				return data
 			} else {
@@ -93,7 +94,16 @@ const CardFilter = ({ slug }) => {
 		)
 
 		resetFilter()
-	}, [slug])
+	}, [
+		slug,
+		dispatch,
+		selectedBaseMemory,
+		selectedYadra,
+		selectedFrontCamera,
+		selectedFastMemory,
+		selectedAccumulator,
+		selectedCorpus
+	])
 
 	const handleFilter = e => {
 		e.preventDefault()
@@ -121,13 +131,13 @@ const CardFilter = ({ slug }) => {
 
 	!!allData.results && allData.results.map(item => brand.push(item.brand))
 
-	const filterItems = brand.filter((item, pos) => brand.indexOf(item) == pos)
+	const filterItems = brand.filter((item, pos) => brand.indexOf(item) === pos)
 
 	const FilterByMemory = () => {
 		const dataList = []
 		const allCategory = []
 
-		allData.results != undefined &&
+		allData.results !== undefined &&
 			allData.results.map(item => dataList.push(item.giga_vstoeno))
 
 		const uniqueData = dataList
@@ -143,7 +153,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByOperativeMemory = () => {
 		const dataList = []
 
-		allData.results != undefined &&
+		allData.results !== undefined &&
 			allData.results.map(item => dataList.push(item.giga_operate))
 
 		const allCategory = []
@@ -161,7 +171,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByFrontCamera = () => {
 		const dataList = []
 
-		allData.results != undefined &&
+		allData.results !== undefined &&
 			allData.results.map(item => dataList.push(item.front_kamera))
 
 		const allCategory = []
@@ -179,7 +189,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByAccumulator = () => {
 		const dataList = []
 
-		allData.results != undefined &&
+		allData.results !== undefined &&
 			allData.results.map(item => dataList.push(item.accumulator))
 
 		const allCategory = []
@@ -197,7 +207,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByYadra = () => {
 		const dataList = []
 
-		allData.results != undefined &&
+		allData.results !== undefined &&
 			allData.results.map(item => dataList.push(item.yadra))
 
 		const allCategory = []
@@ -214,7 +224,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByCorpus = () => {
 		const dataList = []
 
-		allData.results != undefined &&
+		allData.results !== undefined &&
 			allData.results.map(item => dataList.push(item.corpus))
 
 		const allCategory = []
@@ -250,11 +260,11 @@ const CardFilter = ({ slug }) => {
 				>
 					<h3 className='text-xl text-red-700'>
 						<span className='capitalize'>
-							{slug != 'all' ? slug : 'Все '} {t('cardFilter.smartPhone')}
+							{slug !== 'all' ? slug : 'Все '} {t('cardFilter.smartPhone')}
 						</span>
 					</h3>
 					<div>
-						{pathname == '/products/category/all' ? (
+						{pathname === '/products/category/all' ? (
 							<Link to='/products/category/all' className='text-red-700'>
 								{t('header.catalogAll')}
 							</Link>
@@ -266,7 +276,7 @@ const CardFilter = ({ slug }) => {
 
 						{filterItems.map(item => (
 							<p key={item} className='capitalize'>
-								{pathname == `/products/category/${item}` ? (
+								{pathname === `/products/category/${item}` ? (
 									<Link
 										to={`/products/category/${item}`}
 										style={{ color: 'red' }}
@@ -291,7 +301,7 @@ const CardFilter = ({ slug }) => {
 						</h3>
 						{
 							<>
-								{count == 0 ? (
+								{count === 0 ? (
 									<div className='flex justify-between text-red-500 text-xl'>
 										<span>{count}</span>
 										<span>{maxExpensiveProduct}</span>
@@ -350,8 +360,8 @@ const CardFilter = ({ slug }) => {
 									className='m-0 p-2'
 									style={{ border: '1px solid #D92E15' }}
 								>
-									{FilterByMemory().map(item => (
-										<div className='radio' style={{ width: '100%' }}>
+									{FilterByMemory().map((item, index) => (
+										<div key={index} className='radio' style={{ width: '100%' }}>
 											<label className='block w-full cursor-pointer'>
 												<input
 													style={{ margin: '0 12px 0 0' }}
@@ -402,8 +412,12 @@ const CardFilter = ({ slug }) => {
 									className='m-0 p-3'
 									style={{ border: '1px solid #D92E15' }}
 								>
-									{FilterByOperativeMemory().map(item => (
-										<div className='radio' style={{ width: '100%' }}>
+									{FilterByOperativeMemory().map((item, index) => (
+										<div
+											key={index}
+											className='radio'
+											style={{ width: '100%' }}
+										>
 											<label className='block w-full cursor-pointer'>
 												<input
 													style={{ margin: '0 12px 0 0' }}
@@ -454,14 +468,18 @@ const CardFilter = ({ slug }) => {
 									className='m-0 p-2'
 									style={{ border: '1px solid #D92E15' }}
 								>
-									{FilterByFrontCamera().map(item => (
-										<div className='radio' style={{ width: '100%' }}>
+									{FilterByFrontCamera().map((item, index) => (
+										<div
+											key={index}
+											className='radio'
+											style={{ width: '100%' }}
+										>
 											<label className='block w-full cursor-pointer'>
 												<input
 													style={{ margin: '0 12px 0 0' }}
 													type='radio'
 													value={item}
-													checked={selectedFrontCamera == item}
+													checked={selectedFrontCamera === item}
 													onChange={e => setSelectedFrontCamera(e.target.value)}
 													className='hover:text-red-300'
 												/>
@@ -506,14 +524,18 @@ const CardFilter = ({ slug }) => {
 									className='m-0 p-2'
 									style={{ border: '1px solid #D92E15' }}
 								>
-									{FilterByAccumulator().map(item => (
-										<div className='radio' style={{ width: '100%' }}>
+									{FilterByAccumulator().map((item, index) => (
+										<div
+											key={index}
+											className='radio'
+											style={{ width: '100%' }}
+										>
 											<label className='block w-full cursor-pointer'>
 												<input
 													style={{ margin: '0 12px 0 0' }}
 													type='radio'
 													value={item}
-													checked={selectedAccumulator == item}
+													checked={selectedAccumulator === item}
 													onChange={e => setSelectedAccumulator(e.target.value)}
 													className='hover:text-red-300'
 												/>
@@ -556,14 +578,18 @@ const CardFilter = ({ slug }) => {
 									className='m-0 p-2'
 									style={{ border: '1px solid #D92E15' }}
 								>
-									{FilterByYadra().map(item => (
-										<div className='radio' style={{ width: '100%' }}>
+									{FilterByYadra().map((item, index) => (
+										<div
+											key={index}
+											className='radio'
+											style={{ width: '100%' }}
+										>
 											<label className='block w-full cursor-pointer'>
 												<input
 													style={{ margin: '0 12px 0 0' }}
 													type='radio'
 													value={item}
-													checked={selectedYadra == item}
+													checked={selectedYadra === item}
 													onChange={e => setSelectedYadra(e.target.value)}
 													className='hover:text-red-300'
 												/>
@@ -606,14 +632,18 @@ const CardFilter = ({ slug }) => {
 									className='m-0 p-2'
 									style={{ border: '1px solid #D92E15' }}
 								>
-									{FilterByCorpus().map(item => (
-										<div className='radio' style={{ width: '100%' }}>
+									{FilterByCorpus().map((item, index) => (
+										<div
+											key={index}
+											className='radio'
+											style={{ width: '100%' }}
+										>
 											<label className='block w-full cursor-pointer'>
 												<input
 													style={{ margin: '0 12px 0 0' }}
 													type='radio'
 													value={item}
-													checked={selectedCorpus == item}
+													checked={selectedCorpus === item}
 													onChange={e => setSelectedCorpus(e.target.value)}
 													className='hover:text-red-300'
 												/>
@@ -769,7 +799,7 @@ const CardFilter = ({ slug }) => {
 							<button
 								className='rounded text-slate-200 ease-in duration-300'
 								style={
-									sortType == 'asc'
+									sortType === 'asc'
 										? {
 												background: '#D92E15',
 												padding: '5px 10px',
@@ -792,7 +822,7 @@ const CardFilter = ({ slug }) => {
 							<button
 								className='rounded text-slate-200 ease-in duration-300'
 								style={
-									sortType == 'desc'
+									sortType === 'desc'
 										? {
 												background: '#D92E15',
 												padding: '5px 10px',
@@ -815,7 +845,7 @@ const CardFilter = ({ slug }) => {
 							<button
 								className='rounded text-slate-200 ease-in duration-300'
 								style={
-									sortType == 'asc'
+									sortType === 'asc'
 										? {
 												background: '#D92E15',
 												padding: '5px 10px',
@@ -858,7 +888,7 @@ const CardFilter = ({ slug }) => {
 					className='flex'
 					style={{ flexWrap: 'wrap', justifyContent: 'center' }}
 				>
-					{slug == 'all'
+					{slug === 'all'
 						? !!fetchData() &&
 						  fetchData()
 								.filter(function (elem, index, self) {
@@ -867,7 +897,7 @@ const CardFilter = ({ slug }) => {
 								.map((item, index) => <CardItem key={index} {...item} />)
 						: !!fetchData(filteredData) &&
 						  fetchData(filteredData)
-								.filter(brand => brand.brand == slug)
+								.filter(brand => brand.brand === slug)
 								.filter(function (elem, index, self) {
 									return index === self.indexOf(elem)
 								})

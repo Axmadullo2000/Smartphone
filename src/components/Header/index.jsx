@@ -1,5 +1,6 @@
 import { Badge } from '@mui/material'
 import React, { useEffect, useRef, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
 import { useCart } from 'react-use-cart'
@@ -10,7 +11,6 @@ import { getAllData } from '../../redux/asyncThunks'
 import { logoutAction } from '../../redux/slices/AuthSlice'
 import { AuthService } from '../../Service'
 
-import { useTranslation } from 'react-i18next'
 import basket from '../../assets/basket.svg'
 import loggedinUser from '../../assets/loggedinUser.svg'
 import user from '../../assets/user.svg'
@@ -27,7 +27,7 @@ const Header = () => {
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const { totalItems, totalUniqueItems } = useCart()
+	const { totalUniqueItems } = useCart()
 	const { t, i18n } = useTranslation()
 
 	const brand = []
@@ -46,11 +46,12 @@ const Header = () => {
 	!!allData.results && allData.results.map(item => brand.push(item.brand))
 
 	const brands = brand.filter(function (item, pos) {
-		return brand.indexOf(item) == pos
+		return brand.indexOf(item) === pos
 	})
 
 	useEffect(() => {
 		document.addEventListener('click', checkOpening)
+		// eslint-disable-next-line
 	}, [isMenuOpen])
 
 	const logoutUser = async () => {
@@ -62,6 +63,7 @@ const Header = () => {
 
 	useEffect(() => {
 		dispatch(getAllData())
+		// eslint-disable-next-line
 	}, [])
 
 	return (
@@ -209,9 +211,9 @@ const Header = () => {
 					<button
 						className='w-40 flex hover:bg-red-600'
 						onClick={() => {
-							if (pathname == '/') {
+							if (pathname === '/') {
 								navigate('/sign-up')
-							} else if (pathname == '/sign-up') {
+							} else if (pathname === '/sign-up') {
 								navigate('/sign-in')
 							} else {
 								navigate('/sign-up')
@@ -281,7 +283,7 @@ const Header = () => {
 					onChange={e => {
 						i18n.changeLanguage(e.target.value)
 						localStorage.setItem('lang', e.target.value)
-						window.location.reload()
+						// window.location.reload()
 					}}
 					style={{
 						width: '95px',

@@ -1,16 +1,15 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
+import { useTranslation } from 'react-i18next'
 import Footer from '../../../components/Footer'
 import Header from '../../../components/Header'
 import { loginAction } from '../../../redux/slices/AuthSlice'
-import {useTranslation} from "react-i18next"
 import { AuthService } from '../../../Service'
 
 const Login = () => {
-	const [registerData, setLoggedInUserData] = useState({})
 	const [userName, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	let [error, setError] = useState('')
@@ -18,8 +17,8 @@ const Login = () => {
 	const loggedInData = { username: userName, password: password }
 
 	const dispatch = useDispatch()
-	const { userData, loggenIn } = useSelector(auth => auth.auth)
 	const navigate = useNavigate()
+	const { t } = useTranslation()
 
 	const {
 		register,
@@ -32,23 +31,18 @@ const Login = () => {
 	const loginUser = async () => {
 		try {
 			const response = await AuthService.login(loggedInData)
-			console.log(response)
 			dispatch(loginAction(response.user_info))
 			localStorage.setItem('token', response.token)
 			navigate('/')
 		} catch (e) {
 			setError('error')
-			console.log(e)
 		}
 	}
 
 	const onSubmit = data => {
-		setLoggedInUserData(data)
 		loginUser()
 	}
 
-	console.log(userData)
-	const {t} = useTranslation();
 	return (
 		<div>
 			<Header />
@@ -65,16 +59,18 @@ const Login = () => {
 								</p>
 							</div>
 							<h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
-								{t("login.loginAccount")}
+								{t('login.loginAccount')}
 							</h2>
 						</div>
 						<form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
 							<input type='hidden' name='remember' defaultValue='true' />
 							<div className='-space-y-px rounded-md shadow-sm'>
 								<div>
-									{errors.username && <p>{t("validateRegistration.userNameReq")}</p>}
+									{errors.username && (
+										<p>{t('validateRegistration.userNameReq')}</p>
+									)}
 									<label htmlFor='username' className='sr-only'>
-									{t("validateRegistration.userName")}
+										{t('validateRegistration.userName')}
 									</label>
 									<input
 										value={userName}
@@ -87,16 +83,16 @@ const Login = () => {
 										name='username'
 										required
 										className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-										placeholder={t("validateRegistration.userNamePl")}
+										placeholder={t('validateRegistration.userNamePl')}
 										onChange={e => setUsername(e.target.value)}
 									/>
 								</div>
 								<div className='my-5' style={{ marginTop: '15px' }}>
 									<label htmlFor='password' className='sr-only'>
-										{t("forgotPAssword.password")}
+										{t('forgotPAssword.password')}
 									</label>
 									{errors.password && (
-										<span>{t("forgotPAssword.passwordReq")}</span>
+										<span>{t('forgotPAssword.passwordReq')}</span>
 									)}
 									<input
 										value={password}
@@ -111,15 +107,15 @@ const Login = () => {
 										autoComplete='current-password'
 										required
 										className='mb-2 relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-										placeholder={t("forgotPAssword.password")}
+										placeholder={t('forgotPAssword.password')}
 										onChange={e => setPassword(e.target.value)}
 									/>
 								</div>
 							</div>
-							{error == 'error' && (
+							{error === 'error' && (
 								<div>
 									<p className='text-red-500'>{error}</p>
-									<p>{t("login.problemLogin")}</p>
+									<p>{t('login.problemLogin')}</p>
 								</div>
 							)}
 
@@ -130,7 +126,7 @@ const Login = () => {
 											to='/sign-up'
 											className='text-xl font-medium text-indigo-600 hover:text-indigo-500'
 										>
-											{t("login.signup")}
+											{t('login.signup')}
 										</Link>
 									</div>
 								</div>
@@ -141,7 +137,7 @@ const Login = () => {
 											to='/accounts/reset-password'
 											className='text-xl font-medium text-green-600 hover:text-indigo-500'
 										>
-											{t("login.forgotPassword")}
+											{t('login.forgotPassword')}
 										</Link>
 									</div>
 								</div>
@@ -152,7 +148,7 @@ const Login = () => {
 									type='submit'
 									className='group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 								>
-									{t("login.signin")}
+									{t('login.signin')}
 								</button>
 							</div>
 						</form>{' '}

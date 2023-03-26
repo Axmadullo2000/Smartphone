@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch, useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import {useTranslation} from "react-i18next"
+
 import { AuthService } from '../../Service'
 import Loader from '../Loader'
 
@@ -15,10 +15,9 @@ export const ValidateRegistration = () => {
 		mode: 'onSubmit' // "onChange"
 	})
 
-	const [registerData, setRegisterData] = useState({})
 	const [username, setUsername] = useState('')
 	const [email, setEmail] = useState('')
-	let [error, setError] = useState('')
+
 	const [loading, setLoading] = useState(false)
 	const [result, setResult] = useState('')
 	const registerInfoData = {
@@ -26,24 +25,19 @@ export const ValidateRegistration = () => {
 		email: email
 	}
 
-	const dispatch = useDispatch()
-	const {t} = useTranslation();
-	const { userData } = useSelector(state => state.auth)
+	const { t } = useTranslation()
 
 	let [success, setSuccess] = useState(true)
 
 	const registerUser = async () => {
-		const response = await AuthService.register(registerInfoData)
+		await AuthService.register(registerInfoData)
 		try {
-			setResult(`{t("validateRegistration.passwordSent")}`)
-			setError('')
+			setResult(`${t('validateRegistration.passwordSent')}`)
 		} catch (e) {
-			setError(e.response.data)
 		}
 	}
 
 	const onSubmit = data => {
-		setRegisterData(data)
 		setTimeout(() => {
 			setLoading(false)
 		}, 7000)
@@ -71,16 +65,18 @@ export const ValidateRegistration = () => {
 							</p>
 						</div>
 						<h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
-							{t("validateRegistration.registerAccount")}
+							{t('validateRegistration.registerAccount')}
 						</h2>
 					</div>
 					<form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
 						<input type='hidden' name='remember' defaultValue='true' />
 						<div className='-space-y-px rounded-md shadow-sm'>
 							<div>
-								{errors.username && <p>{t("validateRegistration.userNameReq")}</p>}
+								{errors.username && (
+									<p>{t('validateRegistration.userNameReq')}</p>
+								)}
 								<label htmlFor='username' className='sr-only'>
-								{t("validateRegistration.userName")}
+									{t('validateRegistration.userName')}
 								</label>
 								<input
 									id='username'
@@ -94,12 +90,12 @@ export const ValidateRegistration = () => {
 									name='username'
 									required
 									className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-									placeholder={t("validateRegistration.userNamePl")}
+									placeholder={t('validateRegistration.userNamePl')}
 								/>
 							</div>
 							<div>
 								<label htmlFor='email-address' className='sr-only'>
-								{t("validateRegistration.email")}
+									{t('validateRegistration.email')}
 								</label>
 								<input
 									id='email-address'
@@ -114,7 +110,7 @@ export const ValidateRegistration = () => {
 									type='email'
 									required
 									className='my-2 mt-4 relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-									placeholder={t("validateRegistration.email")}
+									placeholder={t('validateRegistration.email')}
 								/>
 							</div>
 						</div>
@@ -126,7 +122,7 @@ export const ValidateRegistration = () => {
 										to='/sign-in'
 										className='text-xl font-medium text-indigo-600 hover:text-indigo-500'
 									>
-										{t("forgotPAssword.haveAccount")}
+										{t('forgotPAssword.haveAccount')}
 									</Link>
 								</div>
 							</div>
@@ -134,13 +130,15 @@ export const ValidateRegistration = () => {
 							{!success && (
 								<div>
 									<p className='mt-2 text-red-500'>
-									{t("validateRegistration.incorrectwrite")}
+										{t('validateRegistration.incorrectwrite')}
 									</p>
 								</div>
 							)}
-							{result != '' && (
+							{result !== '' && (
 								<div>
-									<p className='text-green-600 mt-3'>{result}</p>
+									<p className='text-green-600 mt-3'>
+										{t('validateRegistration.passwordSent')}
+									</p>
 								</div>
 							)}
 						</div>
@@ -150,7 +148,7 @@ export const ValidateRegistration = () => {
 								type='submit'
 								className='group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
 							>
-								{t("validateRegistration.register")}
+								{t('validateRegistration.register')}
 							</button>
 						</div>
 					</form>

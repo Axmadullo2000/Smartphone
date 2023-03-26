@@ -16,7 +16,6 @@ import './CardItem.scss'
 export const CardItem = item => {
 	const { name, photo1, price, slug } = item
 	const { comments } = useSelector(comment => comment.comment)
-	const { data } = useSelector(state => state.data)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
@@ -34,14 +33,14 @@ export const CardItem = item => {
 
 	useEffect(() => {
 		dispatch(SearchAsyncThunk({ search: name, offset: 0 }))
-	}, [name])
+	}, [dispatch, name])
 
 	return (
 		<div
 			className='card border mx-3 px-2 my-2'
-			style={{ width: '250px', borderRadius: '18px', height: '500px' }}
+			style={{ width: '250px', borderRadius: '18px', height: '560px' }}
 		>
-			<div style={{ width: '150px' }} className='flex'>
+			<div style={{ width: '150px', margin: '15px 0' }} className='flex'>
 				<img
 					style={{
 						border: '2px dotted red',
@@ -86,7 +85,7 @@ export const CardItem = item => {
 				}}
 				src={photo1}
 				alt={name}
-				style={{ width: '225px', height: '300px' }}
+				style={{ width: '400px', height: '300px' }}
 			/>
 			<p
 				onClick={() => {
@@ -97,13 +96,14 @@ export const CardItem = item => {
 					navigate(`/products/view/${slug}`)
 				}}
 				className='text-center'
+				style={{ margin: '15px 0 10px 0' }}
 			>
 				{name}
 			</p>
 			<div className='flex'>
-				{[...Array(Math.floor(middlePrice))].map(item => (
+				{[...Array(Math.floor(middlePrice))].map((item, index) => (
 					<img
-						key={item}
+						key={index}
 						className='stars'
 						src={stars}
 						alt=''
@@ -137,7 +137,6 @@ export const CardItem = item => {
 					}}
 					onClick={() => {
 						addItem({ ...item, price: price })
-						console.log(data)
 					}}
 				>
 					<img src={basket} width={24} height={24} alt='' />
