@@ -1,6 +1,7 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
+
 import facebook from '../../assets/facebook.svg'
 import headphone from '../../assets/headphone.svg'
 import instagram from '../../assets/instagram.svg'
@@ -9,7 +10,19 @@ import telegram from '../../assets/telegram.svg'
 import './Footer.scss'
 
 const Footer = () => {
+	const navigate = useNavigate()
+
 	const { t } = useTranslation()
+
+	let destination = 'instagram://user?username=axmadullo_ubaydullayev'
+	if (navigator.userAgent.match(/Android/i)) {
+		// use Android's redirect
+		document.location = destination
+	} else {
+		// use iOS redirect
+		window.location.replace(destination)
+	}
+
 	return (
 		<footer
 			className='footer flex text-slate-100 justify-between'

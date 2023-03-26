@@ -222,7 +222,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							<div className='flex'>
 								<>
 									<Link
-										to={`https://t.me/share/url?url=http://139.59.15.161:3000/products/view/
+										to={`https://t.me/share/url?url=http://smartshopcenter.org:3000/products/view/
 												${detailData.phone.slug}/`}
 										style={{
 											padding: '5px',
@@ -235,7 +235,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									</Link>
 
 									<Link
-										to={`https://www.facebook.com/sharer/sharer.php?u=http://139.59.15.161:3000/products/view/${detailData.phone.slug}`}
+										to={`https://www.facebook.com/sharer/sharer.php?u=http://smartshopcenter.org:3000/products/view/${detailData.phone.slug}`}
 										style={{
 											padding: '5px',
 											background: '#f4f4f4',
@@ -308,7 +308,8 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							<p>{t('showLittleinfo.code')} №</p>
 							<div className='flex'>
 								{comments.length === 0
-									? !!detailData.phone && detailData.phone.types === 'smartphone'
+									? !!detailData.phone &&
+									  detailData.phone.types === 'smartphone'
 										? [...Array(Math.floor(detailData.phone.rating))].map(
 												(item, index) => {
 													return (
@@ -327,19 +328,40 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 														Math.floor(extraProductDetail.airpod.rating)
 												)
 										  ].map((item, index) => {
-												return <img alt="star" key={index} src={star} className='star' />
+												return (
+													<img
+														alt='star'
+														key={index}
+														src={star}
+														className='star'
+													/>
+												)
 										  })
 									: // если длина массива больше чем 0
 									!!detailData.phone && detailData.phone.types === 'smartphone'
 									? [...Array(Math.floor(middlePrice))].map(index => {
-											return <img alt="star" key={index} src={star} className='star' />
+											return (
+												<img
+													alt='star'
+													key={index}
+													src={star}
+													className='star'
+												/>
+											)
 									  })
 									: [
 											...Array(
 												!!extraProductDetail.airpod && Math.floor(middlePrice)
 											)
 									  ].map((item, index) => {
-											return <img alt="star" key={index} src={star} className='star' />
+											return (
+												<img
+													alt='star'
+													key={index}
+													src={star}
+													className='star'
+												/>
+											)
 									  })}
 							</div>
 						</div>
@@ -393,17 +415,18 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								margin: '10px 0'
 							}}
 						>
-							{!!detailData.phone && detailData.phone.types === 'smartphone' && (
-								<>
-									{' '}
-									<span className='character_item'>
-										{t('searchResult.type')}
-									</span>
-									<span className='character_value'>
-										{detailData.phone.Version_OS}
-									</span>
-								</>
-							)}
+							{!!detailData.phone &&
+								detailData.phone.types === 'smartphone' && (
+									<>
+										{' '}
+										<span className='character_item'>
+											{t('searchResult.type')}
+										</span>
+										<span className='character_value'>
+											{detailData.phone.Version_OS}
+										</span>
+									</>
+								)}
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types === 'extra' && (
 									<>
@@ -424,16 +447,17 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								margin: '10px 0'
 							}}
 						>
-							{!!detailData.phone && detailData.phone.types === 'smartphone' && (
-								<>
-									<span className='character_item'>
-										{t('showLittleinfo.typeCorpus')}
-									</span>
-									<span className='character_value'>
-										{!!detailData.phone && detailData.phone.corpus}
-									</span>
-								</>
-							)}
+							{!!detailData.phone &&
+								detailData.phone.types === 'smartphone' && (
+									<>
+										<span className='character_item'>
+											{t('showLittleinfo.typeCorpus')}
+										</span>
+										<span className='character_value'>
+											{!!detailData.phone && detailData.phone.corpus}
+										</span>
+									</>
+								)}
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types === 'extra' && (
 									<>
@@ -456,18 +480,19 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								margin: '10px 0'
 							}}
 						>
-							{!!detailData.phone && detailData.phone.types === 'smartphone' && (
-								<>
-									<span className='character_item'>
-										{t('searchResult.typeSimCard')}
-									</span>
-									<span className='character_value'>
-										{!!detailData.phone &&
-											detailData.phone.sim_card &&
-											detailData.phone.sim_card !== undefined}
-									</span>
-								</>
-							)}
+							{!!detailData.phone &&
+								detailData.phone.types === 'smartphone' && (
+									<>
+										<span className='character_item'>
+											{t('searchResult.typeSimCard')}
+										</span>
+										<span className='character_value'>
+											{!!detailData.phone &&
+												detailData.phone.sim_card &&
+												detailData.phone.sim_card !== undefined}
+										</span>
+									</>
+								)}
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types === 'extra' && (
 									<>
@@ -487,16 +512,17 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								margin: '10px 0'
 							}}
 						>
-							{!!detailData.phone && detailData.phone.types === 'smartphone' && (
-								<>
-									<span className='character_item'>
-										{t('searchResult.size')} (ШxВxТ){' '}
-									</span>
-									<span className='character_value'>
-										{!!detailData.phone && detailData.phone.allow_display}
-									</span>
-								</>
-							)}
+							{!!detailData.phone &&
+								detailData.phone.types === 'smartphone' && (
+									<>
+										<span className='character_item'>
+											{t('searchResult.size')} (ШxВxТ){' '}
+										</span>
+										<span className='character_value'>
+											{!!detailData.phone && detailData.phone.allow_display}
+										</span>
+									</>
+								)}
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types === 'extra' && (
 									<>
