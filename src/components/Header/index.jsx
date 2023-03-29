@@ -3,7 +3,6 @@ import React, { useEffect, useRef, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation, useNavigate } from 'react-router-dom'
-import { useCart } from 'react-use-cart'
 
 import Basket from '../Basket'
 
@@ -15,11 +14,14 @@ import basket from '../../assets/basket.svg'
 import loggedinUser from '../../assets/loggedinUser.svg'
 import user from '../../assets/user.svg'
 
+import { productsInBasket } from '../../redux/asyncThunks/Basket'
+
 import './Header.scss'
 
 const Header = () => {
 	const { allData } = useSelector(state => state.data)
 	const { userData, loggednIn } = useSelector(auth => auth.auth)
+	const { basketData } = useSelector(state => state.basket)
 	const ref = useRef()
 	const [isMenuOpen, setIsMenuOpen] = useState(false)
 	const [basketModalOpen, setBasketModalOpen] = useState(false)
@@ -27,7 +29,6 @@ const Header = () => {
 	const { pathname } = useLocation()
 	const navigate = useNavigate()
 	const dispatch = useDispatch()
-	const { totalUniqueItems } = useCart()
 	const { t, i18n } = useTranslation()
 
 	const brand = []
@@ -62,9 +63,15 @@ const Header = () => {
 	}
 
 	useEffect(() => {
+		if (userData.id !== undefined) {
+			dispatch(productsInBasket(userData.id))
+		}
+	})
+
+	useEffect(() => {
 		dispatch(getAllData())
 		// eslint-disable-next-line
-	}, [])
+	}, [dispatch])
 
 	return (
 		<>
@@ -210,6 +217,7 @@ const Header = () => {
 				{!loggednIn ? (
 					<button
 						className='w-40 flex hover:bg-red-600'
+
 						onClick={() => {
 							if (pathname === '/') {
 								navigate('/sign-up')
@@ -230,7 +238,7 @@ const Header = () => {
 						</p>
 					</button>
 				) : (
-					<div className='w-40 flex hover:bg-red-600'>
+					<div className='flex hover:bg-red-600'>
 						<img
 							src={loggedinUser}
 							alt=''
@@ -248,12 +256,12 @@ const Header = () => {
 				)}
 
 				<button
-					className='flex items-center hover:bg-red-600'
+					className='flex items-center hover:bg-red-600 ml-4'
 					onClick={() => setBasketModalOpen(true)}
 					style={{ maxWidth: '160px' }}
 				>
 					<Badge
-						badgeContent={totalUniqueItems}
+						badgeContent={basketData.length}
 						sx={{
 							'& .MuiBadge-badge': {
 								backgroundColor: 'white',
@@ -274,6 +282,7 @@ const Header = () => {
 							className='bg-slate-100 hover:bg-red-100 p-1 ml-5 rounded-lg'
 						/>
 					</Badge>
+
 					<span className='text-white text-sm ml-2'>
 						{t('header.cart')} / {t('header.order')}
 					</span>

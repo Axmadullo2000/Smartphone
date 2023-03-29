@@ -361,7 +361,11 @@ const CardFilter = ({ slug }) => {
 									style={{ border: '1px solid #D92E15' }}
 								>
 									{FilterByMemory().map((item, index) => (
-										<div key={index} className='radio' style={{ width: '100%' }}>
+										<div
+											key={index}
+											className='radio'
+											style={{ width: '100%' }}
+										>
 											<label className='block w-full cursor-pointer'>
 												<input
 													style={{ margin: '0 12px 0 0' }}

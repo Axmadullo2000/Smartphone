@@ -1,15 +1,19 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useCart } from 'react-use-cart'
+
+import { deleteProductFromBasket } from '../../redux/asyncThunks/Basket'
+import { IncreaseQuantity } from '../../redux/slices/AddToBasketSlice'
+
 import './BasketCard.scss'
 
 export const BasketCard = ({ item }) => {
 	const navigate = useNavigate()
 	const { t } = useTranslation()
-
-	const { name, price, photo1, id, quantity } = item
-	const { updateItemQuantity, removeItem } = useCart()
+	const dispatch = useDispatch()
+	const { basketData } = useSelector(state => state.basket)
+	let { name, price, image, id, count } = item
 
 	return (
 		<li className='cart-item added_to_basket'>
@@ -18,7 +22,7 @@ export const BasketCard = ({ item }) => {
 					className='card-img'
 					width='100px'
 					height='100px'
-					src={photo1}
+					src={image}
 					alt={name}
 					onClick={() => navigate(`/products/view/${item.slug}`)}
 				/>
@@ -35,12 +39,8 @@ export const BasketCard = ({ item }) => {
 
 					<div className='card-count'>
 						<span className='card-count-info'>{t('basket.totalItems')}:</span>
-						{quantity > 1 ? (
-							<button
-								className='card-minus-btn'
-								onClick={() => updateItemQuantity(id, quantity - 1)}
-								style={{ fontSize: '26px' }}
-							>
+						{count > 1 ? (
+							<button className='card-minus-btn' style={{ fontSize: '26px' }}>
 								-
 							</button>
 						) : (
@@ -53,13 +53,13 @@ export const BasketCard = ({ item }) => {
 							className='card-item-count'
 							style={{ fontSize: '20px' }}
 						>
-							{quantity}
+							{count}
 						</span>
 
 						<button
 							className='card-add-btn'
-							onClick={() => updateItemQuantity(id, quantity + 1)}
 							style={{ fontSize: '26px' }}
+							onClick={() => dispatch(IncreaseQuantity(basketData, item))}
 						>
 							+
 						</button>
@@ -67,9 +67,12 @@ export const BasketCard = ({ item }) => {
 				</div>
 				<div className='card-total'>
 					<p className='card-total-price'>
-						{price * quantity} {t('basketCard.soum')}
+						{price * count} {t('basketCard.soum')}
 					</p>
-					<button className='card-delete-btn' onClick={() => removeItem(id)}>
+					<button
+						className='card-delete-btn'
+						onClick={() => dispatch(deleteProductFromBasket(id))}
+					>
 						{t('basketCard.delete')}
 					</button>
 				</div>

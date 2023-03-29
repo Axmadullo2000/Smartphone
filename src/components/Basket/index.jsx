@@ -1,16 +1,17 @@
 import React, { useEffect, useRef } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { useCart } from 'react-use-cart'
 
 import { BasketCard } from '../BasketCard'
 
 import close from '../../assets/close.svg'
 
-import { useTranslation } from 'react-i18next'
 import './Basket.scss'
 
 const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 	const { t } = useTranslation()
+	const { basketData } = useSelector(state => state.basket)
 	const ref = useRef()
 	const checkIfClickedOutside = e => {
 		if (basketModalOpen && ref.current && !ref.current.contains(e.target)) {
@@ -19,8 +20,6 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 	}
 
 	const navigate = useNavigate()
-
-	const { isEmpty, items, cartTotal, totalItems } = useCart()
 
 	useEffect(() => {
 		document.addEventListener('mousedown', checkIfClickedOutside)
@@ -49,7 +48,7 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 								<img src={close} alt='close button' />
 							</button>
 							<div className='flex justify-between'>
-								<h2
+								{/* <h2
 									style={{
 										color: '#223869',
 										fontSize: '24px',
@@ -58,12 +57,12 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 										fontStyle: 'normal'
 									}}
 								>
-									{isEmpty ? (
+									{quantity === 0 ? (
 										<p>{t('basket.emptyCart')}</p>
 									) : (
 										<p>{t('basket.yourCart')}</p>
 									)}
-								</h2>
+								</h2> */}
 								<Link
 									to='/customer/cart/'
 									style={{
@@ -82,25 +81,24 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 							style={{ marginTop: '40px', overflow: 'scroll' }}
 						>
 							<ul className='basket-list'>
-								{items.map((item, index) => (
-									<BasketCard key={index} item={item} />
-								))}
+								{basketData.length > 0 &&
+									basketData.map((item, index) => (
+										<BasketCard key={index} item={item} />
+									))}
 							</ul>
 							<div className='cart-bottom'>
-								{totalItems != 0 && (
+								{/* {totalItems != 0 && (
 									<div className='total-box'>
 										<p className='total-counts'>
-											{t('basket.totalItems')}: {totalItems}{' '}
+											{t('basket.totalItems')}: {basketData.length}{' '}
 											{t('basket.countItems')}.
 										</p>
 										<p className='total-price'>
 											{t('basket.totalPrice')}:{' '}
-											<span>
-												{cartTotal} {t('basket.soum')}
-											</span>
+											<span>{quantity * price} {t('basket.soum')}</span>
 										</p>
 									</div>
-								)}
+								)} */}
 								<div>
 									<button
 										onClick={() => navigate('/customer/cart/')}

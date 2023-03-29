@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useCart } from 'react-use-cart'
 
 import { SearchAsyncThunk } from '../../redux/asyncThunks'
 
@@ -11,15 +10,17 @@ import percent from '../../assets/percent.svg'
 import stars from '../../assets/stars.svg'
 import truck from '../../assets/truck.svg'
 
+import { addProductToBasket } from '../../redux/asyncThunks/Basket'
 import './CardItem.scss'
 
 export const CardItem = item => {
-	const { name, photo1, price, slug } = item
+	const { id, name, photo1, price, slug, types } = item
 	const { comments } = useSelector(comment => comment.comment)
+	const { basketData } = useSelector(state => state.basket)
+
+	const { loggednIn } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-
-	const { addItem } = useCart()
 
 	let middlePrice = 5
 
@@ -136,7 +137,16 @@ export const CardItem = item => {
 						cursor: 'pointer'
 					}}
 					onClick={() => {
-						addItem({ ...item, price: price })
+						if (loggednIn) {
+							dispatch(
+								addProductToBasket({
+									product_id: id,
+									group_product: types === 'smartphone' ? 1 : 2
+								})
+							)
+						} else {
+							navigate('/sign-up')
+						}
 					}}
 				>
 					<img src={basket} width={24} height={24} alt='' />

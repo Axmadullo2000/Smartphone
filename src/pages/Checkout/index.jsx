@@ -2,21 +2,43 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { useCart } from 'react-use-cart'
 import * as Yup from 'yup'
 
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 
+import { loginAction } from '../../redux/slices/AuthSlice'
+
+import { AuthService } from '../../Service'
+import { setItem } from '../../Service/localData'
+
 import './Checkout.scss'
 
 export const Checkout = () => {
+	const dispatch = useDispatch()
 	const { t } = useTranslation()
+	const { loggednIn } = useSelector(state => state.auth)
+	const { basketData } = useSelector(state => state.basket)
 
 	const [firstName, setFirstName] = useState('')
 	const [secondName, setSecondName] = useState('')
 	const [phoneNumber, setPhoneNumber] = useState('')
+
+	const [userName, setUsername] = useState('')
+	const [password, setPassword] = useState('')
+	const [repeatPasword, setRepeatPassword] = useState('')
+	const [email, setEmail] = useState('')
+
+	const data = {
+		username: userName,
+		password,
+		new_password: repeatPasword,
+		email
+	}
+
+	console.log(loggednIn)
 
 	const [locationDelivery, setLocationDelivery] = useState('')
 	const [address, setAddress] = useState('')
@@ -38,7 +60,16 @@ export const Checkout = () => {
 
 		typeDelivery: Yup.boolean().required(
 			t('checkout.validation.typeDelivery.required')
-		)
+		),
+		userName: Yup.string().required(t('checkout.validation.userName')),
+		userPassword: Yup.string().required(t('checkout.validation.password')),
+		repeatPasword: Yup.string()
+			.required(t('checkout.validation.repeatPassword'))
+			.oneOf(
+				[Yup.ref('userPassword')],
+				`${t('forgotPAssword.analogPassword')}`
+			),
+		email: Yup.string().required(t('checkout.validation.email'))
 	})
 
 	const {
@@ -51,7 +82,14 @@ export const Checkout = () => {
 		resolver: yupResolver(userDetail)
 	})
 
-	const onSubmit = e => {
+	const extraRegisterUsers = async () => {
+		const response = await AuthService.extraRegister(data)
+		dispatch(loginAction(response))
+		setItem('token', response.token)
+		console.log(response)
+	}
+
+	const onSubmit = async e => {
 		e.preventDefault()
 	}
 
@@ -60,8 +98,6 @@ export const Checkout = () => {
 	const [payment, setPayment] = useState(false)
 
 	const navigate = useNavigate()
-
-	let { items, emptyCart, cartTotal } = useCart()
 
 	return (
 		<div>
@@ -135,95 +171,242 @@ export const Checkout = () => {
 								}}
 							>
 								<>
-									<form
-										onSubmit={handleSubmit(onSubmit)}
-										className='ml-6'
-										style={{ lineHeight: '35px' }}
-									>
-										<div className='flex mt-4'>
-											<div className='flex flex-col'>
+									{loggednIn ? (
+										<form
+											onSubmit={handleSubmit(onSubmit)}
+											className='ml-6'
+											style={{ lineHeight: '35px' }}
+										>
+											<div className='flex mt-4'>
+												<div className='flex flex-col'>
+													<label
+														style={{
+															color: '#a94442',
+															fontWeight: 'bold',
+															fontSize: '16px'
+														}}
+													>
+														{t('checkout.name')}
+													</label>
+													<input
+														{...register('firstName')}
+														id='firstName'
+														name='firstName'
+														value={firstName}
+														onChange={e => setFirstName(e.target.value)}
+														style={{
+															background: '#eefaff',
+															width: '320px',
+															padding: '0 15px',
+															borderRadius: '5px'
+														}}
+													/>
+													<p style={{ color: '#a94442', fontSize: '16px' }}>
+														{errors.firstName?.message}
+													</p>
+												</div>
+												<div className='flex flex-col'>
+													<label
+														style={{
+															color: '#3c763d',
+															fontWeight: 'bold',
+															fontSize: '16px',
+															marginLeft: '12px'
+														}}
+													>
+														{t('checkout.lastName')}
+													</label>
+													<input
+														{...register('secondName')}
+														id='secondName'
+														name='secondName'
+														value={secondName}
+														onChange={e => setSecondName(e.target.value)}
+														style={{
+															background: '#eefaff',
+															width: '320px',
+															padding: '0 15px',
+															marginLeft: '12px',
+															borderRadius: '5px'
+														}}
+													/>
+												</div>
+											</div>
+											<div className='flex flex-col mt-4'>
 												<label
 													style={{
-														color: '#a94442',
+														color: 'rgb(169, 68, 66)',
 														fontWeight: 'bold',
 														fontSize: '16px'
 													}}
 												>
-													{t('checkout.name')}
+													{t('checkout.mobile')}
 												</label>
 												<input
-													{...register('firstName')}
-													id='firstName'
-													name='firstName'
-													value={firstName}
-													onChange={e => setFirstName(e.target.value)}
+													{...register('phoneNumber')}
+													type={'tel'}
+													name='phoneNumber'
+													id='phoneNumber'
+													value={phoneNumber}
+													onChange={e => setPhoneNumber(e.target.value)}
 													style={{
 														background: '#eefaff',
-														width: '320px',
+														width: '652px',
 														padding: '0 15px',
 														borderRadius: '5px'
 													}}
 												/>
 												<p style={{ color: '#a94442', fontSize: '16px' }}>
-													{errors.firstName?.message}
+													{errors.phoneNumber?.message}
 												</p>
 											</div>
-											<div className='flex flex-col'>
-												<label
-													style={{
-														color: '#3c763d',
-														fontWeight: 'bold',
-														fontSize: '16px',
-														marginLeft: '12px'
-													}}
+										</form>
+									) : (
+										<form
+											onSubmit={handleSubmit(onSubmit)}
+											className='flex flex-col ml-6'
+											style={{ lineHeight: '35px' }}
+										>
+											<div className='flex mt-4'>
+												<div className='flex flex-col'>
+													<label
+														style={{
+															color: '#a94442',
+															fontWeight: 'bold',
+															fontSize: '16px'
+														}}
+													>
+														{t('checkout.userName')}
+													</label>
+													<input
+														{...register('userName')}
+														id='userName'
+														name='userName'
+														value={userName}
+														onChange={e => setUsername(e.target.value)}
+														style={{
+															background: '#eefaff',
+															width: '320px',
+															padding: '0 15px',
+															borderRadius: '5px'
+														}}
+													/>
+													<p style={{ color: '#a94442', fontSize: '14px' }}>
+														{errors.userName?.message}
+													</p>
+												</div>
+												<div
+													className='flex flex-col'
+													style={
+														!!errors.userName?.message
+															? { marginLeft: '0px' }
+															: { marginLeft: '26px' }
+													}
 												>
-													{t('checkout.lastName')}
-												</label>
-												<input
-													{...register('secondName')}
-													id='secondName'
-													name='secondName'
-													value={secondName}
-													onChange={e => setSecondName(e.target.value)}
-													style={{
-														background: '#eefaff',
-														width: '320px',
-														padding: '0 15px',
-														marginLeft: '12px',
-														borderRadius: '5px'
-													}}
-												/>
+													<label
+														style={{
+															color: '#a94442',
+															fontWeight: 'bold',
+															fontSize: '16px',
+															marginLeft: '12px'
+														}}
+													>
+														{t('checkout.password')}
+													</label>
+													<input
+														{...register('userPassword')}
+														id='userPassword'
+														name='userPassword'
+														value={password}
+														onChange={e => setPassword(e.target.value)}
+														style={{
+															background: '#eefaff',
+															width: '320px',
+															padding: '0 15px',
+															marginLeft: '12px',
+															borderRadius: '5px'
+														}}
+													/>
+													<p
+														style={{
+															color: '#a94442',
+															fontSize: '14px',
+															marginLeft: '14px'
+														}}
+													>
+														{errors.userPassword?.message}
+													</p>
+												</div>
 											</div>
-										</div>
-										<div className='flex flex-col mt-4'>
-											<label
-												style={{
-													color: 'rgb(169, 68, 66)',
-													fontWeight: 'bold',
-													fontSize: '16px'
-												}}
-											>
-												{t('checkout.mobile')}
-											</label>
-											<input
-												{...register('phoneNumber')}
-												type={'tel'}
-												name='phoneNumber'
-												id='phoneNumber'
-												value={phoneNumber}
-												onChange={e => setPhoneNumber(e.target.value)}
-												style={{
-													background: '#eefaff',
-													width: '652px',
-													padding: '0 15px',
-													borderRadius: '5px'
-												}}
-											/>
-											<p style={{ color: '#a94442', fontSize: '16px' }}>
-												{errors.phoneNumber?.message}
-											</p>
-										</div>
-									</form>
+											<div className='flex mt-4'>
+												<div className='flex flex-col'>
+													<label
+														style={{
+															color: '#a94442',
+															fontWeight: 'bold',
+															fontSize: '16px'
+														}}
+													>
+														{t('checkout.repeatPasword')}
+													</label>
+													<input
+														{...register('repeatPasword')}
+														id='repeatPasword'
+														name='repeatPasword'
+														value={repeatPasword}
+														onChange={e => setRepeatPassword(e.target.value)}
+														style={{
+															background: '#eefaff',
+															width: '320px',
+															padding: '0 15px',
+															borderRadius: '5px'
+														}}
+													/>
+													<p style={{ color: '#a94442', fontSize: '14px' }}>
+														{errors.repeatPasword?.message}
+													</p>
+												</div>
+												<div
+													className='flex flex-col'
+													style={{ marginLeft: '26px' }}
+												>
+													<label
+														style={{
+															color: '#a94442',
+															fontWeight: 'bold',
+															fontSize: '16px',
+															marginLeft: '12px'
+														}}
+													>
+														{t('checkout.email')}
+													</label>
+													<input
+														{...register('email')}
+														id='email'
+														name='email'
+														value={email}
+														onChange={e => setEmail(e.target.value)}
+														style={{
+															background: '#eefaff',
+															width: '320px',
+															padding: '0 15px',
+															marginLeft: '12px',
+															borderRadius: '5px'
+														}}
+													/>
+													<p
+														style={{
+															color: '#a94442',
+															fontSize: '14px',
+															marginLeft: '14px'
+														}}
+													>
+														{errors.email?.message}
+													</p>
+												</div>
+											</div>
+										</form>
+									)}
 								</>
 								<>
 									<div className='mt-4'>
@@ -240,9 +423,10 @@ export const Checkout = () => {
 											}}
 											className='ml-6'
 											onClick={() => {
-												if (!!firstName && !!secondName && !!phoneNumber) {
+												if (Object.keys(errors).length === 0) {
 													setDeliverInfo(true)
 													setUserInfo(false)
+													extraRegisterUsers()
 												}
 											}}
 										>
@@ -651,7 +835,6 @@ export const Checkout = () => {
 									<button
 										onClick={() => {
 											if (!!payment) {
-												emptyCart()
 												navigate('/customer/message')
 											}
 										}}
@@ -720,8 +903,8 @@ export const Checkout = () => {
 
 						<div>
 							<div className='' style={{ borderBottom: '1px soldi silver' }}>
-								{!!items.length &&
-									items.map(item => (
+								{!!basketData.length &&
+									basketData.map(item => (
 										<div style={{ borderBOttom: '1px solid silver' }}>
 											<div
 												key={item.id}
@@ -737,7 +920,7 @@ export const Checkout = () => {
 														marginTop: '6px'
 													}}
 												>
-													{item.quantity * item.price} {t('checkout.soum')}
+													{item.count * item.price} {t('checkout.soum')}
 												</p>
 											</div>
 											<p
@@ -751,7 +934,7 @@ export const Checkout = () => {
 												{item.quantity} × {item.price} {t('checkout.soum')}
 											</p>
 											<img
-												src={item.photo1}
+												src={item.image}
 												style={{ maxWidth: '200px', height: '100%' }}
 											/>
 										</div>
@@ -770,7 +953,7 @@ export const Checkout = () => {
 										marginRight: '35px'
 									}}
 								>
-									{cartTotal} {t('checkout.soum')}
+									{/* {cartTotal} {t('checkout.soum')} */}
 								</p>
 							</div>
 							<div
@@ -818,7 +1001,7 @@ export const Checkout = () => {
 										marginTop: '6px'
 									}}
 								>
-									{cartTotal} {t('checkout.soum')}
+									{/* {cartTotal} {t('checkout.soum')} */}
 								</p>
 							</div>
 						</div>

@@ -17,6 +17,15 @@ export const AuthService = {
 		)
 		return response.data
 	},
+
+	async extraRegister(data) {
+		const response = await axios.post(
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/accounts/extra_create/`,
+			data
+		)
+		return response.data
+	},
+
 	async login(data) {
 		const response = await axios.post(
 			'http://ec2-54-175-61-21.compute-1.amazonaws.com/api/accounts/login/',
@@ -48,3 +57,5 @@ export const AuthService = {
 		return response.data
 	}
 }
+
+export default axios

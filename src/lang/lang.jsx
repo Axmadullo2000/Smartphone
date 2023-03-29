@@ -168,6 +168,10 @@ export const lang = {
 			passwordSent: 'Ваш пароль отправлен на ваш электронный адрес!!!'
 		},
 		checkout: {
+			userName: 'Имя пользователя',
+			password: 'Пароль',
+			repeatPasword: 'Повторите пароль',
+			email: 'Почта',
 			order: 'Оформить заказ',
 			orderinfo: 'Информация о покупателе',
 			deliveryInfo: 'Информация о доставке',
@@ -222,7 +226,11 @@ export const lang = {
 				},
 				typeDelivery: {
 					required: 'Поле Типа Доставки Обязательно к закполнению!!!'
-				}
+				},
+				userName: 'Поле имя пользователя обязательно к заполнению!',
+				password: 'Поле пароля обязательно к заполнению!',
+				repeatPassword: 'Повторите пароль пожалуйста оно необходимо!',
+				email: 'Заполните поле почты!'
 			},
 
 			paymentInfo: {
@@ -447,6 +455,10 @@ export const lang = {
 			passwordSent: 'Ваш пароль надіслано на вашу электронну адресу!!!'
 		},
 		checkout: {
+			userName: "ім'я користувача",
+			password: 'пароль',
+			repeatPasword: 'повторіть пароль',
+			email: 'пошта',
 			order: 'Оформити замовлення',
 			orderinfo: 'Інформація про покупця',
 			name: "Ваше ім'я",
@@ -499,7 +511,11 @@ export const lang = {
 				},
 				address: {
 					required: 'Необхідно заповнити "адреса для доставки".'
-				}
+				},
+				userName: '',
+				password: '',
+				repeatPassword: '',
+				email: ''
 			},
 			paymentInfo: {
 				name: 'Інформація про Толове',
@@ -721,6 +737,10 @@ export const lang = {
 			passwordSent: 'Parolingiz elektron pochta manzilingizga yuborildi!!!'
 		},
 		checkout: {
+			userName: 'Foydanalanuvchi nomi',
+			password: 'Parol',
+			repeatPasword: 'Parolni takrorlang',
+			email: 'Pochta',
 			order: 'Buyurtmani tasdiqlash',
 			orderinfo: "Xaridor haqida ma'lumot",
 			deliveryInfo: "Yetkazib berish tog'risida ma'lumot",
@@ -774,7 +794,11 @@ export const lang = {
 				},
 				address: {
 					required: 'Tovar yetkazib beriladigon joy nomini yozing!'
-				}
+				},
+				userName: 'Foydalanuvchi Nomini kiritish Majburiy!',
+				password: 'Parolni kiriting!',
+				repeatPassword: 'Parolni qaytadan kiriting!',
+				email: 'Pochtani kiritish majburiy'
 			},
 			paymentInfo: {
 				name: "Tolov haqida Ma'lumot",

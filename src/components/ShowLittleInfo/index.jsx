@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import { useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
-import { useCart } from 'react-use-cart'
+import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
 
+import { addProductToBasket } from '../../redux/asyncThunks/Basket'
 import { Container } from '../Zoom/Container'
 
-import { useTranslation } from 'react-i18next'
 import facebook from '../../assets/facebook.svg'
 import star from '../../assets/stars.svg'
 import telegram from '../../assets/telegram.svg'
@@ -17,10 +17,10 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 		second: false,
 		third: false
 	})
+	const navigate = useNavigate()
 	const { detailData, extraProductDetail } = useSelector(state => state.data)
 	const { comments } = useSelector(comment => comment.comment)
 
-	const { addItem } = useCart()
 	const { t } = useTranslation()
 	let middlePrice = 5
 
@@ -31,6 +31,12 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 				0
 			) / comments.length
 	}
+
+	const dispatch = useDispatch()
+
+	console.log(detailData)
+
+	console.log(extraProductDetail)
 
 	return (
 		<div
@@ -601,7 +607,6 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					{!!detailData.phone && (
 						<>
 							<Link
-								onClick={() => addItem({ ...detailData.phone })}
 								className='hover:shadow	hover:shadow-slate-400 ease-in'
 								to='/customer/checkout'
 								style={{
@@ -616,7 +621,14 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								{t('showLittleinfo.buyNow')}
 							</Link>
 							<button
-								onClick={() => addItem({ ...detailData.phone })}
+								onClick={() =>
+									dispatch(
+										addProductToBasket({
+											group_product: 1,
+											product_id: 2
+										})
+									)
+								}
 								className='hover:shadow	hover:shadow-slate-400 ease-in	'
 								style={{
 									padding: '11px 10px',
@@ -634,8 +646,11 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					)}
 					{!!extraProductDetail.airpod && (
 						<>
-							<Link
-								onClick={() => addItem({ ...extraProductDetail.airpod })}
+							<button
+								onClick={() => {
+									navigate('/customer/checkout')
+									dispatch(addProductToBasket(extraProductDetail.airpod))
+								}}
 								className='hover:shadow	hover:shadow-slate-400 ease-in'
 								to='/'
 								style={{
@@ -648,9 +663,11 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								}}
 							>
 								Купить сейчас
-							</Link>
+							</button>
 							<button
-								onClick={() => addItem({ ...extraProductDetail.airpod })}
+								onClick={() =>
+									dispatch(addProductToBasket(extraProductDetail.airpod))
+								}
 								className='hover:shadow	hover:shadow-slate-400 ease-in	'
 								style={{
 									padding: '11px 10px',

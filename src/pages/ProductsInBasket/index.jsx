@@ -1,6 +1,5 @@
 import { useTranslation } from 'react-i18next'
 import { Link, useNavigate } from 'react-router-dom'
-import { useCart } from 'react-use-cart'
 
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
@@ -8,19 +7,19 @@ import Header from '../../components/Header'
 import close from '../../assets/close.svg'
 import up from '../../assets/up.svg'
 
+import { useDispatch, useSelector } from 'react-redux'
+import { deleteProductFromBasket } from '../../redux/asyncThunks/Basket'
+
 import './ProductsInBasket.scss'
 
 export const ProductsInBasket = () => {
-	const {
-		items,
-		isEmpty,
-		updateItemQuantity,
-		removeItem,
-		totalItems,
-		cartTotal
-	} = useCart()
+	const dispatch = useDispatch()
+
+	const { basketData } = useSelector(state => state.basket)
+
 	const navigate = useNavigate()
 	const { t } = useTranslation()
+
 	return (
 		<>
 			<Header />
@@ -50,15 +49,15 @@ export const ProductsInBasket = () => {
 			<div
 				className='flex'
 				style={
-					totalItems == 0
+					!basketData.length && basketData.length == 0
 						? {
 								justifyContent: 'space-between'
 						  }
-						: { width: '100%' }
+						: { width: '100%', justifyContent: 'space-between' }
 				}
 			>
 				<div style={{ marginLeft: '32px' }}>
-					{isEmpty ? (
+					{!basketData.length ? (
 						<h2
 							style={{
 								fontSize: '18px',
@@ -70,97 +69,81 @@ export const ProductsInBasket = () => {
 							{t('productsInCart.emptyCart')}
 						</h2>
 					) : (
-						<>
-							{items.map(item => (
+						basketData.length > 0 &&
+						basketData.map(item => (
+							<div
+								key={item.id}
+								className='flex space-x-36 inBasketItem'
+								style={{
+									background: 'white',
+									marginBottom: '10px',
+									width: '95%'
+								}}
+							>
 								<div
-									key={item.id}
-									className='flex space-x-36 inBasketItem'
+									className='flex'
+									onClick={() => navigate(`/products/view/${item.slug}`)}
+									style={{ marginLeft: '22px' }}
+								>
+									<img
+										style={{
+											maxWidth: '150px',
+											minHeight: '150px'
+										}}
+										className='cursor-pointer'
+										src={item.image}
+										alt={item.slug}
+									/>
+								</div>
+								<div
+									onClick={() => navigate(`/products/view/${item.slug}`)}
+									className='product_name'
+								>
+									<p style={{ marginTop: '20px' }}>{item.name}</p>
+								</div>
+								<div
+									className='flex'
 									style={{
-										background: 'white',
-										marginBottom: '10px',
-										width: '95%'
+										height: '40px',
+										marginTop: '65px'
 									}}
 								>
-									<div
-										className='flex'
-										onClick={() => navigate(`/products/view/${item.slug}`)}
-										style={{ marginLeft: '22px' }}
-									>
-										<img
-											style={{
-												maxWidth: '150px',
-												minHeight: '150px'
-											}}
-											className='cursor-pointer'
-											src={item.photo1}
-											alt={item.slug}
-										/>
+									<div style={{ fontSize: '22px' }}>
+										{item.quantity > 1 ? (
+											<button className='hover:text-red-400'>-</button>
+										) : (
+											<button className='hover:text-red-400'>-</button>
+										)}
 									</div>
-									<div
-										onClick={() => navigate(`/products/view/${item.slug}`)}
-										className='product_name'
-									>
-										<p style={{ marginTop: '20px' }}>{item.name}</p>
+									<div style={{ fontSize: '22px', margin: '0 20px' }}>
+										{item.count}
 									</div>
-									<div
-										className='flex'
-										style={{
-											height: '40px',
-											marginTop: '65px'
-										}}
-									>
-										<div style={{ fontSize: '22px' }}>
-											{item.quantity > 1 ? (
-												<button
-													onClick={() =>
-														updateItemQuantity(item.id, item.quantity - 1)
-													}
-													className='hover:text-red-400'
-													ч
-												>
-													-
-												</button>
-											) : (
-												<button className='hover:text-red-400'>-</button>
-											)}
-										</div>
-										<div style={{ fontSize: '22px', margin: '0 20px' }}>
-											{item.quantity}
-										</div>
-										<div style={{ fontSize: '22px' }}>
-											<button
-												onClick={() =>
-													updateItemQuantity(item.id, item.quantity + 1)
-												}
-												className='hover:text-red-400'
-											>
-												+
-											</button>
-										</div>
-									</div>
-									<div>
-										<p style={{ marginTop: '65px', fontSize: '22px' }}>
-											{item.price * item.quantity}
-										</p>
-									</div>
-
-									<div style={{ marginTop: '60px', paddingRight: '22px' }}>
-										<button
-											style={{ width: '36px', height: '36px' }}
-											onClick={() => removeItem(item.id)}
-										>
-											<img src={close} alt='close' />
-										</button>
+									<div style={{ fontSize: '22px' }}>
+										<button className='hover:text-red-400'>+</button>
 									</div>
 								</div>
-							))}
-						</>
+								<div>
+									<p style={{ marginTop: '65px', fontSize: '22px' }}>
+										{item.price * item.count}
+									</p>
+								</div>
+
+								<div style={{ marginTop: '60px', paddingRight: '22px' }}>
+									<button
+										onClick={() => dispatch(deleteProductFromBasket(item.id))}
+										style={{ width: '36px', height: '36px' }}
+									>
+										<img src={close} alt='close' />
+									</button>
+								</div>
+							</div>
+						))
 					)}
 				</div>
 
 				<div
 					style={
-						totalItems == 0
+						!basketData.length
 							? {
 									display: 'flex',
 									justifyContent: 'center',
@@ -175,7 +158,7 @@ export const ProductsInBasket = () => {
 				>
 					<div
 						style={
-							totalItems == 0
+							!basketData.length
 								? {
 										display: 'block',
 										background: '#fff',
@@ -208,7 +191,8 @@ export const ProductsInBasket = () => {
 									{t('productsInCart.orderCount')}:
 								</span>
 								<span className='basket_textValue_color'>
-									{totalItems} {t('basket.countItems')}.
+									{basketData.length > 0 ? basketData.length : 0}{' '}
+									{t('basket.countItems')}.
 								</span>
 							</li>
 							<li
@@ -221,9 +205,9 @@ export const ProductsInBasket = () => {
 								>
 									{t('productsInCart.cost')}:
 								</span>
-								<span className='basket_textValue_color'>
+								{/* <span className='basket_textValue_color'>
 									{cartTotal} {t('basketCard.soum')}.
-								</span>
+								</span> */}
 							</li>
 							<div
 								style={{
@@ -247,7 +231,7 @@ export const ProductsInBasket = () => {
 									style={{ color: 'red' }}
 									className='basket_textValue_color'
 								>
-									{cartTotal} {t('basketCard.soum')}.
+									{0} {t('basketCard.soum')}.
 								</span>
 							</li>
 						</ul>
