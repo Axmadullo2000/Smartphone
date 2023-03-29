@@ -7,14 +7,13 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'
 import Basket from '../Basket'
 
 import { getAllData } from '../../redux/asyncThunks'
+import { productsInBasket } from '../../redux/asyncThunks/Basket'
 import { logoutAction } from '../../redux/slices/AuthSlice'
 import { AuthService } from '../../Service'
 
 import basket from '../../assets/basket.svg'
 import loggedinUser from '../../assets/loggedinUser.svg'
 import user from '../../assets/user.svg'
-
-import { productsInBasket } from '../../redux/asyncThunks/Basket'
 
 import './Header.scss'
 
@@ -217,7 +216,6 @@ const Header = () => {
 				{!loggednIn ? (
 					<button
 						className='w-40 flex hover:bg-red-600'
-
 						onClick={() => {
 							if (pathname === '/') {
 								navigate('/sign-up')

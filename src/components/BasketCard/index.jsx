@@ -13,22 +13,26 @@ export const BasketCard = ({ item }) => {
 	const { t } = useTranslation()
 	const dispatch = useDispatch()
 	const { basketData } = useSelector(state => state.basket)
-	let { name, price, image, id, count } = item
+
+	let { name, price, image, id, count, slug } = item
 
 	return (
 		<li className='cart-item added_to_basket'>
-			<div className='cart-card '>
+			<div className='cart-card'>
 				<img
 					className='card-img'
 					width='100px'
 					height='100px'
 					src={image}
 					alt={name}
-					onClick={() => navigate(`/products/view/${item.slug}`)}
+					onClick={() => navigate(`/products/view/${slug}`)}
 				/>
-				<div className='card-info'>
+				<div
+					className='card-info'
+					onClick={() => navigate(`/products/view/${slug}`)}
+				>
 					<h4
-						onClick={() => navigate(`/products/view/${item.slug}`)}
+						onClick={() => navigate(`/products/view/${slug}`)}
 						className='card-title'
 					>
 						{name}

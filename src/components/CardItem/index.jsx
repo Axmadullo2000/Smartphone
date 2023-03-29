@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -21,6 +21,8 @@ export const CardItem = item => {
 	const { loggednIn } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
+
+	const [state, setState] = useState()
 
 	let middlePrice = 5
 

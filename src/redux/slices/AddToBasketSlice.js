@@ -3,13 +3,15 @@ import { createSlice } from '@reduxjs/toolkit'
 import {
 	addProductToBasket,
 	deleteProductFromBasket,
+	paymentAsynkThunk,
 	productsInBasket
 } from '../asyncThunks/Basket'
 
 const initialState = {
 	addedData: [],
 	basketData: [],
-	remove: []
+	remove: [],
+	paymentLink: ''
 }
 
 export const AddToBasket = createSlice({
@@ -26,6 +28,9 @@ export const AddToBasket = createSlice({
 			})
 			.addCase(deleteProductFromBasket.fulfilled, (state, action) => {
 				state.remove = action.payload
+			})
+			.addCase(paymentAsynkThunk.fulfilled, (state, action) => {
+				state.paymentLink = action.payload
 			})
 	}
 })

@@ -20,6 +20,9 @@ export const ProductsInBasket = () => {
 	const navigate = useNavigate()
 	const { t } = useTranslation()
 
+	const totalPrice =
+		!!basketData.length && basketData.reduce((acc, item) => acc + item.price, 0)
+
 	return (
 		<>
 			<Header />
@@ -205,9 +208,9 @@ export const ProductsInBasket = () => {
 								>
 									{t('productsInCart.cost')}:
 								</span>
-								{/* <span className='basket_textValue_color'>
-									{cartTotal} {t('basketCard.soum')}.
-								</span> */}
+								<span className='basket_textValue_color'>
+									{totalPrice} {t('basketCard.soum')}.
+								</span>
 							</li>
 							<div
 								style={{
@@ -231,7 +234,7 @@ export const ProductsInBasket = () => {
 									style={{ color: 'red' }}
 									className='basket_textValue_color'
 								>
-									{0} {t('basketCard.soum')}.
+									{totalPrice} {t('basketCard.soum')}.
 								</span>
 							</li>
 						</ul>

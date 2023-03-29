@@ -3,14 +3,14 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
+import { paymentAsynkThunk } from '../../redux/asyncThunks/Basket'
 
 import { loginAction } from '../../redux/slices/AuthSlice'
-
 import { AuthService } from '../../Service'
 import { setItem } from '../../Service/localData'
 
@@ -19,8 +19,8 @@ import './Checkout.scss'
 export const Checkout = () => {
 	const dispatch = useDispatch()
 	const { t } = useTranslation()
-	const { loggednIn } = useSelector(state => state.auth)
-	const { basketData } = useSelector(state => state.basket)
+	const { userData, loggednIn } = useSelector(state => state.auth)
+	const { basketData, paymentLink } = useSelector(state => state.basket)
 
 	const [firstName, setFirstName] = useState('')
 	const [secondName, setSecondName] = useState('')
@@ -37,8 +37,6 @@ export const Checkout = () => {
 		new_password: repeatPasword,
 		email
 	}
-
-	console.log(loggednIn)
 
 	const [locationDelivery, setLocationDelivery] = useState('')
 	const [address, setAddress] = useState('')
@@ -72,6 +70,9 @@ export const Checkout = () => {
 		email: Yup.string().required(t('checkout.validation.email'))
 	})
 
+	const totalPrice =
+		!!basketData.length && basketData.reduce((acc, item) => acc + item.price, 0)
+
 	const {
 		register,
 		watch,
@@ -86,7 +87,6 @@ export const Checkout = () => {
 		const response = await AuthService.extraRegister(data)
 		dispatch(loginAction(response))
 		setItem('token', response.token)
-		console.log(response)
 	}
 
 	const onSubmit = async e => {
@@ -96,8 +96,6 @@ export const Checkout = () => {
 	const [userInfo, setUserInfo] = useState(true)
 	const [deliveryInfo, setDeliverInfo] = useState(false)
 	const [payment, setPayment] = useState(false)
-
-	const navigate = useNavigate()
 
 	return (
 		<div>
@@ -740,42 +738,6 @@ export const Checkout = () => {
 								>
 									<label style={{ color: '#666' }}>
 										<input
-											style={{ width: '16px', height: '16px' }}
-											type={'radio'}
-											name='payment'
-											onChange={e => setPaymentSystem(e.target.value)}
-											value={t('checkout.paymentInfo.nal')}
-										/>
-										<span style={{ marginLeft: '12px' }}>
-											{t('checkout.paymentInfo.nal')}
-										</span>
-									</label>
-									<label style={{ color: '#666' }}>
-										<input
-											style={{ width: '16px', height: '16px' }}
-											type={'radio'}
-											name='payment'
-											onChange={e => setPaymentSystem(e.target.value)}
-											value={t('checkout.paymentInfo.terminal')}
-										/>
-										<span style={{ marginLeft: '12px' }}>
-											{t('checkout.paymentInfo.terminal')}
-										</span>
-									</label>
-									<label style={{ color: '#666' }}>
-										<input
-											style={{ width: '16px', height: '16px' }}
-											type={'radio'}
-											name='payment'
-											onChange={e => setPaymentSystem(e.target.value)}
-											value={t('checkout.paymentInfo.combo')}
-										/>
-										<span style={{ marginLeft: '12px' }}>
-											{t('checkout.paymentInfo.combo')}
-										</span>
-									</label>
-									<label style={{ color: '#666' }}>
-										<input
 											style={{ width: '16px', height: '16px', color: '#666' }}
 											type={'radio'}
 											name='payment'
@@ -833,9 +795,12 @@ export const Checkout = () => {
 										{t('checkout.prevStep')}
 									</button>
 									<button
-										onClick={() => {
+										onClick={e => {
 											if (!!payment) {
-												navigate('/customer/message')
+												e.preventDefault()
+												dispatch(paymentAsynkThunk(userData.id))
+												console.log(paymentLink)
+												window.location.href = paymentLink
 											}
 										}}
 										style={{
@@ -931,7 +896,7 @@ export const Checkout = () => {
 													marginTop: '6px'
 												}}
 											>
-												{item.quantity} × {item.price} {t('checkout.soum')}
+												{item.count} × {item.price} {t('checkout.soum')}
 											</p>
 											<img
 												src={item.image}
@@ -953,7 +918,7 @@ export const Checkout = () => {
 										marginRight: '35px'
 									}}
 								>
-									{/* {cartTotal} {t('checkout.soum')} */}
+									{totalPrice} {t('checkout.soum')}
 								</p>
 							</div>
 							<div
@@ -1001,7 +966,7 @@ export const Checkout = () => {
 										marginTop: '6px'
 									}}
 								>
-									{/* {cartTotal} {t('checkout.soum')} */}
+									{totalPrice} {t('checkout.soum')}
 								</p>
 							</div>
 						</div>
