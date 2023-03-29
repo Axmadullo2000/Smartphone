@@ -795,14 +795,6 @@ export const Checkout = () => {
 										{t('checkout.prevStep')}
 									</button>
 									<button
-										onClick={e => {
-											if (!!payment) {
-												e.preventDefault()
-												dispatch(paymentAsynkThunk(userData.id))
-												console.log(paymentLink)
-												window.location.href = paymentLink
-											}
-										}}
 										style={{
 											padding: '10px 15px',
 											background: 'green',
@@ -813,6 +805,15 @@ export const Checkout = () => {
 											fontWeight: 'bold',
 											width: '49%',
 											marginLeft: '12px'
+										}}
+										onClick={() => {
+											dispatch(paymentAsynkThunk(userData.id))
+											if (!!payment) {
+												if (paymentLink.id !== undefined) {
+													window.location.href = `${paymentLink.id}`
+													console.log(paymentLink.id)
+												}
+											}
 										}}
 									>
 										{t('checkout.makeOrder')}

@@ -34,10 +34,6 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 
 	const dispatch = useDispatch()
 
-	console.log(detailData)
-
-	console.log(extraProductDetail)
-
 	return (
 		<div
 			style={{
@@ -606,7 +602,16 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 				<div style={{ marginTop: '10px' }}>
 					{!!detailData.phone && (
 						<>
-							<Link
+							<button
+								onClick={() => {
+									dispatch(
+										addProductToBasket({
+											group_product: 1,
+											product_id: 1
+										})
+									)
+									navigate('/customer/checkout')
+								}}
 								className='hover:shadow	hover:shadow-slate-400 ease-in'
 								to='/customer/checkout'
 								style={{
@@ -619,13 +624,13 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								}}
 							>
 								{t('showLittleinfo.buyNow')}
-							</Link>
+							</button>
 							<button
 								onClick={() =>
 									dispatch(
 										addProductToBasket({
 											group_product: 1,
-											product_id: 2
+											product_id: 1
 										})
 									)
 								}
@@ -648,8 +653,13 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 						<>
 							<button
 								onClick={() => {
+									dispatch(
+										addProductToBasket({
+											group_product: 1,
+											product_id: 2
+										})
+									)
 									navigate('/customer/checkout')
-									dispatch(addProductToBasket(extraProductDetail.airpod))
 								}}
 								className='hover:shadow	hover:shadow-slate-400 ease-in'
 								to='/'
@@ -662,11 +672,16 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									fontWeight: '700'
 								}}
 							>
-								Купить сейчас
+								{t('showLittleinfo.buyNow')}
 							</button>
 							<button
 								onClick={() =>
-									dispatch(addProductToBasket(extraProductDetail.airpod))
+									dispatch(
+										addProductToBasket({
+											group_product: 1,
+											product_id: 2
+										})
+									)
 								}
 								className='hover:shadow	hover:shadow-slate-400 ease-in	'
 								style={{
@@ -679,7 +694,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									marginLeft: '10px'
 								}}
 							>
-								Добавить в корзину
+								{t('showLittleinfo.addToCart')}
 							</button>
 						</>
 					)}

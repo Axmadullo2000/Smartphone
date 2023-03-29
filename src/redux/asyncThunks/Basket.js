@@ -50,6 +50,6 @@ export const paymentAsynkThunk = createAsyncThunk(
 			`http://ec2-54-175-61-21.compute-1.amazonaws.com/create-checkout-session/${id}/`
 		)
 		// console.log(response.data)
-		return response.data.id
+		return response.data
 	}
 )
