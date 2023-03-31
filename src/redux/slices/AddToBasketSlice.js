@@ -17,7 +17,12 @@ const initialState = {
 export const AddToBasket = createSlice({
 	name: 'Basket/AddToBasket',
 	initialState,
-	reducers: {},
+	reducers: {
+		incrementQuantity: (state, action) => {
+			const item = state.basketData.find(item => item.id === action.payload)
+			item.quantity++
+		}
+	},
 	extraReducers: builder => {
 		builder
 			.addCase(addProductToBasket.fulfilled, (state, action) => {
@@ -35,6 +40,6 @@ export const AddToBasket = createSlice({
 	}
 })
 
-export const { IncreaseQuantity } = AddToBasket.actions
+export const { incrementQuantity } = AddToBasket.actions
 
 export default AddToBasket.reducer

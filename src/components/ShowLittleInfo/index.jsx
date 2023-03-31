@@ -606,8 +606,9 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								onClick={() => {
 									dispatch(
 										addProductToBasket({
-											group_product: 1,
-											product_id: 1
+											product_id: detailData.phone.id,
+											group_product:
+												detailData.phone.types === 'smartphone' ? 1 : 2
 										})
 									)
 									navigate('/customer/checkout')
@@ -626,14 +627,15 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								{t('showLittleinfo.buyNow')}
 							</button>
 							<button
-								onClick={() =>
+								onClick={() => {
 									dispatch(
 										addProductToBasket({
-											group_product: 1,
-											product_id: 1
+											product_id: detailData.phone.id,
+											group_product:
+												detailData.phone.types === 'smartphone' ? 1 : 2
 										})
 									)
-								}
+								}}
 								className='hover:shadow	hover:shadow-slate-400 ease-in	'
 								style={{
 									padding: '11px 10px',
@@ -655,8 +657,9 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								onClick={() => {
 									dispatch(
 										addProductToBasket({
-											group_product: 1,
-											product_id: 2
+											product_id: detailData.phone.id,
+											group_product:
+												extraProductDetail.phone.types === 'smartphone' ? 1 : 2
 										})
 									)
 									navigate('/customer/checkout')
@@ -678,8 +681,9 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								onClick={() =>
 									dispatch(
 										addProductToBasket({
-											group_product: 1,
-											product_id: 2
+											product_id: extraProductDetail.airpod.id,
+											group_product:
+												extraProductDetail.airpod.types === 'smartphone' ? 1 : 2
 										})
 									)
 								}

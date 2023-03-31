@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
@@ -16,14 +16,10 @@ import './CardItem.scss'
 export const CardItem = item => {
 	const { id, name, photo1, price, slug, types } = item
 	const { comments } = useSelector(comment => comment.comment)
-	const { basketData } = useSelector(state => state.basket)
 
 	const { loggednIn } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
-
-	const [state, setState] = useState()
-
 	let middlePrice = 5
 
 	if (comments.length > 0) {
@@ -36,6 +32,7 @@ export const CardItem = item => {
 
 	useEffect(() => {
 		dispatch(SearchAsyncThunk({ search: name, offset: 0 }))
+		console.log(item)
 	}, [dispatch, name])
 
 	return (

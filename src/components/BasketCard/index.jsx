@@ -1,10 +1,10 @@
 import React from 'react'
 import { useTranslation } from 'react-i18next'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { deleteProductFromBasket } from '../../redux/asyncThunks/Basket'
-import { IncreaseQuantity } from '../../redux/slices/AddToBasketSlice'
+import { incrementQuantity } from '../../redux/slices/AddToBasketSlice'
 
 import './BasketCard.scss'
 
@@ -12,7 +12,6 @@ export const BasketCard = ({ item }) => {
 	const navigate = useNavigate()
 	const { t } = useTranslation()
 	const dispatch = useDispatch()
-	const { basketData } = useSelector(state => state.basket)
 
 	let { name, price, image, id, count, slug } = item
 
@@ -63,7 +62,7 @@ export const BasketCard = ({ item }) => {
 						<button
 							className='card-add-btn'
 							style={{ fontSize: '26px' }}
-							onClick={() => dispatch(IncreaseQuantity(basketData, item))}
+							onClick={() => dispatch(incrementQuantity(id))}
 						>
 							+
 						</button>
