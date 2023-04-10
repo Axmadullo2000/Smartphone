@@ -3,8 +3,10 @@ import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import { deleteProductFromBasket } from '../../redux/asyncThunks/Basket'
-import { incrementQuantity } from '../../redux/slices/AddToBasketSlice'
+import {
+	deleteProductFromBasket,
+	updateBasketItem
+} from '../../redux/asyncThunks/Basket'
 
 import './BasketCard.scss'
 
@@ -26,24 +28,24 @@ export const BasketCard = ({ item }) => {
 					alt={name}
 					onClick={() => navigate(`/products/view/${slug}`)}
 				/>
-				<div
-					className='card-info'
-					onClick={() => navigate(`/products/view/${slug}`)}
-				>
-					<h4
-						onClick={() => navigate(`/products/view/${slug}`)}
-						className='card-title'
-					>
-						{name}
-					</h4>
-					<span onClick={() => navigate(`/products/view/${item.slug}`)}>
-						{t('basketCard.price')}: {price} {t('basketCard.soum')}
+				<div className='card-info'>
+					<h4 className='card-title'>{name}</h4>
+					<span>
+						{t('basketCard.price')}: {price / count} {t('basketCard.soum')}
 					</span>
 
 					<div className='card-count'>
 						<span className='card-count-info'>{t('basket.totalItems')}:</span>
 						{count > 1 ? (
-							<button className='card-minus-btn' style={{ fontSize: '26px' }}>
+							<button
+								onClick={() =>
+									dispatch(
+										updateBasketItem({ id, data: { count: item.count - 1 } })
+									)
+								}
+								className='card-minus-btn'
+								style={{ fontSize: '26px' }}
+							>
 								-
 							</button>
 						) : (
@@ -51,18 +53,18 @@ export const BasketCard = ({ item }) => {
 								-
 							</button>
 						)}
-						<span
-							onClick={() => navigate(`/products/view/${item.slug}`)}
-							className='card-item-count'
-							style={{ fontSize: '20px' }}
-						>
+						<span className='card-item-count' style={{ fontSize: '20px' }}>
 							{count}
 						</span>
 
 						<button
 							className='card-add-btn'
 							style={{ fontSize: '26px' }}
-							onClick={() => dispatch(incrementQuantity(id))}
+							onClick={() =>
+								dispatch(
+									updateBasketItem({ id, data: { count: item.count + 1 } })
+								)
+							}
 						>
 							+
 						</button>
@@ -70,7 +72,7 @@ export const BasketCard = ({ item }) => {
 				</div>
 				<div className='card-total'>
 					<p className='card-total-price'>
-						{price * count} {t('basketCard.soum')}
+						{price} {t('basketCard.soum')}
 					</p>
 					<button
 						className='card-delete-btn'

@@ -25,7 +25,9 @@ import { getItem } from './Service/localData'
 import { lang } from './lang/lang'
 
 import './App.css'
+import { NotFound } from './pages/NotFound'
 import { ResultShopping } from './pages/ResultShopping'
+import { TransactionHistory } from './pages/TransactionHistory'
 
 function App() {
 	const dispatch = useDispatch()
@@ -72,6 +74,8 @@ function App() {
 
 			<Route path='/customer/checkout/' element={<Checkout />} />
 			<Route path='/customer/message/' element={<ResultShopping />} />
+			<Route path='/customer/orders/' element={<TransactionHistory />} />
+			<Route path='*' element={<NotFound />} />
 		</Routes>
 	)
 }

@@ -1,3 +1,8 @@
+.search_result {
+	width: 600px;
+	margin: auto;
+}
+
 .cardElement {
 	border-radius: 2px;
 	margin: 20px 0;
@@ -6,4 +11,38 @@
 }
 .cardElement:hover {
 	border: 1px solid red;
+}
+
+.notFound_products {
+	border: 1px solid #1d4ed8;
+	width: 500px;
+	height: 400px;
+	padding: 22px;
+	.allProoduct {
+		color: red;
+		font-size: 20px;
+		text-transform: uppercase;
+		font-weight: bold;
+		border: 1px solid red;
+		padding: 12px;
+		transition: 0.2s ease color;
+	}
+	.allProoduct:hover {
+		background: red;
+		color: white;
+	}
+}
+
+@media (max-width: 630px) {
+	.searchContent {
+		overflow-x: hidden;
+	}
+	.notFound_products {
+		width: 320px;
+		margin-left: 12px;
+		.allProoduct {
+			font-size: 15px;
+			padding: 5px;
+		}
+	}
 }

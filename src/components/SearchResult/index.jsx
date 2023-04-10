@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { SearchAsyncThunk } from '../../redux/asyncThunks'
 
@@ -12,7 +12,7 @@ import Loader from '../Loader'
 import './SearchResult.scss'
 
 export const SearchResult = () => {
-	const {t} = useTranslation()
+	const { t } = useTranslation()
 	const { data, status } = useSelector(data => data.data)
 	const dispatch = useDispatch()
 	let { slug } = useParams()
@@ -32,21 +32,21 @@ export const SearchResult = () => {
 
 	useEffect(() => {
 		dispatch(SearchAsyncThunk({ search: slug, offset: count }))
-		Count()
 	}, [slug])
 
 	return (
-		<div>
+		<div className='searchContent'>
 			<Header />
-			<h2 className='text-center text-2xl text-stone-50 mb-5'>{t("searchResult.title")}</h2>
-			<div className='' style={{ width: '600px', margin: 'auto' }}>
+			<h2 className='text-center text-2xl text-stone-50 mb-5'>
+				{t('searchResult.title')}
+			</h2>
+			<div className='search_result'>
 				{!!data.results &&
 					data.results.map(item => (
 						<div
-							style={{ cursor: 'pointer' }}
 							onClick={() => navigate(`/products/view/${item.slug}`)}
 							key={item.id}
-							className='cardElement flex'
+							className='cardElement flex cursor-pointer'
 						>
 							{status == '' ? (
 								<Loader />
@@ -54,15 +54,28 @@ export const SearchResult = () => {
 								<img src={item.photo1} alt='' width={300} />
 							)}
 							<ul className='ml-4 mt-4'>
-								<li>{t("searchResult.type")} {item.name.slice(0, 8)}</li>
-								<li>{t("searchResult.version")} {item.Version_OS}</li>
-								<li>{t("searchResult.corpus")} {item.corpus}</li>
-								<li>{t("searchResult.typeSimCard")} {item.sim_card}</li>
-								<li>{t("searchResult.size")} {item.size}</li>
-								<li>{t("searchResult.weight")} {item.weight}</li>
+								<li>
+									{t('searchResult.type')} {item.name.slice(0, 8)}
+								</li>
+								<li>
+									{t('searchResult.version')} {item.Version_OS}
+								</li>
+								<li>
+									{t('searchResult.corpus')} {item.corpus}
+								</li>
+								<li>
+									{t('searchResult.typeSimCard')} {item.sim_card}
+								</li>
+								<li>
+									{t('searchResult.size')} {item.size}
+								</li>
+								<li>
+									{t('searchResult.weight')} {item.weight}
+								</li>
 							</ul>
 						</div>
 					))}
+
 				{arr.map(item => (
 					<button
 						onClick={() =>
@@ -74,7 +87,24 @@ export const SearchResult = () => {
 						{item}
 					</button>
 				))}
-				<br />
+
+				{!!data.results && data.results.length == 0 && (
+					<div className='notFound_products'>
+						<h2
+							style={{
+								color: 'red',
+								fontSize: '32px',
+								fontWeight: 'bold'
+							}}
+						>
+							{t('searchResult.NotFoundTitle')}
+						</h2>
+						<p className='mt-4'></p>
+						<Link to='/products/category/all' className='allProoduct'>
+							{t('searchResult.ListSmartphones')}
+						</Link>{' '}
+					</div>
+				)}
 			</div>
 			<Footer />
 		</div>

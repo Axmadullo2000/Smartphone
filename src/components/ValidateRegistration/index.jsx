@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import { toast } from 'react-toastify'
 
 import { AuthService } from '../../Service'
 import Loader from '../Loader'
@@ -33,8 +34,7 @@ export const ValidateRegistration = () => {
 		await AuthService.register(registerInfoData)
 		try {
 			setResult(`${t('validateRegistration.passwordSent')}`)
-		} catch (e) {
-		}
+		} catch (e) {}
 	}
 
 	const onSubmit = data => {
@@ -136,6 +136,17 @@ export const ValidateRegistration = () => {
 							)}
 							{result !== '' && (
 								<div>
+									<div style={{display: 'none'}}>
+										{toast.success(t('validateRegistration.passwordSent'), {
+											position: 'top-right',
+											autoClose: 5000,
+											hideProgressBar: false,
+											closeOnClick: true,
+											pauseOnHover: true,
+											draggable: true,
+											theme: 'dark'
+										})}
+									</div>
 									<p className='text-green-600 mt-3'>
 										{t('validateRegistration.passwordSent')}
 									</p>

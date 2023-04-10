@@ -1,5 +1,7 @@
 export const lang = {
 	ru: {
+		titlePage:
+			'Интернет магазин Smart Shop смартфоны Делаем Доставку по Всему Миру',
 		header: {
 			catalog: 'Каталог',
 			login: 'Вход',
@@ -10,6 +12,8 @@ export const lang = {
 			catalogTitle: 'Средства связи',
 			catalogAll: 'Все Смартфоны',
 			searchFavourite: 'Поищите ваш любимый Смарфтон',
+			history: 'Истории Транзакций',
+			allTransactions: 'Все Транзакции',
 			uz: 'Узбекский',
 			ru: 'Русский',
 			ukr: 'Украинский'
@@ -133,7 +137,9 @@ export const lang = {
 			corpus: 'Корпус',
 			typeSimCard: 'Тип Sim-карты',
 			size: 'Размеры',
-			weight: 'Вес'
+			weight: 'Вес',
+			NotFoundTitle: 'По запросы Смартфоны не были найдены!',
+			ListSmartphones: 'Список всех смартфонов'
 		},
 		showLittleinfo: {
 			share: 'Поделиться',
@@ -290,6 +296,8 @@ export const lang = {
 		}
 	},
 	uk: {
+		titlePage:
+			'Інтернет магазин Smart Shop Смартфони робимо Доставку по всьому світу',
 		header: {
 			catalog: 'Каталог',
 			login: 'Вхід',
@@ -300,6 +308,8 @@ export const lang = {
 			catalogTitle: "Засоби зв'язку",
 			catalogAll: 'Усі Смартфони',
 			searchFavourite: 'Пошукайте ваш улюблений Смарфтон',
+			history: 'Історії Транзакцій',
+			allTransactions: 'Всі Транзакції',
 			uz: 'Узбецька',
 			ru: 'Російська',
 			ukr: 'Українська'
@@ -420,7 +430,9 @@ export const lang = {
 			corpus: 'Корпус',
 			typeSimCard: 'Тип Sim-карти',
 			size: 'Розміри',
-			weight: 'Вага'
+			weight: 'Вага',
+			NotFoundTitle: 'За запити Смартфони не були знайдені!',
+			ListSmartphones: 'Список усіх смартфонів'
 		},
 		showLittleinfo: {
 			share: 'Поділитися',
@@ -573,6 +585,8 @@ export const lang = {
 		}
 	},
 	uz: {
+		titlePage:
+			'Smart Shop Internet Magazinidan Smartfonlarni Dunyoning Istalgan Joyiga Yetkazib Beramiz.',
 		header: {
 			catalog: 'Katalog',
 			login: 'Kirish',
@@ -583,6 +597,8 @@ export const lang = {
 			catalogTitle: 'Aloqa vositalari',
 			catalogAll: 'Barcha smartfonlar',
 			searchFavourite: 'Sevimli Smarftoningizni qidiring',
+			history: 'Haridlar Tarixi',
+			allTransactions: "Barcha o'tkazmalar",
 			uz: "O'zbek",
 			ru: 'Russ',
 			ukr: 'Ukrain'
@@ -702,7 +718,9 @@ export const lang = {
 			corpus: 'Ramka',
 			typeSimCard: 'Sim-karta turi',
 			size: "O'lchovlar",
-			weight: "Og'irlik"
+			weight: "Og'irlik",
+			NotFoundTitle: "Sizning So'rovingiz bo'yicha smartfonlar topilmadi!",
+			ListSmartphones: "Barcha Smartfonlar Ro'yxati"
 		},
 		showLittleinfo: {
 			share: 'Ulashish',

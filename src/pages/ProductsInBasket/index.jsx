@@ -1,14 +1,17 @@
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 
 import Footer from '../../components/Footer'
 import Header from '../../components/Header'
 
+import {
+	deleteProductFromBasket,
+	updateBasketItem
+} from '../../redux/asyncThunks/Basket'
+
 import close from '../../assets/close.svg'
 import up from '../../assets/up.svg'
-
-import { useDispatch, useSelector } from 'react-redux'
-import { deleteProductFromBasket } from '../../redux/asyncThunks/Basket'
 
 import './ProductsInBasket.scss'
 
@@ -22,6 +25,9 @@ export const ProductsInBasket = () => {
 
 	const totalPrice =
 		!!basketData.length && basketData.reduce((acc, item) => acc + item.price, 0)
+
+	const totalCount =
+		!!basketData.length && basketData.reduce((acc, item) => acc + item.count, 0)
 
 	return (
 		<>
@@ -112,8 +118,22 @@ export const ProductsInBasket = () => {
 									}}
 								>
 									<div style={{ fontSize: '22px' }}>
-										{item.quantity > 1 ? (
-											<button className='hover:text-red-400'>-</button>
+										{item.count > 1 ? (
+											<button
+												onClick={() =>
+													dispatch(
+														updateBasketItem({
+															id: item.id,
+															data: {
+																count: item.count - 1
+															}
+														})
+													)
+												}
+												className='hover:text-red-400'
+											>
+												-
+											</button>
 										) : (
 											<button className='hover:text-red-400'>-</button>
 										)}
@@ -122,12 +142,26 @@ export const ProductsInBasket = () => {
 										{item.count}
 									</div>
 									<div style={{ fontSize: '22px' }}>
-										<button className='hover:text-red-400'>+</button>
+										<button
+											onClick={() =>
+												dispatch(
+													updateBasketItem({
+														id: item.id,
+														data: {
+															count: item.count + 1
+														}
+													})
+												)
+											}
+											className='hover:text-red-400'
+										>
+											+
+										</button>
 									</div>
 								</div>
 								<div>
 									<p style={{ marginTop: '65px', fontSize: '22px' }}>
-										{item.price * item.count}
+										{item.price} {t('basketCard.soum')}
 									</p>
 								</div>
 
@@ -194,8 +228,7 @@ export const ProductsInBasket = () => {
 									{t('productsInCart.orderCount')}:
 								</span>
 								<span className='basket_textValue_color'>
-									{basketData.length > 0 ? basketData.length : 0}{' '}
-									{t('basket.countItems')}.
+									{totalCount > 0 ? totalCount : 0} {t('basket.countItems')}.
 								</span>
 							</li>
 							<li
@@ -209,7 +242,7 @@ export const ProductsInBasket = () => {
 									{t('productsInCart.cost')}:
 								</span>
 								<span className='basket_textValue_color'>
-									{totalPrice} {t('basketCard.soum')}.
+									{!basketData.length ? 0 : totalPrice} {t('basketCard.soum')}.
 								</span>
 							</li>
 							<div
@@ -234,7 +267,7 @@ export const ProductsInBasket = () => {
 									style={{ color: 'red' }}
 									className='basket_textValue_color'
 								>
-									{totalPrice} {t('basketCard.soum')}.
+									{!basketData.length ? 0 : totalPrice} {t('basketCard.soum')}.
 								</span>
 							</li>
 						</ul>

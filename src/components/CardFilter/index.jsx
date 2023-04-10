@@ -92,8 +92,6 @@ const CardFilter = ({ slug }) => {
 				offset: 0
 			})
 		)
-
-		resetFilter()
 	}, [
 		slug,
 		dispatch,
@@ -375,7 +373,7 @@ const CardFilter = ({ slug }) => {
 													onChange={e => setSelectedBaseMemory(e.target.value)}
 													className='hover:text-red-300'
 												/>
-												{item} {t('cardFilter.gb')}
+												{item}
 											</label>
 										</div>
 									))}

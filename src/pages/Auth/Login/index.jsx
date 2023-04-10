@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useDispatch } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
-
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
+
 import Footer from '../../../components/Footer'
 import Header from '../../../components/Header'
+
 import { loginAction } from '../../../redux/slices/AuthSlice'
 import { AuthService } from '../../../Service'
 
@@ -13,9 +15,8 @@ const Login = () => {
 	const [userName, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	let [error, setError] = useState('')
-
 	const loggedInData = { username: userName, password: password }
-
+	const { loggednIn } = useSelector(state => state.auth)
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const { t } = useTranslation()
@@ -41,6 +42,10 @@ const Login = () => {
 
 	const onSubmit = data => {
 		loginUser()
+	}
+
+	if (loggednIn) {
+		navigate('/')
 	}
 
 	return (
@@ -113,9 +118,16 @@ const Login = () => {
 								</div>
 							</div>
 							{error === 'error' && (
-								<div>
-									<p className='text-red-500'>{error}</p>
-									<p>{t('login.problemLogin')}</p>
+								<div style={{ display: 'none' }}>
+									{toast.error(t('login.problemLogin'), {
+										position: 'top-right',
+										autoClose: 5000,
+										hideProgressBar: false,
+										closeOnClick: true,
+										pauseOnHover: true,
+										draggable: true,
+										theme: 'dark'
+									})}{' '}
 								</div>
 							)}
 

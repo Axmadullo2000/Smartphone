@@ -5,8 +5,6 @@ import { Link, useNavigate } from 'react-router-dom'
 
 import { BasketCard } from '../BasketCard'
 
-import close from '../../assets/close.svg'
-
 import './Basket.scss'
 
 const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
@@ -24,6 +22,9 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 	const totalPrice =
 		!!basketData.length && basketData.reduce((acc, item) => acc + item.price, 0)
 
+	const totalCount =
+		!!basketData.length && basketData.reduce((acc, item) => acc + item.count, 0)
+
 	useEffect(() => {
 		document.addEventListener('mousedown', checkIfClickedOutside)
 	}, [basketModalOpen])
@@ -31,26 +32,10 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 	return (
 		<>
 			{basketModalOpen && (
-				<div
-					className='p-10 fixed right-0 h-full'
-					style={{
-						width: '700px',
-						zIndex: 999,
-						background: 'white',
-						height: '100vh',
-						overflow: 'scroll'
-					}}
-					ref={ref}
-				>
+				<div className='basketCard p-10 ' ref={ref}>
 					{!!basketData.length && basketData.length > 0 ? (
 						<div>
 							<div>
-								<button
-									onClick={() => setBasketModalOpen(old => !old)}
-									style={{ position: 'absolute', right: '0px', top: '35px' }}
-								>
-									<img src={close} alt='close button' />
-								</button>
 								<div className='flex justify-between'>
 									<h2
 										style={{
@@ -65,12 +50,8 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 									</h2>
 									<Link
 										to='/customer/cart/'
-										style={{
-											padding: '8px 50px 8px 32px',
-											background: '#F0F0F0',
-											marginRight: '22px',
-											color: '#223869'
-										}}
+										style={{}}
+										className='redirectToCart'
 									>
 										{t('basket.cartPage')}
 									</Link>
@@ -90,7 +71,7 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 									{
 										<div className='total-box'>
 											<p className='total-counts'>
-												{t('basket.totalItems')}: {basketData.length}{' '}
+												{t('basket.totalItems')}: {totalCount}{' '}
 												{t('basket.countItems')}.
 											</p>
 											<p className='total-price'>

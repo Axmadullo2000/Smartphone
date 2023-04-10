@@ -12,12 +12,23 @@ axios.interceptors.request.use(config => {
 
 export const addProductToBasket = createAsyncThunk(
 	'basket/addProductToBasket',
-	async data => {
+	async (data, { rejectWithValue, dispatch, fulfillWithValue }) => {
 		const response = await axios.post(
 			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/comments/add_product/`,
 			data
 		)
 
+		return response.data
+	}
+)
+
+export const updateBasketItem = createAsyncThunk(
+	'update/updateBasketItem',
+	async ({ id, data }) => {
+		const response = await axios.put(
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/comments/operate_product/${id}/`,
+			data
+		)
 		return response.data
 	}
 )
@@ -28,6 +39,7 @@ export const productsInBasket = createAsyncThunk(
 		const response = await axios.get(
 			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/comments/operate_product/${id}/`
 		)
+
 		return response.data
 	}
 )
@@ -49,7 +61,7 @@ export const paymentAsynkThunk = createAsyncThunk(
 		const response = await axios.post(
 			`http://ec2-54-175-61-21.compute-1.amazonaws.com/create-checkout-session/${id}/`
 		)
-		// console.log(response.data)
+
 		return response.data
 	}
 )

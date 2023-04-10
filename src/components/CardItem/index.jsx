@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
 import { SearchAsyncThunk } from '../../redux/asyncThunks'
+import { addProductToBasket } from '../../redux/asyncThunks/Basket'
 
 import basket from '../../assets/basket.svg'
 import energy from '../../assets/energy.svg'
@@ -10,7 +11,7 @@ import percent from '../../assets/percent.svg'
 import stars from '../../assets/stars.svg'
 import truck from '../../assets/truck.svg'
 
-import { addProductToBasket } from '../../redux/asyncThunks/Basket'
+import { toast } from 'react-toastify'
 import './CardItem.scss'
 
 export const CardItem = item => {
@@ -32,7 +33,6 @@ export const CardItem = item => {
 
 	useEffect(() => {
 		dispatch(SearchAsyncThunk({ search: name, offset: 0 }))
-		console.log(item)
 	}, [dispatch, name])
 
 	return (
@@ -144,6 +144,16 @@ export const CardItem = item => {
 								})
 							)
 						} else {
+							toast.success('You need to Register your account', {
+								position: 'top-right',
+								autoClose: 5000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: true,
+								progress: undefined,
+								theme: 'dark'
+							})
 							navigate('/sign-up')
 						}
 					}}

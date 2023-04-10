@@ -13,11 +13,8 @@ const Footer = () => {
 	const { t } = useTranslation()
 
 	return (
-		<footer
-			className='footer flex text-slate-100 justify-between'
-			style={{ paddingBottom: '40px' }}
-		>
-			<div className='flex items-start'>
+		<footer className='footer flex text-slate-100'>
+			<div className='footerLogo flex items-start'>
 				<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
 					<Link to='/' className='opacity-75 hover:opacity-100'>
 						<span className='text-red-700'>Smart</span>{' '}
@@ -26,38 +23,7 @@ const Footer = () => {
 				</p>
 			</div>
 
-			<div>
-				<h5>{t('footer.about')}</h5>
-				<ul style={{ lineHeight: '30px' }}>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.about')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.news')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.gaurantee')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.sale')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.adress')}
-						</Link>
-					</li>
-				</ul>
-			</div>
-
-			<div>
+			<div className='footerBlock'>
 				<h5>{t('footer.buy')}</h5>
 				<ul style={{ lineHeight: '30px' }}>
 					<li>
@@ -93,27 +59,31 @@ const Footer = () => {
 				</ul>
 			</div>
 
-			<div>
-				<h5>{t('footer.services')}</h5>
-				<ul style={{ lineHeight: '30px' }}>
-					<li>{t('footer.canIBuy')}</li>
-					<li>{t('footer.payment')}</li>
-					<li>{t('footer.unired')}</li>
-					<li>{t('footer.Cooperation')}</li>
-					<li>{t('footer.zmarket')}</li>
-				</ul>
-			</div>
-
-			<div className='mr-5'>
+			<div className='mr-5 footerBlock'>
 				<h5>{t('footer.contact')}</h5>
 				<div className='flex'>
-					<button>
+					<button
+						onClick={() =>
+							(window.location.href =
+								'https://www.facebook.com/profile.php?id=100041447745536')
+						}
+					>
 						<img src={facebook} alt='' width={44} height={44} />
 					</button>
-					<button className='mx-4'>
+					<button
+						className='mx-4'
+						onClick={() =>
+							(window.location.href =
+								'https://www.instagram.com/axmadullo_ubaydullayev/')
+						}
+					>
 						<img src={instagram} alt='' width={44} height={44} />
 					</button>
-					<button>
+					<button
+						onClick={() =>
+							(window.location.href = 'https://t.me/AxmadulloDeveloper')
+						}
+					>
 						<img src={telegram} alt='' width={44} height={44} />
 					</button>
 				</div>
@@ -125,7 +95,9 @@ const Footer = () => {
 						height={36}
 						alt=''
 					/>
-					<p className='text-white text-2xl ml-2'>(91) 792 12 32</p>
+					<a href='tel: +998997944262' className='text-white text-2xl ml-2'>
+						(99) 794-42-62
+					</a>
 				</button>
 			</div>
 		</footer>

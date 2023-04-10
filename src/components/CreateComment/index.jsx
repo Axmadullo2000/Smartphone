@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
+import { useTranslation } from 'react-i18next'
 import { useDispatch } from 'react-redux'
-import { useLocation } from 'react-router-dom'
 
 import { createComment } from '../../redux/slices/CommentSlice'
 import { CrudComment } from '../../Service/Comment'
 
 import './CreateComment.scss'
-import { useTranslation } from 'react-i18next';
 
 export const CreateComment = ({ id }) => {
 	const [grade, setGrade] = useState('')
 	const [comment, setComment] = useState('')
-	const { pathname } = useLocation()
-	const {t} = useTranslation();
+	const { t } = useTranslation()
 	const dispatch = useDispatch()
 
 	const data = {
@@ -50,7 +48,7 @@ export const CreateComment = ({ id }) => {
 					fontWeight: '600'
 				}}
 			>
-				{t("createComment.title")}
+				{t('createComment.title')}
 			</h2>
 			<form onSubmit={onSubmit} className='create_comment'>
 				<input
@@ -65,13 +63,13 @@ export const CreateComment = ({ id }) => {
 				/>
 				<textarea
 					name='comment'
-					placeholder={t("updateComment.typeCommentPlaceholder")}
+					placeholder={t('updateComment.typeCommentPlaceholder')}
 					className='comment_form_content'
 					value={comment}
 					onChange={e => setComment(e.target.value)}
 				></textarea>
 				<button className='comment_form_content comment_btn'>
-				{t("createComment.feedback")}
+					{t('createComment.feedback')}
 				</button>
 			</form>
 		</div>
