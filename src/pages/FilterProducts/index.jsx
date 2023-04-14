@@ -2,9 +2,9 @@ import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
 import CardFilter from '../../components/CardFilter'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import PopularProducts from '../../components/PopularProducts'
+import Footer from '../../components/Layouts/Footer'
+import Header from '../../components/Layouts/Header'
+import PopularProducts from '../../components/Layouts/PopularProducts'
 
 import './FilterProducts.scss'
 

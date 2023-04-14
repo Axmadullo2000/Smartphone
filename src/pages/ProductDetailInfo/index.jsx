@@ -1,11 +1,11 @@
-import { useParams } from "react-router-dom";
+import { useParams } from 'react-router-dom'
 
-import CardDetail from "../../components/CardDetail";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import Footer from '../../components/Layouts/Footer'
+import Header from '../../components/Layouts/Header'
+import CardDetail from '../../components/ProductsDetail/CardDetail'
 
 export const ProductDetailInfo = () => {
-	const { slug } = useParams();
+	const { slug } = useParams()
 
 	return (
 		<>
@@ -13,5 +13,5 @@ export const ProductDetailInfo = () => {
 			<CardDetail slug={slug} />
 			<Footer />
 		</>
-	);
-};
+	)
+}

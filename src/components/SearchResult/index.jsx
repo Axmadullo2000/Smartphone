@@ -5,9 +5,9 @@ import { Link, useNavigate, useParams } from 'react-router-dom'
 
 import { SearchAsyncThunk } from '../../redux/asyncThunks'
 
-import Footer from '../Footer'
-import Header from '../Header'
-import Loader from '../Loader'
+import Footer from '../Layouts/Footer'
+import Header from '../Layouts/Header'
+import Loader from '../Layouts/Loader'
 
 import './SearchResult.scss'
 

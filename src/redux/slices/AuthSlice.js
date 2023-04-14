@@ -21,7 +21,7 @@ const AuthSlice = createSlice({
 			state.userData = action.payload
 			toast.success('You Successfully Logged In', {
 				position: 'top-right',
-				autoClose: 5000,
+				autoClose: 1000,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,
@@ -29,13 +29,13 @@ const AuthSlice = createSlice({
 				theme: 'dark'
 			})
 		},
-		logoutAction(state, action) {
+		logoutAction(state) {
 			state.loggednIn = false
 			state.userData = []
 			removeItem('token')
-			toast.success('You Successfully LogOut', {
+			toast.success('You Successfully Logged Out', {
 				position: 'top-right',
-				autoClose: 5000,
+				autoClose: 1000,
 				hideProgressBar: false,
 				closeOnClick: true,
 				pauseOnHover: true,

@@ -1,18 +1,20 @@
-import React from 'react'
+import { useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 
-import Header from '../../../components/Header'
-import { ValidateRegistration } from '../../../components/ValidateRegistration'
-import Footer from '../../../components/Footer'
+import { ValidateRegistration } from '../../../components/Auth/ValidateRegistration'
+import Footer from '../../../components/Layouts/Footer'
+import Header from '../../../components/Layouts/Header'
 
 const Registration = () => {
 	const { loggednIn } = useSelector(state => state.auth)
 	const navigate = useNavigate()
 
-	if (loggednIn) {
-		navigate('/')
-	}
+	useEffect(() => {
+		if (loggednIn) {
+			navigate('/')
+		}
+	})
 	return (
 		<div>
 			<Header />

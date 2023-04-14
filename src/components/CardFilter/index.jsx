@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link, useLocation } from 'react-router-dom'
 
 import { filterByFewParams } from '../../redux/asyncThunks'
-import { CardItem } from '../CardItem'
-import TooltipSlider from '../TooltipSlider'
+import { CardItem } from '../Layouts/CardItem'
+import TooltipSlider from './TooltipSlider'
 
 import closeElement from '../../assets/closeElement.svg'
 import openElement from '../../assets/openElement.svg'

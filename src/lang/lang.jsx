@@ -27,7 +27,8 @@ export const lang = {
 			totalPrice: 'Общая сумма',
 			soum: 'сумов',
 			cart: 'Корзина',
-			order: 'Заказать'
+			order: 'Заказать',
+			empty: 'Вы должны добавить товары в корзину чтобы оформить заказ!'
 		},
 		basketCard: {
 			price: 'Цена',
@@ -109,14 +110,14 @@ export const lang = {
 			emailReq: 'Электронная почта обязательна',
 			emailMin: 'Длина электронного письма должна быть не менее 10 символов',
 			emailMax: 'Электронная почта не может превышать 60 символов',
-			passwordReq: 'Необходимо пароль',
+			passwordReq: 'Необходимо пароль!!!',
 			confirmPasswordReq: 'Поле Подтверждения пароля обязательно к заполнению',
 
 			passwordMin: 'Длина пароля должна быть не менее 8 символов',
 			passwordMax: 'Пароль не может превышать 32 символа',
 			confirmpasswordReq: 'Требуется подтверждение пароля',
 			resetPassword: 'Сбросить пароль',
-			analogPassword: 'пароли должны быть аналогичными',
+			analogPassword: 'пароли должны быть аналогичными!!!',
 			email: 'Электронная почта',
 			password: 'Пароль',
 			confirmPassword: 'Повторите пароль',
@@ -168,10 +169,13 @@ export const lang = {
 			userName: 'Имя пользователя',
 			userNamePl: 'Ваше имя пользователя',
 			email: 'Адрес электронной почты',
+			emailNameReq: 'Почта обязательна для заполнения!!!',
 			incorrectwrite:
 				'Неверно написанное имя пользователя или адрес электронной почты',
 			register: 'Зарегистрировать',
-			passwordSent: 'Ваш пароль отправлен на ваш электронный адрес!!!'
+			passwordSent: 'Ваш пароль отправлен на ваш электронный адрес!!!',
+			mustHaveRegister:
+				'Зарегистрирууте свой аккаунт чтобы добавить Товар в корзину.'
 		},
 		checkout: {
 			userName: 'Имя пользователя',
@@ -272,7 +276,8 @@ export const lang = {
 			problemLogin: 'Проблемы со входом в аккаунт',
 			signup: 'У вас нет аккаунта?',
 			forgotPassword: 'Забыли пароль?',
-			signin: 'Войти'
+			signin: 'Войти',
+			successLogin: 'Вы Успешно зашли в свой аккаунт.'
 		},
 		footer: {
 			about: 'О нас',
@@ -323,7 +328,8 @@ export const lang = {
 			totalPrice: 'Загальна сума',
 			soum: 'сумів',
 			cart: 'Кошик',
-			order: 'Замовити'
+			order: 'Замовити',
+			empty: 'Ви повинні додати товари в кошик щоб оформити замовлення!'
 		},
 		basketCard: {
 			price: 'Ціна',
@@ -404,11 +410,11 @@ export const lang = {
 			emailReq: "Електронна пошта обов'язкова",
 			emailMin: 'Довжина електронного листа має бути не менше 10 символів',
 			emailMax: 'Електронна пошта не може перевищувати 60 символів',
-			passwordReq: 'Необхідний пароль',
+			passwordReq: 'Необхідний пароль!!!',
 			passwordMin: 'Довжина пароля повинна бути не менше 8 символів',
 			passwordMax: 'Пароль не може перевищувати 32 символи',
 			confirmPasswordReq: "Поле Підтвердження пароля обов'язково до заповнення",
-			analogPassword: 'паролі повинні бути подібними',
+			analogPassword: 'паролі повинні бути подібними!!!',
 			resetPassword: 'Скинути пароль',
 			email: 'Електронна пошта',
 			password: 'Пароль',
@@ -461,10 +467,13 @@ export const lang = {
 			userName: "Ім'я користувача",
 			userNamePl: "Ваше ім'я користувача",
 			email: 'Адреса електронної пошти',
+			emailNameReq: "Пошта обов'язкова для заповнення!!!",
 			incorrectwrite:
 				"Невірно написане ім'я користувача або адресу електронної пошти",
 			register: 'Зареєструвати',
-			passwordSent: 'Ваш пароль надіслано на вашу электронну адресу!!!'
+			passwordSent: 'Ваш пароль надіслано на вашу электронну адресу!!!',
+			mustHaveRegister:
+				'Ви повинні зареєструвати свій обліковий запис! Щоб Додати Товар до кошика.'
 		},
 		checkout: {
 			userName: "ім'я користувача",
@@ -561,7 +570,8 @@ export const lang = {
 			problemLogin: 'Проблеми з входом в обліковий запис',
 			signup: 'У вас немає облікового запису?',
 			forgotPassword: 'Забули пароль?',
-			signin: 'Увійти'
+			signin: 'Увійти',
+			successLogin: 'Ви успішно зайшли до свого облікового запису'
 		},
 		footer: {
 			about: 'Про нас',
@@ -612,7 +622,9 @@ export const lang = {
 			totalPrice: 'Umumiy qiymat',
 			soum: "so'm",
 			cart: 'Savat',
-			order: 'Buyurtma'
+			order: 'Buyurtma',
+			empty:
+				'Haridni amalga oshirish uchun tovarni korzinaga qoshishingiz kerak!'
 		},
 		basketCard: {
 			price: 'Narx',
@@ -692,12 +704,12 @@ export const lang = {
 			emailReq: 'Elektron pochta majburiy',
 			emailMin: "Elektron pochta kamida 10 belgidan iborat bo'lishi kerak",
 			emailMax: 'Elektron pochta 60 belgidan oshmasligi kerak',
-			passwordReq: "Parol qo'yish majburiy",
+			passwordReq: "Parolni kiritish majburiy!!!",
 			confirmPasswordReq: "Parolni ta'sdiqlash majburiy",
 			passwordMin: "Parol kamida 8 ta belgidan iborat bo'lishi kerak",
 			passwordMax: 'Parol 32 belgidan oshmasligi kerak',
-			resetPassword: "Parolni qayta o'rnatish",
-			analogPassword: "Parollar bir xil bo'lishi shart",
+			resetPassword: 'Parolni Tiklash',
+			analogPassword: "Parollar bir xil bo'lishi shart!!!",
 			email: 'Elektron pochta',
 			password: 'Parol',
 			confirmPassword: 'Parolni qayta kiriting',
@@ -749,10 +761,12 @@ export const lang = {
 			userName: 'Foydalanuvchi nomi',
 			userNamePl: 'Foydalanuvchi nomingiz',
 			email: 'E-mail manzili',
+			emailNameReq: 'Pochta kiritish Majburiy!!!',
 			incorrectwrite:
 				'Foydalanuvchi nomi yoki elektron pochta manzili xato yozilgan',
 			register: "Ro'yxatdan o'tish",
-			passwordSent: 'Parolingiz elektron pochta manzilingizga yuborildi!!!'
+			passwordSent: 'Parolingiz elektron pochta manzilingizga yuborildi!!!',
+			mustHaveRegister: "Tovarni savatga qo'shish uchun Ro'yxatdan o'ting!"
 		},
 		checkout: {
 			userName: 'Foydanalanuvchi nomi',
@@ -848,7 +862,8 @@ export const lang = {
 			problemLogin: 'Hisobingizga kirishda muammolar',
 			signup: "Akkountingiz yo'qmi?",
 			forgotPassword: 'Parolni unutdingizmi?',
-			signin: 'Kirish'
+			signin: 'Kirish',
+			successLogin: 'Akkountingizga Muvaffaqiyatli kirdingiz.'
 		},
 		footer: {
 			about: 'Biz haqimizda',

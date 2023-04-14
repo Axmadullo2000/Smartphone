@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
+
+import Footer from '../../components/Layouts/Footer'
+import Header from '../../components/Layouts/Header'
 
 export const NotFound = () => {
 	const navigate = useNavigate()

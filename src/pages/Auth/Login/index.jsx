@@ -1,12 +1,12 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
-import Footer from '../../../components/Footer'
-import Header from '../../../components/Header'
+import Footer from '../../../components/Layouts/Footer'
+import Header from '../../../components/Layouts/Header'
 
 import { loginAction } from '../../../redux/slices/AuthSlice'
 import { AuthService } from '../../../Service'
@@ -15,10 +15,14 @@ const Login = () => {
 	const [userName, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	let [error, setError] = useState('')
+
 	const loggedInData = { username: userName, password: password }
 	const { loggednIn } = useSelector(state => state.auth)
+
 	const dispatch = useDispatch()
+
 	const navigate = useNavigate()
+
 	const { t } = useTranslation()
 
 	const {
@@ -40,13 +44,15 @@ const Login = () => {
 		}
 	}
 
-	const onSubmit = data => {
+	const onSubmit = () => {
 		loginUser()
 	}
 
-	if (loggednIn) {
-		navigate('/')
-	}
+	useEffect(() => {
+		if (loggednIn) {
+			navigate('/')
+		}
+	})
 
 	return (
 		<div>
@@ -71,9 +77,6 @@ const Login = () => {
 							<input type='hidden' name='remember' defaultValue='true' />
 							<div className='-space-y-px rounded-md shadow-sm'>
 								<div>
-									{errors.username && (
-										<p>{t('validateRegistration.userNameReq')}</p>
-									)}
 									<label htmlFor='username' className='sr-only'>
 										{t('validateRegistration.userName')}
 									</label>
@@ -91,14 +94,16 @@ const Login = () => {
 										placeholder={t('validateRegistration.userNamePl')}
 										onChange={e => setUsername(e.target.value)}
 									/>
+									{errors.username && (
+										<p className='errorMessage'>
+											{t('validateRegistration.userNameReq')}
+										</p>
+									)}
 								</div>
 								<div className='my-5' style={{ marginTop: '15px' }}>
 									<label htmlFor='password' className='sr-only'>
 										{t('forgotPAssword.password')}
 									</label>
-									{errors.password && (
-										<span>{t('forgotPAssword.passwordReq')}</span>
-									)}
 									<input
 										value={password}
 										id='password'
@@ -115,6 +120,11 @@ const Login = () => {
 										placeholder={t('forgotPAssword.password')}
 										onChange={e => setPassword(e.target.value)}
 									/>
+									{errors.password && (
+										<span className='errorMessage'>
+											{t('forgotPAssword.passwordReq')}
+										</span>
+									)}
 								</div>
 							</div>
 							{error === 'error' && (

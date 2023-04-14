@@ -1,9 +1,11 @@
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { toast } from 'react-toastify'
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
+
+import Footer from '../../components/Layouts/Footer'
+import Header from '../../components/Layouts/Header'
 import { ShoppingMessage } from '../../components/ShoppingMessage'
+
 import { getSuccessFullAsyncThunk } from '../../redux/asyncThunks/Transaction'
 
 export const ResultShopping = () => {

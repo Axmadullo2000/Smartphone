@@ -3,11 +3,11 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import * as Yup from 'yup'
 
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
+import Footer from '../../components/Layouts/Footer'
+import Header from '../../components/Layouts/Header'
 import { paymentAsynkThunk } from '../../redux/asyncThunks/Basket'
 
 import { loginAction } from '../../redux/slices/AuthSlice'
@@ -19,6 +19,7 @@ import './Checkout.scss'
 export const Checkout = () => {
 	const dispatch = useDispatch()
 	const { t } = useTranslation()
+	const navigate = useNavigate()
 	const { userData, loggednIn } = useSelector(state => state.auth)
 	const { basketData, paymentLink } = useSelector(state => state.basket)
 
@@ -96,6 +97,10 @@ export const Checkout = () => {
 	const [userInfo, setUserInfo] = useState(true)
 	const [deliveryInfo, setDeliverInfo] = useState(false)
 	const [payment, setPayment] = useState(false)
+
+	if (basketData.length === 0 || basketData.Error == 'wrong id user') {
+		navigate('/customer/cart/')
+	}
 
 	return (
 		<div>

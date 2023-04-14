@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 
-import Footer from '../../components/Footer'
-import Header from '../../components/Header'
-import NewProducts from '../../components/NewProducts'
-import PopularProducts from '../../components/PopularProducts'
+import Footer from '../../components/Layouts/Footer'
+import Header from '../../components/Layouts/Header'
+import NewProducts from '../../components/Layouts/NewProducts'
+import PopularProducts from '../../components/Layouts/PopularProducts'
 
 export default function HomePage() {
 	const { t } = useTranslation()
