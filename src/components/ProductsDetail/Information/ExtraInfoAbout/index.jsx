@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 
 import { Comments } from '../../Comments/Comments'
 
+import './ExtraInfoAbout.scss'
+
 export const ExtraInfoAbout = ({
 	showFullDescription,
 	setShowFullDescription
@@ -10,29 +12,16 @@ export const ExtraInfoAbout = ({
 	const { detailData, extraProductDetail, commentData } = useSelector(
 		data => data.data
 	)
+
 	const { t } = useTranslation()
+
 	return (
-		<div
-			style={{
-				marginTop: '5rem',
-				background: 'white',
-				padding: '50px',
-				width: '1200px'
-			}}
-		>
+		<div className='extraContainer'>
 			<ul className='flex'>
 				<li
-					style={
-						showFullDescription.description
-							? {
-									color: '#d92e15',
-									borderBottom: '3px solid #d92e15',
-									fontWeight: '700',
-									cursor: 'pointer'
-							  }
-							: { cursor: 'pointer', color: '#838383' }
-					}
-					className='mx-2'
+					className={`mx-2 side_detail ${
+						showFullDescription.description ? 'activeSide_detail' : ''
+					} `}
 					onClick={() =>
 						setShowFullDescription({
 							description: true,
@@ -44,17 +33,9 @@ export const ExtraInfoAbout = ({
 					{t('extraInfoAbout.desc')}
 				</li>
 				<li
-					style={
-						showFullDescription.characteristic
-							? {
-									color: '#d92e15',
-									borderBottom: '3px solid #d92e15',
-									fontWeight: '700',
-									cursor: 'pointer'
-							  }
-							: { cursor: 'pointer', color: '#838383' }
-					}
-					className='mx-2'
+					className={`mx-2 side_detail ${
+						showFullDescription.characteristic ? 'activeSide_detail' : ''
+					} `}
 					onClick={() =>
 						setShowFullDescription({
 							description: false,
@@ -67,17 +48,9 @@ export const ExtraInfoAbout = ({
 				</li>
 
 				<li
-					style={
-						showFullDescription.feedback
-							? {
-									color: '#d92e15',
-									borderBottom: '3px solid #d92e15',
-									fontWeight: '700',
-									cursor: 'pointer'
-							  }
-							: { cursor: 'pointer', color: '#838383' }
-					}
-					className='mx-2'
+					className={`mx-2 side_detail ${
+						showFullDescription.feedback ? 'activeSide_detail' : ''
+					} `}
 					onClick={() =>
 						setShowFullDescription({
 							description: false,
@@ -153,7 +126,7 @@ export const ExtraInfoAbout = ({
 												<span style={{ width: '50%' }}>
 													{t('extraInfoAbout.version')}
 												</span>
-												<span>{detailData.phone.Version_OS}</span>
+												<span>{detailData.phone.version_os}</span>
 											</li>
 										)}
 										{!!detailData.phone && (

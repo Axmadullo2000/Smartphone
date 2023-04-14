@@ -9,27 +9,17 @@ import { SimilarProducts } from '../SimilarProducts'
 import next from '../../../assets/next.svg'
 import prev from '../../../assets/prev.svg'
 
+import './ExtraProduct.scss'
+
 export const ExtraProduct = ({ similarData }) => {
 	const swiperRef = useRef()
 	const { t } = useTranslation()
 
 	return (
-		<div>
+		<div className='extraProductContainer'>
 			{!!similarData.also_buy && similarData.also_buy.length > 0 && (
 				<>
-					<h2
-						style={{
-							color: '#223869',
-							fontWeight: '600',
-							fontSize: '24px',
-							lineHeight: '25px',
-							fontStyle: 'normal',
-							textAlign: 'center',
-							margin: '30px 0'
-						}}
-					>
-						{t('extraProduct.title')}
-					</h2>
+					<h2 className='extraProductTitle'>{t('extraProduct.title')}</h2>
 
 					{!!similarData.also_buy && similarData.also_buy.length > 0 && (
 						<div className='flex justify-center mt-8 relative'>

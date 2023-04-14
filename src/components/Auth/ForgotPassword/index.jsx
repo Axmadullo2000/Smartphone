@@ -1,13 +1,11 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import * as Yup from 'yup'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
+import * as Yup from 'yup'
 
 import { AuthService } from '../../../Service'
-
-import { formSchema } from '../../../Service'
 
 export const ForgotPassword = () => {
 	const [email, setEmail] = useState('')
@@ -135,7 +133,9 @@ export const ForgotPassword = () => {
 										className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
 										placeholder={t('forgotPAssword.confirmPassword')}
 									/>
-									<p className='errorMessage'>{errors.passwordRepeat?.message}</p>
+									<p className='errorMessage'>
+										{errors.passwordRepeat?.message}
+									</p>
 								</div>
 							</div>
 

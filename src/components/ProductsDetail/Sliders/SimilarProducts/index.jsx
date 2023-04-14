@@ -8,40 +8,60 @@ import { CardItem } from '../../../Layouts/CardItem'
 import next from '../../../../assets/next.svg'
 import prev from '../../../../assets/prev.svg'
 
+import './SimilarProducts.scss'
+
 export const SimilarProducts = ({ similarData }) => {
 	const swiperRef = useRef()
 	const { t } = useTranslation()
 	return (
 		<>
-			<h2
-				style={{
-					color: '#223869',
-					fontWeight: '600',
-					fontSize: '24px',
-					lineHeight: '25px',
-					fontStyle: 'normal',
-					textAlign: 'center',
-					margin: '30px 0'
-				}}
-			>
-				{t('similarProducts.title')}
-			</h2>
+			<h2 className='similarProductTitle'>{t('similarProducts.title')}</h2>
 
 			<div className='flex justify-center mt-8 relative'>
 				<button
 					onClick={() => swiperRef.current.slidePrev()}
-					className='z-50 absolute'
-					style={{
-						width: '55px',
-						top: '50%',
-						transform: 'translateY(-50%)',
-						left: '1%'
-					}}
+					className='goToPrev z-50 absolute'
 				>
 					<img src={prev} alt='' />
 				</button>
 
 				<Swiper
+					breakpoints={{
+						330: {
+							width: 300,
+							slidesPerView: 1,
+							spaceBetweenSlides: 10
+						},
+						400: {
+							width: 300,
+							slidesPerView: 1,
+							spaceBetweenSlides: 10
+						},
+						530: {
+							width: 530,
+							slidesPerView: 1,
+							spaceBetweenSlides: 10
+						},
+						600: {
+							width: 300,
+							slidesPerView: 2,
+							spaceBetweenSlides: 10
+						},
+
+						768: {
+							width: 600,
+							slidesPerView: 2,
+							spaceBetweenSlides: 10
+						},
+						800: {
+							slidesPerView: 3,
+							spaceBetweenSlides: 50
+						},
+						1000: {
+							slidesPerView: 4,
+							spaceBetweenSlides: 10
+						}
+					}}
 					slidesPerView={5}
 					loop={true}
 					speed={500}
@@ -64,13 +84,7 @@ export const SimilarProducts = ({ similarData }) => {
 
 				<button
 					onClick={() => swiperRef.current.slideNext()}
-					className='z-50 absolute'
-					style={{
-						width: '55px',
-						top: '50%',
-						transform: 'translateY(-50%)',
-						right: '3%'
-					}}
+					className='goToNext z-50 absolute'
 				>
 					<img src={next} alt='' />
 				</button>

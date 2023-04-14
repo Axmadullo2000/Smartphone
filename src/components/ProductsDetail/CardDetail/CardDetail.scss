@@ -1,28 +1,20 @@
+.detailContainer {
+	margin-left: 25px;
+	background: #f6f6f6;
+	overflow: hidden;
+}
+
+.directionFromProducts {
+	background: #d92e15;
+	color: white;
+	padding: 10px;
+	font-size: 12px;
+	border-radius: 4px 4px 4px 4px;
+}
+
 .directionFromProducts:hover {
 	background: rgb(34, 56, 105) !important;
 	transition: 0.7s ease;
-}
-
-.phone_details {
-	display: flex;
-	border-bottom: 1px dashed #cecece;
-	align-items: center;
-}
-
-li.phone_details span:nth-child(1) {
-	font-style: normal;
-	font-weight: 600;
-	font-size: 16px;
-	line-height: 40px;
-	color: #223869;
-}
-
-li.phone_details span:nth-child(2) {
-	font-style: normal;
-	font-weight: normal;
-	font-size: 16px;
-	line-height: 19px;
-	color: #5f5f5f;
 }
 
 .character_item {
@@ -45,4 +37,25 @@ li.phone_details span:nth-child(2) {
 .star {
 	width: 30px;
 	height: 60px;
+}
+
+.gotoUp {
+	position: fixed;
+	right: 30px;
+	bottom: 20px;
+	z-index: 999;
+}
+
+@media (max-width: 576px) {
+	.detailContainer {
+		margin-left: 0 !important;
+	}
+
+	.gotoUp {
+		border: 1px solid silver;
+		background: white;
+		img {
+			width: 50px;
+		}
+	}
 }

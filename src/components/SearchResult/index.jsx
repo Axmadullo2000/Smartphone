@@ -12,20 +12,27 @@ import Loader from '../Layouts/Loader'
 import './SearchResult.scss'
 
 export const SearchResult = () => {
-	const { t } = useTranslation()
+	const navigate = useNavigate()
+
 	const { data, status } = useSelector(data => data.data)
 	const dispatch = useDispatch()
+	
 	let { slug } = useParams()
-	const navigate = useNavigate()
+	
+	const { t } = useTranslation()
+
 	const arr = []
 
 	slug = slug?.trim()
 
 	const Count = () => {
-		for (let i = 1; i < data.count; i++) {
-			arr.push(i)
+		if (!!data.results) {
+			for (let i = 1; i < data.results.length; i++) {
+				arr.push(i)
+			}
 		}
 	}
+
 	Count()
 
 	const count = 0

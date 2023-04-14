@@ -10,6 +10,8 @@ import facebook from '../../../../assets/facebook.svg'
 import star from '../../../../assets/stars.svg'
 import telegram from '../../../../assets/telegram.svg'
 
+import './ShowLittleInfo.scss'
+
 export const ShowLittleInfo = ({ setShowFullDescription }) => {
 	const [isActive, setIsActive] = useState(false)
 	const [showPhone, setShowPhone] = useState({
@@ -17,11 +19,15 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 		second: false,
 		third: false
 	})
-	const navigate = useNavigate()
+
 	const { detailData, extraProductDetail } = useSelector(state => state.data)
 	const { comments } = useSelector(comment => comment.comment)
 
 	const { t } = useTranslation()
+
+	const navigate = useNavigate()
+	const dispatch = useDispatch()
+
 	let middlePrice = 5
 
 	if (comments.length > 0) {
@@ -32,15 +38,8 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 			) / comments.length
 	}
 
-	const dispatch = useDispatch()
-
 	return (
-		<div
-			style={{
-				margin: '35px 0px 12px 12px',
-				display: 'flex'
-			}}
-		>
+		<div className='showLittleContainer'>
 			<div>
 				<div>
 					{' '}
@@ -96,27 +95,15 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 						</div>
 					)}
 				</div>
-				<div className='mt-5' style={{ marginRight: '2px' }}>
+				<div className='mt-5'>
 					<div className='flex'>
 						<div
 							onClick={() => {
 								setShowPhone({ first: true, second: false, third: false })
 							}}
-							style={
-								showPhone.first
-									? {
-											border: '2px solid red',
-											margin: '0 10px',
-											borderRadius: '5px',
-											cursor: 'pointer'
-									  }
-									: {
-											border: '2px solid transparent',
-											margin: '0 10px',
-											borderRadius: '5px',
-											cursor: 'pointer'
-									  }
-							}
+							className={`icon_detail
+								${showPhone.first ? 'activeIcon_detail' : ''}
+									`}
 						>
 							{!!detailData.phone && (
 								<img
@@ -139,21 +126,9 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							onClick={() => {
 								setShowPhone({ first: false, second: true, third: false })
 							}}
-							style={
-								showPhone.second
-									? {
-											border: '2px solid red',
-											margin: '0 10px',
-											borderRadius: '5px',
-											cursor: 'pointer'
-									  }
-									: {
-											border: '2px solid transparent',
-											margin: '0 10px',
-											borderRadius: '5px',
-											cursor: 'pointer'
-									  }
-							}
+							className={`icon_detail
+								${showPhone.second ? 'activeIcon_detail' : ''}
+									`}
 						>
 							{!!detailData.phone && (
 								<img
@@ -176,21 +151,9 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							onClick={() => {
 								setShowPhone({ first: false, second: false, third: true })
 							}}
-							style={
-								showPhone.third
-									? {
-											border: '2px solid red',
-											margin: '0 10px',
-											borderRadius: '5px',
-											cursor: 'pointer'
-									  }
-									: {
-											border: '2px solid transparent',
-											margin: '0 10px',
-											borderRadius: '5px',
-											cursor: 'pointer'
-									  }
-							}
+							className={`icon_detail
+							${showPhone.third ? 'activeIcon_detail' : ''}
+								`}
 						>
 							{!!detailData.phone && (
 								<>
@@ -206,19 +169,12 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					</div>
 				</div>
 			</div>
-			<div
-				style={{
-					boxShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
-					background: 'white',
-					marginLeft: '22px',
-					padding: '20px'
-				}}
-			>
-				<div className='flex mt-2' style={{ justifyContent: 'space-between' }}>
-					<p className='uppercase' style={{ color: 'rgb(34, 40, 192)' }}>
+			<div className='detailInfo_content'>
+				<div className='flex mt-2 justify-between items-center socialNetworks_detail'>
+					<p className='uppercase blue-color'>
 						{!!detailData.phone && detailData.phone.brand}
 					</p>
-					<div className='flex items-center'>
+					<div className='flex items-center shareWithLinks ml-2'>
 						<p>{t('showLittleinfo.share')}:</p>
 						{!!detailData.phone && detailData.phone.types === 'smartphone' && (
 							<div className='flex'>
@@ -226,24 +182,14 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									<Link
 										to={`https://t.me/share/url?url=http://smartshopcenter.org:3000/products/view/
 												${detailData.phone.slug}/`}
-										style={{
-											padding: '5px',
-											background: '#f4f4f4',
-											borderRadius: '6px',
-											marginLeft: '5px'
-										}}
+										className='social_detail'
 									>
 										<img src={telegram} width={30} height={30} alt='telegram' />
 									</Link>
 
 									<Link
 										to={`https://www.facebook.com/sharer/sharer.php?u=http://smartshopcenter.org:3000/products/view/${detailData.phone.slug}`}
-										style={{
-											padding: '5px',
-											background: '#f4f4f4',
-											borderRadius: '6px',
-											marginLeft: '5px'
-										}}
+										className='social_detail'
 									>
 										<img src={facebook} width={30} height={30} alt='facebook' />
 									</Link>
@@ -256,12 +202,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									<>
 										<Link
 											to={`https://t.me/share/url?url=http://smartshopcenter.org:3000/products/view/${extraProductDetail.airpod.id}`}
-											style={{
-												padding: '5px',
-												background: '#f4f4f4',
-												borderRadius: '6px',
-												marginLeft: '5px'
-											}}
+											className='social_detail'
 										>
 											<img
 												src={telegram}
@@ -273,12 +214,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 
 										<Link
 											to={`https://www.facebook.com/sharer/sharer.php?u=http://smartshopcenter.org:3000/products/view/${extraProductDetail.airpod.id}`}
-											style={{
-												padding: '5px',
-												background: '#f4f4f4',
-												borderRadius: '6px',
-												marginLeft: '5px'
-											}}
+											className='social_detail'
 										>
 											<img
 												src={facebook}
@@ -293,22 +229,20 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					</div>
 				</div>
 				<div>
-					<p
-						style={{
-							color: '#223869!important',
-							fontSize: '20px',
-							lineHeight: '24px',
-							width: '450px'
-						}}
-					>
+					<p className='titleOfDetailContent'>
 						{!!detailData.phone && detailData.phone.name}
 					</p>
 					<p style={{ color: '#3c763d' }}>{t('showLittleinfo.cash')}</p>
 
 					<div className=''>
-						<div className='flex items-center justify-between'>
-							<p>{t('showLittleinfo.code')} №</p>
-							<div className='flex'>
+						<div className='flex items-center justify-between codeOfProduct'>
+							<p>
+								{t('showLittleinfo.code')} №{' '}
+								{(!!extraProductDetail.airpod &&
+									extraProductDetail.airpod.id) ||
+									(!!detailData.phone && detailData.phone.id)}
+							</p>
+							<div className='flex stars_detail'>
 								{comments.length === 0
 									? !!detailData.phone &&
 									  detailData.phone.types === 'smartphone'
@@ -375,8 +309,10 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					</h3>
 					{!!detailData.phone && detailData.phone.types === 'smartphone' && (
 						<h2 style={{ color: '#223869', fontSize: '22px' }}>
-							{t('showLittleinfo.left')}{' '}
-							{!!detailData.phone && detailData.phone.count}{' '}
+							{t('showLittleinfo.left')}
+							{': '}
+
+							{!!detailData.phone && detailData.phone.count}
 							{t('showLittleinfo.count')}
 						</h2>
 					)}
@@ -384,8 +320,9 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 						extraProductDetail.airpod.types === 'extra' && (
 							<h2 style={{ color: '#223869', fontSize: '22px' }}>
 								{t('showLittleinfo.left')}
-								{!!extraProductDetail.airpod &&
-									extraProductDetail.airpod.count}{' '}
+								{': '}
+								{!!extraProductDetail.airpod && extraProductDetail.airpod.count}
+
 								{t('showLittleinfo.count')}
 							</h2>
 						)}
@@ -554,11 +491,9 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							</li>
 						)}
 						<li
+							className='flex cursor-pointer justify-end'
 							style={{
-								display: 'flex',
-								justifyContent: 'flex-end',
-								color: '#D92E15',
-								cursor: 'pointer'
+								color: '#D92E15'
 							}}
 							onClick={() =>
 								setShowFullDescription({
@@ -574,15 +509,8 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 				</div>
 			</div>
 
-			<div
-				style={{
-					boxShadow: '0 1px 3px rgba(0, 0, 0, 0.5)',
-					background: 'white',
-					marginLeft: '22px',
-					padding: '20px'
-				}}
-			>
-				<h1 style={{ fontSize: '24px' }}>
+			<div className='priceOfProduct'>
+				<h1 className='price_title'>
 					{t('basketCard.price')}:
 					<span
 						style={{
@@ -599,7 +527,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					</span>
 				</h1>
 
-				<div style={{ marginTop: '10px' }}>
+				<div className='basket_btns' style={{ marginTop: '10px' }}>
 					{!!detailData.phone && (
 						<>
 							<button
@@ -613,16 +541,8 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									)
 									navigate('/customer/checkout')
 								}}
-								className='hover:shadow	hover:shadow-slate-400 ease-in'
+								className='buyNow hover:shadow	hover:shadow-slate-400 ease-in'
 								to='/customer/checkout'
-								style={{
-									padding: '12px 16px',
-									background: '#d92e15',
-									borderRadius: '5px',
-									color: 'white',
-									fontSize: '16px',
-									fontWeight: '700'
-								}}
 							>
 								{t('showLittleinfo.buyNow')}
 							</button>
@@ -636,16 +556,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 										})
 									)
 								}}
-								className='hover:shadow	hover:shadow-slate-400 ease-in	'
-								style={{
-									padding: '11px 10px',
-									background: '#d92e15',
-									borderRadius: '5px',
-									color: 'white',
-									fontSize: '16px',
-									fontWeight: '700',
-									marginLeft: '10px'
-								}}
+								className='addToBasket_detail hover:shadow	hover:shadow-slate-400 ease-in'
 							>
 								{t('showLittleinfo.addToCart')}
 							</button>
@@ -664,16 +575,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									)
 									navigate('/customer/checkout')
 								}}
-								className='hover:shadow	hover:shadow-slate-400 ease-in'
-								to='/'
-								style={{
-									padding: '12px 16px',
-									background: '#d92e15',
-									borderRadius: '5px',
-									color: 'white',
-									fontSize: '16px',
-									fontWeight: '700'
-								}}
+								className='buyNow'
 							>
 								{t('showLittleinfo.buyNow')}
 							</button>
@@ -687,16 +589,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 										})
 									)
 								}
-								className='hover:shadow	hover:shadow-slate-400 ease-in	'
-								style={{
-									padding: '11px 10px',
-									background: '#d92e15',
-									borderRadius: '5px',
-									color: 'white',
-									fontSize: '16px',
-									fontWeight: '700',
-									marginLeft: '10px'
-								}}
+								className='addToBasket_detail hover:shadow	hover:shadow-slate-400 ease-in'
 							>
 								{t('showLittleinfo.addToCart')}
 							</button>

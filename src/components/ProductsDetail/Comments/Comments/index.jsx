@@ -58,9 +58,9 @@ export const Comments = ({ id }) => {
 			{comments.length > 0 &&
 				(comments.error !== 'wrong id' ||
 					comments.Error !== 'wrong id phone') &&
-				comments.map(item => (
+				comments.map((item, index) => (
 					<div
-						key={item.id}
+						key={index}
 						style={{
 							border: '1px solid red',
 							margin: '20px 0',
@@ -92,7 +92,7 @@ export const Comments = ({ id }) => {
 						<div className='flex'>
 							{[...Array(Math.floor(item.rate))].map((item, index) => {
 								return (
-									<img alt='star' key={index} src={star} className='star' />
+									<img key={index} alt='star' src={star} className='star' />
 								)
 							})}
 						</div>

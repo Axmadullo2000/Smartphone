@@ -36,43 +36,19 @@ const CardDetail = ({ slug }) => {
 	}, [dispatch, slug])
 
 	return (
-		<div style={{ marginLeft: '25px', background: '#f6f6f6' }}>
+		<div className='detailContainer'>
 			<ul className='flex mt-4 justify-start items-center'>
-				<li
-					className='directionFromProducts mx-2'
-					style={{
-						background: '#D92E15',
-						color: 'white',
-						padding: '10px',
-						fontSize: '12px',
-						borderRadius: '4px 4px 4px 4px'
-					}}
-				>
+				<li className='directionFromProducts mx-2'>
 					<Link to='/'>{t('cardDetail.main')}</Link>
 				</li>
 				{!!detailData.phone && detailData.phone.types === 'smartphone' && (
-					<li
-						className='directionFromProducts mx-2'
-						style={{
-							background: '#D92E15',
-							color: 'white',
-							padding: '10px',
-							fontSize: '12px',
-							borderRadius: '0 4px 4px 0'
-						}}
-					>
+					<li className='directionFromProducts mx-2'>
 						<Link to='/products/category/all/'>{t('header.catalogAll')}</Link>
 					</li>
 				)}
 				<li
 					className='directionFromProducts mx-2'
-					style={{
-						background: '#223869',
-						color: 'white',
-						padding: '10px',
-						fontSize: '12px',
-						borderRadius: '0 4px 4px 0'
-					}}
+					style={{ background: '#223869' }}
 				>
 					{!!detailData.phone && detailData.phone.name}
 					{!!extraProductDetail.airpod && extraProductDetail.airpod.name}
@@ -85,12 +61,7 @@ const CardDetail = ({ slug }) => {
 			/>
 			<div>
 				<button
-					style={{
-						position: 'fixed',
-						right: '30px',
-						bottom: '20px',
-						zIndex: 999
-					}}
+					className='gotoUp'
 					onClick={() => {
 						window.scrollTo({
 							top: 0,
