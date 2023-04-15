@@ -26,11 +26,18 @@ export const Checkout = () => {
 	const [firstName, setFirstName] = useState('')
 	const [secondName, setSecondName] = useState('')
 	const [phoneNumber, setPhoneNumber] = useState('')
-
 	const [userName, setUsername] = useState('')
 	const [password, setPassword] = useState('')
 	const [repeatPasword, setRepeatPassword] = useState('')
 	const [email, setEmail] = useState('')
+	const [locationDelivery, setLocationDelivery] = useState('')
+	const [address, setAddress] = useState('')
+	const [typeOfDelivery, setTypeOfDelivery] = useState(false)
+	const [extraInfo, setExtraInfo] = useState('')
+	const [paymentSystem, setPaymentSystem] = useState('')
+	const [userInfo, setUserInfo] = useState(true)
+	const [deliveryInfo, setDeliverInfo] = useState(false)
+	const [payment, setPayment] = useState(false)
 
 	const data = {
 		username: userName,
@@ -38,13 +45,6 @@ export const Checkout = () => {
 		new_password: repeatPasword,
 		email
 	}
-
-	const [locationDelivery, setLocationDelivery] = useState('')
-	const [address, setAddress] = useState('')
-	const [typeOfDelivery, setTypeOfDelivery] = useState(false)
-	const [extraInfo, setExtraInfo] = useState('')
-
-	const [paymentSystem, setPaymentSystem] = useState('')
 
 	const userDetail = Yup.object().shape({
 		firstName: Yup.string()
@@ -94,11 +94,7 @@ export const Checkout = () => {
 		e.preventDefault()
 	}
 
-	const [userInfo, setUserInfo] = useState(true)
-	const [deliveryInfo, setDeliverInfo] = useState(false)
-	const [payment, setPayment] = useState(false)
-
-	if (basketData.length === 0 || basketData.Error == 'wrong id user') {
+	if (!!basketData.length && basketData.length > 0 && !loggednIn) {
 		navigate('/customer/cart/')
 	}
 
