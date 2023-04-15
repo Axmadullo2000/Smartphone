@@ -29,3 +29,99 @@
 	color: #223869;
 	font-weight: 600;
 }
+
+@media (max-width: 1300px) {
+	.checkout_container {
+		flex-direction: column;
+		div.paymentDescription {
+			margin-left: 33px;
+			width: 712px;
+		}
+		.yourOrderTitle {
+			width: 100%;
+		}
+		.yourOrderDescription {
+			width: 100% !important;
+		}
+	}
+}
+
+@media (max-width: 1000px) {
+	.yourOrderTitle {
+		width: 100%;
+	}
+}
+
+@media (max-width: 800px) {
+	.form_aboutUser {
+		input {
+			max-width: 600px;
+			width: 100%;
+		}
+	}
+	.form_data {
+		flex-direction: column;
+	}
+
+	.inputFoldersBlock {
+		padding: 0 15px !important;
+	}
+
+	.form_aboutUser {
+		label {
+			line-height: 15px;
+		}
+		input[name='secondName'] {
+			margin-left: 0 !important;
+			max-width: 600px !important;
+			width: 100% !important;
+		}
+		input[name='firstName'] {
+			width: 100% !important;
+		}
+		input[name='phoneNumber'] {
+			max-width: 600px !important;
+			width: 100% !important;
+		}
+	}
+
+	.userDataSidebar {
+		width: 500px !important;
+		padding: 0 40px 0 0;
+	}
+	.paymentDescription {
+		max-width: 430px !important;
+		width: 100%;
+	}
+}
+
+@media (max-width: 500px) {
+	.paymentDescription,
+	.userDataSidebar {
+		width: 400px !important;
+	}
+
+	.checkout ul {
+		margin-left: 0 !important;
+	}
+
+	.basketCard {
+		min-width: 360px !important;
+		.added_to_basket {
+			width: 400px !important;
+		}
+	}
+}
+
+@media (max-width: 440px) {
+	.paymentDescription {
+		width: 320px !important;
+	}
+	.userDataSidebar {
+		width: 360px !important;
+		padding: 0 10px 0 0;
+		.form_block {
+			margin-left: 0 !important;
+		}
+	}
+}

@@ -99,9 +99,9 @@ export const Checkout = () => {
 	}
 
 	return (
-		<div>
+		<div className='checkout'>
 			<Header />
-			<div className='checkout_container'>
+			<>
 				<ul className='flex mt-5' style={{ marginLeft: '32px' }}>
 					<li className='checkout_direction'>
 						<Link to='/'>{t('cardDetail.main')}</Link>
@@ -118,14 +118,17 @@ export const Checkout = () => {
 				>
 					{t('checkout.order')}
 				</h2>
-
-				<div className='mt-8 flex justify-between'>
+			</>
+			<div className='checkout_container flex justify-around'>
+				<div
+					className='mt-8 flex flex-col userDataSidebar'
+					style={{ width: '742px' }}
+				>
 					<h3
-						className='ml-6 flex items-center'
+						className='flex items-center'
 						style={{
 							border: '1px solid silver',
 							padding: '15px 20px',
-							width: '742px',
 							background: '#f5f5f5',
 							color: '#333'
 						}}
@@ -146,23 +149,10 @@ export const Checkout = () => {
 						</span>
 						<span className='ml-2'>{t('checkout.orderinfo')}</span>
 					</h3>
-					<h3
-						className='mr-6'
-						style={{
-							border: '1px solid silver',
-							padding: '15px 20px',
-							width: '685px',
-							background: '#f5f5f5',
-							color: '#333'
-						}}
-					>
-						{t('checkout.yourOrder')}
-					</h3>
-				</div>
-				<div className='flex justify-around'>
-					<div style={{ width: '742px' }}>
+					<div className='form_block'>
 						{userInfo && (
 							<div
+								className='inputFoldersBlock'
 								style={{
 									width: '100%',
 									border: '1px solid silver',
@@ -170,13 +160,13 @@ export const Checkout = () => {
 								}}
 							>
 								<>
-									{loggednIn ? (
+									{loggednIn && (
 										<form
 											onSubmit={handleSubmit(onSubmit)}
-											className='ml-6'
+											className='ml-6 form_aboutUser'
 											style={{ lineHeight: '35px' }}
 										>
-											<div className='flex mt-4'>
+											<div className='flex mt-4 form_data'>
 												<div className='flex flex-col'>
 													<label
 														style={{
@@ -258,151 +248,6 @@ export const Checkout = () => {
 												<p style={{ color: '#a94442', fontSize: '16px' }}>
 													{errors.phoneNumber?.message}
 												</p>
-											</div>
-										</form>
-									) : (
-										<form
-											onSubmit={handleSubmit(onSubmit)}
-											className='flex flex-col ml-6'
-											style={{ lineHeight: '35px' }}
-										>
-											<div className='flex mt-4'>
-												<div className='flex flex-col'>
-													<label
-														style={{
-															color: '#a94442',
-															fontWeight: 'bold',
-															fontSize: '16px'
-														}}
-													>
-														{t('checkout.userName')}
-													</label>
-													<input
-														{...register('userName')}
-														id='userName'
-														name='userName'
-														value={userName}
-														onChange={e => setUsername(e.target.value)}
-														style={{
-															background: '#eefaff',
-															width: '320px',
-															padding: '0 15px',
-															borderRadius: '5px'
-														}}
-													/>
-													<p style={{ color: '#a94442', fontSize: '14px' }}>
-														{errors.userName?.message}
-													</p>
-												</div>
-												<div
-													className='flex flex-col'
-													style={
-														!!errors.userName?.message
-															? { marginLeft: '0px' }
-															: { marginLeft: '26px' }
-													}
-												>
-													<label
-														style={{
-															color: '#a94442',
-															fontWeight: 'bold',
-															fontSize: '16px',
-															marginLeft: '12px'
-														}}
-													>
-														{t('checkout.password')}
-													</label>
-													<input
-														{...register('userPassword')}
-														id='userPassword'
-														name='userPassword'
-														value={password}
-														onChange={e => setPassword(e.target.value)}
-														style={{
-															background: '#eefaff',
-															width: '320px',
-															padding: '0 15px',
-															marginLeft: '12px',
-															borderRadius: '5px'
-														}}
-													/>
-													<p
-														style={{
-															color: '#a94442',
-															fontSize: '14px',
-															marginLeft: '14px'
-														}}
-													>
-														{errors.userPassword?.message}
-													</p>
-												</div>
-											</div>
-											<div className='flex mt-4'>
-												<div className='flex flex-col'>
-													<label
-														style={{
-															color: '#a94442',
-															fontWeight: 'bold',
-															fontSize: '16px'
-														}}
-													>
-														{t('checkout.repeatPasword')}
-													</label>
-													<input
-														{...register('repeatPasword')}
-														id='repeatPasword'
-														name='repeatPasword'
-														value={repeatPasword}
-														onChange={e => setRepeatPassword(e.target.value)}
-														style={{
-															background: '#eefaff',
-															width: '320px',
-															padding: '0 15px',
-															borderRadius: '5px'
-														}}
-													/>
-													<p style={{ color: '#a94442', fontSize: '14px' }}>
-														{errors.repeatPasword?.message}
-													</p>
-												</div>
-												<div
-													className='flex flex-col'
-													style={{ marginLeft: '26px' }}
-												>
-													<label
-														style={{
-															color: '#a94442',
-															fontWeight: 'bold',
-															fontSize: '16px',
-															marginLeft: '12px'
-														}}
-													>
-														{t('checkout.email')}
-													</label>
-													<input
-														{...register('email')}
-														id='email'
-														name='email'
-														value={email}
-														onChange={e => setEmail(e.target.value)}
-														style={{
-															background: '#eefaff',
-															width: '320px',
-															padding: '0 15px',
-															marginLeft: '12px',
-															borderRadius: '5px'
-														}}
-													/>
-													<p
-														style={{
-															color: '#a94442',
-															fontSize: '14px',
-															marginLeft: '14px'
-														}}
-													>
-														{errors.email?.message}
-													</p>
-												</div>
 											</div>
 										</form>
 									)}
@@ -823,12 +668,28 @@ export const Checkout = () => {
 							</div>
 						)}
 					</div>
-					<div
+				</div>
+				<div className='mt-8 paymentDescription'>
+					<h3
+						className='mr-6 yourOrderTitle'
 						style={{
-							width: '683px',
+							border: '1px solid silver',
+							padding: '18px 5px',
+							background: '#f5f5f5',
+							color: '#333',
+							width: '100%'
+						}}
+					>
+						{t('checkout.yourOrder')}
+					</h3>
+					<div
+						className='yourOrderDescription'
+						style={{
+							width: '685px',
 							marginBottom: '1rem',
 							background: 'white',
-							padding: '0 22px 52px 20px'
+							padding: '20px 25px 52px 20px',
+							border: '1px solid silver'
 						}}
 					>
 						<div
@@ -872,7 +733,7 @@ export const Checkout = () => {
 							<div className='' style={{ borderBottom: '1px soldi silver' }}>
 								{!!basketData.length &&
 									basketData.map(item => (
-										<div style={{ borderBOttom: '1px solid silver' }}>
+										<div style={{ borderBottom: '1px solid silver' }}>
 											<div
 												key={item.id}
 												className='flex justify-between'
