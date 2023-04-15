@@ -36,6 +36,10 @@
 @media (max-width: 630px) {
 	.searchContent {
 		overflow-x: hidden;
+		min-width: 350px;
+		.cardElement {
+			padding: 10px 18px;
+		}
 	}
 	.notFound_products {
 		width: 320px;
@@ -44,5 +48,24 @@
 			font-size: 15px;
 			padding: 5px;
 		}
+		.search_result_info {
+			font-size: 16px;
+		}
+	}
+
+	.search_result_image {
+		width: 200px;
+	}
+}
+
+@media (max-width: 460px) {
+	.search_result_image {
+		width: 150px;
+	}
+	.search_result_info {
+		font-size: 14px;
+	}
+	.searchContent .cardElement {
+		padding: 0 10px;
 	}
 }

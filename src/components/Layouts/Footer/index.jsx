@@ -23,43 +23,7 @@ const Footer = () => {
 				</p>
 			</div>
 
-			<div className='footerBlock'>
-				<h5>{t('footer.buy')}</h5>
-				<ul style={{ lineHeight: '30px' }}>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.pickup')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.contact')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.serviceCenter')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.feedback')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.vacancy')}
-						</Link>
-					</li>
-					<li>
-						<Link to='/' style={{ padding: '10px', margin: '-10px' }}>
-							{t('footer.corporateBuy')}
-						</Link>
-					</li>
-				</ul>
-			</div>
-
-			<div className='mr-5 footerBlock'>
+			<div className='mr-5 ml-5 footerBlock'>
 				<h5>{t('footer.contact')}</h5>
 				<div className='flex'>
 					<button

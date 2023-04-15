@@ -132,7 +132,7 @@ export const lang = {
 			title: 'Популярные товары'
 		},
 		searchResult: {
-			title: 'Результат поиска',
+			title: 'Результаты поиска',
 			type: 'Тип',
 			version: 'Версия ОС ',
 			corpus: 'Корпус',
@@ -153,7 +153,10 @@ export const lang = {
 			corpus: 'Корпус',
 			all: 'Все',
 			buyNow: 'Купить сейчас',
-			addToCart: 'Добавить в корзину'
+			addToCart: 'Добавить в корзину',
+			signInForAddToBasket:
+				'Чтобы добавить товар в корзину. Войдите в профиль сначала!',
+			signInForBuyProduct: 'Чтобы купить товар. Войдите в профиль сначала!'
 		},
 		similarProducts: {
 			title: 'Похожие товары'
@@ -278,6 +281,12 @@ export const lang = {
 			forgotPassword: 'Забыли пароль?',
 			signin: 'Войти',
 			successLogin: 'Вы Успешно зашли в свой аккаунт.'
+		},
+		notFound: {
+			understand: 'Понимаешь...',
+			absent:
+				'...на моём сайте нету такой страницы. Просто возвращайся на главную!',
+			mainPage: 'На Главную'
 		},
 		footer: {
 			about: 'О нас',
@@ -430,7 +439,7 @@ export const lang = {
 			title: 'Популярні товари'
 		},
 		searchResult: {
-			title: 'Результат пошуку',
+			title: 'Результаты пошуку',
 			type: 'Тип',
 			version: 'Версія  ОС ',
 			corpus: 'Корпус',
@@ -451,7 +460,10 @@ export const lang = {
 			corpus: 'Корпус',
 			all: 'Всі',
 			buyNow: 'Купити зараз',
-			addToCart: 'Додати до кошика'
+			addToCart: 'Додати до кошика',
+			signInForAddToBasket:
+				'Щоб додати товар у кошик. Увійдіть в профіль спочатку!',
+			signInForBuyProduct: 'Щоб купити товар. Увійдіть в профіль спочатку!'
 		},
 		similarProducts: {
 			title: 'Схожі товари'
@@ -572,6 +584,12 @@ export const lang = {
 			forgotPassword: 'Забули пароль?',
 			signin: 'Увійти',
 			successLogin: 'Ви успішно зайшли до свого облікового запису'
+		},
+		notFound: {
+			understand: 'Розуміти...',
+			absent:
+				'...на моєму сайті немає такої сторінки. Просто повертайся на головну!',
+			mainPage: 'На Головну'
 		},
 		footer: {
 			about: 'Про нас',
@@ -704,7 +722,7 @@ export const lang = {
 			emailReq: 'Elektron pochta majburiy',
 			emailMin: "Elektron pochta kamida 10 belgidan iborat bo'lishi kerak",
 			emailMax: 'Elektron pochta 60 belgidan oshmasligi kerak',
-			passwordReq: "Parolni kiritish majburiy!!!",
+			passwordReq: 'Parolni kiritish majburiy!!!',
 			confirmPasswordReq: "Parolni ta'sdiqlash majburiy",
 			passwordMin: "Parol kamida 8 ta belgidan iborat bo'lishi kerak",
 			passwordMax: 'Parol 32 belgidan oshmasligi kerak',
@@ -745,7 +763,11 @@ export const lang = {
 			corpus: 'Ramka',
 			all: 'Hammasi',
 			buyNow: 'Hozir xarid qilish',
-			addToCart: "Savatga qo'shish"
+			addToCart: "Savatga qo'shish",
+			signInForAddToBasket:
+				'Tovarni sotib olish uchun Avval Profilingizga Kiring!',
+			signInForBuyProduct:
+				'Tovarni harid uchun olish uchun. Avval Profilingizga Kiring!'
 		},
 		similarProducts: {
 			title: "O'xshash mahsulotlar"
@@ -864,6 +886,13 @@ export const lang = {
 			forgotPassword: 'Parolni unutdingizmi?',
 			signin: 'Kirish',
 			successLogin: 'Akkountingizga Muvaffaqiyatli kirdingiz.'
+		},
+
+		notFound: {
+			understand: 'Tushuning...',
+			absent:
+				"...Bu saytda bunday manzil mavjud emas! Shunchaki Asosiy Menuga o'ting",
+			mainPage: 'Asosiy Menu'
 		},
 		footer: {
 			about: 'Biz haqimizda',

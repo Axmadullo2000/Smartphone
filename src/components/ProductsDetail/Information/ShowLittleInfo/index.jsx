@@ -19,9 +19,12 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 		second: false,
 		third: false
 	})
+	const [errorInAddToBasket, setErrorInAddToBasket] = useState(false)
+	const [errorInBuyProduct, setErrorInBuyProduct] = useState(false)
 
 	const { detailData, extraProductDetail } = useSelector(state => state.data)
 	const { comments } = useSelector(comment => comment.comment)
+	const { loggednIn } = useSelector(state => state.auth)
 
 	const { t } = useTranslation()
 
@@ -532,14 +535,18 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 						<>
 							<button
 								onClick={() => {
-									dispatch(
-										addProductToBasket({
-											product_id: detailData.phone.id,
-											group_product:
-												detailData.phone.types === 'smartphone' ? 1 : 2
-										})
-									)
-									navigate('/customer/checkout')
+									if (loggednIn) {
+										dispatch(
+											addProductToBasket({
+												product_id: detailData.phone.id,
+												group_product:
+													detailData.phone.types === 'smartphone' ? 1 : 2
+											})
+										)
+										navigate('/customer/checkout')
+									} else {
+										setErrorInBuyProduct(true)
+									}
 								}}
 								className='buyNow hover:shadow	hover:shadow-slate-400 ease-in'
 								to='/customer/checkout'
@@ -548,13 +555,17 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							</button>
 							<button
 								onClick={() => {
-									dispatch(
-										addProductToBasket({
-											product_id: detailData.phone.id,
-											group_product:
-												detailData.phone.types === 'smartphone' ? 1 : 2
-										})
-									)
+									if (loggednIn) {
+										dispatch(
+											addProductToBasket({
+												product_id: detailData.phone.id,
+												group_product:
+													detailData.phone.types === 'smartphone' ? 1 : 2
+											})
+										)
+									} else {
+										setErrorInAddToBasket(true)
+									}
 								}}
 								className='addToBasket_detail hover:shadow	hover:shadow-slate-400 ease-in'
 							>
@@ -562,33 +573,56 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							</button>
 						</>
 					)}
+					{errorInAddToBasket && (
+						<p style={{ color: '#d92e15' }}>
+							{t('showLittleinfo.signInForAddToBasket')}
+						</p>
+					)}
+					{errorInBuyProduct && (
+						<p style={{ color: '#d92e15' }}>
+							{t('showLittleinfo.signInForBuyProduct')}
+						</p>
+					)}
+
 					{!!extraProductDetail.airpod && (
 						<>
 							<button
 								onClick={() => {
-									dispatch(
-										addProductToBasket({
-											product_id: detailData.phone.id,
-											group_product:
-												extraProductDetail.phone.types === 'smartphone' ? 1 : 2
-										})
-									)
-									navigate('/customer/checkout')
+									if (loggednIn) {
+										dispatch(
+											addProductToBasket({
+												product_id: detailData.phone.id,
+												group_product:
+													extraProductDetail.phone.types === 'smartphone'
+														? 1
+														: 2
+											})
+										)
+										navigate('/customer/checkout')
+									} else {
+										setErrorInBuyProduct(true)
+									}
 								}}
 								className='buyNow'
 							>
 								{t('showLittleinfo.buyNow')}
 							</button>
 							<button
-								onClick={() =>
-									dispatch(
-										addProductToBasket({
-											product_id: extraProductDetail.airpod.id,
-											group_product:
-												extraProductDetail.airpod.types === 'smartphone' ? 1 : 2
-										})
-									)
-								}
+								onClick={() => {
+									if (loggednIn) {
+										dispatch(
+											addProductToBasket({
+												product_id: extraProductDetail.airpod.id,
+												group_product:
+													extraProductDetail.airpod.types === 'smartphone'
+														? 1
+														: 2
+											})
+										)
+									} else {
+										setErrorInAddToBasket(true)
+									}
+								}}
 								className='addToBasket_detail hover:shadow	hover:shadow-slate-400 ease-in'
 							>
 								{t('showLittleinfo.addToCart')}

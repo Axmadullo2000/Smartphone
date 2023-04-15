@@ -104,7 +104,7 @@ const Header = () => {
 							<img width={30} src={openElement} />
 						</>
 					)}
-					<span className='text-xl opacity-60'>{t('header.catalog')}</span>
+					<span className='text-xl text-white'>{t('header.catalog')}</span>
 				</div>
 
 				<form onSubmit={searchHandleSubmit}>

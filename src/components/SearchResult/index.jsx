@@ -16,9 +16,9 @@ export const SearchResult = () => {
 
 	const { data, status } = useSelector(data => data.data)
 	const dispatch = useDispatch()
-	
+
 	let { slug } = useParams()
-	
+
 	const { t } = useTranslation()
 
 	const arr = []
@@ -44,7 +44,7 @@ export const SearchResult = () => {
 	return (
 		<div className='searchContent'>
 			<Header />
-			<h2 className='text-center text-2xl text-stone-50 mb-5'>
+			<h2 className='text-center text-2xl mt-5 mb-5'>
 				{t('searchResult.title')}
 			</h2>
 			<div className='search_result'>
@@ -58,9 +58,14 @@ export const SearchResult = () => {
 							{status == '' ? (
 								<Loader />
 							) : (
-								<img src={item.photo1} alt='' width={300} />
+								<img
+									className='search_result_image'
+									src={item.photo1}
+									alt=''
+									width={300}
+								/>
 							)}
-							<ul className='ml-4 mt-4'>
+							<ul className='search_result_info ml-4 mt-4'>
 								<li>
 									{t('searchResult.type')} {item.name.slice(0, 8)}
 								</li>

@@ -7,6 +7,9 @@ import { filterByFewParams } from '../../redux/asyncThunks'
 import { CardItem } from '../Layouts/CardItem'
 import TooltipSlider from './TooltipSlider'
 
+import bars from '../../assets/bars.svg'
+import closeSidebar from '../../assets/close.svg'
+
 import closeElement from '../../assets/closeElement.svg'
 import openElement from '../../assets/openElement.svg'
 import up from '../../assets/up.svg'
@@ -246,16 +249,9 @@ const CardFilter = ({ slug }) => {
 	}
 
 	return (
-		<div style={{ display: 'flex', marginTop: '13px' }}>
+		<div className='cardFilterContainer'>
 			{showProducts && (
-				<div
-					style={{
-						width: '400px',
-						background: '#f6f6f6',
-						padding: '20px 35px',
-						lineHeight: '30px'
-					}}
-				>
+				<div className='filterByBrand'>
 					<h3 className='text-xl text-red-700'>
 						<span className='capitalize'>
 							{slug !== 'all' ? slug : 'Все '} {t('cardFilter.smartPhone')}
@@ -263,11 +259,17 @@ const CardFilter = ({ slug }) => {
 					</h3>
 					<div>
 						{pathname === '/products/category/all' ? (
-							<Link to='/products/category/all' className='text-red-700'>
+							<Link
+								to='/products/category/all'
+								className='brandLink text-red-700 hover:text-red-450'
+							>
 								{t('header.catalogAll')}
 							</Link>
 						) : (
-							<Link to='/products/category/all' className='text-red-450'>
+							<Link
+								to='/products/category/all'
+								className='brandLink text-red-450 hover:text-red-450'
+							>
 								{t('header.catalogAll')}
 							</Link>
 						)}
@@ -276,13 +278,19 @@ const CardFilter = ({ slug }) => {
 							<p key={item} className='capitalize'>
 								{pathname === `/products/category/${item}` ? (
 									<Link
+										className='brandLink hover:text-red-450'
 										to={`/products/category/${item}`}
-										style={{ color: 'red' }}
+										style={{ color: '#d92e15' }}
 									>
 										{item}
 									</Link>
 								) : (
-									<Link to={`/products/category/${item}`}>{item}</Link>
+									<Link
+										className='brandLink hover:text-red-450'
+										to={`/products/category/${item}`}
+									>
+										{item}
+									</Link>
 								)}
 							</p>
 						))}
@@ -313,7 +321,10 @@ const CardFilter = ({ slug }) => {
 							</>
 						}
 
-						<div style={{ width: 320, margin: '20px 0px' }}>
+						<div
+							className='price_filter'
+							style={{ width: 320, margin: '20px 0px' }}
+						>
 							<TooltipSlider
 								onChange={value => setCount(value)}
 								range
@@ -677,115 +688,21 @@ const CardFilter = ({ slug }) => {
 			)}
 
 			<div style={{ width: '100%' }}>
-				<div
-					className='bg-white flex justify-between rounded items-center mb-10'
-					style={{
-						width: 'calc(100%-25px)',
-						margin: '30px auto',
-						padding: '10px',
-						boxShadow: '5px 5px 5px red'
-					}}
-				>
+				<div className='bg-white flex justify-between rounded items-center mb-10 filterByPrice'>
 					<div className='flex items-center'>
 						<div
 							onClick={() => setShowProducts(!showProducts)}
-							style={
-								showProducts
-									? {
-											cursor: 'pointer',
-											background: '#D92E15',
-											border: '2px solid #D92E15',
-											color: 'white',
-											padding: '10px',
-											borderRadius: '5px',
-											paddingBottom: '19px',
-											paddingTop: '12px'
-									  }
-									: {
-											display: 'flex',
-											justifyContent: 'center',
-											alignItems: 'center',
-											cursor: 'pointer',
-											background: '#D92E15',
-											border: '2px solid #D92E15',
-											padding: '20px',
-											borderRadius: '5px',
-											paddingBottom: '20px',
-											paddingTop: '12px'
-									  }
+							className={
+								showProducts ? 'show_sidebar_filter' : 'hide_sidebar_filter'
 							}
 						>
 							{showProducts ? (
-								<div
-									className='flex flex-col'
-									style={{
-										display: 'flex',
-										alignItems: 'center',
-										justifyContent: 'center',
-										width: '22px',
-										height: '14px',
-										position: 'relative',
-										margin: '-5px 8px'
-									}}
-								>
-									<span
-										style={{
-											width: '20px',
-											height: '3px',
-											margin: '3px 0',
-											background: 'white',
-											position: 'absolute',
-											top: '49%',
-											transform: 'rotate(45deg)'
-										}}
-									></span>
-									<span
-										style={{
-											width: '20px',
-											height: '3px',
-											margin: '3px 0',
-											background: 'white',
-											position: 'absolute',
-											top: '49%',
-											transform: 'rotate(-45deg)'
-										}}
-									></span>
+								<div className=''>
+									<img src={closeSidebar} width={35} height={35} />
 								</div>
 							) : (
-								<div
-									className='flex flex-col absolute'
-									style={{ width: '22px', height: '14px', margin: '0px 8px' }}
-								>
-									<span
-										style={{
-											width: '100%',
-											height: '3px',
-											margin: '3px 0',
-											background: 'white',
-											position: 'absolute',
-											top: 0
-										}}
-									></span>
-									<span
-										style={{
-											width: '100%',
-											height: '3px',
-											margin: '3px 0',
-											background: 'white',
-											position: 'absolute',
-											top: '50%'
-										}}
-									></span>
-									<span
-										style={{
-											width: '100%',
-											height: '3px',
-											margin: '3px 0',
-											background: 'white',
-											position: 'absolute',
-											top: '100%'
-										}}
-									></span>
+								<div className=''>
+									<img src={bars} width={35} height={35} />
 								</div>
 							)}
 						</div>
@@ -796,7 +713,10 @@ const CardFilter = ({ slug }) => {
 							{t('cardFilter.sort')}
 						</h3>
 					</div>
-					<form className='flex' onSubmit={e => e.preventDefault()}>
+					<form
+						className='flex priceFilterForm'
+						onSubmit={e => e.preventDefault()}
+					>
 						<div onClick={() => setSorted('asc')} className='mx-2'>
 							<button
 								className='rounded text-slate-200 ease-in duration-300'
@@ -870,12 +790,7 @@ const CardFilter = ({ slug }) => {
 				</div>
 				<div>
 					<button
-						style={{
-							position: 'fixed',
-							right: '30px',
-							bottom: '20px',
-							zIndex: 999
-						}}
+						className='fixedDirectUp'
 						onClick={() => {
 							window.scrollTo({
 								top: 0,
@@ -883,7 +798,7 @@ const CardFilter = ({ slug }) => {
 							})
 						}}
 					>
-						<img src={up} alt='up' />
+						<img src={up} alt='up' width={50} />
 					</button>
 				</div>
 				<div

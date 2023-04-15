@@ -10,6 +10,8 @@ import { CardItem } from '../../Layouts/CardItem'
 import next from '../../../assets/next.svg'
 import prev from '../../../assets/prev.svg'
 
+import './PopularProducts.scss'
+
 const PopularProducts = () => {
 	const { t } = useTranslation()
 	const swiperRef = useRef()
@@ -58,8 +60,8 @@ const PopularProducts = () => {
 							spaceBetweenSlides: 10
 						},
 						768: {
-							slidesPerView: 2,
-							spaceBetweenSlides: 1500
+							slidesPerView: 4,
+							spaceBetweenSlides: 10
 						},
 						800: {
 							slidesPerView: 3,

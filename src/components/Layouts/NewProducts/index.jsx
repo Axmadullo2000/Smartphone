@@ -11,6 +11,8 @@ import { CardItem } from '../CardItem'
 import next from '../../../assets/next.svg'
 import prev from '../../../assets/prev.svg'
 
+import './NewProducts.scss'
+
 export default function NewProducts() {
 	const { t } = useTranslation()
 	const newRef = useRef()

@@ -1,4 +1,82 @@
+.brandLink:hover {
+	color: #d92e15;
+}
+
+.cardFilterContainer {
+	display: flex;
+	margin-top: 13px;
+
+	.filterByBrand {
+		width: 400px;
+		background: #f6f6f6;
+		padding: 20px 35px;
+		lineheight: 30px;
+	}
+
+	.filterByPrice {
+		max-width: 100%;
+		margin: 30px auto;
+		padding: 10px;
+		boxshadow: 5px 5px 5px red;
+		.show_sidebar_filter {
+			cursor: pointer;
+			background: #d92e15;
+			border: 2px solid #d92e15;
+			color: white;
+			padding: 0px;
+			border-radius: 5px;
+			padding-bottom: 0px;
+			padding-top: 0px;
+		}
+		.hide_sidebar_filter {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+			background: #d92e15;
+			border: 2px solid #d92e15;
+			padding: 0px;
+			border-radius: 5px;
+			padding-bottom: 0px;
+			padding-top: 0;
+		}
+	}
+}
+
 .resetFilter:hover {
 	background: rgb(217, 46, 21);
 	color: white !important;
+}
+
+.fixedDirectUp {
+	position: fixed;
+	right: 5px;
+	bottom: 20px;
+	z-index: 999;
+	border: 1px solid red;
+	img {
+		width: 60px;
+	}
+}
+
+@media (max-width: 1000px) {
+	.cardFilterContainer {
+		flex-direction: column;
+		.filterByBrand,
+		.price_filter {
+			width: 100% !important;
+		}
+	}
+}
+
+@media (max-width: 576px) {
+	.cardFilterContainer {
+		flex-direction: column;
+		.filterByPrice {
+			flex-direction: column;
+		}
+		.priceFilterForm {
+			margin-top: 22px;
+		}
+	}
 }
