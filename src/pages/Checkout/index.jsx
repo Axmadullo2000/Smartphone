@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -20,6 +20,7 @@ export const Checkout = () => {
 	const dispatch = useDispatch()
 	const { t } = useTranslation()
 	const navigate = useNavigate()
+
 	const { userData, loggednIn } = useSelector(state => state.auth)
 	const { basketData, paymentLink } = useSelector(state => state.basket)
 
@@ -94,15 +95,20 @@ export const Checkout = () => {
 		e.preventDefault()
 	}
 
-	if (!!basketData.length && basketData.length > 0 && !loggednIn) {
-		navigate('/customer/cart/')
-	}
+	useEffect(() => {
+		if (basketData.length == 0 || !loggednIn) {
+			navigate('/customer/cart/')
+		}
+	}, [])
 
 	return (
 		<div className='checkout'>
 			<Header />
 			<>
-				<ul className='flex mt-5' style={{ marginLeft: '32px' }}>
+				<ul
+					className='flex mt-5 checkoutDirection'
+					style={{ marginLeft: '32px' }}
+				>
 					<li className='checkout_direction'>
 						<Link to='/'>{t('cardDetail.main')}</Link>
 					</li>
@@ -481,6 +487,7 @@ export const Checkout = () => {
 									</p>
 									<p>{errors.typeDelivery?.message}</p>
 									<textarea
+										className='detailInformation'
 										defaultValue={extraInfo}
 										onChange={e => setExtraInfo(e.target.value)}
 										style={{
@@ -489,7 +496,7 @@ export const Checkout = () => {
 											height: '120px'
 										}}
 									></textarea>
-									<div>
+									<div className='prevAndNextBtnBlock'>
 										<button
 											onClick={() => {
 												setUserInfo(true)
@@ -736,7 +743,7 @@ export const Checkout = () => {
 										<div style={{ borderBottom: '1px solid silver' }}>
 											<div
 												key={item.id}
-												className='flex justify-between'
+												className='flex justify-between titleAndPriceColumn'
 												style={{ marginTop: '10px' }}
 											>
 												<p>{item.name}</p>

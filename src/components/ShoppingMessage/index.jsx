@@ -1,6 +1,8 @@
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
 
+import './ShoppingMessage.scss'
+
 export const ShoppingMessage = () => {
 	const { t } = useTranslation()
 
@@ -18,23 +20,12 @@ export const ShoppingMessage = () => {
 				</li>
 			</ul>
 
-			<div style={{ width: '30rem', height: '32rem', margin: 'auto' }}>
-				<div
-					style={{
-						background: '-webkit-linear-gradient(45deg, #019871, #a0ebcf)',
-						textShadow: '0 2px rgba(128, 128, 128, 0.6)',
-						color: 'white',
-						textAlign: 'center',
-						fontSize: '2.25rem',
-						padding: '5rem'
-					}}
-				>
+			<div className='bannerContainer'>
+				<div className='bannerTitle'>
 					{t('successShopping.congratulations')}
 				</div>
-				<div style={{}}>
-					<p style={{ border: '1px solid silver', padding: '5rem' }}>
-						{t('successShopping.message')}
-					</p>
+				<div className='bannerMessage'>
+					<p>{t('successShopping.message')}</p>
 				</div>
 			</div>
 		</>

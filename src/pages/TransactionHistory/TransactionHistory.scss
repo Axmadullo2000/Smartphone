@@ -1,0 +1,45 @@
+.position_to_left {
+	margin-left: 32px;
+	max-width: 100%;
+}
+
+.history_email {
+	color: #fff;
+	font-size: 24px;
+	margin-left: 22px;
+	font-weight: bold;
+}
+
+@media (max-width: 650px) {
+	.position_to_left {
+		margin-left: 32px;
+		width: 500px;
+	}
+}
+
+@media (max-width: 500px) {
+	.position_to_left {
+		margin-left: 32px;
+		width: 320px;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.checkout_direction:nth-child(2) {
+		margin-left: 0 !important;
+		margin-top: 12px;
+	}
+
+	.history_email {
+		font-size: 16px;
+		margin-left: 0 !important;
+		margin-top: 12px;
+	}
+}
+
+@media (max-width: 400px) {
+	.position_to_left {
+		margin-left: 8px;
+		width: 500px;
+	}
+}

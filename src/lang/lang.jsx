@@ -274,6 +274,20 @@ export const lang = {
 			totalPay: 'Всего к оплате',
 			order: 'Оформить заказ'
 		},
+
+		buyedProducts: {
+			order: 'Заказы',
+			myOrders: 'Мои Заказы',
+			orderUnical: 'Заказ: №',
+			date: 'Дата',
+			count: 'Количество',
+			countNumber: 'шт.',
+			payment: 'К оплате',
+			soum: 'сум',
+			detailOrder: 'Детали Заказа',
+			overAll: 'Итог',
+			emptyOrderList: 'Ваши Заказы Пусты'
+		},
 		login: {
 			loginAccount: 'Войдите в свой аккаунт',
 			problemLogin: 'Проблемы со входом в аккаунт',
@@ -577,6 +591,19 @@ export const lang = {
 			totalPay: 'Всьго до сплати',
 			order: 'Оформити замовлення'
 		},
+		buyedProducts: {
+			order: 'Замовлення',
+			myOrders: 'Мої Замовлення',
+			orderUnical: 'Замовлення: №',
+			date: 'Дата',
+			count: 'Кількість',
+			countNumber: 'шт.',
+			payment: 'До оплати',
+			soum: 'сум',
+			detailOrder: 'Деталі Замовлення',
+			overAll: 'Підсумок',
+			emptyOrderList: 'Ваші Замовлення Порожні'
+		},
 		login: {
 			loginAccount: 'Увійдіть до свого облікового запису',
 			problemLogin: 'Проблеми з входом в обліковий запис',
@@ -878,6 +905,19 @@ export const lang = {
 			orderCount: 'Tovarlar soni',
 			cost: 'Narx',
 			totalPay: "To'lash uchun jami"
+		},
+		buyedProducts: {
+			order: 'Zakazlar',
+			myOrders: 'Mening Zakazlarim',
+			orderUnical: 'Zakaz: №',
+			date: 'Sana',
+			count: 'Soni',
+			countNumber: 'dona.',
+			payment: "To'lov uchun",
+			soum: "so'm",
+			detailOrder: "Zakaz haqida to'liq ma'lumot",
+			overAll: 'Umumiy',
+			emptyOrderList: "Sizning Savatingiz bo'sh"
 		},
 		login: {
 			loginAccount: 'Akkountingizga kiring',
