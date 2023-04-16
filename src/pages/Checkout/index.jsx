@@ -10,10 +10,6 @@ import Footer from '../../components/Layouts/Footer'
 import Header from '../../components/Layouts/Header'
 import { paymentAsynkThunk } from '../../redux/asyncThunks/Basket'
 
-import { loginAction } from '../../redux/slices/AuthSlice'
-import { AuthService } from '../../Service'
-import { setItem } from '../../Service/localData'
-
 import './Checkout.scss'
 
 export const Checkout = () => {
@@ -27,10 +23,6 @@ export const Checkout = () => {
 	const [firstName, setFirstName] = useState('')
 	const [secondName, setSecondName] = useState('')
 	const [phoneNumber, setPhoneNumber] = useState('')
-	const [userName, setUsername] = useState('')
-	const [password, setPassword] = useState('')
-	const [repeatPasword, setRepeatPassword] = useState('')
-	const [email, setEmail] = useState('')
 	const [locationDelivery, setLocationDelivery] = useState('')
 	const [address, setAddress] = useState('')
 	const [typeOfDelivery, setTypeOfDelivery] = useState(false)
@@ -39,13 +31,6 @@ export const Checkout = () => {
 	const [userInfo, setUserInfo] = useState(true)
 	const [deliveryInfo, setDeliverInfo] = useState(false)
 	const [payment, setPayment] = useState(false)
-
-	const data = {
-		username: userName,
-		password,
-		new_password: repeatPasword,
-		email
-	}
 
 	const userDetail = Yup.object().shape({
 		firstName: Yup.string()
@@ -77,7 +62,6 @@ export const Checkout = () => {
 
 	const {
 		register,
-		watch,
 		formState: { errors },
 		handleSubmit
 	} = useForm({
@@ -85,20 +69,15 @@ export const Checkout = () => {
 		resolver: yupResolver(userDetail)
 	})
 
-	const extraRegisterUsers = async () => {
-		const response = await AuthService.extraRegister(data)
-		dispatch(loginAction(response))
-		setItem('token', response.token)
-	}
-
 	const onSubmit = async e => {
 		e.preventDefault()
 	}
 
 	useEffect(() => {
-		if (basketData.length == 0 || !loggednIn) {
+		if (basketData.length === 0 || !loggednIn) {
 			navigate('/customer/cart/')
 		}
+		// eslint-disable-next-line
 	}, [])
 
 	return (
@@ -268,7 +247,6 @@ export const Checkout = () => {
 												marginTop: '20px',
 												marginBottom: '18px',
 												borderRadius: '5px',
-												color: 'white',
 												fontWeight: 'bold'
 											}}
 											className='ml-6'
@@ -276,7 +254,6 @@ export const Checkout = () => {
 												if (Object.keys(errors).length === 0) {
 													setDeliverInfo(true)
 													setUserInfo(false)
-													extraRegisterUsers()
 												}
 											}}
 										>
@@ -509,7 +486,6 @@ export const Checkout = () => {
 												marginTop: '20px',
 												marginBottom: '18px',
 												borderRadius: '5px',
-												color: 'white',
 												fontWeight: 'bold',
 												width: '49%'
 											}}
@@ -535,7 +511,6 @@ export const Checkout = () => {
 												marginLeft: '10px',
 												marginBottom: '18px',
 												borderRadius: '5px',
-												color: 'white',
 												fontWeight: 'bold',
 												width: '49%'
 											}}
@@ -640,7 +615,6 @@ export const Checkout = () => {
 											marginTop: '20px',
 											marginBottom: '18px',
 											borderRadius: '5px',
-											color: 'white',
 											fontWeight: 'bold',
 											width: '49%'
 										}}
@@ -769,6 +743,7 @@ export const Checkout = () => {
 												{item.count} × {item.price} {t('checkout.soum')}
 											</p>
 											<img
+												alt={item.name}
 												src={item.image}
 												style={{ maxWidth: '200px', height: '100%' }}
 											/>
@@ -828,7 +803,6 @@ export const Checkout = () => {
 								</p>
 								<p
 									style={{
-										color: '#5f5f5f',
 										marginRight: '28px',
 										color: '#d92e15',
 										fontSize: '20px',

@@ -18,13 +18,16 @@ export const TransactionHistory = () => {
 	const { bookedProducts } = useSelector(state => state.payment)
 	const { loggednIn } = useSelector(state => state.auth)
 
+	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	const dispatch = useDispatch()
+	if (!loggednIn) {
+		navigate('/')
+	}
 
 	useEffect(() => {
 		dispatch(getSuccessFullAsyncThunk())
-	}, [])
+	}, [dispatch])
 
 	return (
 		<>
@@ -49,6 +52,7 @@ export const TransactionHistory = () => {
 					src={userIcon}
 					width={60}
 					height={60}
+					alt='user'
 					style={{ background: 'white', borderRadius: '50%' }}
 				/>
 				<p className='history_email'>{userData.email}</p>

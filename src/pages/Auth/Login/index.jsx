@@ -3,13 +3,14 @@ import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
-import { toast } from 'react-toastify'
 
 import Footer from '../../../components/Layouts/Footer'
 import Header from '../../../components/Layouts/Header'
 
 import { loginAction } from '../../../redux/slices/AuthSlice'
 import { AuthService } from '../../../Service'
+
+import './Login.scss'
 
 const Login = () => {
 	const [userName, setUsername] = useState('')
@@ -40,9 +41,11 @@ const Login = () => {
 			localStorage.setItem('token', response.token)
 			navigate('/')
 		} catch (e) {
-			setError('error')
+			setError(e.response.data)
 		}
 	}
+
+	// console.log(error?.non_field_errors[0])
 
 	const onSubmit = () => {
 		loginUser()
@@ -127,26 +130,13 @@ const Login = () => {
 									)}
 								</div>
 							</div>
-							{error === 'error' && (
-								<div style={{ display: 'none' }}>
-									{toast.error(t('login.problemLogin'), {
-										position: 'top-right',
-										autoClose: 5000,
-										hideProgressBar: false,
-										closeOnClick: true,
-										pauseOnHover: true,
-										draggable: true,
-										theme: 'dark'
-									})}{' '}
-								</div>
-							)}
 
 							<div className='flex'>
 								<div className='flex items-center justify-between'>
 									<div className='text-sm'>
 										<Link
 											to='/sign-up'
-											className='text-xl font-medium text-indigo-600 hover:text-indigo-500'
+											className='redirectToAnother text-xl font-medium text-indigo-600 hover:text-indigo-500'
 										>
 											{t('login.signup')}
 										</Link>
@@ -157,12 +147,18 @@ const Login = () => {
 									<div className='text-sm'>
 										<Link
 											to='/accounts/reset-password'
-											className='text-xl font-medium text-green-600 hover:text-indigo-500'
+											className='redirectToAnother text-xl font-medium text-green-600 hover:text-indigo-500'
 										>
 											{t('login.forgotPassword')}
 										</Link>
 									</div>
 								</div>
+							</div>
+
+							<div>
+								<p className='text-red-900'>
+									{error !== '' && error?.non_field_errors[0]}
+								</p>
 							</div>
 
 							<div>

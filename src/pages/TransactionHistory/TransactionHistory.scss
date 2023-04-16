@@ -20,7 +20,7 @@
 @media (max-width: 500px) {
 	.position_to_left {
 		margin-left: 32px;
-		width: 320px;
+		width: 300px !important;
 		display: flex;
 		flex-direction: column;
 	}
@@ -28,6 +28,10 @@
 	.checkout_direction:nth-child(2) {
 		margin-left: 0 !important;
 		margin-top: 12px;
+	}
+
+	.myOrders {
+		width: 300px !important;
 	}
 
 	.history_email {
@@ -40,6 +44,5 @@
 @media (max-width: 400px) {
 	.position_to_left {
 		margin-left: 8px;
-		width: 500px;
 	}
 }

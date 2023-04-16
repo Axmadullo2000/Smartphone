@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
-import { toast } from 'react-toastify'
-
+import { errorAction } from '../../../redux/slices/AuthSlice'
 import { AuthService } from '../../../Service'
+
 import Loader from '../../Layouts/Loader'
 
 import './Registration.scss'
@@ -23,30 +24,33 @@ export const ValidateRegistration = () => {
 	const [loading, setLoading] = useState(false)
 	const [result, setResult] = useState('')
 	const [success, setSuccess] = useState(true)
-
 	const { t } = useTranslation()
+	const dispatch = useDispatch()
+	const { error } = useSelector(state => state.auth)
 
 	const registerInfoData = {
 		username: username,
 		email: email
 	}
 
-	const registerUser = async () => {
-		await AuthService.register(registerInfoData)
+	const registerUserAccount = async () => {
 		try {
+			await AuthService.register(registerInfoData)
 			setResult(`${t('validateRegistration.passwordSent')}`)
-		} catch (e) {}
+		} catch (error) {
+			dispatch(errorAction(error.response.data))
+		}
 	}
 
 	const onSubmit = () => {
 		setTimeout(() => {
 			setLoading(false)
-		}, 7000)
+		}, 3000)
 
 		setTimeout(() => {
 			if (username.length > 5 && email.length > 10) {
 				setSuccess(true)
-				registerUser()
+				registerUserAccount()
 			} else {
 				setSuccess(false)
 			}
@@ -144,22 +148,19 @@ export const ValidateRegistration = () => {
 							)}
 							{result !== '' && (
 								<div>
-									<div className='d-none'>
-										{toast.success(t('validateRegistration.passwordSent'), {
-											position: 'top-right',
-											autoClose: 5000,
-											hideProgressBar: false,
-											closeOnClick: true,
-											pauseOnHover: true,
-											draggable: true,
-											theme: 'dark'
-										})}
-									</div>
 									<p className='text-green-600 mt-3'>
 										{t('validateRegistration.passwordSent')}
 									</p>
 								</div>
 							)}
+						</div>
+
+						<div>
+							{Object.entries(error).map((i, index) => (
+								<p className='capitalize text-red-900'>
+									{index + 1}) {i[1]}
+								</p>
+							))}
 						</div>
 
 						<div>

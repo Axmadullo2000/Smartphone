@@ -16,7 +16,7 @@ export const TransactionCard = ({ item, index }) => {
 	const dispatch = useDispatch()
 
 	const [open, setOpen] = useState(
-		item != 'wrong id phone'
+		item !== 'wrong id phone'
 			? item.map(value => ({
 					index: false
 			  }))
@@ -25,54 +25,38 @@ export const TransactionCard = ({ item, index }) => {
 
 	useEffect(() => {
 		dispatch(getSuccessFullAsyncThunk())
-	}, [])
 
-	/**
-	 * buyedProducts: {
-			order: 'Заказы',
-			myOrders: 'Мои Заказы',
-			orderUnical: 'Заказ: №',
-			date: 'Дата',
-			count: 'Количество',
-			countNumber: 'шт.',
-			payment: 'К оплате',
-			soum: 'сум',
-			detailOrder: 'Детали Заказа',
-			overAll: 'Итог',
-			emptyOrderList: 'Ваши Заказы Пусты'
-		}
-	 * 
-	 * 
-	 */
+		// eslint-disable-next-line
+	})
 
 	return (
 		<>
-			{Object.keys(bookedProducts).length > 0 ? (
+			{item !== 'wrong id phone' ? (
 				<div key={index} className='myOrders position_to_left'>
 					<div className='detailPaymentHistory flex justify-between'>
 						<div>
 							<p>
 								{t('buyedProducts.orderUnical')}
-								{item != 'wrong id phone'
+								{item !== 'wrong id phone'
 									? item.map((i, index) => <span key={index}>{i.id}</span>)[0]
 									: ''}
 							</p>
 							<p>
 								{t('buyedProducts.date')}:{' '}
-								{item != 'wrong id phone'
+								{item !== 'wrong id phone'
 									? item
 											.map(i => i.time)
 											.filter(function (i, pos, self) {
-												return self.indexOf(i) == pos
+												return self.indexOf(i) === pos
 											})[0]
 											.slice(0, 10)
 									: ''}{' '}
 								|
-								{item != 'wrong id phone'
+								{item !== 'wrong id phone'
 									? item
 											.map(i => i.time)
 											.filter(function (i, pos, self) {
-												return self.indexOf(i) == pos
+												return self.indexOf(i) === pos
 											})[0]
 											.slice(11, 19)
 									: ''}
@@ -80,7 +64,7 @@ export const TransactionCard = ({ item, index }) => {
 							</p>
 							<p>
 								{t('buyedProducts.count')}:{' '}
-								{item != 'wrong id phone'
+								{item !== 'wrong id phone'
 									? bookedProducts[index + 1].reduce(
 											(acc, item) => acc + item.count,
 											0
@@ -92,29 +76,19 @@ export const TransactionCard = ({ item, index }) => {
 
 						<div>
 							<p className='flex items-center' style={{ fontSize: '20px' }}>
-								{t('buyedProducts.payment')}:
-								<span
-									style={{
-										color: '#D92E15',
-										fontSize: '29px',
-										fontWeight: 'bold',
-										marginLeft: '4px'
-									}}
-								>
-									{item != 'wrong id phone'
-										? bookedProducts[index + 1].reduce(
-												(acc, item) => acc + item.price,
-												0
-										  )
-										: ''}
-									{'  '}
-									{t('buyedProducts.soum')}
-								</span>
+								{t('buyedProducts.payment')}:{' '}
+								{item !== 'wrong id phone' &&
+									bookedProducts[index + 1].reduce(
+										(acc, item) => acc + item.price,
+										0
+									)}{' '}
+								{t('buyedProducts.soum')}
 							</p>
 						</div>
 
 						<div className='openHideDetail'>
 							<img
+								alt='openandclose'
 								width={25}
 								height={25}
 								style={
@@ -150,14 +124,18 @@ export const TransactionCard = ({ item, index }) => {
 							>
 								{t('buyedProducts.detailOrder')}
 							</h2>
-							{item != 'wrong id phone'
+							{item !== 'wrong id phone'
 								? item.map((product, index) => (
 										<div
 											key={index}
 											className='flex items-center justify-between history_content_unical'
 										>
 											<div className='flex items-center nameAndPriceColumn'>
-												<img src={product.image} style={{ height: '120px' }} />
+												<img
+													alt={product.name}
+													src={product.image}
+													style={{ height: '120px' }}
+												/>
 												<div>
 													<p>{product.name}</p>
 													<p>
@@ -166,7 +144,7 @@ export const TransactionCard = ({ item, index }) => {
 												</div>
 											</div>
 
-											<div className='nameAndPriceColumn' style={{}}>
+											<div className='nameAndPriceColumn'>
 												{t('buyedProducts.overAll')}:{' '}
 												<span
 													className='priceForProduct'

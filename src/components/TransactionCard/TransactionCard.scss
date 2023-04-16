@@ -41,8 +41,12 @@
 		border: 1px solid red;
 		padding: 10px;
 		width: 60px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 30px;
 		img {
-			width: 35px !important;
+			width: 20px !important;
 		}
 	}
 
@@ -60,10 +64,14 @@
 	.priceForProduct {
 		font-size: 18px !important;
 	}
+
+	.product_price {
+		font-size: 16px;
+	}
 }
 
 @media (max-width: 550px) {
 	.myOrders {
-		width: 350px !important;
+		width: 300px !important;
 	}
 }

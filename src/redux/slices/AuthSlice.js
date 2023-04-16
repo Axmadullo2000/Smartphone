@@ -5,7 +5,8 @@ import { removeItem } from '../../Service/localData'
 
 const initialState = {
 	loggednIn: false,
-	userData: []
+	userData: [],
+	error: []
 }
 
 const AuthSlice = createSlice({
@@ -42,10 +43,14 @@ const AuthSlice = createSlice({
 				draggable: true,
 				theme: 'dark'
 			})
+		},
+		errorAction(state, action) {
+			state.error = action.payload
 		}
 	}
 })
 
 export default AuthSlice.reducer
 
-export const { registerAction, loginAction, logoutAction } = AuthSlice.actions
+export const { registerAction, loginAction, logoutAction, errorAction } =
+	AuthSlice.actions
