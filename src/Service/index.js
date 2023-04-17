@@ -55,6 +55,14 @@ export const AuthService = {
 		)
 
 		return response.data
+	},
+
+	async deleteUser(data) {
+		const response = await axios.put(
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/accounts/deluser/`,
+			data
+		)
+		return response.data
 	}
 }
 

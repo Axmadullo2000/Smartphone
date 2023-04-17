@@ -1,8 +1,11 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import * as Yup from 'yup'
+
 import { errorAction } from '../../../redux/slices/AuthSlice'
 import { AuthService } from '../../../Service'
 
@@ -11,12 +14,25 @@ import Loader from '../../Layouts/Loader'
 import './Registration.scss'
 
 export const ValidateRegistration = () => {
+	const { t } = useTranslation()
+	const formSchema = Yup.object().shape({
+		username: Yup.string()
+			.required(`${t('validateRegistration.usernameRequired')}`)
+			.min(5, t('validateRegistration.usernameMinLength'))
+			.max(32, t('validateRegistration.usernameMaxLength')),
+		email: Yup.string()
+			.required('validateRegistration.emailRequired')
+			.min(8, `${t('validateRegistration.emailMinLength')}`)
+			.max(32, `${t('validateRegistration.emailMaxLength')}`)
+	})
+
 	const {
 		register,
 		formState: { errors },
 		handleSubmit
 	} = useForm({
-		mode: 'onSubmit' // "onSubmit"
+		mode: 'onSubmit',
+		resolver: yupResolver(formSchema)
 	})
 
 	const [username, setUsername] = useState('')
@@ -24,7 +40,6 @@ export const ValidateRegistration = () => {
 	const [loading, setLoading] = useState(false)
 	const [result, setResult] = useState('')
 	const [success, setSuccess] = useState(true)
-	const { t } = useTranslation()
 	const dispatch = useDispatch()
 	const { error } = useSelector(state => state.auth)
 
@@ -82,11 +97,7 @@ export const ValidateRegistration = () => {
 								</label>
 								<input
 									id='username'
-									{...register('username', {
-										required: true,
-										minLength: 5,
-										maxLength: 60
-									})}
+									{...register('username')}
 									value={username}
 									onChange={e => setUsername(e.target.value)}
 									name='username'
@@ -94,10 +105,8 @@ export const ValidateRegistration = () => {
 									className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
 									placeholder={t('validateRegistration.userNamePl')}
 								/>
-								{errors.username && (
-									<p className='errorMessage'>
-										{t('validateRegistration.userNameReq')}
-									</p>
+								{errors?.username && (
+									<p className='errorMessage'>{errors.username?.message}</p>
 								)}
 							</div>
 							<div style={{ marginTop: '25px' }}>
@@ -106,11 +115,7 @@ export const ValidateRegistration = () => {
 								</label>
 								<input
 									id='email-address'
-									{...register('email', {
-										required: true,
-										minLength: 10,
-										maxLength: 50
-									})}
+									{...register('email')}
 									value={email}
 									onChange={e => setEmail(e.target.value)}
 									name='email'
@@ -119,13 +124,14 @@ export const ValidateRegistration = () => {
 									className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
 									placeholder={t('validateRegistration.email')}
 								/>
-								{errors.email && (
-									<span className='errorMessage'>
-										{t('validateRegistration.emailNameReq')}
-									</span>
-								)}
 							</div>
 						</div>
+
+						<span>
+							{errors?.email && (
+								<span className='errorMessage'>{errors.email?.message}</span>
+							)}
+						</span>
 
 						<div className=''>
 							<div className='flex items-center justify-between'>

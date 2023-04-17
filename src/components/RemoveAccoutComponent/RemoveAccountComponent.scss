@@ -1,0 +1,9 @@
+.removeUserContainer {
+	height: 150px;
+}
+
+@media (max-width: 1000px) {
+	.removeUserContainer {
+		height: 100%;
+	}
+}

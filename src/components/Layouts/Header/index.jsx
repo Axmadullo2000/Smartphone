@@ -97,11 +97,11 @@ const Header = () => {
 				>
 					{isMenuOpen ? (
 						<>
-							<img width={30} src={closeElement} />
+							<img alt='close' width={30} src={closeElement} />
 						</>
 					) : (
 						<>
-							<img width={30} src={openElement} />
+							<img alt='open' width={30} src={openElement} />
 						</>
 					)}
 					<span className='text-xl text-white'>{t('header.catalog')}</span>
@@ -143,7 +143,7 @@ const Header = () => {
 								width={60}
 								height={60}
 								src={user}
-								alt=''
+								alt='user'
 								className='bg-slate-100 p-3 rounded-lg'
 							/>
 							<p className='text-white text-sm ml-2'>
@@ -157,7 +157,7 @@ const Header = () => {
 							src={loggedinUser}
 							onClick={() => setShowHistoryTransaction(!showHistoryTransaction)}
 							className='bg-slate-100 p-3 rounded-lg'
-							alt=''
+							alt='userLogged'
 						/>
 						<div className='flex'>
 							<p
@@ -195,7 +195,7 @@ const Header = () => {
 							src={basket}
 							width={34}
 							height={34}
-							alt=''
+							alt='basket'
 							className='bg-slate-100 hover:bg-red-100 p-1 ml-5 rounded-lg'
 						/>
 					</Badge>
@@ -246,15 +246,25 @@ const Header = () => {
 			{loggednIn && showHistoryTransaction && (
 				<div className='historyTransactions flex mx-auto p-5'>
 					<h2 className='history_title'>{t('header.history')}</h2>
-					<ul>
+					<ul className='flex flex-col'>
 						<li className='mt-4'>
 							<Link to='/customer/orders/' className='all_transactions'>
 								{t('header.allTransactions')}
 							</Link>
 						</li>
-						<button onClick={logoutUser} className='mt-4 mr-1'>
-							{t('header.logout')}
-						</button>
+						<li>
+							<button onClick={logoutUser} className='logout mt-4 mr-1'>
+								{t('header.logout')}
+							</button>
+						</li>
+						<li className='deleteUser_list'>
+							<button
+								onClick={() => navigate('/remove-account')}
+								className='deleteUser'
+							>
+								{t('header.deleteUser')}
+							</button>
+						</li>
 					</ul>
 				</div>
 			)}

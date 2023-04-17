@@ -25,6 +25,7 @@ import { getItem } from './Service/localData'
 import { lang } from './lang/lang'
 
 import './App.css'
+import { DeleteAccount } from './pages/Auth/DeleteAccount'
 import { NotFound } from './pages/NotFound'
 import { ResultShopping } from './pages/ResultShopping'
 import { TransactionHistory } from './pages/TransactionHistory'
@@ -64,6 +65,7 @@ function App() {
 			<Route path='/' element={<HomePage />} />
 			<Route path='/sign-up' element={<Registration />} />
 			<Route path='/sign-in' element={<Login />} />
+			<Route path='/remove-account' element={<DeleteAccount />} />
 
 			<Route path='/search/:slug' element={<SearchResult />} />
 			<Route path='/products/category/:slug' element={<FilterProducts />} />

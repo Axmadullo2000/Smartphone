@@ -1,8 +1,10 @@
+import { yupResolver } from '@hookform/resolvers/yup'
 import React, { useEffect, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
+import * as Yup from 'yup'
 
 import Footer from '../../../components/Layouts/Footer'
 import Header from '../../../components/Layouts/Header'
@@ -26,12 +28,24 @@ const Login = () => {
 
 	const { t } = useTranslation()
 
+	const formSchema = Yup.object().shape({
+		username: Yup.string()
+			.required(`${t('login.usernameRequired')}`)
+			.min(5, t('login.usernameMinLength'))
+			.max(32, t('login.usernameMaxLength')),
+		password: Yup.string()
+			.required('login.passwordRequired')
+			.min(8, `${t('login.passwordMinLength')}`)
+			.max(32, `${t('login.passwordMaxLength')}`)
+	})
+
 	const {
 		register,
 		formState: { errors },
 		handleSubmit
 	} = useForm({
-		mode: 'onSubmit' // "onChange"
+		mode: 'onSubmit',
+		resolver: yupResolver(formSchema)
 	})
 
 	const loginUser = async () => {
@@ -44,8 +58,6 @@ const Login = () => {
 			setError(e.response.data)
 		}
 	}
-
-	// console.log(error?.non_field_errors[0])
 
 	const onSubmit = () => {
 		loginUser()
@@ -81,73 +93,66 @@ const Login = () => {
 							<div className='-space-y-px rounded-md shadow-sm'>
 								<div>
 									<label htmlFor='username' className='sr-only'>
-										{t('validateRegistration.userName')}
+										{t('')}
 									</label>
 									<input
 										value={userName}
 										id='username'
-										{...register('username', {
-											required: true,
-											minLength: 3,
-											maxLength: 60
-										})}
+										{...register('username')}
 										name='username'
 										required
 										className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-										placeholder={t('validateRegistration.userNamePl')}
+										placeholder={t('login.username')}
 										onChange={e => setUsername(e.target.value)}
 									/>
 									{errors.username && (
-										<p className='errorMessage'>
-											{t('validateRegistration.userNameReq')}
-										</p>
+										<p className='errorMessage'>{errors?.username?.message}</p>
 									)}
 								</div>
 								<div className='my-5' style={{ marginTop: '15px' }}>
 									<label htmlFor='password' className='sr-only'>
-										{t('forgotPAssword.password')}
+										{t('')}
 									</label>
 									<input
 										value={password}
 										id='password'
-										{...register('password', {
-											required: true,
-											minLength: 3,
-											maxLength: 40
-										})}
+										{...register('password')}
 										name='password'
 										type='password'
 										autoComplete='current-password'
 										required
 										className='mb-2 relative block w-full appearance-none rounded-none rounded-b-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
-										placeholder={t('forgotPAssword.password')}
+										placeholder={t('login.password')}
 										onChange={e => setPassword(e.target.value)}
 									/>
-									{errors.password && (
-										<span className='errorMessage'>
-											{t('forgotPAssword.passwordReq')}
-										</span>
-									)}
 								</div>
 							</div>
 
-							<div className='flex'>
-								<div className='flex items-center justify-between'>
+							<span>
+								{errors?.password && (
+									<span className='text-red-500 errorMessage'>
+										{errors.password?.message}
+									</span>
+								)}
+							</span>
+
+							<div className='flex flex-wrap redirect_bts'>
+								<div className='flex items-center justify-between register'>
 									<div className='text-sm'>
 										<Link
 											to='/sign-up'
-											className='redirectToAnother text-xl font-medium text-indigo-600 hover:text-indigo-500'
+											className='signUp redirectToAnother text-xl font-medium'
 										>
 											{t('login.signup')}
 										</Link>
 									</div>
 								</div>
 
-								<div className='ml-2 flex items-center justify-between'>
+								<div className='flex items-center justify-between forgot_password'>
 									<div className='text-sm'>
 										<Link
 											to='/accounts/reset-password'
-											className='redirectToAnother text-xl font-medium text-green-600 hover:text-indigo-500'
+											className='redirectToAnother text-xl font-medium'
 										>
 											{t('login.forgotPassword')}
 										</Link>
@@ -156,16 +161,15 @@ const Login = () => {
 							</div>
 
 							<div>
-								<p className='text-red-900'>
-									{error !== '' && error?.non_field_errors[0]}
-								</p>
+								<p className='text-red-900'></p>
 							</div>
 
+							<span className='text-red-500 mt-2'>
+								{Object.keys(error).length > 0 && <>{t('login.error')}</>}
+							</span>
+
 							<div>
-								<button
-									type='submit'
-									className='group relative flex w-full justify-center rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
-								>
+								<button type='submit' className='signButton'>
 									{t('login.signin')}
 								</button>
 							</div>

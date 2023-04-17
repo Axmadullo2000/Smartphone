@@ -1,5 +1,40 @@
-@media (max-width: 400px) {
-	.redirectToAnother {
-		font-size: 16px !important;
+.redirectToAnother {
+	font-size: 16px !important;
+	border: 1px solid #d92e15;
+	padding: 10px 6px;
+	color: red;
+	width: 200px;
+	display: block;
+	text-align: center;
+	transition: 0.5s ease color;
+}
+.redirectToAnother:hover {
+	background: #d92e15;
+	color: white;
+}
+
+.redirectToAnother:last-child {
+	margin: 0 10px;
+}
+
+.signButton {
+	padding: 10px 6px;
+	width: 100%;
+	background: blue !important;
+	color: white;
+	border-radius: 6px;
+}
+
+button.signButton::hover {
+	opacity: 0.5 !important;
+}
+
+@media (max-width: 480px) {
+	.redirect_bts {
+		flex-direction: column;
+	}
+	.forgot_password {
+		margin: 20px 0px 0 0px;
+		width: 100%;
 	}
 }

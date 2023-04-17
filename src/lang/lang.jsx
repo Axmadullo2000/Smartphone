@@ -14,6 +14,7 @@ export const lang = {
 			searchFavourite: 'Поищите ваш любимый Смарфтон',
 			history: 'Истории Транзакций',
 			allTransactions: 'Все Транзакции',
+			deleteUser: 'Удалить Аккаунт',
 			uz: 'Узбекский',
 			ru: 'Русский',
 			ukr: 'Украинский'
@@ -178,7 +179,27 @@ export const lang = {
 			register: 'Зарегистрировать',
 			passwordSent: 'Ваш пароль отправлен на ваш электронный адрес!!!',
 			mustHaveRegister:
-				'Зарегистрирууте свой аккаунт чтобы добавить Товар в корзину.'
+				'Зарегистрирууте свой аккаунт чтобы добавить Товар в корзину.',
+			usernameMinLength:
+				'Имя пользователя должна содержать больше 5 элементов!',
+			usernameMaxLength:
+				'Имя пользователя должна содержать меньше 32 элементов!',
+			usernameRequired: 'Имя пользователя обязательна к заполнению!',
+
+			emailMinLength: 'Адрес почты должна содержать больше 8 элементов!',
+			emailMaxLength: 'Адрес почты должна содержать меньше 32 элементов!',
+			emailRequired: 'Адрес почты обязательна к заполнению!'
+		},
+
+		removeAccount: {
+			mustHavePass: 'Вы должны ввести пароль!',
+			minLength: 'Минимальная длина пароля должна быть 8 символов',
+			maxLength: 'Максимальная длина пароля должна быть 32 символов',
+			delUserTitle: 'Удалить Аккаунт',
+			currentPassword: 'Текущий пароль',
+			finishRoadUser: 'Сбросить Аккаунт',
+			placeholder: 'Введите ваш текущий',
+			error: 'Пароль неверный! Введите корректный пароль'
 		},
 		checkout: {
 			userName: 'Имя пользователя',
@@ -289,12 +310,25 @@ export const lang = {
 			emptyOrderList: 'Ваши Заказы Пусты'
 		},
 		login: {
+			username: 'Введите имя пользователя',
+			password: 'Введите пароль',
 			loginAccount: 'Войдите в свой аккаунт',
 			problemLogin: 'Проблемы со входом в аккаунт',
 			signup: 'У вас нет аккаунта?',
 			forgotPassword: 'Забыли пароль?',
 			signin: 'Войти',
-			successLogin: 'Вы Успешно зашли в свой аккаунт.'
+			successLogin: 'Вы Успешно зашли в свой аккаунт.',
+			error: 'Имя пользователя или пароль неверные!',
+
+			usernameMinLength:
+				'Имя пользователя должна содержать больше 5 элементов!',
+			usernameMaxLength:
+				'Имя пользователя должна содержать меньше 32 элементов!',
+			usernameRequired: 'Имя пользователя обязательна к заполнению!',
+
+			passwordMinLength: 'Пароль должна содержать больше 8 элементов!',
+			passwordMaxLength: 'Пароль должна содержать меньше 32 элементов!',
+			passwordRequired: 'Пароль обязателен к заполнению!'
 		},
 		notFound: {
 			understand: 'Понимаешь...',
@@ -303,24 +337,7 @@ export const lang = {
 			mainPage: 'На Главную'
 		},
 		footer: {
-			about: 'О нас',
-			news: 'Новости',
-			gaurantee: 'Гарантия',
-			sale: 'Акции',
-			adress: 'Адреса магазинов',
-			buy: 'Покупателям',
-			pickup: 'Доставка',
-			contact: 'Контакты',
-			serviceCenter: 'Сервис центр',
-			feedback: 'Оставить отзыв',
-			vacancy: 'Вакансии',
-			corporateBuy: 'Корпоративным покупателям',
-			services: 'Услуги',
-			canIBuy: 'Как сделать покупку?',
-			payment: 'Способы оплаты',
-			unired: 'Рассрочка UNIRED',
-			Cooperation: 'Сотрудничество',
-			zmarket: 'Рассрочка zMARKET'
+			contact: 'Контакты'
 		}
 	},
 	uk: {
@@ -338,6 +355,7 @@ export const lang = {
 			searchFavourite: 'Пошукайте ваш улюблений Смарфтон',
 			history: 'Історії Транзакцій',
 			allTransactions: 'Всі Транзакції',
+			deleteUser: 'Видалити Аккаунт',
 			uz: 'Узбецька',
 			ru: 'Російська',
 			ukr: 'Українська'
@@ -499,7 +517,24 @@ export const lang = {
 			register: 'Зареєструвати',
 			passwordSent: 'Ваш пароль надіслано на вашу электронну адресу!!!',
 			mustHaveRegister:
-				'Ви повинні зареєструвати свій обліковий запис! Щоб Додати Товар до кошика.'
+				'Ви повинні зареєструвати свій обліковий запис! Щоб Додати Товар до кошика.',
+			usernameMinLength: "Ім'я користувача повинна містити більше 5 елементів!",
+			usernameMaxLength: "Ім'я користувача повинна містити менше 32 елементів!",
+			usernameRequired: "Ім'я користувача обов'язкове до заповнення!",
+
+			emailMinLength: 'Адреса пошти повинна містити більше 8 елементів!',
+			emailMaxLength: 'Адреса пошти повинна містити менше 32 елементів!',
+			emailRequired: "Адреса Пошти обов'язкова до заповнення!"
+		},
+		removeAccount: {
+			mustHavePass: 'Ви повинні ввести пароль!',
+			minLength: 'Мінімальна довжина пароля 8 символів',
+			maxLength: 'Максимальна довжина пароля 32 символів',
+			delUserTitle: 'Видалити Аккаунт',
+			currentPassword: 'Поточний пароль',
+			finishRoadUser: 'Скинути Аккаунт',
+			placeholder: 'Введіть Ваш поточний',
+			error: 'Пароль невірний! Введіть коректний пароль'
 		},
 		checkout: {
 			userName: "ім'я користувача",
@@ -605,12 +640,22 @@ export const lang = {
 			emptyOrderList: 'Ваші Замовлення Порожні'
 		},
 		login: {
+			username: "Введіть ім'я користувача",
+			password: 'Введіть пароль',
 			loginAccount: 'Увійдіть до свого облікового запису',
 			problemLogin: 'Проблеми з входом в обліковий запис',
 			signup: 'У вас немає облікового запису?',
 			forgotPassword: 'Забули пароль?',
 			signin: 'Увійти',
-			successLogin: 'Ви успішно зайшли до свого облікового запису'
+			successLogin: 'Ви успішно зайшли до свого облікового запису',
+			error: "Ім'я користувача або пароль невірні!",
+			usernameMinLength: "Ім'я користувача повинна містити більше 5 елементів!",
+			usernameMaxLength: "Ім'я користувача повинна містити менше 32 елементів!",
+			usernameRequired: "Ім'я користувача обов'язкове до заповнення!",
+
+			passwordMinLength: 'Пароль повинна містити більше 8 елементів!',
+			passwordMaxLength: 'Пароль повинна містити менше 32 елементів!',
+			passwordRequired: "Пароль обов'язковий до заповнення!"
 		},
 		notFound: {
 			understand: 'Розуміти...',
@@ -654,6 +699,7 @@ export const lang = {
 			searchFavourite: 'Sevimli Smarftoningizni qidiring',
 			history: 'Haridlar Tarixi',
 			allTransactions: "Barcha o'tkazmalar",
+			deleteUser: "Akkautni O'chirish",
 			uz: "O'zbek",
 			ru: 'Russ',
 			ukr: 'Ukrain'
@@ -815,7 +861,27 @@ export const lang = {
 				'Foydalanuvchi nomi yoki elektron pochta manzili xato yozilgan',
 			register: "Ro'yxatdan o'tish",
 			passwordSent: 'Parolingiz elektron pochta manzilingizga yuborildi!!!',
-			mustHaveRegister: "Tovarni savatga qo'shish uchun Ro'yxatdan o'ting!"
+			mustHaveRegister: "Tovarni savatga qo'shish uchun Ro'yxatdan o'ting!",
+			usernameMinLength:
+				"Foydalanuvchi nomingiz 5ta elementdan ko'proq bo'lishi kerak!",
+			usernameMaxLength:
+				"Foydalanuvchi nomingiz 32 ta elementdan kamroq bo'lishi kerak!",
+			usernameRequired: 'Foydalanuvchi nomingizni kiritishingiz shart!',
+			emailMinLength:
+				"Pochta adresingiz 5ta elementdan ko'proq bo'lishi kerak!",
+			emailMaxLength:
+				"Pochta adresingiz 32 ta elementdan kamroq bo'lishi kerak!",
+			emailRequired: 'Pochta adresingiz kiritishingiz shart!'
+		},
+		removeAccount: {
+			mustHavePass: 'Parolni kiritish majburiy!',
+			minLength: "Parolni 8 tadan kop'proq kiriting!",
+			maxLength: 'Parolni 32 tadan kamroq kiriting!',
+			delUserTitle: "Profilni O'chirish",
+			currentPassword: 'Amaldagi parol',
+			finishRoadUser: "Akkauntni O'chirish",
+			placeholder: 'Amaldagi parolingizni kiriting',
+			error: "Parolingiz noto'g'ri! Parolni to'grisini kiriting!"
 		},
 		checkout: {
 			userName: 'Foydanalanuvchi nomi',
@@ -920,11 +986,23 @@ export const lang = {
 			emptyOrderList: "Sizning Savatingiz bo'sh"
 		},
 		login: {
+			username: 'Foydalanuvchi nomingizni kiriting',
+			password: 'Parolingizni kiriting',
 			loginAccount: 'Akkountingizga kiring',
 			problemLogin: 'Hisobingizga kirishda muammolar',
 			signup: "Akkountingiz yo'qmi?",
 			forgotPassword: 'Parolni unutdingizmi?',
 			signin: 'Kirish',
+			usernameMinLength:
+				"Foydalanuvchi nomingiz 5ta elementdan ko'proq bo'lishi kerak!",
+			usernameMaxLength:
+				"Foydalanuvchi nomingiz 32 ta elementdan kamroq bo'lishi kerak!",
+			usernameRequired: 'Foydalanuvchi nomingizni kiritishingiz shart!',
+
+			passwordMinLength: "Parolingiz 8ta elementdan ko'proq bo'lishi kerak!",
+			passwordMaxLength: "Parolingiz 32 ta elementdan kamroq bo'lishi kerak!",
+			passwordRequired: 'Parolni kiritishingiz shart!',
+			error: "Login yoki parolingiz noto'g'ri",
 			successLogin: 'Akkountingizga Muvaffaqiyatli kirdingiz.'
 		},
 
@@ -935,24 +1013,7 @@ export const lang = {
 			mainPage: 'Asosiy Menu'
 		},
 		footer: {
-			about: 'Biz haqimizda',
-			news: 'Yangiliklar',
-			gaurantee: 'Kafolat',
-			sale: 'Aksiya',
-			adress: "Do'konlar manzillari",
-			buy: 'Xaridorlar',
-			pickup: 'Yetkazib berish',
-			contact: 'Kontaktlar',
-			serviceCenter: "Xizmat ko'rsatish markazi",
-			feedback: 'Kommentariya qoldiring',
-			vacancy: 'Ishlar',
-			corporateBuy: 'Korporativ xaridorlar',
-			services: 'Xizmatlar',
-			canIBuy: 'Qanday qilib xarid qilish kerak?',
-			payment: "To'lov usullari",
-			unired: "UNIRED To'lov",
-			Cooperation: 'Hamkorlik',
-			zmarket: "ZMARKET to'lovi"
+			contact: 'Kontaktlar'
 		}
 	}
 }

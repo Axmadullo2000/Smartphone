@@ -46,11 +46,30 @@ const AuthSlice = createSlice({
 		},
 		errorAction(state, action) {
 			state.error = action.payload
+		},
+		removeAccount(state) {
+			state.loggednIn = false
+			state.userData = []
+			removeItem('token')
+			toast.success('You Successfully Delete Your own Account', {
+				position: 'top-right',
+				autoClose: 1000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				theme: 'dark'
+			})
 		}
 	}
 })
 
 export default AuthSlice.reducer
 
-export const { registerAction, loginAction, logoutAction, errorAction } =
-	AuthSlice.actions
+export const {
+	registerAction,
+	loginAction,
+	logoutAction,
+	removeAccount,
+	errorAction
+} = AuthSlice.actions

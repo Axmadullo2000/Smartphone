@@ -67,6 +67,12 @@
 	margin-top: 12px;
 }
 
+.all_transactions:hover {
+	background: #d92e15 !important;
+	color: #fff;
+	transition: 0.4s ease background;
+}
+
 .historyTransactions {
 	width: 750px;
 	background: rgb(255, 254, 256);
@@ -75,6 +81,39 @@
 
 .show_hide__element {
 	transition: 0.8s ease;
+}
+.historyTransactions ul {
+	li.deleteUser_list {
+		display: flex;
+		justify-content: flex-end;
+	}
+	li.deleteUser_list button {
+		border-width: 1px;
+	}
+	li.deleteUser_list button:hover {
+		background: #fff !important;
+		color: #d92e15;
+		transition: 0.4s ease background;
+		border-color: red;
+	}
+}
+
+.logout {
+	border: 1px solid red;
+	padding: 5px 12px;
+	color: #d92e15;
+}
+
+.logout:hover {
+	color: white !important;
+	background: #d92e15;
+}
+
+.deleteUser {
+	background: red;
+	color: white;
+	padding: 5px 12px;
+	justify-content: flex-end;
 }
 
 @media (max-width: 1200px) {
