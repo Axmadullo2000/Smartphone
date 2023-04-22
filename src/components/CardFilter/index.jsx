@@ -60,10 +60,10 @@ const CardFilter = ({ slug }) => {
 			array = [...products.results]
 			// filtering with range
 			array.filter(product => {
-				if (count === 0) {
+				if (count == 0) {
 					productData.push(product)
 				} else {
-					if (product.price > count[0] && product.price < count[1]) {
+					if (product.price > count[0] && product.price < Number(count[1])) {
 						productData.push(product)
 					}
 				}
@@ -95,16 +95,7 @@ const CardFilter = ({ slug }) => {
 				offset: 0
 			})
 		)
-	}, [
-		slug,
-		dispatch,
-		selectedBaseMemory,
-		selectedYadra,
-		selectedFrontCamera,
-		selectedFastMemory,
-		selectedAccumulator,
-		selectedCorpus
-	])
+	}, [dispatch, filterByFewParams])
 
 	const handleFilter = e => {
 		e.preventDefault()
@@ -248,6 +239,10 @@ const CardFilter = ({ slug }) => {
 		setSelectedCorpus('')
 	}
 
+	const language = localStorage.getItem('lang')
+		? localStorage.getItem('lang')
+		: 'ru'
+
 	return (
 		<div className='cardFilterContainer'>
 			{showProducts && (
@@ -307,15 +302,73 @@ const CardFilter = ({ slug }) => {
 						</h3>
 						{
 							<>
-								{count === 0 ? (
+								{count === 0 && typeof count === 'number' ? (
 									<div className='flex justify-between text-red-500 text-xl'>
-										<span>{count}</span>
-										<span>{maxExpensiveProduct}</span>
+										{language == 'uz' && (
+											<span className='price'>{count} so'm</span>
+										)}
+										{language == 'ru' && (
+											<span className='price'>
+												{Number(count / 140.25).toFixed(1)} рублей
+											</span>
+										)}
+										{language == 'uk' && (
+											<>
+												<span className='price'>
+													{Number(count / 309.98).toFixed(0)} гривень
+												</span>
+											</>
+										)}
+										<>
+											{allData.results != undefined && language == 'uz' && (
+												<span className='price'>
+													{maxExpensiveProduct} so'm
+												</span>
+											)}
+											{allData.results != undefined && language == 'ru' && (
+												<span className='price'>
+													{Number(maxExpensiveProduct / 140.25).toFixed(1)}{' '}
+													рублей
+												</span>
+											)}
+											{allData.results != undefined && language == 'uk' && (
+												<span className='price'>
+													{Number(maxExpensiveProduct / 309.98).toFixed(1)}{' '}
+													гривень
+												</span>
+											)}
+										</>
 									</div>
 								) : (
 									<div className='flex justify-between text-xl text-red-500'>
-										<span>{count[0]}</span>
-										<span>{count[1]}</span>
+										{language == 'uz' && (
+											<>
+												{' '}
+												<span className='price'>{count[0]} so'm</span>
+												<span className='price'>{count[1]} so'm</span>
+											</>
+										)}
+										{language == 'ru' && (
+											<>
+												<span className='price'>
+													{Number(count[0] / 140.25).toFixed(0)} рублей
+												</span>
+												<span className='price'>
+													{Number(count[1] / 140.25).toFixed(0)} рублей
+												</span>
+											</>
+										)}
+										{language == 'uk' && (
+											<>
+												{' '}
+												<span className='price'>
+													{Number(count[0] / 309.98).toFixed(0)} гривень
+												</span>
+												<span className='price'>
+													{Number(count[1] / 309.98).toFixed(0)} гривень
+												</span>
+											</>
+										)}
 									</div>
 								)}
 							</>
@@ -325,14 +378,40 @@ const CardFilter = ({ slug }) => {
 							className='price_filter'
 							style={{ width: 320, margin: '20px 0px' }}
 						>
-							<TooltipSlider
-								onChange={value => setCount(value)}
-								range
-								min={0}
-								max={23000000}
-								defaultValue={[0, 23000000]}
-								tipFormatter={value => `${value} ${t('basket.soum')}`}
-							/>
+							{language == 'uz' && (
+								<TooltipSlider
+									onChange={value => setCount(value)}
+									range
+									min={0}
+									max={maxExpensiveProduct}
+									defaultValue={[0, maxExpensiveProduct]}
+									tipFormatter={value => `${value} so'm`}
+								/>
+							)}
+							{language == 'ru' && (
+								<TooltipSlider
+									onChange={value => setCount(value)}
+									range
+									min={0}
+									max={maxExpensiveProduct}
+									defaultValue={[0, maxExpensiveProduct]}
+									tipFormatter={value =>
+										`${Number(value / 140.25).toFixed(1)} рублей`
+									}
+								/>
+							)}
+							{language == 'uk' && (
+								<TooltipSlider
+									onChange={value => setCount(value)}
+									range
+									min={0}
+									max={maxExpensiveProduct}
+									defaultValue={[0, maxExpensiveProduct]}
+									tipFormatter={value =>
+										`${Number(value / 309.98).toFixed(1)} гривень`
+									}
+								/>
+							)}
 						</div>
 					</div>
 					<div>
@@ -801,10 +880,7 @@ const CardFilter = ({ slug }) => {
 						<img src={up} alt='up' width={50} />
 					</button>
 				</div>
-				<div
-					className='flex'
-					style={{ flexWrap: 'wrap', justifyContent: 'center' }}
-				>
+				<div className='cardFilter'>
 					{slug === 'all'
 						? !!fetchData() &&
 						  fetchData()

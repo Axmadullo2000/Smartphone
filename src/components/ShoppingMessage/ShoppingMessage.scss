@@ -29,6 +29,17 @@
 		max-width: 420px;
 		margin: 30px auto;
 	}
+	.ml-7 {
+		margin-left: 0 !important;
+	}
+	.shoppingResultsLinks {
+		flex-direction: column !important;
+		max-width: 200px;
+	}
+	.checkout_direction:nth-child(2) {
+		margin-left: 0 !important;
+		margin-top: 12px;
+	}
 }
 
 @media (max-width: 440px) {

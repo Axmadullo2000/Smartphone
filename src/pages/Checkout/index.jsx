@@ -1,5 +1,5 @@
 import { yupResolver } from '@hookform/resolvers/yup'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
@@ -69,16 +69,13 @@ export const Checkout = () => {
 		resolver: yupResolver(userDetail)
 	})
 
+	const language = localStorage.getItem('lang')
+		? localStorage.getItem('lang')
+		: 'uz'
+
 	const onSubmit = async e => {
 		e.preventDefault()
 	}
-
-	useEffect(() => {
-		if (basketData.length === 0 || !loggednIn) {
-			navigate('/customer/cart/')
-		}
-		// eslint-disable-next-line
-	}, [])
 
 	return (
 		<div className='checkout'>
@@ -91,7 +88,7 @@ export const Checkout = () => {
 					<li className='checkout_direction'>
 						<Link to='/'>{t('cardDetail.main')}</Link>
 					</li>
-					<li className='checkout_direction mx-4'>
+					<li className='checkout_direction mx-4 basket_card'>
 						<Link to='/customer/cart/'>{t('basket.cart')}</Link>
 					</li>
 					<li className='checkout_direction'>{t('checkout.order')}</li>
@@ -180,14 +177,7 @@ export const Checkout = () => {
 													</p>
 												</div>
 												<div className='flex flex-col'>
-													<label
-														style={{
-															color: '#3c763d',
-															fontWeight: 'bold',
-															fontSize: '16px',
-															marginLeft: '12px'
-														}}
-													>
+													<label className='secondNameLabel'>
 														{t('checkout.lastName')}
 													</label>
 													<input
@@ -729,7 +719,18 @@ export const Checkout = () => {
 														marginTop: '6px'
 													}}
 												>
-													{item.count * item.price} {t('checkout.soum')}
+													{language == 'uz' && (
+														<>
+															{item.price}
+															{t('checkout.soum')}
+														</>
+													)}
+													{language == 'ru' && (
+														<>{Math.floor(item.price / 140.25)} рублей</>
+													)}
+													{language == 'uk' && (
+														<>{Math.floor(item.price / 309.98)} гривен</>
+													)}
 												</p>
 											</div>
 											<p
@@ -740,7 +741,27 @@ export const Checkout = () => {
 													marginTop: '6px'
 												}}
 											>
-												{item.count} × {item.price} {t('checkout.soum')}
+												{language == 'uz' && (
+													<>
+														{item.count} ×{' '}
+														{Math.round(item.price / item.count, 1)}
+														{t('checkout.soum')}
+													</>
+												)}
+												{language == 'ru' && (
+													<>
+														{item.count} ×{' '}
+														{Math.round(item.price / 140.25 / item.count, 2)}{' '}
+														рублей
+													</>
+												)}
+												{language == 'uk' && (
+													<>
+														{item.count} ×{' '}
+														{Math.round(item.price / (309.98 * item.count), 1)}{' '}
+														рублей
+													</>
+												)}
 											</p>
 											<img
 												alt={item.name}
@@ -763,7 +784,18 @@ export const Checkout = () => {
 										marginRight: '35px'
 									}}
 								>
-									{totalPrice} {t('checkout.soum')}
+									{language == 'uz' && (
+										<>
+											{totalPrice}
+											{t('checkout.soum')}
+										</>
+									)}
+									{language == 'ru' && (
+										<>{Math.round(totalPrice / 140.25)} рублей</>
+									)}
+									{language == 'uk' && (
+										<>{Math.round(totalPrice / 309.98, 1)} гривен</>
+									)}
 								</p>
 							</div>
 							<div
@@ -810,7 +842,18 @@ export const Checkout = () => {
 										marginTop: '6px'
 									}}
 								>
-									{totalPrice} {t('checkout.soum')}
+									{language == 'uz' && (
+										<>
+											{totalPrice}
+											{t('checkout.soum')}
+										</>
+									)}
+									{language == 'ru' && (
+										<>{Math.round(totalPrice / 140.25)} рублей</>
+									)}
+									{language == 'uk' && (
+										<>{Math.round(totalPrice / 309.98, 1)} гривен</>
+									)}
 								</p>
 							</div>
 						</div>

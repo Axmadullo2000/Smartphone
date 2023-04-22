@@ -14,6 +14,9 @@ export const BasketCard = ({ item }) => {
 	const navigate = useNavigate()
 	const { t } = useTranslation()
 	const dispatch = useDispatch()
+	const language = localStorage.getItem('lang')
+		? localStorage.getItem('lang')
+		: 'uz'
 
 	let { name, price, image, id, count, slug } = item
 
@@ -31,7 +34,17 @@ export const BasketCard = ({ item }) => {
 				<div className='card-info'>
 					<h4 className='card-title'>{name}</h4>
 					<span>
-						{t('basketCard.price')}: {price / count} {t('basketCard.soum')}
+						{language == 'uz' && (
+							<>
+								{t('basketCard.price')}: {price / count} so'm
+							</>
+						)}
+						{language == 'ru' && (
+							<>Цена: {Number(price / count / 140.25).toFixed(1)} рублей</>
+						)}
+						{language == 'uk' && (
+							<>Цена: {Number(price / count / 309.98).toFixed(1)} гривен</>
+						)}
 					</span>
 
 					<div className='card-count'>
@@ -72,7 +85,13 @@ export const BasketCard = ({ item }) => {
 				</div>
 				<div className='card-total'>
 					<p className='card-total-price'>
-						{price} {t('basketCard.soum')}
+						{language == 'uz' && (
+							<>
+								{price} {t('basketCard.soum')}
+							</>
+						)}
+						{language == 'ru' && <>{Number(price / 140.25).toFixed(0)} рублей</>}
+						{language == 'uk' && <>{Number(price / 309.98).toFixed(1)} гривен</>}
 					</p>
 					<button
 						className='card-delete-btn'

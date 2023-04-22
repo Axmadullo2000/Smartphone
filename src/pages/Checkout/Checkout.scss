@@ -46,6 +46,13 @@
 	}
 }
 
+.secondNameLabel {
+	color: #3c763d;
+	font-weight: bold;
+	font-size: 16px;
+	margin-left: 12px;
+}
+
 @media (max-width: 1000px) {
 	.yourOrderTitle {
 		width: 100%;
@@ -110,6 +117,20 @@
 			margin-left: 0px !important;
 			margin-top: 0 !important;
 		}
+	}
+
+	.secondNameLabel {
+		margin-left: 0 !important;
+	}
+}
+
+@media (max-width: 676px) {
+	.checkoutDirection {
+		flex-direction: column !important;
+		max-width: 260px !important;
+	}
+	.basket_card {
+		margin: 10px 0 !important;
 	}
 }
 

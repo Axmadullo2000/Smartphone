@@ -119,103 +119,107 @@ const Header = () => {
 							className='search_panel ml-5 mt-1 block px-3 p-4 bg-white border border-slate-300 rounded-md text-sm shadow-sm
     '
 						/>
-						<button className='p-3 bg-red-900 text-slate-200 absolute rounded-lg top-6 right-5 hover:bg-red-600'>
+						<button className='searchBtn p-3 bg-red-900 text-slate-200 absolute rounded-lg top-6 right-5 hover:bg-red-600'>
 							<img src={search} alt='search' />
 						</button>
 					</label>
 				</form>
 
-				{!loggednIn ? (
-					<>
-						<button
-							className='w-40 flex items-center hover:bg-red-600'
-							onClick={() => {
-								if (pathname === '/') {
-									navigate('/sign-up')
-								} else if (pathname === '/sign-up') {
-									navigate('/sign-in')
-								} else {
-									navigate('/sign-up')
-								}
-							}}
-						>
+				<div className='flex items-center'>
+					{!loggednIn ? (
+						<>
+							<button
+								className='w-40 flex items-center hover:bg-red-600'
+								onClick={() => {
+									if (pathname === '/') {
+										navigate('/sign-up')
+									} else if (pathname === '/sign-up') {
+										navigate('/sign-in')
+									} else {
+										navigate('/sign-up')
+									}
+								}}
+							>
+								<img
+									width={60}
+									height={60}
+									src={user}
+									alt='user'
+									className='bg-slate-100 p-3 rounded-lg'
+								/>
+								<p className='text-white text-sm ml-2'>
+									{t('header.login')} /{t('header.register')}
+								</p>
+							</button>
+						</>
+					) : (
+						<div className='loggedInUser flex hover:bg-red-600'>
 							<img
-								width={60}
-								height={60}
-								src={user}
-								alt='user'
-								className='bg-slate-100 p-3 rounded-lg'
-							/>
-							<p className='text-white text-sm ml-2'>
-								{t('header.login')} /{t('header.register')}
-							</p>
-						</button>
-					</>
-				) : (
-					<div className='loggedInUser flex hover:bg-red-600'>
-						<img
-							src={loggedinUser}
-							onClick={() => setShowHistoryTransaction(!showHistoryTransaction)}
-							className='bg-slate-100 p-3 rounded-lg'
-							alt='userLogged'
-						/>
-						<div className='flex'>
-							<p
-								className='capitalize text-white ml-2 items-center mt-4'
+								src={loggedinUser}
 								onClick={() =>
 									setShowHistoryTransaction(!showHistoryTransaction)
 								}
-							>
-								{!!userData.username && userData.username}
-								{name}
-							</p>
+								className='bg-slate-100 p-3 rounded-lg'
+								alt='userLogged'
+							/>
+							<div className='flex'>
+								<p
+									className='capitalize text-white ml-2 items-center mt-4'
+									onClick={() =>
+										setShowHistoryTransaction(!showHistoryTransaction)
+									}
+								>
+									{!!userData.username && userData.username}
+									{name}
+								</p>
+							</div>
 						</div>
-					</div>
-				)}
+					)}
 
-				<button
-					className='basketBtn flex items-center hover:bg-red-600 ml-4'
-					onClick={() => setBasketModalOpen(!basketModalOpen)}
-				>
-					<Badge
-						badgeContent={basketData.length}
-						sx={{
-							'&.MuiBadge-badge': {
-								backgroundColor: 'white',
-								color: 'red'
-							}
-						}}
-						color='secondary'
-						anchorOrigin={{
-							vertical: 'bottom',
-							horizontal: 'right'
-						}}
+					<button
+						className='basketBtn flex items-center hover:bg-red-600 ml-4'
+						onClick={() => setBasketModalOpen(!basketModalOpen)}
 					>
-						<img
-							src={basket}
-							width={34}
-							height={34}
-							alt='basket'
-							className='bg-slate-100 hover:bg-red-100 p-1 ml-5 rounded-lg'
-						/>
-					</Badge>
+						<Badge
+							badgeContent={basketData.length}
+							sx={{
+								'&.MuiBadge-badge': {
+									backgroundColor: 'white',
+									color: 'red'
+								}
+							}}
+							color='secondary'
+							anchorOrigin={{
+								vertical: 'bottom',
+								horizontal: 'right'
+							}}
+						>
+							<img
+								src={basket}
+								width={34}
+								height={34}
+								alt='basket'
+								className='bg-slate-100 hover:bg-red-100 p-1 ml-5 rounded-lg'
+							/>
+						</Badge>
 
-					<span className='text-white text-sm ml-2'>
-						{t('header.cart')} / {t('header.order')}
-					</span>
-				</button>
-				<select
-					defaultValue={i18n.language}
-					onChange={e => {
-						i18n.changeLanguage(e.target.value)
-						localStorage.setItem('lang', e.target.value)
-					}}
-					className='languageOptions'
-				>
-					<option value='ru'>{t('header.ru')}</option>
-					<option value='uz'>{t('header.uz')}</option>
-					<option value='uk'>{t('header.ukr')}</option>
-				</select>
+						<span className='text-white text-sm ml-2'>
+							{t('header.cart')} / {t('header.order')}
+						</span>
+					</button>
+					<select
+						defaultValue={i18n.language}
+						onChange={e => {
+							i18n.changeLanguage(e.target.value)
+							localStorage.setItem('lang', e.target.value)
+						}}
+						className='languageOptions'
+					>
+						<option value='ru'>{t('header.ru')}</option>
+						<option value='uz'>{t('header.uz')}</option>
+						<option value='uk'>{t('header.ukr')}</option>
+					</select>
+				</div>
 			</div>
 
 			{isMenuOpen && (

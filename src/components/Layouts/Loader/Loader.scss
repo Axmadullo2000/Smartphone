@@ -1,17 +1,17 @@
 div.main_loader {
-	margin: 0 auto !important;
-	position: absolute;
-	left: 50%;
-	transform: translateX(-50%);
+	margin: 50px auto 0px auto !important;
 	z-index: 999;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .lds-spinner {
 	color: official;
 	display: inline-block;
 	position: relative;
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 }
 .lds-spinner div {
 	transform-origin: 40px 40px;

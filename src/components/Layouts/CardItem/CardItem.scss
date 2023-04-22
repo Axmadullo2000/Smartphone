@@ -3,6 +3,11 @@
 	border: 1px solid transparent;
 	cursor: pointer;
 	transition: 0.5s ease-in-out;
+	margin: 0 auto !important;
+	width: 250px;
+	border-radius: 18px;
+	height: 450px;
+	min-height: 100%;
 }
 
 .card:hover {
@@ -12,4 +17,15 @@
 	-webkit-box-shadow: 1px 3px 7px 7px rgba(80, 34, 34, 0.2);
 	-moz-box-shadow: 1px 3px 7px 7px rgba(80, 34, 34, 0.2);
 	box-shadow: 1px 3px 7px 7px rgba(80, 34, 34, 0.2);
+}
+
+@media (max-width: 800px) {
+	.card {
+		margin: 0 auto !important;
+	}
+}
+@media (max-width: 680px) {
+	.card {
+		margin: 0 auto !important;
+	}
 }

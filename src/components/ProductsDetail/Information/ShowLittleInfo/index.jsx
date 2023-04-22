@@ -33,6 +33,9 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 
 	let middlePrice = 5
 
+	const language = localStorage.getItem('lang')
+		? localStorage.getItem('lang')
+		: 'uz'
 	if (comments.length > 0) {
 		middlePrice =
 			comments.reduce(
@@ -514,7 +517,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 
 			<div className='priceOfProduct'>
 				<h1 className='price_title'>
-					{t('basketCard.price')}:
+					{t('basketCard.price')}:{' '}
 					<span
 						style={{
 							fontSize: '33px',
@@ -522,11 +525,36 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							fontWeight: '700'
 						}}
 					>
-						<span style={{ letterSpacing: '3px' }}>
-							{!!detailData.phone && detailData.phone.price}
-							{!!extraProductDetail.airpod && extraProductDetail.airpod.price}
-						</span>
-						{t('basketCard.soum')}
+						{!!detailData.phone && (
+							<span style={{ letterSpacing: '3px' }}>
+								{!!detailData.phone &&
+									language == 'uz' &&
+									detailData.phone.price}{' '}
+								{language == 'uz' && ' сум'}
+								{!!detailData.phone &&
+									language == 'ru' &&
+									Number(detailData.phone.price / 140.25).toFixed(1)}
+								{language == 'ru' && ' рубль '}
+								{!!detailData.phone &&
+									language == 'uk' &&
+									Number(detailData.phone.price / 309.98).toFixed(1)}
+								{language == 'uk' && ' гривен'}
+							</span>
+						)}
+						{!!extraProductDetail.airpod && (
+							<span>
+								{language == 'uz' && extraProductDetail.airpod.price}
+								{language == 'uz' && " so'm"}
+								{!!extraProductDetail.airpod &&
+									language == 'ru' &&
+									Number(extraProductDetail.airpod.price / 140.25).toFixed(1)}
+								{language == 'ru' && ' рубль'}
+								{!!extraProductDetail.airpod &&
+									language == 'uk' &&
+									Math.floor(extraProductDetail.airpod.price / 309.98)}
+								{language == 'uk' && ' гривен'}
+							</span>
+						)}
 					</span>
 				</h1>
 

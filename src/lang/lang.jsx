@@ -11,7 +11,7 @@ export const lang = {
 			order: 'Оформление заказа',
 			catalogTitle: 'Средства связи',
 			catalogAll: 'Все Смартфоны',
-			searchFavourite: 'Поищите ваш любимый Смарфтон',
+			searchFavourite: 'Найдите ваш любимый Смарфтон',
 			history: 'Истории Транзакций',
 			allTransactions: 'Все Транзакции',
 			deleteUser: 'Удалить Аккаунт',
@@ -187,8 +187,10 @@ export const lang = {
 			usernameRequired: 'Имя пользователя обязательна к заполнению!',
 
 			emailMinLength: 'Адрес почты должна содержать больше 8 элементов!',
-			emailMaxLength: 'Адрес почты должна содержать меньше 32 элементов!',
-			emailRequired: 'Адрес почты обязательна к заполнению!'
+			emailMaxLength: 'Адрес почты должна содержать меньше 50 элементов!',
+			emailRequired: 'Адрес почты обязательна к заполнению!',
+			existsUsername: 'Такого пользователя существует в системе!',
+			existsEmailAddress: 'Такой адрес почты существует в системе!'
 		},
 
 		removeAccount: {
@@ -337,7 +339,8 @@ export const lang = {
 			mainPage: 'На Главную'
 		},
 		footer: {
-			contact: 'Контакты'
+			frontendContact: 'Контакты Разработчика сайта',
+			technicalProgrammer: 'Контакты Технического специалиста'
 		}
 	},
 	uk: {
@@ -352,7 +355,7 @@ export const lang = {
 			order: 'Кошик',
 			catalogTitle: "Засоби зв'язку",
 			catalogAll: 'Усі Смартфони',
-			searchFavourite: 'Пошукайте ваш улюблений Смарфтон',
+			searchFavourite: 'Знайдіть ваш улюблений смартфон',
 			history: 'Історії Транзакцій',
 			allTransactions: 'Всі Транзакції',
 			deleteUser: 'Видалити Аккаунт',
@@ -450,7 +453,7 @@ export const lang = {
 		forgotPAssword: {
 			emailReq: "Електронна пошта обов'язкова",
 			emailMin: 'Довжина електронного листа має бути не менше 10 символів',
-			emailMax: 'Електронна пошта не може перевищувати 60 символів',
+			emailMax: 'Електронна пошта не може перевищувати 50 символів',
 			passwordReq: 'Необхідний пароль!!!',
 			passwordMin: 'Довжина пароля повинна бути не менше 8 символів',
 			passwordMax: 'Пароль не може перевищувати 32 символи',
@@ -523,8 +526,10 @@ export const lang = {
 			usernameRequired: "Ім'я користувача обов'язкове до заповнення!",
 
 			emailMinLength: 'Адреса пошти повинна містити більше 8 елементів!',
-			emailMaxLength: 'Адреса пошти повинна містити менше 32 елементів!',
-			emailRequired: "Адреса Пошти обов'язкова до заповнення!"
+			emailMaxLength: 'Адреса пошти повинна містити менше 50 елементів!',
+			emailRequired: "Адреса Пошти обов'язкова до заповнення!",
+			existsUsername: 'Такого Користувача існує в системі!',
+			existsEmailAddress: 'Така адреса Пошти існує в системі!'
 		},
 		removeAccount: {
 			mustHavePass: 'Ви повинні ввести пароль!',
@@ -594,10 +599,10 @@ export const lang = {
 				address: {
 					required: 'Необхідно заповнити "адреса для доставки".'
 				},
-				userName: '',
-				password: '',
-				repeatPassword: '',
-				email: ''
+				userName: "Поле ім'я користувача обов'язково до заповнення!",
+				password: "Поле пароля обов'язково до заповнення!",
+				repeatPassword: 'Повторіть пароль будь ласка воно необхідно!',
+				email: 'Заповніть поле Пошти!'
 			},
 			paymentInfo: {
 				name: 'Інформація про Толове',
@@ -644,7 +649,7 @@ export const lang = {
 			password: 'Введіть пароль',
 			loginAccount: 'Увійдіть до свого облікового запису',
 			problemLogin: 'Проблеми з входом в обліковий запис',
-			signup: 'У вас немає облікового запису?',
+			signup: 'Зареєструватися',
 			forgotPassword: 'Забули пароль?',
 			signin: 'Увійти',
 			successLogin: 'Ви успішно зайшли до свого облікового запису',
@@ -664,24 +669,8 @@ export const lang = {
 			mainPage: 'На Головну'
 		},
 		footer: {
-			about: 'Про нас',
-			news: 'Новини',
-			gaurantee: 'Гарантія',
-			sale: 'Акції',
-			adress: 'Адреса магазинів',
-			buy: 'Покупцям',
-			pickup: 'Доставка',
-			contact: 'Контакти',
-			serviceCenter: 'Сервісний центр',
-			feedback: 'Залишить Відгук',
-			vacancy: 'Вакансії',
-			corporateBuy: 'Корпоративним покупцям',
-			services: 'Сервісний',
-			canIBuy: 'Як зробити покупку?',
-			payment: 'Способи оплати',
-			unired: 'Розстрочка ЮНІРЕД',
-			Cooperation: 'Співпраця',
-			zmarket: 'Розстрочка з Маркет'
+			frontendContact: 'Контакти розробника сайту',
+			technicalProgrammer: 'Контакти Технічний спеціаліст'
 		}
 	},
 	uz: {
@@ -696,7 +685,7 @@ export const lang = {
 			order: 'Buyurtma',
 			catalogTitle: 'Aloqa vositalari',
 			catalogAll: 'Barcha smartfonlar',
-			searchFavourite: 'Sevimli Smarftoningizni qidiring',
+			searchFavourite: 'Sevimli Smarftoningizni toping',
 			history: 'Haridlar Tarixi',
 			allTransactions: "Barcha o'tkazmalar",
 			deleteUser: "Akkautni O'chirish",
@@ -740,7 +729,7 @@ export const lang = {
 			yadr: 'yadrolar',
 			copus: 'Korpus materiali',
 			searchByFilter: "Filtrlar bo'yicha qidirish",
-			clearFilter: 'Filtrni tiklash',
+			clearFilter: 'Filtrni o\'chirish',
 			sort: 'Saralash turi',
 			priceBelow: 'narx past',
 			priceHigher: 'narx yuqori',
@@ -870,8 +859,10 @@ export const lang = {
 			emailMinLength:
 				"Pochta adresingiz 5ta elementdan ko'proq bo'lishi kerak!",
 			emailMaxLength:
-				"Pochta adresingiz 32 ta elementdan kamroq bo'lishi kerak!",
-			emailRequired: 'Pochta adresingiz kiritishingiz shart!'
+				"Pochta adresingiz 50 ta elementdan kamroq bo'lishi kerak!",
+			emailRequired: 'Pochta adresingiz kiritishingiz shart!',
+			existsUsername: 'Bunday Foydalanuvchi nomi tizimda mavjud!',
+			existsEmailAddress: 'Bunday Foydalanuvchi pochta addressi tizimda mavjud!'
 		},
 		removeAccount: {
 			mustHavePass: 'Parolni kiritish majburiy!',
@@ -1013,7 +1004,8 @@ export const lang = {
 			mainPage: 'Asosiy Menu'
 		},
 		footer: {
-			contact: 'Kontaktlar'
+			frontendContact: 'Sayt yaratuvchisining Kontaktlari',
+			technicalProgrammer: 'Texnik Mutaxassis Kontakti'
 		}
 	}
 }

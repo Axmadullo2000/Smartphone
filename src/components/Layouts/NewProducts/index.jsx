@@ -44,23 +44,22 @@ export default function NewProducts() {
 				<Swiper
 					breakpoints={{
 						330: {
-							width: 300,
 							slidesPerView: 1,
 							spaceBetweenSlides: 10
 						},
 						400: {
-							width: 300,
+							width: 400,
 							slidesPerView: 1,
 							spaceBetweenSlides: 10
 						},
 						530: {
-							width: 530,
+							width: 300,
 							slidesPerView: 1,
 							spaceBetweenSlides: 10
 						},
 						768: {
 							slidesPerView: 2,
-							spaceBetweenSlides: 1500
+							spaceBetweenSlides: 10
 						},
 						800: {
 							slidesPerView: 3,

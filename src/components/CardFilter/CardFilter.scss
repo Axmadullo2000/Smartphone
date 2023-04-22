@@ -10,14 +10,14 @@
 		width: 400px;
 		background: #f6f6f6;
 		padding: 20px 35px;
-		lineheight: 30px;
+		line-height: 24px;
 	}
 
 	.filterByPrice {
 		max-width: 100%;
 		margin: 30px auto;
 		padding: 10px;
-		boxshadow: 5px 5px 5px red;
+		box-shadow: 5px 5px 5px red;
 		.show_sidebar_filter {
 			cursor: pointer;
 			background: #d92e15;
@@ -59,6 +59,18 @@
 	}
 }
 
+.cardFilter {
+	display: flex;
+	flex-wrap: wrap;
+	.card {
+		margin: 20px !important;
+	}
+}
+
+.price {
+	font-size: 16px;
+}
+
 @media (max-width: 1000px) {
 	.cardFilterContainer {
 		flex-direction: column;
@@ -73,10 +85,14 @@
 	.cardFilterContainer {
 		flex-direction: column;
 		.filterByPrice {
+			width: 420px;
 			flex-direction: column;
 		}
 		.priceFilterForm {
 			margin-top: 22px;
 		}
+	}
+	.cardFilter {
+		justify-content: center !important;
 	}
 }

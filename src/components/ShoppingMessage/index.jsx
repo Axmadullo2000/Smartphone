@@ -8,7 +8,7 @@ export const ShoppingMessage = () => {
 
 	return (
 		<>
-			<ul className='flex ml-7 mt-5'>
+			<ul className='flex ml-7 mt-5 shoppingResultsLinks'>
 				<li className='checkout_direction'>
 					<Link to='/'>{t('cardDetail.main')}</Link>
 				</li>

@@ -20,10 +20,11 @@ export const ValidateRegistration = () => {
 			.required(`${t('validateRegistration.usernameRequired')}`)
 			.min(5, t('validateRegistration.usernameMinLength'))
 			.max(32, t('validateRegistration.usernameMaxLength')),
+
 		email: Yup.string()
-			.required('validateRegistration.emailRequired')
+			.required(`${t('validateRegistration.emailRequired')}`)
 			.min(8, `${t('validateRegistration.emailMinLength')}`)
-			.max(32, `${t('validateRegistration.emailMaxLength')}`)
+			.max(50, `${t('validateRegistration.emailMaxLength')}`)
 	})
 
 	const {
@@ -31,7 +32,7 @@ export const ValidateRegistration = () => {
 		formState: { errors },
 		handleSubmit
 	} = useForm({
-		mode: 'onSubmit',
+		mode: 'onBlur',
 		resolver: yupResolver(formSchema)
 	})
 
@@ -57,6 +58,7 @@ export const ValidateRegistration = () => {
 		}
 	}
 
+	console.log(errors)
 	const onSubmit = () => {
 		setTimeout(() => {
 			setLoading(false)
@@ -105,8 +107,16 @@ export const ValidateRegistration = () => {
 									className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
 									placeholder={t('validateRegistration.userNamePl')}
 								/>
-								{errors?.username && (
-									<p className='errorMessage'>{errors.username?.message}</p>
+								{Object.keys(errors).length > 0 && errors?.username ? (
+									<p className='errorMessage'>{errors?.username?.message}</p>
+								) : (
+									''
+								)}
+								{Object.keys(error).length > 0 &&
+								error.username[0].length > 0 ? (
+									<p>{t('validateRegistration.existsUsername')}</p>
+								) : (
+									''
 								)}
 							</div>
 							<div style={{ marginTop: '25px' }}>
@@ -128,8 +138,13 @@ export const ValidateRegistration = () => {
 						</div>
 
 						<span>
-							{errors?.email && (
-								<span className='errorMessage'>{errors.email?.message}</span>
+							{Object.keys(errors).length > 0 && errors?.email ? (
+								<p className='errorMessage'>{errors?.email?.message}</p>
+							) : (
+								''
+							)}
+							{Object.keys(error).length > 0 && error.email[0].length > 0 && (
+								<p>{t('validateRegistration.existsEmailAddress')}</p>
 							)}
 						</span>
 
@@ -159,14 +174,6 @@ export const ValidateRegistration = () => {
 									</p>
 								</div>
 							)}
-						</div>
-
-						<div>
-							{Object.entries(error).map((i, index) => (
-								<p className='capitalize text-red-900'>
-									{index + 1}) {i[1]}
-								</p>
-							))}
 						</div>
 
 						<div>

@@ -24,7 +24,7 @@ const Footer = () => {
 			</div>
 
 			<div className='mr-5 ml-5 footerBlock'>
-				<h5>{t('footer.contact')}</h5>
+				<h5>{t('footer.frontendContact')}</h5>
 				<div className='flex'>
 					<button
 						onClick={() =>
@@ -62,6 +62,12 @@ const Footer = () => {
 					<a href='tel: +998997944262' className='text-white text-2xl ml-2'>
 						(99) 794-42-62
 					</a>
+				</button>
+			</div>
+			<div className='flex items-start flex-col flex-end'>
+				<span className='mr-4'>{t('footer.technicalProgrammer')}</span>
+				<button className='mt-4' onClick={() => (window.location.href = 'https://t.me/memhard')}>
+					<img src={telegram} alt='' width={44} height={44} />
 				</button>
 			</div>
 		</footer>

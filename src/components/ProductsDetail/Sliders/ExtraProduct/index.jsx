@@ -25,7 +25,7 @@ export const ExtraProduct = ({ similarData }) => {
 						<div className='flex justify-center mt-8 relative'>
 							<button
 								onClick={() => swiperRef.current.slidePrev()}
-								className='z-50 absolute'
+								className='prevBtn z-50 absolute'
 								style={{
 									width: '55px',
 									top: '50%',
@@ -37,6 +37,16 @@ export const ExtraProduct = ({ similarData }) => {
 							</button>
 
 							<Swiper
+								breakpoints={{
+									400: {
+										slidesPerView: 1,
+										spaceBetweenSlides: 300
+									},
+									1000: {
+										slidesPerView: 4,
+										spaceBetweenSlides: 150
+									}
+								}}
 								slidesPerView={5}
 								loop={true}
 								speed={500}
@@ -59,7 +69,7 @@ export const ExtraProduct = ({ similarData }) => {
 
 							<button
 								onClick={() => swiperRef.current.slideNext()}
-								className='z-50 absolute'
+								className='z-50 absolute prevBtn'
 								style={{
 									width: '55px',
 									top: '50%',

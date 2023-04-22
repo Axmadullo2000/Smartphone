@@ -49,7 +49,7 @@ function App() {
 
 	i18n.use(initReactI18next).init({
 		debug: true,
-		fallbackLng: localStorage.getItem('lang') || 'ru',
+		fallbackLng: localStorage.getItem('lang') || 'uz',
 		interpolation: {
 			escapeValue: false
 		},

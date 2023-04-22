@@ -2,6 +2,7 @@ footer {
 	background-color: #2c2c2c;
 	margin-top: 40px;
 	padding-bottom: 40px;
+	justify-content: space-around;
 
 	div {
 		margin-top: 22px;
@@ -18,7 +19,12 @@ footer {
 		flex-direction: column;
 		.footerBlock,
 		.footerLogo {
-			margin: 20px auto;
+			margin: 20px 0;
 		}
+	}
+	footer div,
+	footer .footerBlock {
+		margin: 20px auto !important;
+		align-items: center !important;
 	}
 }

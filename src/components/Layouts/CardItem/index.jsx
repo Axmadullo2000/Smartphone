@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
@@ -6,6 +6,8 @@ import { toast } from 'react-toastify'
 
 import { SearchAsyncThunk } from '../../../redux/asyncThunks'
 import { addProductToBasket } from '../../../redux/asyncThunks/Basket'
+
+import Loader from '../Loader'
 
 import basket from '../../../assets/basket.svg'
 import energy from '../../../assets/energy.svg'
@@ -17,13 +19,21 @@ import './CardItem.scss'
 
 export const CardItem = item => {
 	const { id, name, photo1, price, slug, types } = item
-	const { comments } = useSelector(comment => comment.comment)
 
+	const { comments } = useSelector(comment => comment.comment)
 	const { loggednIn } = useSelector(state => state.auth)
+
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 	const { t } = useTranslation()
+
+	const language = localStorage.getItem('lang')
+		? localStorage.getItem('lang')
+		: 'uz'
+
 	let middlePrice = 5
+
+	const [showImage, setShowImage] = useState(false)
 
 	if (comments.length > 0) {
 		middlePrice =
@@ -33,15 +43,16 @@ export const CardItem = item => {
 			) / comments.length
 	}
 
+	setTimeout(() => {
+		setShowImage(true)
+	}, 4000)
+
 	useEffect(() => {
 		dispatch(SearchAsyncThunk({ search: name, offset: 0 }))
 	}, [dispatch, name])
 
 	return (
-		<div
-			className='card border mx-3 px-2 my-2'
-			style={{ width: '250px', borderRadius: '18px', height: '560px' }}
-		>
+		<div className='card border mx-3 px-2 my-2' style={{ minHeight: '500px' }}>
 			<div style={{ width: '150px', margin: '15px 0' }} className='flex'>
 				<img
 					style={{
@@ -52,7 +63,7 @@ export const CardItem = item => {
 					src={truck}
 					width={40}
 					height={45}
-					alt=''
+					alt='truck'
 				/>
 				<img
 					style={{
@@ -63,7 +74,7 @@ export const CardItem = item => {
 					src={percent}
 					width={40}
 					height={45}
-					alt=''
+					alt='percent'
 				/>
 				<img
 					style={{
@@ -74,48 +85,27 @@ export const CardItem = item => {
 					src={energy}
 					width={40}
 					height={45}
-					alt=''
+					alt='energy'
 				/>
 			</div>
-			<img
-				onClick={() => {
-					window.scrollTo({
-						top: 0,
-						behavior: 'smooth'
-					})
-					navigate(`/products/view/${slug}`)
-				}}
-				src={photo1}
-				alt={name}
-				style={{ width: '400px', height: '300px' }}
-			/>
-			<p
-				onClick={() => {
-					window.scrollTo({
-						top: 0,
-						behavior: 'smooth'
-					})
-					navigate(`/products/view/${slug}`)
-				}}
-				className='text-center'
-				style={{ margin: '15px 0 10px 0' }}
-			>
-				{name}
-			</p>
-			<div className='flex'>
-				{[...Array(Math.floor(middlePrice))].map((item, index) => (
-					<img
-						key={index}
-						className='stars'
-						src={stars}
-						alt=''
-						width={38}
-						height={21}
-					/>
-				))}
-			</div>
+			{!showImage && <Loader />}
 
-			<div className='flex items-center justify-between mb-5'>
+			{showImage && (
+				<img
+					style={{ margin: '20px auto', width: '200px', height: '200px' }}
+					onClick={() => {
+						window.scrollTo({
+							top: 0,
+							behavior: 'smooth'
+						})
+						navigate(`/products/view/${slug}`)
+					}}
+					src={photo1}
+					alt={name}
+				/>
+			)}
+
+			<div className='homePage_cardItems'>
 				<p
 					onClick={() => {
 						window.scrollTo({
@@ -124,44 +114,74 @@ export const CardItem = item => {
 						})
 						navigate(`/products/view/${slug}`)
 					}}
-					className='text-blue-500'
-					style={{ fontSize: '22px', fontWeight: 'bold' }}
+					className='text-center'
+					style={{ margin: '30px 0 10px 0' }}
 				>
-					{price} сум
+					{name}
 				</p>
-				<button
-					style={{
-						border: '1px solid silver',
-						padding: '10px',
-						borderRadius: '10px',
-						margin: '0 10px',
-						cursor: 'pointer'
-					}}
-					onClick={() => {
-						if (loggednIn) {
-							dispatch(
-								addProductToBasket({
-									product_id: id,
-									group_product: types === 'smartphone' ? 1 : 2
-								})
-							)
-						} else {
-							toast.success(t('validateRegistration.mustHaveRegister'), {
-								position: 'top-right',
-								autoClose: 5000,
-								hideProgressBar: false,
-								closeOnClick: true,
-								pauseOnHover: true,
-								draggable: true,
-								progress: undefined,
-								theme: 'dark'
+				<div className='flex'>
+					{[...Array(Math.floor(middlePrice))].map((item, index) => (
+						<img
+							key={index}
+							className='stars'
+							src={stars}
+							alt=''
+							width={38}
+							height={21}
+						/>
+					))}
+				</div>
+
+				<div className='flex items-center justify-between mt-5'>
+					<p
+						onClick={() => {
+							window.scrollTo({
+								top: 0,
+								behavior: 'smooth'
 							})
-							navigate('/sign-up')
-						}
-					}}
-				>
-					<img src={basket} width={24} height={24} alt='' />
-				</button>
+							navigate(`/products/view/${slug}`)
+						}}
+						className='text-blue-500'
+						style={{ fontSize: '18px', fontWeight: 'bold' }}
+					>
+						{language == 'uz' && `${price} so'm`}
+						{language == 'ru' && `${Number(price / 140.25).toFixed(0)} рубль`}
+						{language == 'uk' && `${Number(price / 309.98).toFixed(0)} гривень`}
+					</p>
+					<button
+						style={{
+							border: '1px solid silver',
+							padding: '10px',
+							borderRadius: '10px',
+							margin: '0 10px',
+							cursor: 'pointer'
+						}}
+						onClick={() => {
+							if (loggednIn) {
+								dispatch(
+									addProductToBasket({
+										product_id: id,
+										group_product: types === 'smartphone' ? 1 : 2
+									})
+								)
+							} else {
+								toast.success(t('validateRegistration.mustHaveRegister'), {
+									position: 'top-right',
+									autoClose: 5000,
+									hideProgressBar: false,
+									closeOnClick: true,
+									pauseOnHover: true,
+									draggable: true,
+									progress: undefined,
+									theme: 'dark'
+								})
+								navigate('/sign-up')
+							}
+						}}
+					>
+						<img src={basket} width={24} height={24} alt='' />
+					</button>
+				</div>
 			</div>
 		</div>
 	)

@@ -1,21 +1,25 @@
-body {
-	-webkit-touch-callout: none;
-	-webkit-user-select: none;
-	-khtml-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
-	user-select: none;
+body,
+div {
+	-webkit-touch-callout: none !important;
+	-webkit-user-select: none !important;
+	-khtml-user-select: none !important;
+	-moz-user-select: none !important;
+	-ms-user-select: none !important;
+	user-select: none !important;
 }
 
-body::-webkit-scrollbar {
-	width: 12px;
+body::-webkit-scrollbar,
+div::-webkit-scrollbar {
+	width: 12px !important;
 }
 
-body::-webkit-scrollbar-track {
+body::-webkit-scrollbar-track,
+div::-webkit-scrollbar-track {
 	background: white;
 }
 
-body::-webkit-scrollbar-thumb {
+body::-webkit-scrollbar-thumb,
+div::-webkit-scrollbar-thumb {
 	background-color: rgb(217, 46, 21);
 	border-radius: 20px;
 	border: 3px solid white;

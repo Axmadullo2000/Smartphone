@@ -28,30 +28,23 @@ export const SimilarProducts = ({ similarData }) => {
 				<Swiper
 					breakpoints={{
 						330: {
-							width: 300,
 							slidesPerView: 1,
 							spaceBetweenSlides: 10
 						},
 						400: {
-							width: 300,
+							width: 400,
 							slidesPerView: 1,
 							spaceBetweenSlides: 10
 						},
 						530: {
-							width: 530,
+							width: 300,
 							slidesPerView: 1,
 							spaceBetweenSlides: 10
 						},
-						600: {
+						768: {
 							width: 300,
 							slidesPerView: 2,
-							spaceBetweenSlides: 10
-						},
-
-						768: {
-							width: 600,
-							slidesPerView: 2,
-							spaceBetweenSlides: 10
+							spaceBetweenSlides: 100
 						},
 						800: {
 							slidesPerView: 3,
@@ -59,7 +52,7 @@ export const SimilarProducts = ({ similarData }) => {
 						},
 						1000: {
 							slidesPerView: 4,
-							spaceBetweenSlides: 10
+							spaceBetweenSlides: 150
 						}
 					}}
 					slidesPerView={5}
@@ -77,7 +70,7 @@ export const SimilarProducts = ({ similarData }) => {
 					{similarData.similar !== undefined &&
 						similarData.similar.map(slide => (
 							<SwiperSlide key={slide.id}>
-								<CardItem {...slide} star={4} />
+								<CardItem {...slide} />
 							</SwiperSlide>
 						))}
 				</Swiper>
