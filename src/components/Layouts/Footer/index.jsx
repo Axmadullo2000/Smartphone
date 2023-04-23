@@ -15,8 +15,8 @@ const Footer = () => {
 	return (
 		<footer className='footer flex text-slate-100'>
 			<div className='footerLogo flex items-start'>
-				<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
-					<Link to='/' className='opacity-75 hover:opacity-100'>
+				<p className='logo'>
+					<Link to='/' className='hover:text-color-red'>
 						<span className='text-red-700'>Smart</span>{' '}
 						<span className='text-blue-700'>Shop</span>
 					</Link>
@@ -66,7 +66,10 @@ const Footer = () => {
 			</div>
 			<div className='flex items-start flex-col flex-end'>
 				<span className='mr-4'>{t('footer.technicalProgrammer')}</span>
-				<button className='mt-4' onClick={() => (window.location.href = 'https://t.me/memhard')}>
+				<button
+					className='mt-4'
+					onClick={() => (window.location.href = 'https://t.me/memhard')}
+				>
 					<img src={telegram} alt='' width={44} height={44} />
 				</button>
 			</div>

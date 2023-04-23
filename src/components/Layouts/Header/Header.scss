@@ -1,16 +1,18 @@
+.logo {
+	font-size: 32px;
+	opacity: 1;
+	background: white;
+	padding: 12px;
+	margin: 0 10px;
+	border-radius: 10px;
+	cursor: pointer;
+	font-weight: bold;
+}
 .headerComponent {
-	overflow-x: scroll !important;
+	overflow-x: hidden !important;
 	boxs-hadow: 2px 5px 2px red !important;
 	background: #d92e15;
 	justify-content: space-between;
-	.logo {
-		font-size: 24px;
-		background: white;
-		padding: 12px;
-		margin: 0 10px;
-		border-radius: 10px;
-		cursor: pointer;
-	}
 }
 
 .phoneModelShow {
@@ -159,10 +161,26 @@
 		margin-top: 4px !important;
 		padding: 14px 14px !important;
 	}
+
+	.catalogItems {
+		max-width: 100%;
+		overflow: hidden;
+	}
 }
 
 @media (max-width: 750px) {
 	.historyTransactions {
 		width: 300px !important;
+	}
+	.headerComponent .header_mainContents {
+		flex-direction: column !important;
+	}
+	.loggedInUser {
+	}
+	.search_panel {
+		width: 280px !important;
+	}
+	.searchBtn {
+		padding: 0;
 	}
 }

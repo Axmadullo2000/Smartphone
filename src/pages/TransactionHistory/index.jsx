@@ -21,10 +21,6 @@ export const TransactionHistory = () => {
 	const dispatch = useDispatch()
 	const navigate = useNavigate()
 
-	if (!loggednIn) {
-		navigate('/')
-	}
-
 	useEffect(() => {
 		dispatch(getSuccessFullAsyncThunk())
 	}, [dispatch])

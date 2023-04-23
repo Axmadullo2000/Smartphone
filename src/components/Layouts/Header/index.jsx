@@ -84,7 +84,7 @@ const Header = () => {
 		<>
 			<div className='p-2 flex items-center headerComponent'>
 				<p className='logo'>
-					<Link to='/' className='opacity-75 hover:opacity-100'>
+					<Link to='/' className='hover:text-color-red'>
 						<span className='text-red-700'>Smart</span>{' '}
 						<span className='text-blue-700'>Shop</span>
 					</Link>
@@ -125,7 +125,7 @@ const Header = () => {
 					</label>
 				</form>
 
-				<div className='flex items-center'>
+				<div className='flex items-center header_mainContents'>
 					{!loggednIn ? (
 						<>
 							<button

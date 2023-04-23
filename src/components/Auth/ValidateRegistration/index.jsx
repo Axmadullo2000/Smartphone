@@ -32,7 +32,7 @@ export const ValidateRegistration = () => {
 		formState: { errors },
 		handleSubmit
 	} = useForm({
-		mode: 'onBlur',
+		mode: 'onSubmit',
 		resolver: yupResolver(formSchema)
 	})
 
@@ -58,7 +58,6 @@ export const ValidateRegistration = () => {
 		}
 	}
 
-	console.log(errors)
 	const onSubmit = () => {
 		setTimeout(() => {
 			setLoading(false)
@@ -77,21 +76,19 @@ export const ValidateRegistration = () => {
 
 	return (
 		<div>
-			<div className='flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
+			<div className='relative flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
 				<div className='w-full max-w-md space-y-8'>
 					<div className='mx-auto'>
-						<div className='w-80 mx-auto'>
-							<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
-								<span className='text-red-700 hover:text-red-900'>Smart</span>{' '}
-								<span className='text-blue-700 hover:text-blue-900'>Shop</span>
-							</p>
-						</div>
 						<h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
 							{t('validateRegistration.registerAccount')}
 						</h2>
 					</div>
 					<form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
 						<input type='hidden' name='remember' defaultValue='true' />
+						<p className='logo mx-auto text-center'>
+							<span className='text-red-700'>Smart</span>{' '}
+							<span className='text-blue-700'>Shop</span>
+						</p>
 						<div className='-space-y-px rounded-md shadow-sm'>
 							<div>
 								<label htmlFor='username' className='sr-only'>
@@ -107,16 +104,19 @@ export const ValidateRegistration = () => {
 									className='relative block w-full appearance-none rounded-none rounded-t-md border border-gray-300 px-3 py-2 text-gray-900 placeholder-gray-500 focus:z-10 focus:border-indigo-500 focus:outline-none focus:ring-indigo-500 sm:text-sm'
 									placeholder={t('validateRegistration.userNamePl')}
 								/>
-								{Object.keys(errors).length > 0 && errors?.username ? (
+
+								{typeof error == 'object' &&
+								Object.keys(errors).length > 0 &&
+								errors?.username ? (
 									<p className='errorMessage'>{errors?.username?.message}</p>
 								) : (
 									''
 								)}
-								{Object.keys(error).length > 0 &&
-								error.username[0].length > 0 ? (
-									<p>{t('validateRegistration.existsUsername')}</p>
-								) : (
-									''
+
+								{!!error.username && error.username.length > 0 && (
+									<span className='text-red-600'>
+										{t('validateRegistration.existsUsername')}
+									</span>
 								)}
 							</div>
 							<div style={{ marginTop: '25px' }}>
@@ -137,18 +137,14 @@ export const ValidateRegistration = () => {
 							</div>
 						</div>
 
-						<span>
-							{Object.keys(errors).length > 0 && errors?.email ? (
+						<span className='text-red-600'>
+							{typeof error == 'object' && Object.keys(errors).length > 0 && (
 								<p className='errorMessage'>{errors?.email?.message}</p>
-							) : (
-								''
 							)}
-							{Object.keys(error).length > 0 && error.email[0].length > 0 && (
-								<p>{t('validateRegistration.existsEmailAddress')}</p>
-							)}
+							{!!error.email && t('validateRegistration.existsEmailAddress')}
 						</span>
 
-						<div className=''>
+						<div>
 							<div className='flex items-center justify-between'>
 								<div className='text-sm'>
 									<Link
@@ -159,7 +155,18 @@ export const ValidateRegistration = () => {
 									</Link>
 								</div>
 							</div>
-							{loading && <Loader />}
+							{loading && (
+								<div
+									style={{
+										position: 'absolute',
+										left: '50%',
+										top: '50%',
+										transform: 'translate(-50%, -50%)'
+									}}
+								>
+									<Loader />
+								</div>
+							)}
 							{!success && (
 								<div>
 									<p className='mt-2 text-red-500'>

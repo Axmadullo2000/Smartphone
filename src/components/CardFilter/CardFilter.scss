@@ -79,6 +79,13 @@
 			width: 100% !important;
 		}
 	}
+	.fixedDirectUp {
+		right: 5px;
+		bottom: 20px;
+		img {
+			width: 40px;
+		}
+	}
 }
 
 @media (max-width: 576px) {
@@ -88,11 +95,23 @@
 			width: 420px;
 			flex-direction: column;
 		}
+
 		.priceFilterForm {
 			margin-top: 22px;
 		}
 	}
 	.cardFilter {
 		justify-content: center !important;
+	}
+	.priceFilterForm {
+		margin: 0 30px !important;
+		max-width: 270px;
+		font-size: 14px !important;
+		display: flex;
+		flex-direction: column;
+		button {
+			padding: 10px 15px;
+			margin: 10px;
+		}
 	}
 }

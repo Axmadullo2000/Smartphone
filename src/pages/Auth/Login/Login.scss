@@ -20,13 +20,16 @@
 .signButton {
 	padding: 10px 6px;
 	width: 100%;
-	background: blue !important;
 	color: white;
+	background: blue !important;
 	border-radius: 6px;
+	color: white;
 }
 
-button.signButton::hover {
-	opacity: 0.5 !important;
+.signButton:hover {
+	background: red !important;
+	transition: 0.4s ease color;
+	color: white;
 }
 
 @media (max-width: 480px) {

@@ -6,12 +6,14 @@ import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import { AuthService } from '../../../Service'
+import Loader from '../../Layouts/Loader'
 
 export const ForgotPassword = () => {
 	const [email, setEmail] = useState('')
 	const [password, setPassword] = useState('')
 	const [passwordRepeat, setPasswordRepeat] = useState('')
 	const [success, setSuccess] = useState(false)
+	const [loading, setLoading] = useState(false)
 
 	const { t } = useTranslation()
 
@@ -60,6 +62,10 @@ export const ForgotPassword = () => {
 	}
 
 	const onSubmit = () => {
+		setLoading(true)
+		setTimeout(() => {
+			setLoading(false)
+		}, 3000)
 		createPassword()
 	}
 
@@ -69,20 +75,16 @@ export const ForgotPassword = () => {
 				<div className='flex min-h-full items-center justify-center py-12 px-4 sm:px-6 lg:px-8'>
 					<div className='w-full max-w-md space-y-8'>
 						<div className='mx-auto'>
-							<div className='w-80 mx-auto'>
-								<p className='w-60 p-3 bg-slate-100 text-3xl mx-4 text-red-700 uppercase text-center shadow-lg shadow-blue-500/50 rounded-lg cursor-pointer'>
-									<span className='text-red-700 hover:text-red-900'>Smart</span>{' '}
-									<span className='text-blue-700 hover:text-blue-900'>
-										Shop
-									</span>
-								</p>
-							</div>
 							<h2 className='mt-6 text-center text-3xl font-bold tracking-tight text-gray-900'>
 								{t('forgotPAssword.resetPassword')}
 							</h2>
 						</div>
 						<form className='mt-8 space-y-6' onSubmit={handleSubmit(onSubmit)}>
 							<input type='hidden' name='remember' defaultValue='true' />
+							<p className='logo mx-auto text-center'>
+								<span className='text-red-700'>Smart</span>{' '}
+								<span className='text-blue-700'>Shop</span>
+							</p>
 							<div className='-space-y-px rounded-md shadow-sm'>
 								<div>
 									<label htmlFor='email' className='sr-only'>
@@ -100,6 +102,20 @@ export const ForgotPassword = () => {
 									/>
 									<p className='errorMessage'>{errors.email?.message}</p>
 								</div>
+								{console.log(loading)}
+								{loading && (
+									<div
+										style={{
+											position: 'absolute',
+											left: '50%',
+											top: '50%',
+											transform: 'translate(-50%, -50%)',
+											zIndex: 999
+										}}
+									>
+										<Loader />
+									</div>
+								)}
 								<div style={{ margin: '10px 0' }}>
 									<label htmlFor='password' className='sr-only'>
 										{t('forgotPAssword.password')}

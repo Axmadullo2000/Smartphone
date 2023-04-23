@@ -23,6 +23,10 @@ export const TransactionCard = ({ item, index }) => {
 			: ''
 	)
 
+	const language = localStorage.getItem('lang')
+		? localStorage.getItem('lang')
+		: 'uz'
+
 	useEffect(() => {
 		dispatch(getSuccessFullAsyncThunk())
 
@@ -77,12 +81,37 @@ export const TransactionCard = ({ item, index }) => {
 						<div>
 							<p className='flex items-center' style={{ fontSize: '20px' }}>
 								{t('buyedProducts.payment')}:{' '}
-								{item !== 'wrong id phone' &&
-									bookedProducts[index + 1].reduce(
-										(acc, item) => acc + item.price,
-										0
-									)}{' '}
-								{t('buyedProducts.soum')}
+								{item !== 'wrong id phone' && language == 'uz' && (
+									<>
+										{bookedProducts[index + 1].reduce(
+											(acc, item) => acc + item.price,
+											0
+										)}{' '}
+										so'm
+									</>
+								)}
+								{item !== 'wrong id phone' && language == 'ru' && (
+									<>
+										{Number(
+											bookedProducts[index + 1].reduce(
+												(acc, item) => acc + item.price,
+												0
+											) / 140.25
+										).toFixed(1)}{' '}
+										рублей
+									</>
+								)}{' '}
+								{item !== 'wrong id phone' && language == 'uk' && (
+									<>
+										{Number(
+											bookedProducts[index + 1].reduce(
+												(acc, item) => acc + item.price,
+												0
+											) / 309.98
+										).toFixed(1)}{' '}
+										гривень{' '}
+									</>
+								)}{' '}
 							</p>
 						</div>
 
@@ -139,7 +168,24 @@ export const TransactionCard = ({ item, index }) => {
 												<div>
 													<p>{product.name}</p>
 													<p>
-														{product.count} шт. {product.price / product.count}
+														{product.count} шт.{' '}
+														{language == 'uz' && <>{product.price/product.count} so'm</>}
+														{language == 'ru' && (
+															<>
+																{Number(
+																	product.price / (140.25 * product.count)
+																).toFixed(1)}{' '}
+																рублей
+															</>
+														)}
+														{language == 'uk' && (
+															<>
+																{Number(
+																	product.price / (309.98 * product.count)
+																).toFixed(1)}{' '}
+																гривень
+															</>
+														)}
 													</p>
 												</div>
 											</div>
@@ -150,7 +196,18 @@ export const TransactionCard = ({ item, index }) => {
 													className='priceForProduct'
 													style={{ color: '#D92E15' }}
 												>
-													{product.price} {t('buyedProducts.soum')}
+													{language == 'uz' && <>{product.price} so'm</>}
+													{language == 'ru' && (
+														<>
+															{Number(product.price / 140.25).toFixed(1)} рублей
+														</>
+													)}
+													{language == 'uk' && (
+														<>
+															{Number(product.price / 309.98).toFixed(1)}{' '}
+															гривень
+														</>
+													)}
 												</span>
 											</div>
 										</div>
