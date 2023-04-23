@@ -81,7 +81,7 @@ export const TransactionCard = ({ item, index }) => {
 						<div>
 							<p className='flex items-center' style={{ fontSize: '20px' }}>
 								{t('buyedProducts.payment')}:{' '}
-								{item !== 'wrong id phone' && language == 'uz' && (
+								{item !== 'wrong id phone' && language === 'uz' && (
 									<>
 										{bookedProducts[index + 1].reduce(
 											(acc, item) => acc + item.price,
@@ -90,7 +90,7 @@ export const TransactionCard = ({ item, index }) => {
 										so'm
 									</>
 								)}
-								{item !== 'wrong id phone' && language == 'ru' && (
+								{item !== 'wrong id phone' && language === 'ru' && (
 									<>
 										{Number(
 											bookedProducts[index + 1].reduce(
@@ -101,7 +101,7 @@ export const TransactionCard = ({ item, index }) => {
 										рублей
 									</>
 								)}{' '}
-								{item !== 'wrong id phone' && language == 'uk' && (
+								{item !== 'wrong id phone' && language === 'uk' && (
 									<>
 										{Number(
 											bookedProducts[index + 1].reduce(
@@ -169,8 +169,8 @@ export const TransactionCard = ({ item, index }) => {
 													<p>{product.name}</p>
 													<p>
 														{product.count} шт.{' '}
-														{language == 'uz' && <>{product.price/product.count} so'm</>}
-														{language == 'ru' && (
+														{language === 'uz' && <>{product.price/product.count} so'm</>}
+														{language === 'ru' && (
 															<>
 																{Number(
 																	product.price / (140.25 * product.count)
@@ -178,7 +178,7 @@ export const TransactionCard = ({ item, index }) => {
 																рублей
 															</>
 														)}
-														{language == 'uk' && (
+														{language === 'uk' && (
 															<>
 																{Number(
 																	product.price / (309.98 * product.count)
@@ -196,13 +196,13 @@ export const TransactionCard = ({ item, index }) => {
 													className='priceForProduct'
 													style={{ color: '#D92E15' }}
 												>
-													{language == 'uz' && <>{product.price} so'm</>}
-													{language == 'ru' && (
+													{language === 'uz' && <>{product.price} so'm</>}
+													{language === 'ru' && (
 														<>
 															{Number(product.price / 140.25).toFixed(1)} рублей
 														</>
 													)}
-													{language == 'uk' && (
+													{language === 'uk' && (
 														<>
 															{Number(product.price / 309.98).toFixed(1)}{' '}
 															гривень

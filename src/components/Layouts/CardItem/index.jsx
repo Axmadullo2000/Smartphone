@@ -144,9 +144,10 @@ export const CardItem = item => {
 						className='text-blue-500'
 						style={{ fontSize: '18px', fontWeight: 'bold' }}
 					>
-						{language == 'uz' && `${price} so'm`}
-						{language == 'ru' && `${Number(price / 140.25).toFixed(0)} рубль`}
-						{language == 'uk' && `${Number(price / 309.98).toFixed(0)} гривень`}
+						{language === 'uz' && `${price} so'm`}
+						{language === 'ru' && `${Number(price / 140.25).toFixed(0)} рубль`}
+						{language === 'uk' &&
+							`${Number(price / 309.98).toFixed(0)} гривень`}
 					</p>
 					<button
 						style={{

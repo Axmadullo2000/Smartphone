@@ -1,7 +1,7 @@
 import { t } from 'i18next'
 import { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { getSuccessFullAsyncThunk } from '../../redux/asyncThunks/Transaction'
 
@@ -16,10 +16,8 @@ import './TransactionHistory.scss'
 export const TransactionHistory = () => {
 	const { userData } = useSelector(state => state.auth)
 	const { bookedProducts } = useSelector(state => state.payment)
-	const { loggednIn } = useSelector(state => state.auth)
 
 	const dispatch = useDispatch()
-	const navigate = useNavigate()
 
 	useEffect(() => {
 		dispatch(getSuccessFullAsyncThunk())
