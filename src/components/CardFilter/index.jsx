@@ -240,7 +240,7 @@ const CardFilter = ({ slug }) => {
 
 	const language = localStorage.getItem('lang')
 		? localStorage.getItem('lang')
-		: 'ru'
+		: 'uz'
 
 	return (
 		<div className='cardFilterContainer'>
@@ -776,7 +776,12 @@ const CardFilter = ({ slug }) => {
 						>
 							{showProducts ? (
 								<div className=''>
-									<img src={closeSidebar} width={35} height={35} alt={'close'}/>
+									<img
+										src={closeSidebar}
+										width={35}
+										height={35}
+										alt={'close'}
+									/>
 								</div>
 							) : (
 								<div className=''>
