@@ -39,6 +39,7 @@ export const SearchResult = () => {
 
 	useEffect(() => {
 		dispatch(SearchAsyncThunk({ search: slug, offset: count }))
+		// eslint-disable-next-line
 	}, [slug])
 
 	return (
@@ -55,13 +56,13 @@ export const SearchResult = () => {
 							key={item.id}
 							className='cardElement flex cursor-pointer'
 						>
-							{status == '' ? (
+							{status === '' ? (
 								<Loader />
 							) : (
 								<img
 									className='search_result_image'
 									src={item.photo1}
-									alt=''
+									alt={item.name}
 									width={300}
 								/>
 							)}
@@ -100,7 +101,7 @@ export const SearchResult = () => {
 					</button>
 				))}
 
-				{!!data.results && data.results.length == 0 && (
+				{!!data.results && data.results.length === 0 && (
 					<div className='notFound_products'>
 						<h2
 							style={{

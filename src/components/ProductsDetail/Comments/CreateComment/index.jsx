@@ -36,6 +36,7 @@ export const CreateComment = ({ id }) => {
 
 	useEffect(() => {
 		addComment()
+		// eslint-disable-next-line
 	}, [])
 
 	return (

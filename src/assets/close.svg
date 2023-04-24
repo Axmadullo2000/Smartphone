@@ -1,5 +1,5 @@
 <svg
-							class="closeProduct"
+							className="closeProduct"
 							width='50px'
 							height='48px'
 							viewBox='0 0 24 24'

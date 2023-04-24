@@ -70,34 +70,31 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					)}
 					{showPhone.second && (
 						<div>
-							{!!detailData.phone &&
-								detailData.phone.types === 'smartphone' && (
-									<Container
-										isActive={isActive}
-										setIsActive={setIsActive}
-										imageURL={detailData.phone.photo2}
-									/>
-								)}
-							{!!extraProductDetail.airpod &&
-								extraProductDetail.airpod.types === 'extra' && (
-									<Container
-										isActive={isActive}
-										setIsActive={setIsActive}
-										imageURL={extraProductDetail.airpod.photo2}
-									/>
-								)}
+							{!!detailData.phone && (
+								<Container
+									isActive={isActive}
+									setIsActive={setIsActive}
+									imageURL={detailData.phone.photo2}
+								/>
+							)}
+							{!!extraProductDetail.airpod && (
+								<Container
+									isActive={isActive}
+									setIsActive={setIsActive}
+									imageURL={extraProductDetail.airpod.photo2}
+								/>
+							)}
 						</div>
 					)}
 					{showPhone.third && (
 						<div>
-							{!!detailData.phone &&
-								detailData.phone.types === 'smartphone' && (
-									<Container
-										isActive={isActive}
-										setIsActive={setIsActive}
-										imageURL={detailData.phone.photo3}
-									/>
-								)}
+							{!!detailData.phone && (
+								<Container
+									isActive={isActive}
+									setIsActive={setIsActive}
+									imageURL={detailData.phone.photo3}
+								/>
+							)}
 						</div>
 					)}
 				</div>
@@ -250,8 +247,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 							</p>
 							<div className='flex stars_detail'>
 								{comments.length === 0
-									? !!detailData.phone &&
-									  detailData.phone.types === 'smartphone'
+									? !!detailData.phone
 										? [...Array(Math.floor(detailData.phone.rating))].map(
 												(item, index) => {
 													return (
@@ -280,7 +276,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 												)
 										  })
 									: // если длина массива больше чем 0
-									!!detailData.phone && detailData.phone.types === 'smartphone'
+									!!detailData.phone
 									? [...Array(Math.floor(middlePrice))].map(index => {
 											return (
 												<img
@@ -313,7 +309,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					<h3 style={{ color: '#223869', marginBottom: '40px' }}>
 						{t('extraInfoAbout.character')}
 					</h3>
-					{!!detailData.phone && detailData.phone.types === 'smartphone' && (
+					{!!detailData.phone && (
 						<h2 style={{ color: '#223869', fontSize: '22px' }}>
 							{t('showLittleinfo.left')}
 							{': '}
@@ -360,18 +356,17 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								margin: '10px 0'
 							}}
 						>
-							{!!detailData.phone &&
-								detailData.phone.types === 'smartphone' && (
-									<>
-										{' '}
-										<span className='character_item'>
-											{t('searchResult.type')}
-										</span>
-										<span className='character_value'>
-											{detailData.phone.Version_OS}
-										</span>
-									</>
-								)}
+							{!!detailData.phone && (
+								<>
+									{' '}
+									<span className='character_item'>
+										{t('searchResult.type')}
+									</span>
+									<span className='character_value'>
+										{detailData.phone.Version_OS}
+									</span>
+								</>
+							)}
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types === 'extra' && (
 									<>
@@ -392,17 +387,16 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								margin: '10px 0'
 							}}
 						>
-							{!!detailData.phone &&
-								detailData.phone.types === 'smartphone' && (
-									<>
-										<span className='character_item'>
-											{t('showLittleinfo.typeCorpus')}
-										</span>
-										<span className='character_value'>
-											{!!detailData.phone && detailData.phone.corpus}
-										</span>
-									</>
-								)}
+							{!!detailData.phone && (
+								<>
+									<span className='character_item'>
+										{t('showLittleinfo.typeCorpus')}
+									</span>
+									<span className='character_value'>
+										{!!detailData.phone && detailData.phone.corpus}
+									</span>
+								</>
+							)}
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types === 'extra' && (
 									<>
@@ -425,19 +419,18 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								margin: '10px 0'
 							}}
 						>
-							{!!detailData.phone &&
-								detailData.phone.types === 'smartphone' && (
-									<>
-										<span className='character_item'>
-											{t('searchResult.typeSimCard')}
-										</span>
-										<span className='character_value'>
-											{!!detailData.phone &&
-												detailData.phone.sim_card &&
-												detailData.phone.sim_card !== undefined}
-										</span>
-									</>
-								)}
+							{!!detailData.phone && (
+								<>
+									<span className='character_item'>
+										{t('searchResult.typeSimCard')}
+									</span>
+									<span className='character_value'>
+										{!!detailData.phone &&
+											detailData.phone.sim_card &&
+											detailData.phone.sim_card !== undefined}
+									</span>
+								</>
+							)}
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types === 'extra' && (
 									<>
@@ -457,17 +450,16 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 								margin: '10px 0'
 							}}
 						>
-							{!!detailData.phone &&
-								detailData.phone.types === 'smartphone' && (
-									<>
-										<span className='character_item'>
-											{t('searchResult.size')} (ШxВxТ){' '}
-										</span>
-										<span className='character_value'>
-											{!!detailData.phone && detailData.phone.allow_display}
-										</span>
-									</>
-								)}
+							{!!detailData.phone && (
+								<>
+									<span className='character_item'>
+										{t('searchResult.size')} (ШxВxТ){' '}
+									</span>
+									<span className='character_value'>
+										{!!detailData.phone && detailData.phone.allow_display}
+									</span>
+								</>
+							)}
 							{!!extraProductDetail.airpod &&
 								extraProductDetail.airpod.types === 'extra' && (
 									<>
@@ -480,7 +472,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 									</>
 								)}
 						</li>
-						{!!detailData.phone && detailData.phone.types === 'smartphone' && (
+						{!!detailData.phone && (
 							<li
 								className='flex justify-between'
 								style={{
@@ -528,31 +520,31 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 						{!!detailData.phone && (
 							<span style={{ letterSpacing: '3px' }}>
 								{!!detailData.phone &&
-									language == 'uz' &&
+									language === 'uz' &&
 									detailData.phone.price}{' '}
-								{language == 'uz' && ' сум'}
+								{language === 'uz' && ' сум'}
 								{!!detailData.phone &&
-									language == 'ru' &&
+									language === 'ru' &&
 									Number(detailData.phone.price / 140.25).toFixed(1)}
-								{language == 'ru' && ' рубль '}
+								{language === 'ru' && ' рубль '}
 								{!!detailData.phone &&
-									language == 'uk' &&
+									language === 'uk' &&
 									Number(detailData.phone.price / 309.98).toFixed(1)}
-								{language == 'uk' && ' гривен'}
+								{language === 'uk' && ' гривен'}
 							</span>
 						)}
 						{!!extraProductDetail.airpod && (
 							<span>
-								{language == 'uz' && extraProductDetail.airpod.price}
-								{language == 'uz' && " so'm"}
+								{language === 'uz' && extraProductDetail.airpod.price}
+								{language === 'uz' && " so'm"}
 								{!!extraProductDetail.airpod &&
-									language == 'ru' &&
+									language === 'ru' &&
 									Number(extraProductDetail.airpod.price / 140.25).toFixed(1)}
-								{language == 'ru' && ' рубль'}
+								{language === 'ru' && ' рубль'}
 								{!!extraProductDetail.airpod &&
-									language == 'uk' &&
-									Math.floor(extraProductDetail.airpod.price / 309.98)}
-								{language == 'uk' && ' гривен'}
+									language === 'uk' &&
+									Number(extraProductDetail.airpod.price / 309.98).toFixed(1)}
+								{language === 'uk' && ' гривен'}
 							</span>
 						)}
 					</span>

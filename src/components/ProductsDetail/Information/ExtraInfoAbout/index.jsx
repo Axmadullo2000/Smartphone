@@ -66,7 +66,7 @@ export const ExtraInfoAbout = ({
 			<div style={{ marginTop: '40px' }}>
 				{showFullDescription.description && (
 					<div>
-						{!!detailData.phone && detailData.phone.types == 'smartphone' && (
+						{!!detailData.phone && detailData.phone.types === 'smartphone' && (
 							<>
 								<p
 									style={{
@@ -83,7 +83,7 @@ export const ExtraInfoAbout = ({
 							</>
 						)}
 						{!!extraProductDetail.airpod &&
-							extraProductDetail.airpod.types == 'extra' && (
+							extraProductDetail.airpod.types === 'extra' && (
 								<>
 									<p
 										style={{
@@ -168,7 +168,7 @@ export const ExtraInfoAbout = ({
 							}
 						</div>
 
-						{!!detailData.phone && detailData.phone.types == 'smartphone' && (
+						{!!detailData.phone && detailData.phone.types === 'smartphone' && (
 							<div style={{ lineHeight: '40px' }}>
 								<h2
 									style={{
@@ -182,7 +182,7 @@ export const ExtraInfoAbout = ({
 									{t('extraInfoAbout.screen')}
 								</h2>
 								<ul>
-									{detailData.phone != undefined && (
+									{!!detailData.phone && (
 										<li className='phone_details'>
 											<span style={{ width: '50%' }}>
 												{t('extraInfoAbout.typeScreen')}
@@ -378,7 +378,7 @@ export const ExtraInfoAbout = ({
 							</div>
 						)}
 						{!!extraProductDetail.airpod &&
-							extraProductDetail.airpod.types == 'extra' && (
+							extraProductDetail.airpod.types === 'extra' && (
 								<ul>
 									<li className='phone_details'>
 										<span style={{ width: '50%' }}>
@@ -387,7 +387,7 @@ export const ExtraInfoAbout = ({
 										<span>{extraProductDetail.airpod.enterface}</span>
 									</li>
 									{!!extraProductDetail.airpod &&
-										extraProductDetail.airpod.types == 'extra' && (
+										extraProductDetail.airpod.types === 'extra' && (
 											<li className='phone_details'>
 												<span style={{ width: '50%' }}>
 													{t('showLittleinfo.view')}{' '}
@@ -439,7 +439,7 @@ export const ExtraInfoAbout = ({
 								margin: '10px 0'
 							}}
 						>
-							{commentData['user info'] != undefined &&
+							{commentData['user info'] !== undefined &&
 								commentData['user info'].username}
 						</li>
 

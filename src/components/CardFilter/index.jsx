@@ -56,11 +56,11 @@ const CardFilter = ({ slug }) => {
 
 	const fetchData = (products = allData) => {
 		let data = []
-		if (products.results !== undefined) {
+		if (!!products.results) {
 			array = [...products.results]
 			// filtering with range
 			array.filter(product => {
-				if (count == 0) {
+				if (count === 0) {
 					productData.push(product)
 				} else {
 					if (product.price > count[0] && product.price < Number(count[1])) {
@@ -95,6 +95,7 @@ const CardFilter = ({ slug }) => {
 				offset: 0
 			})
 		)
+		// eslint-disable-next-line
 	}, [dispatch, filterByFewParams])
 
 	const handleFilter = e => {
@@ -129,7 +130,7 @@ const CardFilter = ({ slug }) => {
 		const dataList = []
 		const allCategory = []
 
-		allData.results !== undefined &&
+		!!allData.results &&
 			allData.results.map(item => dataList.push(item.giga_vstoeno))
 
 		const uniqueData = dataList
@@ -145,7 +146,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByOperativeMemory = () => {
 		const dataList = []
 
-		allData.results !== undefined &&
+		!!allData.results &&
 			allData.results.map(item => dataList.push(item.giga_operate))
 
 		const allCategory = []
@@ -163,7 +164,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByFrontCamera = () => {
 		const dataList = []
 
-		allData.results !== undefined &&
+		!!allData.results &&
 			allData.results.map(item => dataList.push(item.front_kamera))
 
 		const allCategory = []
@@ -181,7 +182,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByAccumulator = () => {
 		const dataList = []
 
-		allData.results !== undefined &&
+		!!allData.results &&
 			allData.results.map(item => dataList.push(item.accumulator))
 
 		const allCategory = []
@@ -199,8 +200,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByYadra = () => {
 		const dataList = []
 
-		allData.results !== undefined &&
-			allData.results.map(item => dataList.push(item.yadra))
+		!!allData.results && allData.results.map(item => dataList.push(item.yadra))
 
 		const allCategory = []
 		let uniqueData = dataList
@@ -216,8 +216,7 @@ const CardFilter = ({ slug }) => {
 	const FilterByCorpus = () => {
 		const dataList = []
 
-		allData.results !== undefined &&
-			allData.results.map(item => dataList.push(item.corpus))
+		!!allData.results && allData.results.map(item => dataList.push(item.corpus))
 
 		const allCategory = []
 		let uniqueData = dataList
@@ -302,17 +301,17 @@ const CardFilter = ({ slug }) => {
 						</h3>
 						{
 							<>
-								{count === 0 && typeof count === 'number' ? (
+								{count === 0 ? (
 									<div className='flex justify-between text-red-500 text-xl'>
-										{language == 'uz' && (
+										{language === 'uz' && (
 											<span className='price'>{count} so'm</span>
 										)}
-										{language == 'ru' && (
+										{language === 'ru' && (
 											<span className='price'>
 												{Number(count / 140.25).toFixed(1)} рублей
 											</span>
 										)}
-										{language == 'uk' && (
+										{language === 'uk' && (
 											<>
 												<span className='price'>
 													{Number(count / 309.98).toFixed(0)} гривень
@@ -320,18 +319,18 @@ const CardFilter = ({ slug }) => {
 											</>
 										)}
 										<>
-											{allData.results != undefined && language == 'uz' && (
+											{!!allData.results && language === 'uz' && (
 												<span className='price'>
 													{maxExpensiveProduct} so'm
 												</span>
 											)}
-											{allData.results != undefined && language == 'ru' && (
+											{!!allData.results && language === 'ru' && (
 												<span className='price'>
 													{Number(maxExpensiveProduct / 140.25).toFixed(1)}{' '}
 													рублей
 												</span>
 											)}
-											{allData.results != undefined && language == 'uk' && (
+											{!!allData.results && language === 'uk' && (
 												<span className='price'>
 													{Number(maxExpensiveProduct / 309.98).toFixed(1)}{' '}
 													гривень
@@ -341,14 +340,14 @@ const CardFilter = ({ slug }) => {
 									</div>
 								) : (
 									<div className='flex justify-between text-xl text-red-500'>
-										{language == 'uz' && (
+										{language === 'uz' && (
 											<>
 												{' '}
 												<span className='price'>{count[0]} so'm</span>
 												<span className='price'>{count[1]} so'm</span>
 											</>
 										)}
-										{language == 'ru' && (
+										{language === 'ru' && (
 											<>
 												<span className='price'>
 													{Number(count[0] / 140.25).toFixed(0)} рублей
@@ -358,7 +357,7 @@ const CardFilter = ({ slug }) => {
 												</span>
 											</>
 										)}
-										{language == 'uk' && (
+										{language === 'uk' && (
 											<>
 												{' '}
 												<span className='price'>
@@ -378,7 +377,7 @@ const CardFilter = ({ slug }) => {
 							className='price_filter'
 							style={{ width: 320, margin: '20px 0px' }}
 						>
-							{language == 'uz' && (
+							{language === 'uz' && (
 								<TooltipSlider
 									onChange={value => setCount(value)}
 									range
@@ -388,7 +387,7 @@ const CardFilter = ({ slug }) => {
 									tipFormatter={value => `${value} so'm`}
 								/>
 							)}
-							{language == 'ru' && (
+							{language === 'ru' && (
 								<TooltipSlider
 									onChange={value => setCount(value)}
 									range
@@ -400,7 +399,7 @@ const CardFilter = ({ slug }) => {
 									}
 								/>
 							)}
-							{language == 'uk' && (
+							{language === 'uk' && (
 								<TooltipSlider
 									onChange={value => setCount(value)}
 									range
@@ -777,11 +776,11 @@ const CardFilter = ({ slug }) => {
 						>
 							{showProducts ? (
 								<div className=''>
-									<img src={closeSidebar} width={35} height={35} />
+									<img src={closeSidebar} width={35} height={35} alt={'close'}/>
 								</div>
 							) : (
 								<div className=''>
-									<img src={bars} width={35} height={35} />
+									<img src={bars} width={35} height={35} alt={'open'} />
 								</div>
 							)}
 						</div>

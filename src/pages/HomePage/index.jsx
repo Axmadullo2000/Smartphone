@@ -10,6 +10,7 @@ export default function HomePage() {
 	const { t } = useTranslation()
 	useEffect(() => {
 		document.title = t('titlePage')
+		// eslint-disable-next-line
 	}, [])
 
 	return (

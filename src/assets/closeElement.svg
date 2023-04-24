@@ -1,5 +1,5 @@
 <svg
-	class="closeElement"
+	className="closeElement"
 	style="transform: rotate(270deg)"
 	width='22'
 	height='20'

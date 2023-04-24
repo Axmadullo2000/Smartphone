@@ -43,13 +43,15 @@ export const CardItem = item => {
 			) / comments.length
 	}
 
-	setTimeout(() => {
-		setShowImage(true)
-	}, 4000)
-
 	useEffect(() => {
 		dispatch(SearchAsyncThunk({ search: name, offset: 0 }))
 	}, [dispatch, name])
+
+	useEffect(() => {
+		setTimeout(() => {
+			setShowImage(true)
+		}, 3500)
+	})
 
 	return (
 		<div className='card border mx-3 px-2 my-2' style={{ minHeight: '500px' }}>

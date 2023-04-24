@@ -16,6 +16,7 @@ export const ResultShopping = () => {
 
 	useEffect(() => {
 		dispatch(getSuccessFullAsyncThunk())
+		// eslint-disable-next-line
 	}, [])
 
 	return (
@@ -23,7 +24,7 @@ export const ResultShopping = () => {
 			<Header />
 			<ShoppingMessage />
 			<Footer />
-			{basketData.length == 0 &&
+			{basketData.length === 0 &&
 				Object.keys(bookedProducts).length > 0 &&
 				toast.success('Your Order Ready to Deliverying!', {
 					position: 'top-right',

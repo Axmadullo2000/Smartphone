@@ -34,15 +34,15 @@ export const BasketCard = ({ item }) => {
 				<div className='card-info'>
 					<h4 className='card-title'>{name}</h4>
 					<span>
-						{language == 'uz' && (
+						{language === 'uz' && (
 							<>
 								{t('basketCard.price')}: {price / count} so'm
 							</>
 						)}
-						{language == 'ru' && (
+						{language === 'ru' && (
 							<>Цена: {Number(price / count / 140.25).toFixed(1)} рублей</>
 						)}
-						{language == 'uk' && (
+						{language === 'uk' && (
 							<>Цена: {Number(price / count / 309.98).toFixed(1)} гривен</>
 						)}
 					</span>
@@ -85,13 +85,13 @@ export const BasketCard = ({ item }) => {
 				</div>
 				<div className='card-total'>
 					<p className='card-total-price'>
-						{language == 'uz' && (
+						{language === 'uz' && (
 							<>
 								{price} {t('basketCard.soum')}
 							</>
 						)}
-						{language == 'ru' && <>{Number(price / 140.25).toFixed(0)} рублей</>}
-						{language == 'uk' && <>{Number(price / 309.98).toFixed(1)} гривен</>}
+						{language === 'ru' && <>{Number(price / 140.25).toFixed(0)} рублей</>}
+						{language === 'uk' && <>{Number(price / 309.98).toFixed(1)} гривен</>}
 					</p>
 					<button
 						className='card-delete-btn'

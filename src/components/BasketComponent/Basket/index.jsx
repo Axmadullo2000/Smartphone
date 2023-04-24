@@ -11,6 +11,7 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 	const { t } = useTranslation()
 	const { basketData } = useSelector(state => state.basket)
 	const ref = useRef()
+
 	const checkIfClickedOutside = e => {
 		if (basketModalOpen && ref.current && !ref.current.contains(e.target)) {
 			setBasketModalOpen(false)
@@ -27,7 +28,8 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 
 	useEffect(() => {
 		document.addEventListener('mousedown', checkIfClickedOutside)
-	}, [basketModalOpen])
+		// eslint-disable-next-line
+	}, [checkIfClickedOutside])
 
 	return (
 		<>

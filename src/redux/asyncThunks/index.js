@@ -78,14 +78,14 @@ export const filterByFewParams = createAsyncThunk(
 	}) => {
 		const response = await axios.get(`
 			http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?
-			${brand != undefined ? `brand=${brand}` : null}
-			${corpus != undefined ? `&corpus=${corpus}` : null}
-			${yadra != undefined ? `&yadra=${yadra}` : null}
-			${front_kamera != undefined ? `&front_kamera=${front_kamera}` : ''}
+			${brand !== undefined ? `brand=${brand}` : null}
+			${corpus !== undefined ? `&corpus=${corpus}` : null}
+			${yadra !== undefined ? `&yadra=${yadra}` : null}
+			${front_kamera !== undefined ? `&front_kamera=${front_kamera}` : ''}
 			&giga_vstoeno=${giga_vstoeno}
-			${giga_operate != undefined ? `&giga_operate=${giga_operate}` : ''}
+			${giga_operate !== undefined ? `&giga_operate=${giga_operate}` : ''}
 			${
-				accumulator != undefined ? `&accumulator=${accumulator}` : ''
+				accumulator !== undefined ? `&accumulator=${accumulator}` : ''
 			}&limit=${limit}&offset=${offset}
 			`)
 		return response.data

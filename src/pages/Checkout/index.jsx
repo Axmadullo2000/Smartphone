@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import { useDispatch, useSelector } from 'react-redux'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import * as Yup from 'yup'
 
 import Footer from '../../components/Layouts/Footer'
@@ -15,7 +15,6 @@ import './Checkout.scss'
 export const Checkout = () => {
 	const dispatch = useDispatch()
 	const { t } = useTranslation()
-	const navigate = useNavigate()
 
 	const { userData, loggednIn } = useSelector(state => state.auth)
 	const { basketData, paymentLink } = useSelector(state => state.basket)
@@ -719,16 +718,16 @@ export const Checkout = () => {
 														marginTop: '6px'
 													}}
 												>
-													{language == 'uz' && (
+													{language === 'uz' && (
 														<>
 															{item.price}
 															{t('checkout.soum')}
 														</>
 													)}
-													{language == 'ru' && (
+													{language === 'ru' && (
 														<>{Math.floor(item.price / 140.25)} рублей</>
 													)}
-													{language == 'uk' && (
+													{language === 'uk' && (
 														<>{Math.floor(item.price / 309.98)} гривен</>
 													)}
 												</p>
@@ -741,21 +740,21 @@ export const Checkout = () => {
 													marginTop: '6px'
 												}}
 											>
-												{language == 'uz' && (
+												{language === 'uz' && (
 													<>
 														{item.count} ×{' '}
 														{Math.round(item.price / item.count, 1)}
 														{t('checkout.soum')}
 													</>
 												)}
-												{language == 'ru' && (
+												{language === 'ru' && (
 													<>
 														{item.count} ×{' '}
 														{Math.round(item.price / 140.25 / item.count, 2)}{' '}
 														рублей
 													</>
 												)}
-												{language == 'uk' && (
+												{language === 'uk' && (
 													<>
 														{item.count} ×{' '}
 														{Math.round(item.price / (309.98 * item.count), 1)}{' '}
@@ -784,16 +783,16 @@ export const Checkout = () => {
 										marginRight: '35px'
 									}}
 								>
-									{language == 'uz' && (
+									{language === 'uz' && (
 										<>
 											{totalPrice}
 											{t('checkout.soum')}
 										</>
 									)}
-									{language == 'ru' && (
+									{language === 'ru' && (
 										<>{Math.round(totalPrice / 140.25)} рублей</>
 									)}
-									{language == 'uk' && (
+									{language === 'uk' && (
 										<>{Math.round(totalPrice / 309.98, 1)} гривен</>
 									)}
 								</p>
@@ -842,16 +841,16 @@ export const Checkout = () => {
 										marginTop: '6px'
 									}}
 								>
-									{language == 'uz' && (
+									{language === 'uz' && (
 										<>
 											{totalPrice}
 											{t('checkout.soum')}
 										</>
 									)}
-									{language == 'ru' && (
+									{language === 'ru' && (
 										<>{Math.round(totalPrice / 140.25)} рублей</>
 									)}
-									{language == 'uk' && (
+									{language === 'uk' && (
 										<>{Math.round(totalPrice / 309.98, 1)} гривен</>
 									)}
 								</p>

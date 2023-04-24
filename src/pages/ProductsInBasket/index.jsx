@@ -49,7 +49,7 @@ export const ProductsInBasket = () => {
 				<div
 					className='flex basketContainer'
 					style={
-						!basketData.length && basketData.length == 0
+						!basketData.length && basketData.length === 0
 							? { justifyContent: 'space-between' }
 							: { width: '95%', justifyContent: 'space-between' }
 					}
@@ -124,13 +124,13 @@ export const ProductsInBasket = () => {
 										</div>
 										<div>
 											<p className='product_price'>
-												{language == 'uz' && (
+												{language === 'uz' && (
 													<span>
 														1donasi ({Math.round(item.price / item.count, 2)}{' '}
 														so'm)
 													</span>
 												)}
-												{language == 'uk' && (
+												{language === 'uk' && (
 													<span>
 														{Number(item.price / item.count / 309.98).toFixed(
 															1
@@ -138,7 +138,7 @@ export const ProductsInBasket = () => {
 														гривень за штуку
 													</span>
 												)}
-												{language == 'ru' && (
+												{language === 'ru' && (
 													<span className='text-red-600'>
 														{Number(item.price / item.count / 140.25).toFixed(
 															1
@@ -209,14 +209,14 @@ export const ProductsInBasket = () => {
 									<span className='basket_textValue_color'>
 										{!basketData.length
 											? 0
-											: language == 'uz' && (
+											: language === 'uz' && (
 													<span>
 														{totalPrice} {t('basketCard.soum')}
 													</span>
 											  )}
 										{!basketData.length
 											? 0
-											: language == 'ru' && (
+											: language === 'ru' && (
 													<span>
 														{' '}
 														{Number(totalPrice / 140.25).toFixed(1)} рублей
@@ -224,7 +224,7 @@ export const ProductsInBasket = () => {
 											  )}
 										{!basketData.length
 											? 0
-											: language == 'uk' && (
+											: language === 'uk' && (
 													<span>
 														{Number(totalPrice / 309.98).toFixed(1)} гривен{' '}
 													</span>
@@ -239,20 +239,24 @@ export const ProductsInBasket = () => {
 									<span className='text-color-red-900 basket_textValue_color ml-2'>
 										{!basketData.length
 											? 0
-											: language == 'uz' && (
+											: language === 'uz' && (
 													<span>
 														{totalPrice} {t('basketCard.soum')}
 													</span>
 											  )}
 										{!basketData.length
 											? 0
-											: language == 'ru' && (
-													<span>{Number(totalPrice / 140.25).toFixed(1)} рублей</span>
+											: language === 'ru' && (
+													<span>
+														{Number(totalPrice / 140.25).toFixed(1)} рублей
+													</span>
 											  )}
 										{!basketData.length
 											? 0
-											: language == 'uk' && (
-													<span>{Number(totalPrice / 309.98).toFixed(1)} гривен</span>
+											: language === 'uk' && (
+													<span>
+														{Number(totalPrice / 309.98).toFixed(1)} гривен
+													</span>
 											  )}
 									</span>
 								</li>
@@ -265,7 +269,7 @@ export const ProductsInBasket = () => {
 									}
 									if (
 										basketData.length === 0 ||
-										basketData.Error == 'wrong id user'
+										basketData.Error === 'wrong id user'
 									) {
 										setEmptyBasket(true)
 									}
