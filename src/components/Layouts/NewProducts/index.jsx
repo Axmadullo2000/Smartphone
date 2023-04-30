@@ -16,11 +16,19 @@ import './NewProducts.scss'
 export default function NewProducts() {
 	const { t } = useTranslation()
 	const newRef = useRef()
-	const { newData } = useSelector(data => data.data)
+	const { allData, newData } = useSelector(data => data.data)
 	const dispatch = useDispatch()
 
+	const newProductCount = allData.results?.length
+
 	useEffect(() => {
-		dispatch(fetchNewProductCardsAsyncThunk())
+		if (allData !== 'undefined') {
+			dispatch(fetchNewProductCardsAsyncThunk(allData !== null
+				&& newProductCount > 0
+				&& allData.results.slice(newProductCount - 10, newProductCount)))
+		}
+
+	// 	eslint-disable-next-line
 	}, [dispatch])
 
 	return (

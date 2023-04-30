@@ -15,11 +15,13 @@ import './PopularProducts.scss'
 const PopularProducts = () => {
 	const { t } = useTranslation()
 	const swiperRef = useRef()
-	const { popularData } = useSelector(data => data.data)
+	const { allData, popularData } = useSelector(data => data.data)
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		dispatch(fetchPopularCardsAsyncThunk())
+		if (allData.results !== 'undefined' && allData.results !== null) {
+			dispatch(fetchPopularCardsAsyncThunk(allData.results?.length))
+		}
 	}, [dispatch])
 
 	// SwiperCore.use([Autoplay])
@@ -84,11 +86,16 @@ const PopularProducts = () => {
 					}}
 				>
 					{popularData.results !== undefined &&
-						popularData.results.map(slide => (
-							<SwiperSlide key={slide.id}>
-								<CardItem {...slide} />
-							</SwiperSlide>
-						))}
+						// eslint-disable-next-line array-callback-return
+						popularData.results.map(slide => {
+							if (Number(slide.rating) > 3) {
+								return (
+									<SwiperSlide key={slide.id}>
+										<CardItem {...slide} />
+									</SwiperSlide>
+								)
+							}
+						})}
 				</Swiper>
 				<button
 					onClick={() => swiperRef.current.slideNext()}

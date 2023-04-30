@@ -52,7 +52,7 @@ const Login = () => {
 		try {
 			const response = await AuthService.login(loggedInData)
 			dispatch(loginAction(response.user_info))
-			localStorage.setItem('token', response.token)
+			sessionStorage.setItem('token', response.token)
 			navigate('/')
 		} catch (e) {
 			setError(e.response.data)

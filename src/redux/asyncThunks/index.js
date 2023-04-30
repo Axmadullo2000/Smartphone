@@ -36,9 +36,9 @@ export const nextBtnAsyncThunk = createAsyncThunk(
 
 export const fetchNewProductCardsAsyncThunk = createAsyncThunk(
 	'fetch/fetchNewProductCardsAsyncThunk',
-	async () => {
+	async (newProduct) => {
 		const response = await axios.get(
-			'http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=65&offset=50'
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=10&offset=${newProduct}`
 		)
 
 		return response.data
@@ -47,9 +47,9 @@ export const fetchNewProductCardsAsyncThunk = createAsyncThunk(
 
 export const fetchPopularCardsAsyncThunk = createAsyncThunk(
 	'fetch/fetchPopularCardsAsyncThunk',
-	async () => {
+	async (data) => {
 		const response = await axios.get(
-			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=18&offset=5`
+			`http://ec2-54-175-61-21.compute-1.amazonaws.com/api/phones/func/?limit=${data}&offset=0`
 		)
 
 		return response.data

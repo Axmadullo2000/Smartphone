@@ -67,7 +67,7 @@ const Header = () => {
 		} catch (e) {}
 	}
 
-	const name = localStorage.getItem('user')
+	const name = sessionStorage.getItem('user')
 
 	useEffect(() => {
 		if (userData.id !== undefined) {

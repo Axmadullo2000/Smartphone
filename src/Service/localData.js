@@ -15,7 +15,6 @@ export const setItem = (key, value) => {
 export const removeItem = () => {
 	try {
 		const data = sessionStorage.removeItem('token')
-		sessionStorage.clear()
 		return data
 	} catch (e) {}
 }
