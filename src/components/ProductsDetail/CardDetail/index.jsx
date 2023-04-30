@@ -41,7 +41,7 @@ const CardDetail = ({ slug }) => {
 				<li className='directionFromProducts mx-2'>
 					<Link to='/'>{t('cardDetail.main')}</Link>
 				</li>
-				{!!detailData.phone && detailData.phone.types === 'smartphone' && (
+				{!!detailData.phone && detailData.phone.types === 'смартфон' && (
 					<li className='directionFromProducts mx-2'>
 						<Link to='/products/category/all/'>{t('header.catalogAll')}</Link>
 					</li>
@@ -72,7 +72,7 @@ const CardDetail = ({ slug }) => {
 					<img src={up} alt='up' />
 				</button>
 			</div>
-			{!!detailData.phone && detailData.phone.types === 'smartphone' && (
+			{!!detailData.phone && detailData.phone.types === 'смартфон' && (
 				<ExtraProduct similarData={detailData} />
 			)}
 			{!!extraProductDetail.airpod &&

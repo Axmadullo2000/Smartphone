@@ -66,7 +66,7 @@ export const ExtraInfoAbout = ({
 			<div style={{ marginTop: '40px' }}>
 				{showFullDescription.description && (
 					<div>
-						{!!detailData.phone && detailData.phone.types === 'smartphone' && (
+						{!!detailData.phone && detailData.phone.types === 'смартфон' && (
 							<>
 								<p
 									style={{
@@ -168,7 +168,7 @@ export const ExtraInfoAbout = ({
 							}
 						</div>
 
-						{!!detailData.phone && detailData.phone.types === 'smartphone' && (
+						{!!detailData.phone && detailData.phone.types === 'смартфон' && (
 							<div style={{ lineHeight: '40px' }}>
 								<h2
 									style={{

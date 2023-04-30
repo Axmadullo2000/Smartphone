@@ -164,7 +164,7 @@ export const CardItem = item => {
 								dispatch(
 									addProductToBasket({
 										product_id: id,
-										group_product: types === 'smartphone' ? 1 : 2
+										group_product: types === 'смартфон' ? 1 : 2
 									})
 								)
 							} else {

@@ -179,7 +179,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 					</p>
 					<div className='flex items-center shareWithLinks ml-2'>
 						<p>{t('showLittleinfo.share')}:</p>
-						{!!detailData.phone && detailData.phone.types === 'smartphone' && (
+						{!!detailData.phone && detailData.phone.types === 'смартфон' && (
 							<div className='flex'>
 								<>
 									<Link
@@ -560,7 +560,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 											addProductToBasket({
 												product_id: detailData.phone.id,
 												group_product:
-													detailData.phone.types === 'smartphone' ? 1 : 2
+													detailData.phone.types === 'смартфон' ? 1 : 2
 											})
 										)
 										navigate('/customer/checkout')
@@ -580,7 +580,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 											addProductToBasket({
 												product_id: detailData.phone.id,
 												group_product:
-													detailData.phone.types === 'smartphone' ? 1 : 2
+													detailData.phone.types === 'смартфон' ? 1 : 2
 											})
 										)
 									} else {
@@ -613,7 +613,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 											addProductToBasket({
 												product_id: detailData.phone.id,
 												group_product:
-													extraProductDetail.phone.types === 'smartphone'
+													extraProductDetail.phone.types === 'смартфон'
 														? 1
 														: 2
 											})
@@ -634,7 +634,7 @@ export const ShowLittleInfo = ({ setShowFullDescription }) => {
 											addProductToBasket({
 												product_id: extraProductDetail.airpod.id,
 												group_product:
-													extraProductDetail.airpod.types === 'smartphone'
+													extraProductDetail.airpod.types === 'extra'
 														? 1
 														: 2
 											})
