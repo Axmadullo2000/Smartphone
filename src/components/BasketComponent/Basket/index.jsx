@@ -12,6 +12,7 @@ const Basket = ({ basketModalOpen, setBasketModalOpen }) => {
 	const { basketData } = useSelector(state => state.basket)
 	const ref = useRef()
 
+	// eslint-disable-next-line
 	const checkIfClickedOutside = e => {
 		if (basketModalOpen && ref.current && !ref.current.contains(e.target)) {
 			setBasketModalOpen(false)

@@ -22,6 +22,7 @@ const PopularProducts = () => {
 		if (allData.results !== 'undefined' && allData.results !== null) {
 			dispatch(fetchPopularCardsAsyncThunk(allData.results?.length))
 		}
+		// eslint-disable-next-line
 	}, [dispatch])
 
 	// SwiperCore.use([Autoplay])

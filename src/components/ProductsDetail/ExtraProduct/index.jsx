@@ -16,12 +16,11 @@ export const ExtraProduct = ({ similarData }) => {
 	const { t } = useTranslation()
 
 	return (
-		<div>
-			{!!similarData.also_buy && similarData.also_buy.length > 0 && (
-				<>
-					<h2 className='extraProductTitle'>{t('extraProduct.title')}</h2>
-
-					{!!similarData.also_buy && similarData.also_buy.length > 0 && (
+		<>
+			<div>
+				{!!similarData.also_buy && similarData.also_buy.length >= 3 && (
+					<>
+						<h2 className='extraProductTitle'>{t('extraProduct.title')}</h2>
 						<div className='flex justify-center mt-8 relative'>
 							<button
 								onClick={() => swiperRef.current.slidePrev()}
@@ -87,11 +86,12 @@ export const ExtraProduct = ({ similarData }) => {
 								<img src={next} alt='' />
 							</button>
 						</div>
-					)}
+					</>
+				)}
+				<SimilarProducts similarData={similarData} />
+			</div>
+		</>
+	)}
 
-					<SimilarProducts similarData={similarData} />
-				</>
-			)}
-		</div>
-	)
-}
+
+

@@ -9,6 +9,11 @@
 	border-radius: 5px;
 	cursor: pointer;
 	border: 2px solid transparent;
+	max-width: 100px;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .activeIcon_detail {
