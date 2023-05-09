@@ -5,7 +5,7 @@ import { Autoplay, Navigation, Pagination } from 'swiper'
 import { Swiper, SwiperSlide } from 'swiper/react'
 
 import { fetchPopularCardsAsyncThunk } from '../../../redux/asyncThunks'
-import { CardItem } from '../../Layouts/CardItem'
+import { CardItem } from '../CardItem'
 
 import next from '../../../assets/next.svg'
 import prev from '../../../assets/prev.svg'
